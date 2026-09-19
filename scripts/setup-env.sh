@@ -13,6 +13,9 @@ if command -v apt-get >/dev/null 2>&1; then
 fi
 
 echo "[setup] installing python dependencies"
+# The OS image ships a system copy of `cryptography` that pip cannot uninstall and that lacks its cffi
+# backend; install a working pair beside it first (/usr/local takes precedence on sys.path).
+python3 -m pip install --quiet --disable-pip-version-check --ignore-installed "cffi>=1.16" "cryptography>=42" || true
 python3 -m pip install --quiet --disable-pip-version-check -r requirements.txt
 python3 -m pip install --quiet --disable-pip-version-check -e . || true
 

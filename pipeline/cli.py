@@ -100,6 +100,40 @@ def auth_check(pretty: bool = Pretty, json_: bool = JsonFlag):
     run_command("auth check", lambda: _fn(get_ctx()), pretty=pretty, log=False)
 
 
+@auth_app.command("url")
+def auth_url(port: int = typer.Option(8765, help="loopback port used in the redirect address"), pretty: bool = Pretty):
+    """Print the Google consent link for ONE Gmail account (open it signed in as that account, click Allow)."""
+    from .google_auth import consent_url
+
+    def _fn():
+        return {
+            "url": consent_url(get_ctx().settings, port),
+            "how": "Open the link signed in as the account to authorise, accept the 'unverified app' warning (Advanced -> Go to ...), click Allow. "
+            "The browser lands on an http://localhost page that fails to load: copy that page's full address and run `auth exchange \"<address>\"`.",
+        }
+
+    run_command("auth url", _fn, pretty=pretty, log=False)
+
+
+@auth_app.command("exchange")
+def auth_exchange(pasted: str, port: int = 8765, env_var: str = typer.Option("", help="name to suggest for the environment variable, e.g. GOOGLE_REFRESH_TOKEN_RAW01"), pretty: bool = Pretty):
+    """Turn the pasted redirect address into a long-lived refresh token. The token is printed ONCE: store it in the
+    cloud environment variables and never anywhere else."""
+    from .google_auth import exchange_code
+
+    def _fn():
+        result = exchange_code(get_ctx().settings, pasted, port)
+        name = env_var or ("GOOGLE_REFRESH_TOKEN_RAW01" if "rawfile" in result.get("email", "") else "GOOGLE_REFRESH_TOKEN_SUMMARY01" if "summary" in result.get("email", "") else "GOOGLE_REFRESH_TOKEN_<ACCOUNT>")
+        return {
+            "email": result["email"],
+            "env_var": name,
+            "refresh_token": result["refresh_token"],
+            "next": f"Add `{name}=<refresh_token>` to the cloud environment's variables, start a new session, run `/setup`. Do not store the token anywhere else.",
+        }
+
+    run_command("auth exchange", _fn, pretty=pretty, log=False)
+
+
 @setup_app.command("create-sheet")
 def setup_create_sheet(title: str = "AI Primer Control Panel", pretty: bool = Pretty):
     from .setup_cmds import create_control_sheet

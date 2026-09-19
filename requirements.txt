@@ -12,6 +12,10 @@ google-api-python-client>=2.120
 google-auth>=2.28
 google-auth-httplib2>=0.2
 google-auth-oauthlib>=1.2
+# cffi + cryptography are pulled in by the Google auth libraries; pin them here so pip installs a working
+# pair in /usr/local even when the OS ships a broken system copy of cryptography.
+cffi>=1.16
+cryptography>=42
 pysocks>=1.7
 apify-client>=1.6
 pymupdf>=1.24

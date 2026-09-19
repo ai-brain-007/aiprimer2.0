@@ -16,8 +16,14 @@ Everything here is idempotent: running it twice changes nothing the second time.
    - If it reports `AIPRIMER_CONTROL_SHEET_ID is not set` but the summary account token is present, run
      `python -m pipeline setup create-sheet --pretty`, then tell the user to add the printed sheet id to the
      environment variables as `AIPRIMER_CONTROL_SHEET_ID` and start a new session. Stop there.
-   - If a Google token or the client id/secret is missing, point the user to README.md → "Setup", step 2–3,
-     and stop. Never ask the user to paste a token into the chat.
+   - If the client id/secret is missing, point the user to README.md → "Setup", step 2 and 4, and stop.
+   - If the client id/secret are present but a refresh token is missing, offer the in-chat sign-in:
+     run `python -m pipeline auth url --pretty`, give the user the link and the three-line instruction
+     (open it signed in as the account to authorise, click through the unverified-app warning, click Allow, then
+     paste back the full address of the localhost page that fails to load). When they paste it, run
+     `python -m pipeline auth exchange "<pasted address>" --pretty` and show them the `env_var` name and the
+     `refresh_token` value to copy into the cloud environment variables. Say clearly that they must then start a
+     new session. Never write the token anywhere yourself (no file, no sheet, no commit).
 2. **Bootstrap**:
    ```bash
    python -m pipeline setup all --pretty

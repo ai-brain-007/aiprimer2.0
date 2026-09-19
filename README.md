@@ -40,15 +40,28 @@ Credentials never live in this repository or in any sheet: they are settings of 
    your email, add the scopes `…/auth/drive`, `…/auth/spreadsheets`, `…/auth/documents`, save, then set the
    publishing status to **In production** (in *Testing*, tokens expire after 7 days). Then *Credentials → Create
    credentials → OAuth client ID → Desktop app*. Note the **client ID** and **client secret**.
-3. **Authorise each Gmail account** (on your own computer, once per account):
+3. **Authorise each Gmail account** (once per account). Two ways:
+
+   *From the chat (no laptop needed).* Add `GOOGLE_OAUTH_CLIENT_ID` and `GOOGLE_OAUTH_CLIENT_SECRET` to the cloud
+   environment first (step 4), start a session and ask the agent to run:
+   ```bash
+   python -m pipeline auth url
+   ```
+   Open the printed link on any device, signed in as `ai.primer.rawfile.0001@gmail.com`, click *Advanced → Go to …
+   (unsafe)* on the "unverified app" page, then *Allow*. The browser lands on an `http://localhost…` page that fails
+   to load: copy that page's full address and give it to the agent, which runs
+   `python -m pipeline auth exchange "<address>"`. The result contains the refresh token: copy it into the environment
+   as `GOOGLE_REFRESH_TOKEN_RAW01`. Repeat signed in as `ai.primer.summary.0001@gmail.com` for
+   `GOOGLE_REFRESH_TOKEN_SUMMARY01`. The token passes through the chat once; the chat is private to you.
+
+   *On your own computer (the token never appears in the chat).*
    ```bash
    pip install google-auth-oauthlib
    python scripts/auth_local.py --client-id <ID> --client-secret <SECRET>
    ```
-   Sign in as `ai.primer.rawfile.0001@gmail.com`, click *Advanced → Go to … (unsafe)* on the "unverified app" page,
-   click *Allow*. The script prints a refresh token: that is the value of `GOOGLE_REFRESH_TOKEN_RAW01`.
-   Repeat signed in as `ai.primer.summary.0001@gmail.com` for `GOOGLE_REFRESH_TOKEN_SUMMARY01`.
-   Add a verified phone number to both accounts so they get 15 GB instead of 5 GB.
+   Same clicks; the script prints the refresh token.
+
+   Either way, add a verified phone number to both accounts so they get 15 GB instead of 5 GB.
 4. **Cloud environment.** In Claude Code on the web, create an environment named **AI Primer**:
    - Network access **Custom**, allowed domain `api.apify.com`, tick *Also include default list of common package managers*.
    - **API credentials**: host `api.apify.com`, header `Authorization`, prefix `Bearer`, value = your new Apify token.
