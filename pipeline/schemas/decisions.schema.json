@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "Decision": {
+      "properties": {
+        "temp_id": {
+          "title": "Temp Id",
+          "type": "string"
+        },
+        "decision": {
+          "enum": [
+            "NEW",
+            "SAME",
+            "EVOLVED",
+            "CONTRADICTS"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "target_unit_id": {
+          "default": "",
+          "title": "Target Unit Id",
+          "type": "string"
+        },
+        "rationale": {
+          "default": "",
+          "title": "Rationale",
+          "type": "string"
+        },
+        "what_changed": {
+          "default": "",
+          "title": "What Changed",
+          "type": "string"
+        },
+        "merged_details": {
+          "default": "",
+          "title": "Merged Details",
+          "type": "string"
+        },
+        "merged_description": {
+          "default": "",
+          "title": "Merged Description",
+          "type": "string"
+        },
+        "conflicting_claim": {
+          "default": "",
+          "title": "Conflicting Claim",
+          "type": "string"
+        }
+      },
+      "required": [
+        "temp_id",
+        "decision"
+      ],
+      "title": "Decision",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "resource_id": {
+      "title": "Resource Id",
+      "type": "string"
+    },
+    "decisions": {
+      "items": {
+        "$ref": "#/$defs/Decision"
+      },
+      "title": "Decisions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "resource_id"
+  ],
+  "title": "DecisionsFile",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

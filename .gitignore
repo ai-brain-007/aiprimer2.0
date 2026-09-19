@@ -1,0 +1,23 @@
+# Secrets and local settings: never commit
+.env
+.env.*
+!.env.example
+*.token.json
+client_secret*.json
+
+# Working directories (extracted text, downloads, chunks, helper outputs)
+.cache/
+.work/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store

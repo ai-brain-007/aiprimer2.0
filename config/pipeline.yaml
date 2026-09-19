@@ -1,0 +1,68 @@
+# AI Primer pipeline configuration. Safe to commit: contains no secrets.
+
+apify:
+  metadata_actor: "apidojo/youtube-scraper"
+  transcript_actor: "supreme_coder/youtube-transcript-scraper"
+  # Videos per transcript run (one Apify run per batch keeps runs resumable and cheap to retry).
+  transcript_batch_size: 25
+  # 0 = list every video of a channel.
+  channel_max_results: 0
+  # Rough prices used for the cost estimate shown before a channel is ingested.
+  est_usd_per_video_metadata: 0.0005
+  est_usd_per_transcript: 0.0007
+  # Above this estimated amount the agent must get an explicit confirmation of the amount.
+  cost_confirm_usd: 5.0
+  # Field names of the two actors. `setup fetch-apify-schemas` verifies them against the live
+  # input schema and rewrites this block if the actor changed its input format.
+  input_templates:
+    metadata:
+      start_urls_key: startUrls
+      max_results_key: maxResults
+      extra: {}
+    transcript:
+      start_urls_key: startUrls
+      extra: {}
+
+drive:
+  raw_root_name: "AI Primer Raw"
+  inbox_name: "_Inbox"
+  summaries_root_name: "AI Primer Summaries"
+  upload_chunk_mb: 8
+  # Files smaller than this are read fully to compute the fingerprint before upload (always true today).
+  max_title_chars: 80
+
+extract:
+  # A PDF is treated as scanned when the median characters per page over the sample is below this.
+  scanned_median_chars_threshold: 200
+  scanned_sample_pages: 10
+  ocr_dpi: 300
+  # Pages whose mean OCR confidence is below this are handed to the agent to transcribe by eye.
+  ocr_low_confidence: 60
+  vision_render_dpi: 150
+  # A [mm:ss] marker is inserted in transcripts about every N seconds.
+  transcript_marker_seconds: 60
+  tabular_sample_rows: 20
+
+kb:
+  # Chunk size for helper agents (approximate tokens, computed as characters / 4).
+  chunk_tokens: 12000
+  chunk_overlap_tokens: 300
+  pages_per_window_without_toc: 30
+  # A citation quote must match the source text at least this well (0-100) to be accepted.
+  quote_match_threshold: 90
+  candidate_limit: 5
+  # Name similarity at or above this, with similar details, is auto-classified SAME.
+  auto_same_threshold: 95
+  # Below this name similarity, with no description overlap, a unit is auto-classified NEW.
+  llm_review_threshold: 70
+  description_partial_threshold: 80
+  # Units whose newest citation is older than this many years appear in the obsolescence watch.
+  obsolescence_years: 7
+  # Split the rendered summary into one Doc per Domain above this size.
+  max_doc_chars: 900000
+  parallel_helpers: 4
+
+docs:
+  # anyone_with_link (viewer) or restricted (owner only until shared by hand)
+  sharing: anyone_with_link
+  title_prefix: "Summary — "

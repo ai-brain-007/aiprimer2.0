@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "ReviewItem": {
+      "properties": {
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "verdict": {
+          "enum": [
+            "accept",
+            "reject",
+            "needs_review"
+          ],
+          "title": "Verdict",
+          "type": "string"
+        },
+        "reason": {
+          "default": "",
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit_id",
+        "verdict"
+      ],
+      "title": "ReviewItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "author_id": {
+      "title": "Author Id",
+      "type": "string"
+    },
+    "overall": {
+      "default": "pass",
+      "enum": [
+        "pass",
+        "pass_with_flags",
+        "fail"
+      ],
+      "title": "Overall",
+      "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/ReviewItem"
+      },
+      "title": "Items",
+      "type": "array"
+    }
+  },
+  "required": [
+    "author_id"
+  ],
+  "title": "ReviewFile",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

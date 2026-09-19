@@ -1,0 +1,224 @@
+{
+  "$defs": {
+    "Citation": {
+      "properties": {
+        "resource_id": {
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "location": {
+          "default": "",
+          "title": "Location",
+          "type": "string"
+        },
+        "quote": {
+          "default": "",
+          "title": "Quote",
+          "type": "string"
+        },
+        "verified": {
+          "default": false,
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        }
+      },
+      "required": [
+        "resource_id"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "Contradiction": {
+      "properties": {
+        "resource_id": {
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "claim": {
+          "title": "Claim",
+          "type": "string"
+        },
+        "conflicts_with": {
+          "default": "",
+          "title": "Conflicts With",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resource_id",
+        "claim"
+      ],
+      "title": "Contradiction",
+      "type": "object"
+    },
+    "UnitVersion": {
+      "properties": {
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "resource_id": {
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "summary": {
+          "default": "",
+          "title": "Summary",
+          "type": "string"
+        },
+        "what_changed": {
+          "default": "",
+          "title": "What Changed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "date",
+        "resource_id"
+      ],
+      "title": "UnitVersion",
+      "type": "object"
+    }
+  },
+  "description": "A knowledge card. Front matter fields plus three markdown body sections.",
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "author_id": {
+      "title": "Author Id",
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "principle",
+        "concept",
+        "technique",
+        "drill",
+        "exercise",
+        "list",
+        "script",
+        "example",
+        "glossary",
+        "procedure",
+        "claim",
+        "mistake",
+        "dataset"
+      ],
+      "title": "Type",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "aliases": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Aliases",
+      "type": "array"
+    },
+    "stages": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Stages",
+      "type": "array"
+    },
+    "status": {
+      "default": "active",
+      "enum": [
+        "active",
+        "contradicted",
+        "superseded",
+        "needs_review"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "first_seen": {
+      "default": "",
+      "title": "First Seen",
+      "type": "string"
+    },
+    "last_seen": {
+      "default": "",
+      "title": "Last Seen",
+      "type": "string"
+    },
+    "citations": {
+      "items": {
+        "$ref": "#/$defs/Citation"
+      },
+      "title": "Citations",
+      "type": "array"
+    },
+    "versions": {
+      "items": {
+        "$ref": "#/$defs/UnitVersion"
+      },
+      "title": "Versions",
+      "type": "array"
+    },
+    "contradictions": {
+      "items": {
+        "$ref": "#/$defs/Contradiction"
+      },
+      "title": "Contradictions",
+      "type": "array"
+    },
+    "created_at": {
+      "default": "",
+      "title": "Created At",
+      "type": "string"
+    },
+    "updated_at": {
+      "default": "",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "details": {
+      "default": "",
+      "title": "Details",
+      "type": "string"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    },
+    "earlier_versions": {
+      "default": "",
+      "title": "Earlier Versions",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "author_id",
+    "type",
+    "name"
+  ],
+  "title": "Unit",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

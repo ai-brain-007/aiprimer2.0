@@ -1,0 +1,128 @@
+{
+  "$defs": {
+    "ExtractedCitation": {
+      "properties": {
+        "location": {
+          "default": "",
+          "title": "Location",
+          "type": "string"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "quote"
+      ],
+      "title": "ExtractedCitation",
+      "type": "object"
+    },
+    "ExtractedUnit": {
+      "description": "What an extraction helper writes for one unit found in one chunk.",
+      "properties": {
+        "type": {
+          "enum": [
+            "principle",
+            "concept",
+            "technique",
+            "drill",
+            "exercise",
+            "list",
+            "script",
+            "example",
+            "glossary",
+            "procedure",
+            "claim",
+            "mistake",
+            "dataset"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Aliases",
+          "type": "array"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "details": {
+          "default": "",
+          "title": "Details",
+          "type": "string"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        },
+        "citations": {
+          "items": {
+            "$ref": "#/$defs/ExtractedCitation"
+          },
+          "minItems": 1,
+          "title": "Citations",
+          "type": "array"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "stage_hint": {
+          "default": "",
+          "title": "Stage Hint",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "name",
+        "description",
+        "citations"
+      ],
+      "title": "ExtractedUnit",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "resource_id": {
+      "title": "Resource Id",
+      "type": "string"
+    },
+    "chunk_id": {
+      "default": "",
+      "title": "Chunk Id",
+      "type": "string"
+    },
+    "units": {
+      "items": {
+        "$ref": "#/$defs/ExtractedUnit"
+      },
+      "title": "Units",
+      "type": "array"
+    }
+  },
+  "required": [
+    "resource_id"
+  ],
+  "title": "ExtractionOutput",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

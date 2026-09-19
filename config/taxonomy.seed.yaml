@@ -1,0 +1,121 @@
+# Initial Domain > Primer > Stage tree. Folder and display names carry no numbers.
+# `taxonomy import` creates the nodes that do not exist yet and never deletes or renames existing ones:
+# after the first import, the Taxonomy tab of the control panel is the source of truth.
+
+domains:
+  - name: Body
+    description: "The physical machine: keeping it healthy and long-lived, and making it capable and dangerous when called on."
+    primers:
+      - name: Immortal Yogi
+        slug: yogi
+        description: "Sustain the machine: energy, health, regulation and longevity; a body that never becomes the bottleneck."
+        stages:
+          - {name: Rest Body, description: "Engineer sleep, light and environment so recovery is automatic and tomorrow's capacity is never borrowed against."}
+          - {name: Fuel Body, description: "Food, fluid, timing and substances chosen so energy is stable and nothing you consume costs you the decision."}
+          - {name: Move Body, description: "Keep the frame free and pain-free: screen restriction, train range of motion, hold alignment, preserve joints."}
+          - {name: Regulate Body, description: "Command your own state from the inside: read the nervous system and return it to baseline on demand through breath and attention."}
+          - {name: Massage Body, description: "Work the soft tissue directly: manual and tool-applied bodywork releasing tension in muscle and fascia."}
+          - {name: Repair Body, description: "Return to full capacity fast: recover from training load, heal injury, manage pain so downtime is short and rare."}
+          - {name: Measure and Screen, description: "Know the machine's real numbers: track markers, screen on schedule, catch disease early."}
+          - {name: Extend Life, description: "Slow biological ageing and hold hormonal function so capability compounds over decades."}
+      - name: Olympic Spartan
+        slug: olympic-spartan
+        description: "Deploy the body: strength, conditioning and combat readiness; physical capability and self-protection on demand."
+        stages:
+          - {name: Build Body, description: "Build the engine and the frame: programme strength and conditioning so force and work capacity are there when called on."}
+          - {name: Map and Analyse Threats, description: "See it coming and end it early: read the environment, know the targets and the law, defuse before force is needed."}
+          - {name: Boxing, description: "The combat discipline built on movement, stance, footwork, defence, attack, conditioning and energy management, plus combat tactics and strategy."}
+          - {name: Muay Thai, description: "Own all eight limbs: strike and defend with kicks, knees and elbows, control the clinch."}
+          - {name: BJJ, description: "Own the ground: take it down safely, control position, escape danger and finish."}
+          - {name: MMA, description: "Integrate the three: move cleanly between ranges and keep only what holds up live."}
+
+  - name: Mind
+    description: "The cognitive stack: how you take in truth, decide under uncertainty, and govern the self that has to execute."
+    primers:
+      - name: Prodigy Autodidact
+        slug: prodigy
+        description: "Build an accurate model of the world: filter signal from noise, process and validate information, encode and retain it."
+        stages:
+          - {name: Attend and Clear, description: "Point attention at reality and hold it there: remove interference and sustain focus long enough for real thinking."}
+          - {name: Validate, description: "Let nothing false in: test the source, evidence and reasoning before anything becomes belief."}
+          - {name: Think, description: "Turn validated input into understanding: apply models, decompose to fundamentals, trace consequences."}
+          - {name: Encode Information, description: "Compress understanding into something reusable: synthesise, externalise and practise it until it's yours."}
+          - {name: Store and Retrieve, description: "Have it available at the moment of decision: encode durably, schedule retrieval so knowledge surfaces under pressure."}
+          - {name: Learning, description: "Close the loop: measure what the model got wrong and correct it, so the map converges on the territory."}
+      - name: Strategist Commander
+        slug: strategist
+        description: "Commit to the right action under uncertainty: frame the real problem, quantify, forecast, decide, compete and review."
+        stages:
+          - {name: Clear, description: "Strip distortion before deciding: remove the cognitive and emotional interference between you and the facts."}
+          - {name: Frame, description: "Decide what's actually worth deciding: name the real problem, find the binding constraint, rank effort."}
+          - {name: Quantify, description: "Put numbers on belief: convert uncertainty into probabilities and expected value so options are compared, not argued."}
+          - {name: Forecast, description: "Anticipate what's coming: build plausible futures, size the downside, pre-mortem the plan."}
+          - {name: Commit, description: "Choose and act: match the decision method to the uncertainty and reversibility, commit at the right moment."}
+          - {name: Contend, description: "Win against opponents who react: model the game, signal credibly, see through deception."}
+          - {name: Review, description: "Make the judge better: record reasoning, score the calls, separate good decisions from lucky outcomes."}
+      - name: Sovereign Monarch
+        slug: monarch
+        description: "Govern the self that executes: identity, habits and emotional command that turn decisions into behaviour."
+        stages:
+          - {name: Know, description: "See yourself accurately: values, story, strengths and blind spots before trying to govern any of them."}
+          - {name: Identity, description: "Set the constitution: fix the beliefs, standards and lines that decide behaviour before pressure arrives."}
+          - {name: Self-Control, description: "Hold the line in the moment: govern impulse, appetite, emotion and frame so the decision survives contact."}
+          - {name: Become, description: "Make the right action automatic: build habits and design the environment so execution doesn't depend on willpower."}
+          - {name: Review, description: "Audit who you are becoming: check behaviour against identity, compound what works."}
+
+  - name: People
+    description: "The social stack: reading people accurately, moving them with the spoken word, and building the bonds that matter."
+    primers:
+      - name: Profiler Mentalist
+        slug: profiler
+        description: "Read people accurately: drives, emotion, psychology and live behaviour; detect deception and manipulation defensively."
+        stages:
+          - {name: Drives, description: "Know what actually moves a person: the needs, wants and impulses behind visible behaviour."}
+          - {name: Emotion Chain, description: "Trace how feeling forms, from stimulus to conscious feeling, so you read emotion at its source."}
+          - {name: Pain and Desire, description: "Map what they run from and toward, concretely enough to build an avatar and act on it."}
+          - {name: Psychology, description: "The machinery under behaviour: traits, attachments, defences and conditioning that make a person predictable."}
+          - {name: Systems and Incentives, description: "Read the situation, not just the person: incentives, frames and context steer behaviour more reliably than character."}
+          - {name: Observe, description: "Read them live: establish a baseline, detect deviation in real time from body, face and behaviour."}
+          - {name: Defend, description: "Don't be the one who is read: detect deception and manipulation aimed at you."}
+          - {name: Dark Patterns, description: "Defensive literacy: recognise predatory influence (dark-triad, cult and social-engineering patterns) well enough to counter them."}
+      - name: Orator Diplomat
+        slug: orator
+        description: "Move people with the spoken word: voice, structure, narrative, delivery and ethical suggestion."
+        stages:
+          - {name: Prepare, description: "Earn the right to be heard: know the audience, establish credibility before the first word."}
+          - {name: Instrument, description: "Tune the instrument: voice, articulation and word choice that carry authority."}
+          - {name: Structure, description: "Build arguments that hold: construct and defend a case, recognise fallacious persuasion aimed at you."}
+          - {name: Narrative, description: "Make it land and stick: story, image and frame so the idea is felt, remembered and repeated."}
+          - {name: Delivery, description: "Land it live: hold a room through timing, humour, silence and unscripted confidence."}
+          - {name: Suggestion, description: "Use indirect language deliberately and ethically, and notice it used on you."}
+      - name: Friendly Lover
+        slug: lover
+        description: "Build bonds: attraction, intimacy, long-term relationship, friendship, network and family."
+        stages:
+          - {name: Presence, description: "Be worth approaching: appearance, grooming and style that open the door before you say anything."}
+          - {name: Connect, description: "Turn contact into connection: open, listen, build the rapport that makes a stranger want to continue."}
+          - {name: Attract, description: "Create romantic interest: approach with intent, online and in person, and understand attraction dynamics."}
+          - {name: Intimacy, description: "Deepen into intimacy: physical competence plus the vulnerability and trust that make closeness real."}
+          - {name: Bond, description: "Keep it alive under strain: sustain, repair rupture, hold hard conversations, and end well when it must end."}
+          - {name: Circle, description: "Build the wider circle: friendships, groups and a network you can move within and draw on."}
+          - {name: Family, description: "Build and protect the family unit: parenting, extended relationships and the legal frame carrying the most risk."}
+
+  - name: Money
+    description: "The economic stack: converting skill into revenue and revenue into assets."
+    primers:
+      - name: Sales Man
+        slug: sales
+        description: "Turn the right decision into money: convert qualified conversations into closed revenue, and keep them paying after the close."
+        stages:
+          - {name: Prospecting, description: "Generate enough qualified conversations that pipeline is never the constraint."}
+          - {name: Profiling the Buyer, description: "Know who you're talking to and who actually decides, before you spend the call."}
+          - {name: Rapport and Agenda, description: "Open with trust and a shared agenda so the conversation has permission to go deep."}
+          - {name: Discovery, description: "Surface the real problem and its cost in their words, not yours."}
+          - {name: Qualification, description: "Decide whether this deal deserves your time, and disqualify fast when it doesn't."}
+          - {name: Value and Business Case, description: "Turn the problem into a quantified case for change they can defend internally."}
+          - {name: Pitch and Demo, description: "Show the solution against their specific problem, not a feature tour."}
+          - {name: Trust and Risk Removal, description: "Remove the perceived risk of saying yes."}
+          - {name: Objection Handling, description: "Resolve resistance without pressure so the real blocker surfaces."}
+          - {name: Negotiation, description: "Reach terms that close without giving away the value you built."}
+          - {name: Closing, description: "Ask for the decision and make saying yes easy."}
+          - {name: Follow-up and Expansion, description: "Deliver, retain and expand: the decision keeps paying after the close."}

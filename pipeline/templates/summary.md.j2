@@ -1,0 +1,138 @@
+{{ banner }}
+
+# {{ title }}
+{% if mode != "part" %}
+
+## Author profile
+
+- Canonical name: {{ profile.canonical_name }}
+- Aliases: {{ profile.aliases | join(", ") if profile.aliases else "none recorded" }}
+- Sources: {{ profile.n_sources }}
+- Date span: {{ profile.date_span }}
+- Cards: {{ profile.n_cards }}
+{% if mode == "hub" %}
+
+## Parts
+
+The cards of this author exceed the size of one document, so they are split into one document per domain. This hub keeps the profile, the sources, the evolution timeline, the contradictions, the obsolescence watch, the glossary and the changelog.
+
+{% for p in parts %}
+- {{ p.title }} ({{ p.n_cards }} cards){% if p.url %}: {{ p.url }}{% endif %}
+
+{% endfor %}
+{% endif %}
+
+## Sources
+
+| Date | Title | Type | Link |
+| --- | --- | --- | --- |
+{% for s in sources %}
+| {{ s.date }} | {{ s.title }} | {{ s.type }} | {{ s.link }} |
+{% endfor %}
+
+## Reading guide
+
+Each card is one thing this author teaches. Its type says what kind of thing: a principle (a rule or belief the author holds), a concept (a term, model or distinction), a technique (a method for doing something), a drill (a repeatable practice), an exercise (a task to do once or on a schedule), a list (an enumerated set the author gives), a script (words to say), an example (a worked case or story), a glossary term (a word the author defines), a procedure (ordered steps), a claim (a factual assertion), a mistake (an error the author warns against) or a dataset (numbers or reference data). Cards are grouped by Domain, then by Stage of the AI Primer taxonomy, then by type; cards without a stage sit under Unassigned. Every card ends with its sources, given as resource id and location (page or timestamp); the quote behind each source was checked against the source text. The Evolution timeline lists the cards whose teaching changed between sources, oldest to newest, with what changed. Contradictions and open questions lists the cards where a later source conflicts with an earlier one, plus cards flagged for review. The Obsolescence watch lists the cards whose newest source is older than {{ obsolescence_years }} years or that were superseded: they may no longer reflect the author's current view.
+{% endif %}
+{% if include_cards %}
+{% for d in domains %}
+
+## Cards: {{ d.name }}
+{% for st in d.stages %}
+
+### {{ st.path }}
+{% for tg in st.types %}
+
+**{{ tg.label }}**
+{% for u in tg.units %}
+
+#### {{ u.name }}
+
+{% if u.aliases %}
+Also known as: {{ u.aliases | join(", ") }}
+
+{% endif %}
+{% if u.status_line %}
+{{ u.status_line }}
+
+{% endif %}
+{% if u.also_in %}
+Also in: {{ u.also_in | join("; ") }}
+
+{% endif %}
+{{ u.description }}
+{% if u.details %}
+
+{{ u.details }}
+{% endif %}
+{% if u.notes %}
+
+Notes: {{ u.notes }}
+{% endif %}
+
+Sources:
+{% for s in u.sources %}
+- {{ s }}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% if mode != "part" %}
+
+## Evolution timeline
+
+{% if evolution %}
+{% for e in evolution %}
+- {{ e.name }} ({{ e.unit_id }})
+{% for v in e.versions %}
+  - {{ v.date }} - {{ v.source }}{% if v.what_changed %}: {{ v.what_changed }}{% elif v.summary %}: {{ v.summary }}{% endif %}
+
+{% endfor %}
+{% endfor %}
+{% else %}
+No card has more than one dated version yet.
+{% endif %}
+
+## Contradictions and open questions
+
+{% if contradictions %}
+{% for c in contradictions %}
+- {{ c.name }} ({{ c.unit_id }}), status {{ c.status }}
+{% for x in c.entries %}
+  - {{ x }}
+{% endfor %}
+{% endfor %}
+{% else %}
+None recorded.
+{% endif %}
+
+## Obsolescence watch
+
+{% if obsolescence %}
+{% for o in obsolescence %}
+- {{ o.name }} ({{ o.unit_id }}): {{ o.reason }}
+{% endfor %}
+{% else %}
+No active card relies only on sources older than {{ obsolescence_years }} years.
+{% endif %}
+
+## Glossary
+
+{% if glossary %}
+{% for g in glossary %}
+- {{ g.name }}: {{ g.description }}
+{% endfor %}
+{% else %}
+No glossary terms yet.
+{% endif %}
+
+## Changelog
+
+| Version | Date | Note |
+| --- | --- | --- |
+{% for row in changelog %}
+| {{ row.version }} | {{ row.date }} | {{ row.note }} |
+{% endfor %}
+{% endif %}
