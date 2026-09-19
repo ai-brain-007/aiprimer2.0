@@ -26,7 +26,8 @@ For every chunk file listed in the prepare output, spawn a helper (Agent tool, s
 whose prompt is `pipeline/prompts/extract_units.md` with the placeholders filled (`{{chunk_path}}`,
 `{{output_path}}`, `{{resource_id}}`, `{{chunk_id}}`). The helper reads the chunk and writes `units-NN.json`.
 When a resource has more than one chunk, spawn one consolidation helper with
-`pipeline/prompts/consolidate_resource.md` that reads all `units-NN.json` and writes `units-consolidated.json`.
+`pipeline/prompts/consolidate_resource.md` (placeholders `{{input_paths}}` = the chunk output files,
+`{{output_path}}` = `consolidated_path`, `{{resource_id}}`) that reads all chunk outputs and writes the consolidated file.
 Do not extract cards yourself in the main context: your job is orchestration and the conversation.
 
 ## 4. Fact-check gate 1 (mechanical)
@@ -41,16 +42,18 @@ extraction for that resource with the reminder "quotes must be copied verbatim".
 ```bash
 python -m pipeline summarize match --author <A-id> --resource R-… --pretty
 ```
-Writes `candidates.json`. Spawn a helper with `pipeline/prompts/match_units.md` (placeholders `{{candidates_path}}`,
-`{{decisions_path}}`) that writes `decisions.json` with NEW / SAME / EVOLVED / CONTRADICTS per card.
+Writes the candidates file. If `needs_helper` is above zero, spawn a helper with `pipeline/prompts/match_units.md`
+(placeholders `{{candidates_path}}`, `{{output_path}}` = the `decisions_path` from the command output, `{{resource_id}}`)
+that writes the decisions file with NEW / SAME / EVOLVED / CONTRADICTS per card. Cards the script decided
+automatically (`auto_new`, `auto_same`) need no helper decision.
 
 ## 6. Apply and review (gate 2)
 ```bash
 python -m pipeline summarize apply --author <A-id> --resource R-… --pretty      # for each resource
 python -m pipeline summarize review-prep --author <A-id> --pretty               # writes evidence.md
 ```
-Spawn ONE reviewer helper with `pipeline/prompts/review_units.md` (placeholders `{{evidence_path}}`,
-`{{review_path}}`). It must not see anything else. It writes `review.json`.
+Spawn ONE reviewer helper with `pipeline/prompts/review_units.md` (placeholders `{{author_id}}`, `{{evidence_path}}`,
+`{{output_path}}` = the `review_path` from the command output). It must not see anything else. It writes the review file.
 
 ## 7. Confirm with the user
 Show: cards new / same / evolved / contradicted / rejected, the contradictions found, the reviewer's verdict.

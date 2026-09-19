@@ -77,6 +77,7 @@ Report ingested / skipped / failed counts; re-run the same command for failures 
 ## 5. Screenshots and scanned pages (needs_vision)
 
 - **Image**: `Read` the image. Write a faithful markdown transcription following `pipeline/prompts/transcribe_page.md`
+  (placeholders `{{image_path}}`, `{{output_path}}`, `{{page_marker}}`; you may do this yourself or hand it to a helper)
   into `.work/vision/<name>.md` (include any visible web address, author, date). Then run `ingest run` with
   `--extracted-file .work/vision/<name>.md` and `--title/--author/--date` from what you see or what the user says.
   Several screenshots of one page = one resource: ask, then concatenate the transcriptions into one file and
