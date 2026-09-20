@@ -39,7 +39,9 @@ def make_pdf(path: Path, pages: int = 2) -> Path:
             page.insert_text((72, 90), "The Art of Footwork", fontsize=24)
             page.insert_text((72, 130), "by Teddy Atlas", fontsize=12)
             page.insert_text((72, 160), "Copyright 2019 Some Press", fontsize=10)
-        page.insert_text((72, 220), f"Page {i + 1}: pivot on the ball of the foot and keep the rear heel light. " * 5, fontsize=11)
+        # enough visible text per page that the PDF is not mistaken for a scan (lines must stay inside the page)
+        for k in range(12):
+            page.insert_text((72, 220 + 16 * k), f"Page {i + 1}, line {k + 1}: pivot on the ball of the foot and keep the rear heel light.", fontsize=11)
     doc.save(str(path))
     return path
 
@@ -63,6 +65,10 @@ def test_ingest_youtube_and_pdf_end_to_end(settings, fake_sheets, fake_drive, fa
     assert reg.author("A-teddy-atlas").resource_count == 1 and reg.author("A-teddy-atlas").type == "channel"
     text = fake_drive.blobs[row.text_file_id].read_text(encoding="utf-8")
     assert "[01:05]" in text and "Pivot on the ball" in text and "resource_id: R-YT-abcdefghijk" in text
+    # storage / provenance columns
+    assert row.drive_path == "AI Primer Raw / Body / Olympic Spartan / Boxing" and row.folder_url.startswith("https://drive.google.com/drive/folders/")
+    assert row.text_file_url and row.stored_at and row.resource_kind == "YouTube video (transcript)"
+    assert row.extraction_method.startswith("apify transcript") and row.apify_cost_usd == 0.02  # metadata run + transcript run
 
     # second run: skipped as duplicate, no new Drive files
     n_files = len(fake_drive.files)
@@ -78,6 +84,7 @@ def test_ingest_youtube_and_pdf_end_to_end(settings, fake_sheets, fake_drive, fa
     assert r3["status"] == "ingested" and r3["resource_id"].startswith("R-F-") and r3["published_date"] == "2019"
     row3 = reg.resource(r3["resource_id"])
     assert row3.pages == 3 and row3.author_override and row3.source_type == "pdf"
+    assert row3.resource_kind == "document (PDF)" and row3.extraction_method == "pdf text" and row3.file_size_bytes and row3.apify_cost_usd is None
     assert fake_drive.files[row3.raw_file_id]["name"].endswith(".pdf")
     assert fake_drive.files[row3.raw_file_id]["appProperties"]["resource_id"] == row3.resource_id
     assert reg.author("A-teddy-atlas").resource_count == 2
@@ -114,6 +121,8 @@ def test_channel_list_and_run(settings, fake_sheets, fake_drive, fake_apify, tmp
     assert listing["count"] == 3 and listing["pending"] == 3 and listing["total_hours"] == 0.5 and listing["estimated_cost_usd"] > 0
     res = ing.channel_run("https://www.youtube.com/@chan/videos", ["chanvid0000", "chanvid0001"], "Body / Olympic Spartan / Boxing")
     assert len(res["ingested"]) == 2 and not res["failed"]
+    # listing run (0.01 over 3 videos) + batch transcript run (0.01 over 2 videos), attributed per video
+    assert reg.resource("R-YT-chanvid0000").apify_cost_usd == round(0.01 / 3 + 0.01 / 2, 4)
     listing2 = ing.channel_list("https://www.youtube.com/@chan/videos")
     assert listing2["already_ingested"] == 2 and listing2["pending"] == 1
 

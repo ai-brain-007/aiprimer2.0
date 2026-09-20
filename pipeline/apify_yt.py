@@ -196,13 +196,27 @@ class ApifyYouTube:
         data.update({k: v for k, v in extra.items() if v is not None})
         return data
 
-    def _run(self, actor: str, run_input: dict) -> list[dict]:
+    def _run(self, actor: str, run_input: dict) -> tuple[list[dict], float]:
         result = self.runner.run(actor, run_input, timeout_secs=int(self.cfg.get("timeout_secs", 1800)))
         if result.get("run_id"):
             self.run_ids.append(result["run_id"])
-        if result.get("usage_usd"):
-            self.cost_usd += float(result["usage_usd"])
-        return result.get("items", [])
+        usage = float(result.get("usage_usd") or 0.0)
+        self.cost_usd += usage
+        return result.get("items", []), usage
+
+    @staticmethod
+    def _share(usage: float, n: int) -> float:
+        return round(usage / n, 6) if n else 0.0
+
+    def cost_for(self, video_id: str) -> float | None:
+        """Apify cost attributed to one video: its share of the metadata run(s) plus of the transcript run."""
+        total, found = 0.0, False
+        for kind in ("meta", "transcript"):
+            cached = self._cached(kind, video_id)
+            if cached and cached.get("cost_usd") is not None:
+                total += float(cached["cost_usd"])
+                found = True
+        return round(total, 4) if found else None
 
     # -- cache
     def _cache_path(self, kind: str, key: str) -> Path:
@@ -235,13 +249,14 @@ class ApifyYouTube:
         if missing:
             tpl = (self.cfg.get("input_templates") or {}).get("metadata") or {}
             urls = [f"https://www.youtube.com/watch?v={v}" for v in missing]
-            items = self._run(self.cfg["metadata_actor"], self._input("metadata", urls, **{tpl.get("max_results_key", "maxResults"): len(urls)}))
-            for item in items:
-                v = parse_video_item(item)
-                if v["video_id"]:
-                    v.pop("raw", None)
-                    self._store("meta", v["video_id"], v)
-                    out[v["video_id"]] = v
+            items, usage = self._run(self.cfg["metadata_actor"], self._input("metadata", urls, **{tpl.get("max_results_key", "maxResults"): len(urls)}))
+            parsed = [parse_video_item(item) for item in items]
+            parsed = [v for v in parsed if v["video_id"]]
+            for v in parsed:
+                v.pop("raw", None)
+                v["cost_usd"] = self._share(usage, len(parsed))
+                self._store("meta", v["video_id"], v)
+                out[v["video_id"]] = v
         return out
 
     def channel_videos(self, channel_url: str, max_results: int | None = None, use_cache: bool = True) -> list[dict]:
@@ -252,7 +267,7 @@ class ApifyYouTube:
         tpl = (self.cfg.get("input_templates") or {}).get("metadata") or {}
         mr = max_results if max_results is not None else int(self.cfg.get("channel_max_results", 0) or 0)
         run_input = self._input("metadata", [channel_url], **({tpl.get("max_results_key", "maxResults"): mr} if mr else {}))
-        items = self._run(self.cfg["metadata_actor"], run_input)
+        items, usage = self._run(self.cfg["metadata_actor"], run_input)
         videos = []
         seen = set()
         for item in items:
@@ -261,7 +276,9 @@ class ApifyYouTube:
                 seen.add(v["video_id"])
                 v.pop("raw", None)
                 videos.append(v)
-                self._store("meta", v["video_id"], v)
+        for v in videos:
+            v["cost_usd"] = self._share(usage, len(videos))
+            self._store("meta", v["video_id"], v)
         self._store("channel", key, {"channel_url": channel_url, "videos": videos})
         return videos
 
@@ -278,14 +295,18 @@ class ApifyYouTube:
         for i in range(0, len(missing), batch):
             chunk = missing[i : i + batch]
             urls = [f"https://www.youtube.com/watch?v={v}" for v in chunk]
-            items = self._run(self.cfg["transcript_actor"], self._input("transcript", urls))
+            items, usage = self._run(self.cfg["transcript_actor"], self._input("transcript", urls))
+            parsed = []
             for item in items:
                 t = parse_transcript_item(item)
                 if not t["video_id"] and len(chunk) == 1:
                     t["video_id"] = chunk[0]
                 if t["video_id"]:
-                    self._store("transcript", t["video_id"], t)
-                    out[t["video_id"]] = t
+                    parsed.append(t)
+            for t in parsed:
+                t["cost_usd"] = self._share(usage, len(parsed))
+                self._store("transcript", t["video_id"], t)
+                out[t["video_id"]] = t
         return out
 
     def estimate_cost(self, n_videos: int, with_transcripts: bool = True) -> float:

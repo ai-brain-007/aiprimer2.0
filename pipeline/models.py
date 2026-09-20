@@ -154,6 +154,16 @@ class Resource(TabRow):
     summarized_at: str = ""
     error: str = ""
     notes: str = ""
+    # --- storage and provenance details (appended columns)
+    drive_path: str = ""          # "AI Primer Raw / Body / Olympic Spartan / Boxing"
+    folder_url: str = ""          # link to the stage folder holding the files
+    text_file_url: str = ""       # link to the text version
+    file_size_bytes: int | None = None
+    stored_at: str = ""           # when the original landed in Drive
+    resource_kind: str = ""       # plain-language kind: "YouTube video", "book (PDF)", ...
+    extraction_method: str = ""   # apify transcript | pdf text | ocr | vision | word | spreadsheet | text
+    apify_cost_usd: float | None = None
+    warnings: list[str] = Field(default_factory=list)
 
 
 class Author(TabRow):
@@ -170,6 +180,12 @@ class Author(TabRow):
     last_summarized_at: str = ""
     kb_path: str = ""
     notes: str = ""
+    # --- summary location details (appended columns)
+    summary_doc_created_at: str = ""
+    summary_folder_url: str = ""
+    summary_version: int | None = None
+    kb_url: str = ""                    # link to the cards on GitHub
+    part_doc_urls: list[str] = Field(default_factory=list)
 
 
 class SummaryRun(TabRow):
@@ -190,6 +206,8 @@ class SummaryRun(TabRow):
     doc_url: str = ""
     kb_commit: str = ""
     notes: str = ""
+    resources_count: int | None = None
+    part_doc_urls: list[str] = Field(default_factory=list)
 
 
 class Job(TabRow):

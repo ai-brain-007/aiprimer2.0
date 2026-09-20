@@ -89,6 +89,7 @@ def test_folders_rename_and_sync(fake_sheets, fake_drive, settings):
     assert report.renamed == ["Rest Body -> Sleep and Recovery"]
     assert fake_drive.files[fm.folder_id]["name"] == "Sleep and Recovery"
     assert reg.resource("R-1").stage_path == "Body / Immortal Yogi / Sleep and Recovery"
+    assert reg.resource("R-1").drive_path == "AI Primer Raw / Body / Immortal Yogi / Sleep and Recovery"
     node = reg.node(stage.node_id)
     assert node.previous_names == ["Rest Body"] and node.slug == "body.immortal-yogi.sleep-and-recovery"
     # rename a primer: descendants' paths refresh too

@@ -124,6 +124,10 @@ def test_full_summary_flow(settings, fake_sheets, fake_drive, fake_apify, tmp_pa
     ws.review_path().write_text(json.dumps({"author_id": "A-teddy-atlas", "overall": "pass", "items": [{"unit_id": target, "verdict": "accept", "reason": "supported"}]}), encoding="utf-8")
     fin2 = sc.finalize(ctx, "A-teddy-atlas", publish_doc=True, commit=False)
     assert fin2["version"] == 2 and fin2["evolved"] == 1 and fin2["doc"]["created"] is False and fin2["doc"]["doc_id"] == fin["doc"]["doc_id"]
+    a = reg.author("A-teddy-atlas")
+    assert a.summary_version == 2 and a.summary_doc_created_at and a.summary_folder_url.startswith("https://drive.google.com/drive/folders/")
+    assert a.kb_url.endswith("/knowledge/teddy-atlas") and "github.com" in a.kb_url
+    assert reg.summaries()[-1].resources_count == 2
     unit_files = list((tmp_path / "knowledge" / "teddy-atlas" / "units").glob("*.md"))
     assert len(unit_files) == 4
     roll = next(f.read_text(encoding="utf-8") for f in unit_files if "Shoulder roll" in f.read_text(encoding="utf-8"))

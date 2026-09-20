@@ -295,6 +295,8 @@ def rename_node(registry: Registry, node_id: str, new_name: str, drives: Callabl
             new_path = tax.path(r.stage_id)
             if r.stage_path != new_path:
                 r.stage_path = new_path
+                root = str(registry.settings.drive.get("raw_root_name", "AI Primer Raw"))
+                r.drive_path = f"{root} / {new_path}"
                 changed.append(r)
     if changed:
         registry.repo.update("Resources", changed)

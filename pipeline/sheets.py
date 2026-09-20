@@ -21,8 +21,8 @@ README_TEXT = [
     ["Accounts", "One row per Google account (or Backblaze bucket later): role raw|summary, token_env_var, root folder ids, quota, status active|full|disabled, priority."],
     ["Taxonomy", "Domain > Primer > Stage tree. Edit `name` here and run /taxonomy sync to rename the Drive folder. node_id never changes."],
     ["Folders", "Which Drive folder holds each taxonomy node in each account."],
-    ["Resources", "One row per ingested resource: where it is stored, its metadata and status."],
-    ["Authors", "Canonical author names, aliases and the link to each author's summary Doc."],
+    ["Resources", "One row per ingested resource: kind, where it is stored (Drive path, folder and file links), when, how the text was obtained, Apify cost, warnings, status."],
+    ["Authors", "Canonical author names, aliases, the summary Doc (link, created, last updated, version) and the link to the cards on GitHub."],
     ["Summaries", "One row per generated version of an author summary."],
     ["Jobs", "Activity log: every pipeline command, result and Apify cost."],
 ]

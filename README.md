@@ -98,6 +98,10 @@ or tell the agent in chat; the agent applies the feedback to the cards and re-re
 
 ## Where to look when something goes wrong
 
+- The **Resources** tab answers "where is it?": Drive path, folder and file links, when it was stored, what kind of
+  resource it is, how its text was obtained, the Apify cost attributed to it, and any quality warnings.
+- The **Authors** tab answers "where is the summary?": Doc link, creation date, last update, version, and the link to
+  the cards on GitHub. The **Summaries** tab keeps one row per version.
 - `python -m pipeline auth check --pretty` — credentials and free space per account.
 - `python -m pipeline setup status --pretty` — control sheet link, taxonomy size, resources by status.
 - The **Jobs** tab — every command, its result and its Apify cost.

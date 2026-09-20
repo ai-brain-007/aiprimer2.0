@@ -14,6 +14,7 @@ from typing import Any
 
 from .context import AppContext
 from .docs import DocsPublisher
+from .drive import folder_url
 from .ids import now_iso, today_iso
 from .kb.chunker import chunk_markdown
 from .kb.evidence import build_evidence
@@ -417,6 +418,9 @@ def finalize(ctx: AppContext, author_ref: str, note: str = "", publish_doc: bool
             main = publisher.publish_markdown(files["summary.md"], f"{title_prefix}{author.canonical_name}", summary_account.summaries_folder_id, meta.get("summary_doc_id") or None)
             doc_info = {"doc_id": main["doc_id"], "url": main["url"], "created": main["created"]}
             meta["summary_doc_id"], meta["summary_doc_url"] = main["doc_id"], main["url"]
+            if main["created"] or not meta.get("summary_doc_created_at"):
+                meta["summary_doc_created_at"] = now_iso()
+            meta["summary_folder_url"] = folder_url(summary_account.summaries_folder_id)
             parts = {}
             part_ids = dict(meta.get("part_doc_ids", {}))
             for name, text in files.items():
@@ -440,9 +444,14 @@ def finalize(ctx: AppContext, author_ref: str, note: str = "", publish_doc: bool
     # 5. registry
     author.summary_doc_id = meta.get("summary_doc_id", author.summary_doc_id)
     author.summary_doc_url = meta.get("summary_doc_url", author.summary_doc_url)
+    author.summary_doc_created_at = meta.get("summary_doc_created_at", author.summary_doc_created_at)
+    author.summary_folder_url = meta.get("summary_folder_url", author.summary_folder_url)
+    author.summary_version = version
+    author.part_doc_urls = list((doc_info.get("parts") or {}).values()) or author.part_doc_urls
     author.unit_count = len(units)
     author.last_summarized_at = now_iso()
     author.kb_path = f"knowledge/{_slug(author)}"
+    author.kb_url = kb_github_url(ctx.settings.repo_root, author.kb_path) or author.kb_url
     reg.upsert_author(author)
     reg.append_summary(
         SummaryRun(
@@ -462,6 +471,8 @@ def finalize(ctx: AppContext, author_ref: str, note: str = "", publish_doc: bool
             doc_url=author.summary_doc_url,
             kb_commit=commit_hash,
             notes=note,
+            resources_count=len(resources),
+            part_doc_urls=list((doc_info.get("parts") or {}).values()),
         )
     )
     for rid in included:
@@ -506,6 +517,21 @@ def doc_comments(ctx: AppContext, author_ref: str, resolve: str | None = None) -
         publisher.resolve(author.summary_doc_id, resolve)
         return {"resolved": resolve}
     return {"doc_url": author.summary_doc_url, "comments": publisher.unresolved_comments(author.summary_doc_id)}
+
+
+def kb_github_url(repo_root: Path, kb_path: str) -> str:
+    """Link to the author's cards on GitHub, derived from the git remote and current branch."""
+    try:
+        remote = subprocess.run(["git", "config", "--get", "remote.origin.url"], cwd=repo_root, capture_output=True, text=True, check=True).stdout.strip()
+        branch = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=repo_root, capture_output=True, text=True, check=True).stdout.strip()
+    except Exception:
+        return ""
+    if remote.startswith("git@github.com:"):
+        remote = "https://github.com/" + remote[len("git@github.com:"):]
+    remote = remote.removesuffix(".git")
+    if "github.com" not in remote or not branch or branch == "HEAD":
+        return ""
+    return f"{remote}/tree/{branch}/{kb_path}"
 
 
 def _git_commit(repo_root: Path, path: Path, message: str) -> str:

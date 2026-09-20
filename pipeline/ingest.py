@@ -218,6 +218,13 @@ class Ingestor:
         if kind == "youtube" and video:
             resource.duration_sec = video.get("duration_sec")
         resource.stage_id, resource.stage_path = node.node_id, self.taxonomy.path(node.node_id)
+        resource.resource_kind = resource_kind_label(kind, extraction, resource)
+        resource.extraction_method = extraction_method_label(kind, extraction)
+        resource.warnings = list(extraction.warnings)
+        if local_path is not None and local_path.exists():
+            resource.file_size_bytes = local_path.stat().st_size
+        if kind == "youtube":
+            resource.apify_cost_usd = self.apify.cost_for(nk.key)
         resource.author_override = bool(author)
         if dataset_note:
             resource.notes = (resource.notes + " " if resource.notes else "") + f"dataset: {dataset_note}"
@@ -238,6 +245,8 @@ class Ingestor:
             raise NoStorageError(f"no credentials for account {account.account_id} ({account.token_env_var})")
         folder = ensure_node_folder(self.registry, drive, account, node.node_id)
         resource.account_id, resource.folder_id = account.account_id, folder.folder_id
+        resource.folder_url = folder.folder_url
+        resource.drive_path = drive_path_for(self.settings, resource.stage_path)
         if resource.status == "registered":
             resource.status = "folder_ready"
         self.registry.upsert_resource(resource)
@@ -270,6 +279,7 @@ class Ingestor:
             resource.raw_file_id = meta.get("id", "")
             resource.raw_file_url = meta.get("webViewLink") or file_url(resource.raw_file_id)
             resource.raw_filename = meta.get("name", raw_name)
+            resource.stored_at = resource.stored_at or now_iso()
         if resource.status in ("registered", "folder_ready"):
             resource.status = "uploaded"
         self.registry.upsert_resource(resource)
@@ -301,6 +311,7 @@ class Ingestor:
         text_path = write_extracted_markdown(workdir / text_name, resource, extra, extraction.text)
         tmeta = drive.upload(text_path, text_name, folder.folder_id, {"resource_id": resource.resource_id, "role": "text", "aiprimer": "1"}, mime_type=TEXT_MIME)
         resource.text_file_id = tmeta.get("id", "")
+        resource.text_file_url = tmeta.get("webViewLink") or file_url(resource.text_file_id)
         data_ids = []
         for export in extraction.data_exports:
             dname = data_export_filename(resource, Path(export).stem, author_name)
@@ -433,6 +444,43 @@ class Ingestor:
 
 
 # ----------------------------------------------------------------------------- helpers
+
+
+def drive_path_for(settings: Settings, stage_path: str) -> str:
+    root = str(settings.drive.get("raw_root_name", "AI Primer Raw"))
+    return f"{root} / {stage_path}" if stage_path else root
+
+
+def resource_kind_label(kind: str, extraction: "ex.Extraction | None", resource: Resource) -> str:
+    """Plain-language kind for the control panel."""
+    pages = (extraction.pages if extraction else None) or resource.pages
+    if kind == "youtube":
+        return "YouTube video (transcript)"
+    if kind == "pdf":
+        return "book (PDF)" if pages and pages >= 60 else "document (PDF)"
+    return {
+        "docx": "document (Word)",
+        "xlsx": "dataset (spreadsheet)",
+        "csv": "dataset (CSV)",
+        "txt": "text / notes",
+        "image": "screenshot / image",
+        "video": "video file",
+        "audio": "audio file",
+        "web": "web page",
+    }.get(kind, kind)
+
+
+def extraction_method_label(kind: str, extraction: "ex.Extraction | None") -> str:
+    tk = (extraction.transcript_kind if extraction else "") or ""
+    if kind == "youtube":
+        return {"manual": "apify transcript (author captions)", "auto": "apify transcript (auto captions)", "none": "no transcript"}.get(tk, "apify transcript")
+    if kind == "pdf":
+        return {"ocr": "OCR of scanned pages", "vision": "read by the agent's eyes", "text": "pdf text"}.get(tk, "pdf text")
+    if kind == "image":
+        return "read by the agent's eyes"
+    if kind in ("video", "audio"):
+        return "needs transcription"
+    return {"docx": "word text", "xlsx": "spreadsheet profile", "csv": "spreadsheet profile", "txt": "plain text"}.get(kind, tk or "text")
 
 
 def _apply_ocr_patch(text: str, patch: dict[Any, str]) -> str:

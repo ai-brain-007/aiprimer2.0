@@ -9,6 +9,7 @@ from .context import AppContext
 from .metadata import apply_overrides, ensure_author
 from .models import MetadataGuess, Resource
 from .naming import drive_filename, extracted_filename
+from .ingest import drive_path_for
 from .taxonomy import ensure_node_folder, load_taxonomy
 
 
@@ -50,6 +51,8 @@ def move(ctx: AppContext, ref: str, stage: str) -> dict[str, Any]:
             moved.append(fid)
     old = resource.stage_path
     resource.stage_id, resource.stage_path, resource.folder_id = node.node_id, tax.path(node.node_id), folder.folder_id
+    resource.folder_url = folder.folder_url
+    resource.drive_path = drive_path_for(ctx.settings, resource.stage_path)
     reg.upsert_resource(resource)
     return {"resource_id": resource.resource_id, "from": old, "to": resource.stage_path, "files_moved": moved, "folder_url": folder.folder_url}
 
