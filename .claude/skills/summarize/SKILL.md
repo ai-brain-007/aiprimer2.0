@@ -21,6 +21,12 @@ python -m pipeline summarize prepare --author <A-id> --resources R-…,R-… --p
 ```
 Downloads the text versions and writes `chunks/NN.md` per resource plus `index.json` (existing cards).
 
+## Model rule
+
+Every AI step (identification, checklist, extraction, matching decisions, review, vision transcription) runs on
+the model of this chat session. Helper agents are the same model with a fresh memory: never pass a `model`
+override when spawning them. The user decided this; cost is not a reason to change it.
+
 ## 3. Extract (helper agents, fresh context, up to `kb.parallel_helpers` in parallel)
 For every chunk file listed in the prepare output, spawn a helper (Agent tool, subagent_type `general-purpose`)
 whose prompt is `pipeline/prompts/extract_units.md` with the placeholders filled (`{{chunk_path}}`,

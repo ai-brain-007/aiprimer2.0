@@ -26,6 +26,8 @@ Read the skill file in `.claude/skills/<name>/SKILL.md` before running any of th
   matching and review. Helper prompts live in `pipeline/prompts/`.
 - **Helper agents get fresh context, one job each**: extraction never reviews its own output;
   the reviewer only sees `evidence.md`.
+- **One model for every AI step**: helpers run on the session's model; never pass a `model` override
+  to the Agent tool. The user decided this; do not downgrade helpers for cost.
 
 ## Where things live
 
