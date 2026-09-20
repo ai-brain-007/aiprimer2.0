@@ -10,6 +10,16 @@ if [ -z "${HTTPLIB2_CA_CERTS:-}" ]; then
   done
 fi
 
+# Safety net: the cloud setup script has a five-minute budget; if it could not finish installing the Python
+# packages, install them now in the background and tell the agent to wait for it.
+if ! python3 -c "import typer, pydantic, googleapiclient, apify_client, fitz, pandas, rapidfuzz" >/dev/null 2>&1; then
+  if [ -f requirements.txt ]; then
+    mkdir -p .cache
+    nohup python3 -m pip install --disable-pip-version-check --no-input -q -r requirements.txt >.cache/pip-install.log 2>&1 &
+    echo "AI Primer pipeline: Python packages missing; installing them in the background (log: .cache/pip-install.log). Before any pipeline command, wait until this passes: python3 -c 'import pandas, fitz, googleapiclient'"
+  fi
+fi
+
 missing=()
 if [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON:-}" ] || [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON_RAW:-}" ] || [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY:-}" ]; then
   mode="service account key(s) present"

@@ -55,7 +55,10 @@ no storage, so they can only write inside a paid Workspace Shared Drive. See "Al
      GOOGLE_OAUTH_CLIENT_ID=<client id>
      GOOGLE_OAUTH_CLIENT_SECRET=<client secret>
      ```
-   - Setup script: paste the contents of `scripts/setup-env.sh`.
+   - Setup script: paste the contents of `scripts/setup-env.sh`. (Claude cuts a setup script off after about
+     five minutes and refuses to start the session if it fails, so the script installs only OCR, PDF tools and
+     the Python packages, in parallel, and never exits with an error. `ffmpeg` and `pandoc` are optional and
+     can be installed from a session later.)
    - Create it, then reopen it (hover → settings icon) and add an **API credential**: host `api.apify.com`, header
      `Authorization`, prefix `Bearer`, value = the new Apify token.
 4. **Authorise the two Gmail accounts** (once each). Start a session on the "AI Primer" environment, repository
