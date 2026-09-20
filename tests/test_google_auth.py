@@ -27,6 +27,17 @@ def test_consent_url_uses_client_and_loopback(settings, monkeypatch):
     assert "auth%2Fdrive.file" in url  # the repo config requests drive.file (see test_consent_url_scopes_follow_config)
 
 
+def test_consent_url_has_no_pkce_challenge(settings, monkeypatch):
+    # The verifier would live only in the `auth url` process; `auth exchange` runs later (often in another
+    # session) and could not present it, so the link must not carry a code_challenge.
+    from urllib.parse import parse_qs, urlparse
+
+    monkeypatch.setenv("GOOGLE_OAUTH_CLIENT_ID", "id-123.apps.googleusercontent.com")
+    monkeypatch.setenv("GOOGLE_OAUTH_CLIENT_SECRET", "not-a-real-secret")
+    q = parse_qs(urlparse(consent_url(settings)).query)
+    assert "code_challenge" not in q and "code_challenge_method" not in q
+
+
 def test_consent_url_requires_client(settings, monkeypatch):
     monkeypatch.delenv("GOOGLE_OAUTH_CLIENT_ID", raising=False)
     monkeypatch.delenv("GOOGLE_OAUTH_CLIENT_SECRET", raising=False)

@@ -155,7 +155,10 @@ def _flow(settings: Settings, port: int, client_id: str | None = None, client_se
             "redirect_uris": [f"http://localhost:{port}/"],
         }
     }
-    flow = Flow.from_client_config(client_config, scopes=settings.google_oauth_scopes)
+    # No PKCE: `auth url` and `auth exchange` are two separate processes (often two sessions), so a code
+    # verifier generated for the link would be gone by the time the code is exchanged and Google would
+    # answer `invalid_grant`. A Desktop-app client exchanges the code with its client secret instead.
+    flow = Flow.from_client_config(client_config, scopes=settings.google_oauth_scopes, autogenerate_code_verifier=False)
     flow.redirect_uri = f"http://localhost:{port}/"
     return flow
 
