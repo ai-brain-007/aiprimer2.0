@@ -24,7 +24,7 @@ def test_consent_url_uses_client_and_loopback(settings, monkeypatch):
     assert "client_id=id-123.apps.googleusercontent.com" in url
     assert "redirect_uri=http%3A%2F%2Flocalhost%3A8765%2F" in url
     assert "access_type=offline" in url and "prompt=consent" in url
-    assert "auth%2Fdrive" in url and "auth%2Fspreadsheets" in url and "auth%2Fdocuments" in url
+    assert "auth%2Fdrive.file" in url  # the repo config requests drive.file (see test_consent_url_scopes_follow_config)
 
 
 def test_consent_url_requires_client(settings, monkeypatch):
