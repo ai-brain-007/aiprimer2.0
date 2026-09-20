@@ -79,11 +79,11 @@ python -m pytest -q                                    # all tests use in-memory
 
 ## Google credentials (two modes, chosen per account row)
 
-- **Service account (primary).** `GOOGLE_SERVICE_ACCOUNT_JSON` holds the key; each Accounts row names the
-  Google Workspace **Shared Drive** it writes to (`drive_id`, seeded from `AIPRIMER_RAW_DRIVE_ID` /
-  `AIPRIMER_SUMMARY_DRIVE_ID`). Google gives service accounts no storage: on a personal Gmail Drive the key
-  can read and edit files shared with it but every upload or Doc creation fails with a quota error. The
-  pipeline reports that as "upload refused … Shared Drive" instead of marking the account full.
-- **Refresh token (fallback).** `GOOGLE_REFRESH_TOKEN_<ACCOUNT>` + `GOOGLE_OAUTH_CLIENT_ID/SECRET`; the
-  pipeline acts as that Gmail account and uses its quota (`pipeline auth url` / `auth exchange`).
+- **Refresh token (primary, for the Gmail accounts).** `GOOGLE_REFRESH_TOKEN_<ACCOUNT>` +
+  `GOOGLE_OAUTH_CLIENT_ID/SECRET`; the pipeline acts as that Gmail account and uses its quota. Keys are obtained
+  once with `pipeline auth url` / `auth exchange` (from the chat) or `scripts/auth_local.py`.
+- **Service account (only with Google Workspace Shared Drives).** `GOOGLE_SERVICE_ACCOUNT_JSON` (or `…_RAW` /
+  `…_SUMMARY`) plus `AIPRIMER_RAW_DRIVE_ID` / `AIPRIMER_SUMMARY_DRIVE_ID`. Google gives service accounts no
+  storage: on a personal Gmail Drive the key can edit files shared with it but every upload or Doc creation fails
+  with a quota error, which the pipeline reports as "upload refused … Shared Drive".
 - `auth_kind` is detected from the value (JSON key vs token) unless set explicitly in the Accounts tab.

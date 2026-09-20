@@ -34,54 +34,51 @@ Credentials never live in this repository or in any sheet: they are settings of 
 
 ## Setup (once, about an hour)
 
-The pipeline talks to Google with a **service account key**. A service account has no storage of its own
-(Google removed it in 2023), so it can only create files inside a **Google Workspace Shared Drive** that it is a
-member of. On a plain Gmail Drive it can read and edit files shared with it, but every upload and every new Doc
-fails with a quota error. Plan for one Workspace Shared Drive for raw files and one for summaries (they can be the
-same drive). If you only have Gmail accounts, use the fallback in "Gmail sign-in instead of a service account" below.
+The pipeline talks to Google **as your two Gmail accounts** (`ai.primer.rawfile.0001` for files,
+`ai.primer.summary.0001` for the control sheet and the summary Docs). Each account authorises the pipeline once by
+clicking *Allow*; the resulting key is stored on the Claude Code cloud environment. Files are then owned by the
+Gmail account and use its 15 GB. (A Google *service account* cannot do this on Gmail: Google gives service accounts
+no storage, so they can only write inside a paid Workspace Shared Drive. See "Alternative" below.)
 
 1. **Rotate any Apify token that was ever pasted into a chat.** Apify Console → Settings → Integrations.
-2. **Google Cloud project and service account.** Create a project; enable the **Google Drive API**, **Google Sheets
-   API** and **Google Docs API**. *IAM & Admin → Service accounts → Create service account* (any name, no roles
-   needed) → *Keys → Add key → JSON*. Keep the downloaded file; you will paste its content into the environment in
-   step 4. Note the service account's email (`…@….iam.gserviceaccount.com`).
-3. **Shared Drives.** In Google Workspace, create a Shared Drive for raw files (e.g. "AI Primer Raw Files") and one
-   for summaries (e.g. "AI Primer Summaries"), or one for both. In each, *Manage members* → add the service
-   account's email as **Content manager**. Copy each drive's id from its address bar
-   (`drive.google.com/drive/folders/<id>`).
-4. **Cloud environment.** In Claude Code on the web, create an environment named **AI Primer**:
+2. **Google Cloud project.** Create a project (or reuse one); enable the **Google Drive API**, **Google Sheets API**
+   and **Google Docs API**. Open *APIs & Services → OAuth consent screen*: user type **External**, app name
+   "AI Primer", your email as contact; add the scopes `…/auth/drive`, `…/auth/spreadsheets`, `…/auth/documents`;
+   save; then **Publish app** so the status reads **In production** (in *Testing*, keys expire after 7 days).
+   Then *Credentials → Create credentials → OAuth client ID → Desktop app*. Note the **client ID** and **client secret**.
+3. **Cloud environment.** In Claude Code on the web, click **+ New**, open the environment selector (it says
+   "Default") and choose **Add cloud environment**:
+   - Name `AI Primer`.
    - Network access **Custom**, allowed domain `api.apify.com`, tick *Also include default list of common package managers*.
-   - **API credentials**: host `api.apify.com`, header `Authorization`, prefix `Bearer`, value = your new Apify token.
-   - **Environment variables** (each key JSON on one line; quotes around the value are fine). One key per
-     drive, or a single `GOOGLE_SERVICE_ACCOUNT_JSON` if the same service account serves both:
+   - Environment variables:
      ```
-     GOOGLE_SERVICE_ACCOUNT_JSON_RAW={"type": "service_account", ...}
-     GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY={"type": "service_account", ...}
-     AIPRIMER_RAW_DRIVE_ID=<id of the raw Shared Drive>
-     AIPRIMER_SUMMARY_DRIVE_ID=<id of the summaries Shared Drive>
+     GOOGLE_OAUTH_CLIENT_ID=<client id>
+     GOOGLE_OAUTH_CLIENT_SECRET=<client secret>
      ```
-   - **Setup script**: paste the contents of `scripts/setup-env.sh`.
-5. **Control sheet.** Start a session in that environment and type `/setup`. The first run creates the sheet
-   "AI Primer Control Panel" inside the summaries Shared Drive and prints its id; add it to the environment as
-   `AIPRIMER_CONTROL_SHEET_ID`, start a new session and type `/setup` again: it creates the tabs, the folder tree
-   `AI Primer Raw / Domain / Primer / Stage` and loads the taxonomy.
-6. **Adding storage later:** create another Shared Drive, add the service account as Content manager, add a row in
-   the Accounts tab (`account_id=raw02, role=raw, token_env_var=GOOGLE_SERVICE_ACCOUNT_JSON, drive_id=<id>,
-   priority=2`), run `/setup`.
+   - Setup script: paste the contents of `scripts/setup-env.sh`.
+   - Create it, then reopen it (hover → settings icon) and add an **API credential**: host `api.apify.com`, header
+     `Authorization`, prefix `Bearer`, value = the new Apify token.
+4. **Authorise the two Gmail accounts** (once each). Start a session on the "AI Primer" environment, repository
+   `aiprimer2.0`, and type `/setup`. The agent prints a link. Open it signed in as `ai.primer.rawfile.0001@gmail.com`,
+   click *Advanced → Go to AI Primer (unsafe)* on the "unverified app" page, click *Allow*. The browser lands on an
+   `http://localhost…` page that fails to load: copy that page's full address and paste it into the chat. The agent
+   returns the key and its variable name (`GOOGLE_REFRESH_TOKEN_RAW01`); add it to the environment variables.
+   Repeat signed in as `ai.primer.summary.0001@gmail.com` for `GOOGLE_REFRESH_TOKEN_SUMMARY01`.
+   Add a verified phone number to both accounts so they get 15 GB rather than 5 GB.
+5. **Control sheet.** Start a new session and type `/setup`: it creates the sheet "AI Primer Control Panel" in the
+   summary account and prints its id. Add it as `AIPRIMER_CONTROL_SHEET_ID`, start a new session, `/setup` once more:
+   it creates the tabs, the folder tree `AI Primer Raw / Domain / Primer / Stage` and loads the taxonomy.
+6. **Adding a second raw account later** (when the first Drive is full): authorise the new Gmail as in step 4, store
+   its key as `GOOGLE_REFRESH_TOKEN_RAW02`, add a row in the Accounts tab
+   (`account_id=raw02, role=raw, token_env_var=GOOGLE_REFRESH_TOKEN_RAW02, priority=2`), run `/setup`.
 
-### Gmail sign-in instead of a service account (fallback)
+### Alternative: service account with Google Workspace Shared Drives
 
-Use this only for plain `@gmail.com` accounts, where a service account cannot upload. The pipeline then acts as
-the Gmail account itself and uses its 15 GB.
-
-- In the Google Cloud project: *OAuth consent screen* → External, add the Drive/Sheets/Docs scopes, publish to
-  **In production** (in *Testing*, tokens expire after 7 days); *Credentials → OAuth client ID → Desktop app*;
-  note the client ID and secret and add them to the environment as `GOOGLE_OAUTH_CLIENT_ID` / `GOOGLE_OAUTH_CLIENT_SECRET`.
-- Authorise each Gmail once, either from the chat (`python -m pipeline auth url` → open the link signed in as the
-  account, click Allow, paste back the `http://localhost…` address → `python -m pipeline auth exchange "<address>"`
-  prints the refresh token) or on your computer (`python scripts/auth_local.py --client-id … --client-secret …`).
-  Store the tokens as `GOOGLE_REFRESH_TOKEN_RAW01` and `GOOGLE_REFRESH_TOKEN_SUMMARY01`. Leave
-  `GOOGLE_SERVICE_ACCOUNT_JSON` unset. Add a verified phone number to the accounts so they get 15 GB.
+If you have (or buy) Google Workspace, a service-account key can replace the sign-in: create two Shared Drives, add
+the service account's email as **Content manager** of each, and set `GOOGLE_SERVICE_ACCOUNT_JSON` (or one key per
+drive: `GOOGLE_SERVICE_ACCOUNT_JSON_RAW` / `GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY`) plus `AIPRIMER_RAW_DRIVE_ID` /
+`AIPRIMER_SUMMARY_DRIVE_ID` on the environment. Leave the refresh-token variables unset. On plain Gmail accounts this
+mode can edit a shared sheet but every upload is refused by Google.
 
 ## Daily use
 
