@@ -101,6 +101,8 @@ class Settings:
         """Which settings are present (names only; values never returned)."""
         names = [
             "GOOGLE_SERVICE_ACCOUNT_JSON",
+            "GOOGLE_SERVICE_ACCOUNT_JSON_RAW",
+            "GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY",
             "AIPRIMER_RAW_DRIVE_ID",
             "AIPRIMER_SUMMARY_DRIVE_ID",
             "GOOGLE_OAUTH_CLIENT_ID",

@@ -11,8 +11,8 @@ if [ -z "${HTTPLIB2_CA_CERTS:-}" ]; then
 fi
 
 missing=()
-if [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON:-}" ]; then
-  mode="service account key present"
+if [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON:-}" ] || [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON_RAW:-}" ] || [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY:-}" ]; then
+  mode="service account key(s) present"
   [ -n "${AIPRIMER_RAW_DRIVE_ID:-}" ] || missing+=("AIPRIMER_RAW_DRIVE_ID")
   [ -n "${AIPRIMER_SUMMARY_DRIVE_ID:-}" ] || missing+=("AIPRIMER_SUMMARY_DRIVE_ID")
 else

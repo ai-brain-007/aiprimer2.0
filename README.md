@@ -52,9 +52,11 @@ same drive). If you only have Gmail accounts, use the fallback in "Gmail sign-in
 4. **Cloud environment.** In Claude Code on the web, create an environment named **AI Primer**:
    - Network access **Custom**, allowed domain `api.apify.com`, tick *Also include default list of common package managers*.
    - **API credentials**: host `api.apify.com`, header `Authorization`, prefix `Bearer`, value = your new Apify token.
-   - **Environment variables** (the key JSON on one line; quotes around the value are fine):
+   - **Environment variables** (each key JSON on one line; quotes around the value are fine). One key per
+     drive, or a single `GOOGLE_SERVICE_ACCOUNT_JSON` if the same service account serves both:
      ```
-     GOOGLE_SERVICE_ACCOUNT_JSON={"type": "service_account", ...}
+     GOOGLE_SERVICE_ACCOUNT_JSON_RAW={"type": "service_account", ...}
+     GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY={"type": "service_account", ...}
      AIPRIMER_RAW_DRIVE_ID=<id of the raw Shared Drive>
      AIPRIMER_SUMMARY_DRIVE_ID=<id of the summaries Shared Drive>
      ```

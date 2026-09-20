@@ -77,6 +77,9 @@ def test_default_key_env_prefers_service_account(monkeypatch, sa_json):
     assert default_key_env("raw") == "GOOGLE_REFRESH_TOKEN_RAW01"
     monkeypatch.setenv("GOOGLE_SERVICE_ACCOUNT_JSON", sa_json)
     assert default_key_env("raw") == "GOOGLE_SERVICE_ACCOUNT_JSON" and default_key_env("summary") == "GOOGLE_SERVICE_ACCOUNT_JSON"
+    monkeypatch.setenv("GOOGLE_SERVICE_ACCOUNT_JSON_RAW", sa_json)
+    monkeypatch.setenv("GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY", sa_json)
+    assert default_key_env("raw") == "GOOGLE_SERVICE_ACCOUNT_JSON_RAW" and default_key_env("summary") == "GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY"
 
 
 def _ctx(settings, fake_sheets, fake_drive, fake_apify):

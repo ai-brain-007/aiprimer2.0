@@ -18,8 +18,12 @@ DEFAULT_RAW_TOKEN_ENV = "GOOGLE_REFRESH_TOKEN_RAW01"
 
 
 def default_key_env(role: str) -> str:
-    """Which environment variable holds the credential for a role when the Accounts tab is empty:
-    the service-account key when present (one key serves every role), else the role's refresh token."""
+    """Which environment variable holds the credential for a role when the Accounts tab is empty.
+    Order: a role-specific service-account key (GOOGLE_SERVICE_ACCOUNT_JSON_RAW / _SUMMARY), then the
+    shared key (GOOGLE_SERVICE_ACCOUNT_JSON), then the role's refresh token."""
+    role_specific = f"{SERVICE_ACCOUNT_ENV_DEFAULT}_{'SUMMARY' if role == 'summary' else 'RAW'}"
+    if os.environ.get(role_specific):
+        return role_specific
     if os.environ.get(SERVICE_ACCOUNT_ENV_DEFAULT):
         return SERVICE_ACCOUNT_ENV_DEFAULT
     return DEFAULT_SUMMARY_TOKEN_ENV if role == "summary" else DEFAULT_RAW_TOKEN_ENV
