@@ -112,8 +112,15 @@ def create_control_sheet(ctx: AppContext, title: str = "AI Primer Control Panel"
         except Exception as exc:
             return {"created": False, "error": f"Google refused to create the sheet with the service account: {exc}", "how": [by_hand]}
         return {"created": True, "sheet_id": resp["id"], "url": resp.get("webViewLink"), "next": "add AIPRIMER_CONTROL_SHEET_ID=<sheet_id> to the environment variables and start a new session"}
+    next_step = "add AIPRIMER_CONTROL_SHEET_ID=<sheet_id> to the environment variables and start a new session"
+    parent = os.environ.get("AIPRIMER_SUMMARY_DRIVE_ID", "").strip()
+    if parent:
+        # Gmail sign-in with a folder id: create the sheet inside that folder (owned by the Gmail account).
+        body = {"name": title, "mimeType": SPREADSHEET_MIME, "parents": [parent]}
+        resp = services.drive.files().create(body=body, fields="id,webViewLink", supportsAllDrives=True).execute()
+        return {"created": True, "sheet_id": resp["id"], "url": resp.get("webViewLink"), "parent_folder_id": parent, "next": next_step}
     resp = services.sheets.spreadsheets().create(body={"properties": {"title": title}}, fields="spreadsheetId,spreadsheetUrl").execute()
-    return {"created": True, "sheet_id": resp["spreadsheetId"], "url": resp.get("spreadsheetUrl"), "next": "add AIPRIMER_CONTROL_SHEET_ID=<sheet_id> to the environment variables and start a new session"}
+    return {"created": True, "sheet_id": resp["spreadsheetId"], "url": resp.get("spreadsheetUrl"), "next": next_step}
 
 
 def init_sheet(ctx: AppContext) -> dict[str, Any]:
