@@ -62,6 +62,14 @@ class Settings:
         return os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET", "").strip()
 
     @property
+    def google_oauth_scopes(self) -> list[str]:
+        """Scopes requested at the Gmail sign-in and attached to refresh-token credentials
+        (config/pipeline.yaml -> google.oauth_scopes; default: full Drive, Sheets and Docs)."""
+        raw = self.section("google").get("oauth_scopes")
+        scopes = [str(s).strip() for s in (raw or []) if str(s).strip()]
+        return scopes or list(GOOGLE_SCOPES)
+
+    @property
     def apify_token(self) -> str | None:
         return os.environ.get("APIFY_TOKEN") or None
 

@@ -81,7 +81,9 @@ python -m pytest -q                                    # all tests use in-memory
 
 - **Refresh token (primary, for the Gmail accounts).** `GOOGLE_REFRESH_TOKEN_<ACCOUNT>` +
   `GOOGLE_OAUTH_CLIENT_ID/SECRET`; the pipeline acts as that Gmail account and uses its quota. Keys are obtained
-  once with `pipeline auth url` / `auth exchange` (from the chat) or `scripts/auth_local.py`.
+  once with `pipeline auth url` / `auth exchange` (from the chat) or `scripts/auth_local.py`. One OAuth client
+  (Desktop app) serves every Gmail account. Scopes: `config/pipeline.yaml` → `google.oauth_scopes` (default
+  `drive.file`: the pipeline sees only what it created; `drive` for hand-made folders and the Drive inbox).
 - **Service account (only with Google Workspace Shared Drives).** `GOOGLE_SERVICE_ACCOUNT_JSON` (or `…_RAW` /
   `…_SUMMARY`) plus `AIPRIMER_RAW_DRIVE_ID` / `AIPRIMER_SUMMARY_DRIVE_ID`. Google gives service accounts no
   storage: on a personal Gmail Drive the key can edit files shared with it but every upload or Doc creation fails

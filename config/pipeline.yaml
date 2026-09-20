@@ -1,5 +1,17 @@
 # AI Primer pipeline configuration. Safe to commit: contains no secrets.
 
+google:
+  # Scopes requested at the Gmail sign-in (refresh-token mode). Service accounts always use full access.
+  # - drive.file (default): non-sensitive, so the sign-in shows no "unverified app" warning; but the pipeline
+  #   only sees files and folders it created itself. AIPRIMER_RAW_DRIVE_ID / AIPRIMER_SUMMARY_DRIVE_ID must then
+  #   be unset (or name folders the pipeline created), and `/ingest inbox` cannot see files dropped into
+  #   _Inbox by hand.
+  # - https://www.googleapis.com/auth/drive (+ spreadsheets, documents): full access to the Drive, needed for
+  #   hand-made folders and the Drive inbox; the sign-in shows a warning you click through (Advanced -> Go to
+  #   AI Primer (unsafe)).
+  oauth_scopes:
+    - https://www.googleapis.com/auth/drive.file
+
 apify:
   metadata_actor: "apidojo/youtube-scraper"
   transcript_actor: "supreme_coder/youtube-transcript-scraper"

@@ -42,10 +42,19 @@ no storage, so they can only write inside a paid Workspace Shared Drive. See "Al
 
 1. **Rotate any Apify token that was ever pasted into a chat.** Apify Console → Settings → Integrations.
 2. **Google Cloud project.** Create a project (or reuse one); enable the **Google Drive API**, **Google Sheets API**
-   and **Google Docs API**. Open *APIs & Services → OAuth consent screen*: user type **External**, app name
-   "AI Primer", your email as contact; add the scopes `…/auth/drive`, `…/auth/spreadsheets`, `…/auth/documents`;
-   save; then **Publish app** so the status reads **In production** (in *Testing*, keys expire after 7 days).
-   Then *Credentials → Create credentials → OAuth client ID → Desktop app*. Note the **client ID** and **client secret**.
+   and **Google Docs API**. Open *Google Auth Platform* (formerly *OAuth consent screen*): user type **External**,
+   app name "AI Primer", your email as contact. No website is needed and verification is never submitted.
+   Under *Data access* add the scopes the pipeline requests (`config/pipeline.yaml` → `google.oauth_scopes`).
+   The default `…/auth/drive.file` is non-sensitive, so the sign-in shows no "unverified app" warning, but the
+   pipeline then only sees files and folders it created itself: it creates `AI Primer Raw` / `AI Primer Summaries`
+   at the top of each My Drive (drag them anywhere afterwards), and `AIPRIMER_RAW_DRIVE_ID` /
+   `AIPRIMER_SUMMARY_DRIVE_ID` must stay unset. Use `…/auth/drive` (+ `spreadsheets`, `documents`) instead if the
+   pipeline must use folders you made by hand or read files dropped into `_Inbox`; that scope is restricted, so
+   the sign-in shows a warning you click through (*Advanced → Go to AI Primer (unsafe)*).
+   Under *Audience* click **Publish app** so the status reads **In production** (in *Testing*, keys expire after
+   7 days). Then *Clients → Create client → Desktop app* (not "Web application": the pipeline has no web server,
+   it uses the loopback address you paste back). Note the **client ID** and **client secret**; one client serves
+   every Gmail account that signs in.
 3. **Cloud environment.** In Claude Code on the web, click **+ New**, open the environment selector (it says
    "Default") and choose **Add cloud environment**:
    - Name `AI Primer`.

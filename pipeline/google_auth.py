@@ -120,7 +120,7 @@ def credentials_for(settings: Settings, token_env_var: str, auth_kind: str = "au
         token_uri="https://oauth2.googleapis.com/token",
         client_id=settings.google_client_id,
         client_secret=settings.google_client_secret,
-        scopes=GOOGLE_SCOPES,
+        scopes=settings.google_oauth_scopes,
     )
 
 
@@ -155,7 +155,7 @@ def _flow(settings: Settings, port: int, client_id: str | None = None, client_se
             "redirect_uris": [f"http://localhost:{port}/"],
         }
     }
-    flow = Flow.from_client_config(client_config, scopes=GOOGLE_SCOPES)
+    flow = Flow.from_client_config(client_config, scopes=settings.google_oauth_scopes)
     flow.redirect_uri = f"http://localhost:{port}/"
     return flow
 

@@ -32,3 +32,32 @@ def test_consent_url_requires_client(settings, monkeypatch):
     monkeypatch.delenv("GOOGLE_OAUTH_CLIENT_SECRET", raising=False)
     with pytest.raises(AuthError):
         consent_url(settings)
+
+
+def test_consent_url_scopes_follow_config(settings, monkeypatch):
+    from urllib.parse import parse_qs, urlparse
+
+    monkeypatch.setenv("GOOGLE_OAUTH_CLIENT_ID", "id-123.apps.googleusercontent.com")
+    monkeypatch.setenv("GOOGLE_OAUTH_CLIENT_SECRET", "secret")
+    settings.config["google"] = {"oauth_scopes": ["https://www.googleapis.com/auth/drive.file"]}
+    q = parse_qs(urlparse(consent_url(settings)).query)
+    assert q["scope"] == ["https://www.googleapis.com/auth/drive.file"]
+    assert q["access_type"] == ["offline"] and q["prompt"] == ["consent"]
+    settings.config.pop("google")  # no config -> full Drive, Sheets and Docs
+    q = parse_qs(urlparse(consent_url(settings)).query)
+    assert set(q["scope"][0].split()) == {
+        "https://www.googleapis.com/auth/drive",
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/documents",
+    }
+
+
+def test_refresh_token_credentials_use_configured_scopes(settings, monkeypatch):
+    from pipeline.google_auth import credentials_for
+
+    monkeypatch.setenv("GOOGLE_OAUTH_CLIENT_ID", "id-123.apps.googleusercontent.com")
+    monkeypatch.setenv("GOOGLE_OAUTH_CLIENT_SECRET", "secret")
+    monkeypatch.setenv("GOOGLE_REFRESH_TOKEN_RAW01", "1//0gRefreshToken")
+    settings.config["google"] = {"oauth_scopes": ["https://www.googleapis.com/auth/drive.file"]}
+    creds = credentials_for(settings, "GOOGLE_REFRESH_TOKEN_RAW01")
+    assert list(creds.scopes) == ["https://www.googleapis.com/auth/drive.file"]
