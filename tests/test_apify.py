@@ -29,7 +29,7 @@ def test_parse_transcript_item_shapes():
 
 def test_client_caching_and_batches(settings, fake_apify, tmp_path):
     fake_apify.responses["apidojo/youtube-scraper"] = lambda inp: [{"id": u.rsplit("=", 1)[-1] if "watch?v=" in u else f"vid{i:08d}", "title": f"T{i}", "channelName": "Chan", "date": "2020-01-0%d" % (i % 9 + 1)} for i, u in enumerate(inp["startUrls"])]
-    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [{"videoId": u.rsplit("=", 1)[-1], "transcript": [{"start": 0, "dur": 1, "text": "hello"}]} for u in inp["startUrls"]]
+    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [{"videoId": u.rsplit("=", 1)[-1], "transcript": [{"start": 0, "dur": 1, "text": "hello"}]} for u in inp["urls"]]
     yt = ApifyYouTube(fake_apify, settings, cache_dir=tmp_path / "yt")
     meta = yt.video_metadata(["abcdefghijk"])
     assert meta["abcdefghijk"]["title"] == "T0"
@@ -63,3 +63,114 @@ def test_channel_listing_and_schema_fetch(settings, fake_apify, tmp_path, monkey
     yt.video_metadata(["newvideo001"], use_cache=False)
     actor, inp = fake_apify.calls[-1]
     assert inp["startUrls"] == [{"url": "https://www.youtube.com/watch?v=newvideo001"}] and inp["maxItems"] == 1
+
+
+def _fake_apify_client(actor_client, build_client, run_client, dataset_client):
+    class Client:
+        def actor(self, actor_id):
+            return actor_client
+
+        def build(self, build_id):
+            return build_client
+
+        def run(self, run_id):
+            return run_client
+
+        def dataset(self, dataset_id):
+            return dataset_client
+
+    return Client()
+
+
+def test_real_runner_with_apify_client_3_models():
+    """apify-client >= 3 returns pydantic models (camelCase aliases) and takes timedelta arguments."""
+    import json
+    from datetime import timedelta
+
+    from pydantic import BaseModel, ConfigDict
+    from pydantic.alias_generators import to_camel
+
+    from pipeline.apify_yt import RealApifyRunner, as_dict
+
+    class Model(BaseModel):
+        model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, extra="allow")
+
+    class Run(Model):
+        id: str
+        status: str
+        default_dataset_id: str
+        usage_total_usd: float | None = None
+
+    class Actor(Model):
+        id: str
+        tagged_builds: dict[str, dict | None] | None = None
+
+    class Build(Model):
+        id: str
+        input_schema: str | None = None
+
+    calls: dict = {}
+
+    class ActorClient:
+        def get(self, *, timeout="short"):
+            return Actor(id="a1", tagged_builds={"latest": {"buildId": "b1"}})
+
+        def call(self, *, run_input=None, run_timeout=None, wait_duration=None, timeout="no_timeout"):
+            calls["call"] = {"run_input": run_input, "run_timeout": run_timeout, "wait_duration": wait_duration}
+            return Run(id="r1", status="SUCCEEDED", default_dataset_id="d1", usage_total_usd=0.02)
+
+    class BuildClient:
+        def get(self, *, timeout="short"):
+            return Build(id="b1", input_schema=json.dumps({"properties": {"urls": {"type": "array"}}}))
+
+    class RunClient:
+        def get(self, *, timeout="short"):
+            return Run(id="r1", status="SUCCEEDED", default_dataset_id="d1")
+
+    class DatasetClient:
+        def iterate_items(self, **kwargs):
+            yield {"id": "abcdefghijk"}
+
+    runner = RealApifyRunner(client=_fake_apify_client(ActorClient(), BuildClient(), RunClient(), DatasetClient()))
+    out = runner.run("x/y", {"urls": ["u"]}, timeout_secs=30)
+    assert out == {"run_id": "r1", "items": [{"id": "abcdefghijk"}], "usage_usd": 0.02, "status": "SUCCEEDED"}
+    assert calls["call"]["run_input"] == {"urls": ["u"]}
+    assert calls["call"]["run_timeout"] == timedelta(seconds=30) and calls["call"]["wait_duration"] == timedelta(seconds=30)
+    assert runner.dataset_items("r1") == [{"id": "abcdefghijk"}]
+    assert runner.actor_input_schema("x/y") == {"properties": {"urls": {"type": "array"}}}
+    assert as_dict(None) == {} and as_dict({"a": 1}) == {"a": 1}
+    assert as_dict(Actor(id="a2")) == {"id": "a2", "taggedBuilds": None}
+
+
+def test_real_runner_with_legacy_dict_client():
+    """apify-client 1.x / 2.x returns dicts and takes timeout_secs / wait_secs."""
+    from pipeline.apify_yt import RealApifyRunner
+
+    calls: list = []
+
+    class ActorClient:
+        def get(self):
+            return {"id": "a1", "taggedBuilds": {"latest": {"buildId": "b1"}}}
+
+        def call(self, *, run_input=None, timeout_secs=None, wait_secs=None):
+            calls.append((run_input, timeout_secs, wait_secs))
+            return {"id": "r1", "status": "SUCCEEDED", "defaultDatasetId": "d1", "usageTotalUsd": None}
+
+    class BuildClient:
+        def get(self):
+            return {"id": "b1", "inputSchema": {"properties": {"startUrls": {"type": "array", "items": {"type": "object"}}}}}
+
+    class RunClient:
+        def get(self):
+            return None
+
+    class DatasetClient:
+        def iterate_items(self, **kwargs):
+            return iter([{"videoId": "abcdefghijk"}])
+
+    runner = RealApifyRunner(client=_fake_apify_client(ActorClient(), BuildClient(), RunClient(), DatasetClient()))
+    out = runner.run("x/y", {"startUrls": ["u"]}, timeout_secs=45)
+    assert out == {"run_id": "r1", "items": [{"videoId": "abcdefghijk"}], "usage_usd": None, "status": "SUCCEEDED"}
+    assert calls == [({"startUrls": ["u"]}, 45, 45)]
+    assert runner.dataset_items("missing") == []
+    assert runner.actor_input_schema("x/y")["properties"]["startUrls"]["items"] == {"type": "object"}

@@ -114,7 +114,7 @@ def test_channel_list_and_run(settings, fake_sheets, fake_drive, fake_apify, tmp
         if "@chan" in inp["startUrls"][0]
         else [{"id": u.rsplit("=", 1)[-1], "title": "Video", "channelName": "Chan", "date": "2022-01-01", "duration": 600} for u in inp["startUrls"]]
     )
-    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [{"videoId": u.rsplit("=", 1)[-1], "transcript": [{"start": 0, "dur": 2, "text": "content"}]} for u in inp["startUrls"]]
+    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [{"videoId": u.rsplit("=", 1)[-1], "transcript": [{"start": 0, "dur": 2, "text": "content"}]} for u in inp["urls"]]
     ctx, reg, *_ = build_ctx(settings, fake_sheets, fake_drive, fake_apify)
     ing = Ingestor(ctx)
     listing = ing.channel_list("https://www.youtube.com/@chan/videos")

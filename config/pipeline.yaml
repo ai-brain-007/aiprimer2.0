@@ -17,10 +17,12 @@ apify:
   input_templates:
     metadata:
       start_urls_key: startUrls
-      max_results_key: maxResults
+      start_urls_format: strings
+      max_results_key: maxItems
       extra: {}
     transcript:
-      start_urls_key: startUrls
+      start_urls_key: urls
+      start_urls_format: strings
       extra: {}
 
 drive:

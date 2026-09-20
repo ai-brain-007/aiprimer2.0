@@ -11,8 +11,10 @@ Actor output shapes vary between versions, so parsing is tolerant (several key s
 
 from __future__ import annotations
 
+import inspect
 import json
 import re
+from datetime import timedelta
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -28,32 +30,63 @@ class ApifyRunner(Protocol):
     def actor_input_schema(self, actor_id: str) -> dict: ...
 
 
-class RealApifyRunner:
-    def __init__(self, token: str | None = None):
-        from apify_client import ApifyClient
+def as_dict(obj: Any) -> dict:
+    """Normalize an apify-client response to a camelCase dict.
 
-        self.client = ApifyClient(token=token) if token else ApifyClient()
+    apify-client < 3 returns plain dicts; apify-client >= 3 returns pydantic models whose fields are
+    snake_case with camelCase aliases (``run.default_dataset_id`` <-> ``"defaultDatasetId"``).
+    """
+    if obj is None:
+        return {}
+    if isinstance(obj, dict):
+        return obj
+    dump = getattr(obj, "model_dump", None)
+    if callable(dump):
+        return dump(by_alias=True, mode="json")
+    return dict(obj)
+
+
+class RealApifyRunner:
+    def __init__(self, token: str | None = None, client: Any | None = None):
+        if client is None:
+            from apify_client import ApifyClient
+
+            client = ApifyClient(token=token) if token else ApifyClient()
+        self.client = client
+
+    def _call_actor(self, actor_id: str, run_input: dict, timeout_secs: int) -> dict:
+        """Run an actor and wait for it, with the keyword names of the installed apify-client."""
+        actor = self.client.actor(actor_id)
+        params = inspect.signature(actor.call).parameters
+        kwargs: dict[str, Any] = {"run_input": run_input}
+        if "timeout_secs" in params:  # apify-client 1.x / 2.x
+            kwargs["timeout_secs"] = timeout_secs
+            kwargs["wait_secs"] = timeout_secs
+        else:  # apify-client >= 3: timedeltas
+            kwargs["run_timeout"] = timedelta(seconds=timeout_secs)
+            kwargs["wait_duration"] = timedelta(seconds=timeout_secs)
+        return as_dict(actor.call(**kwargs))
 
     def run(self, actor_id: str, run_input: dict, timeout_secs: int = 1800) -> dict:
-        run = self.client.actor(actor_id).call(run_input=run_input, timeout_secs=timeout_secs, wait_secs=timeout_secs)
+        run = self._call_actor(actor_id, run_input, timeout_secs)
         if not run:
             raise RuntimeError(f"actor {actor_id} returned no run")
-        items = list(self.client.dataset(run["defaultDatasetId"]).iterate_items())
+        items = [as_dict(i) for i in self.client.dataset(run["defaultDatasetId"]).iterate_items()]
         usage = run.get("usageTotalUsd")
         return {"run_id": run.get("id", ""), "items": items, "usage_usd": float(usage) if usage is not None else None, "status": run.get("status", "")}
 
     def dataset_items(self, run_id: str) -> list[dict]:
-        run = self.client.run(run_id).get()
+        run = as_dict(self.client.run(run_id).get())
         if not run:
             return []
-        return list(self.client.dataset(run["defaultDatasetId"]).iterate_items())
+        return [as_dict(i) for i in self.client.dataset(run["defaultDatasetId"]).iterate_items()]
 
     def actor_input_schema(self, actor_id: str) -> dict:
-        actor = self.client.actor(actor_id).get() or {}
+        actor = as_dict(self.client.actor(actor_id).get())
         build_id = ((actor.get("taggedBuilds") or {}).get("latest") or {}).get("buildId")
         if not build_id:
             return {}
-        build = self.client.build(build_id).get() or {}
+        build = as_dict(self.client.build(build_id).get())
         schema = build.get("inputSchema")
         if isinstance(schema, str):
             try:
@@ -318,6 +351,7 @@ class ApifyYouTube:
         """Verify the actors' input field names against their live input schema; rewrite config if needed."""
         report: dict[str, Any] = {}
         templates = self.settings.config.setdefault("apify", {}).setdefault("input_templates", {})
+        changed = False
         for kind, actor_key in (("metadata", "metadata_actor"), ("transcript", "transcript_actor")):
             actor = self.cfg[actor_key]
             schema = self.runner.actor_input_schema(actor) or {}
@@ -332,7 +366,12 @@ class ApifyYouTube:
                     found["start_urls_format"] = "objects" if items.get("type") == "object" else "strings"
                 if kind == "metadata" and ("maxresult" in low or low in ("maxitems", "limit", "maxvideos")):
                     found["max_results_key"] = name
+            if any(tpl.get(k) != v for k, v in found.items()):
+                changed = True
             tpl.update(found)
             report[kind] = {"actor": actor, "schema_found": bool(props), "fields": found, "required": schema.get("required", [])}
-        save_config(self.settings)
+        # Only rewrite config/pipeline.yaml when an actor's input format actually changed (the dump drops comments).
+        if changed:
+            save_config(self.settings)
+        report["config_updated"] = changed
         return report

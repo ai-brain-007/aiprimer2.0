@@ -5,6 +5,7 @@ Also makes the repository root importable when pytest is started from any direct
 
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
@@ -16,6 +17,19 @@ if str(REPO_ROOT) not in sys.path:
 
 from pipeline.config import load_settings  # noqa: E402
 from tests.fakes import FakeApifyRunner, FakeDriveBackend, FakeSheetsBackend  # noqa: E402
+
+
+@pytest.fixture(autouse=True)
+def _clean_credential_env(monkeypatch):
+    """Tests use in-memory fakes; the cloud environment's real credentials and ids must never leak in."""
+    for var in (
+        "GOOGLE_SERVICE_ACCOUNT_JSON", "GOOGLE_SERVICE_ACCOUNT_JSON_RAW", "GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY",
+        "AIPRIMER_RAW_DRIVE_ID", "AIPRIMER_SUMMARY_DRIVE_ID", "AIPRIMER_CONTROL_SHEET_ID",
+        "GOOGLE_OAUTH_CLIENT_ID", "GOOGLE_OAUTH_CLIENT_SECRET", "APIFY_TOKEN",
+    ):
+        monkeypatch.delenv(var, raising=False)
+    for var in [v for v in os.environ if v.startswith("GOOGLE_REFRESH_TOKEN_")]:
+        monkeypatch.delenv(var, raising=False)
 
 
 @pytest.fixture
