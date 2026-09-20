@@ -147,3 +147,24 @@ def test_ingest_quota_error_with_service_account_is_explained(settings, fake_she
         Ingestor(ctx).run(str(src), "Body / Immortal Yogi / Rest Body", author="X")
     assert GMAIL_QUOTA_HINT in str(exc.value)
     assert reg.account("raw01").status == "active"  # not marked full: the account is not the problem
+
+
+def test_auth_check_write_test_reports_google_refusal(settings, fake_sheets, fake_drive, fake_apify, monkeypatch, sa_json):
+    from pipeline.setup_cmds import auth_check
+
+    monkeypatch.setenv("GOOGLE_SERVICE_ACCOUNT_JSON", sa_json)
+    monkeypatch.setenv("AIPRIMER_CONTROL_SHEET_ID", "sheet123")
+    ctx, reg, drive = _ctx(settings, fake_sheets, fake_drive, fake_apify)
+    shared = drive.ensure_folder(None, "AI PRIMER - RAWFILE")  # a folder the human shared with the robot
+    reg.upsert_account(Account(account_id="raw01", token_env_var="GOOGLE_SERVICE_ACCOUNT_JSON", drive_id=shared["id"]))
+    reg.upsert_account(Account(account_id="summary01", role="summary", token_env_var="GOOGLE_SERVICE_ACCOUNT_JSON", drive_id=shared["id"]))
+    # first: Google accepts (e.g. a Workspace Shared Drive)
+    report = auth_check(ctx)
+    raw = next(e for e in report["accounts"] if e["account_id"] == "raw01")
+    assert raw["writes_into"]["kind"] == "folder" and raw["write_test"]["can_write"] is True and "warning" not in raw
+    assert not [f for f in fake_drive.files.values() if f["name"] == "aiprimer-write-test.txt" and not f["trashed"]]
+    # then: Google refuses (a personal Gmail Drive)
+    fake_drive.fail_upload_with = RuntimeError("The user's Drive storage quota has been exceeded (storageQuotaExceeded)")
+    report = auth_check(ctx)
+    raw = next(e for e in report["accounts"] if e["account_id"] == "raw01")
+    assert raw["write_test"]["can_write"] is False and "refused" in raw["warning"] and "sign-in" in raw["warning"]

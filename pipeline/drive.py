@@ -217,6 +217,38 @@ class DriveClient:
         except Exception:
             return None
 
+    def container(self, container_id: str) -> dict | None:
+        """Describe the place an account writes into: a Shared Drive or a folder shared with it."""
+        sd = self.shared_drive(container_id)
+        if sd:
+            return {"kind": "shared_drive", "id": container_id, "name": sd.get("name", "")}
+        try:
+            meta = self.backend.get_file(container_id)
+        except Exception:
+            return None
+        if meta.get("mimeType") != FOLDER_MIME:
+            return None
+        return {"kind": "folder", "id": container_id, "name": meta.get("name", "")}
+
+    def write_test(self, parent_id: str) -> dict:
+        """Prove whether this credential can CREATE a file in `parent_id` (uploads a 1-byte file, then trashes it)."""
+        import tempfile
+
+        with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as fh:
+            fh.write("x")
+            path = Path(fh.name)
+        try:
+            meta = self.backend.upload_file(path, "aiprimer-write-test.txt", parent_id, "text/plain", {"aiprimer": "write-test"})
+        except Exception as exc:
+            return {"can_write": False, "error": str(exc)}
+        finally:
+            path.unlink(missing_ok=True)
+        try:
+            self.backend.trash_file(meta["id"])
+        except Exception:
+            pass
+        return {"can_write": True, "file_id": meta.get("id", "")}
+
     def ensure_path(self, root_id: str, names: list[str]) -> list[dict]:
         out: list[dict] = []
         parent = root_id

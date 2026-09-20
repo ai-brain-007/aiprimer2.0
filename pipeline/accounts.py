@@ -11,8 +11,9 @@ from .registry import Registry
 SAFETY_MARGIN = 1.05  # keep 5% headroom
 
 GMAIL_QUOTA_HINT = (
-    "a service account has no Drive storage of its own, so it cannot upload into a personal Gmail Drive; "
-    "give it a Google Workspace Shared Drive (Accounts tab: drive_id) or switch the account to a refresh token"
+    "a service account has no Drive storage of its own, so Google refuses its uploads into a personal Gmail Drive "
+    "(even into a folder shared with it); give it a Google Workspace Shared Drive, or switch the account to the "
+    "Gmail sign-in (refresh token)"
 )
 
 
@@ -29,8 +30,8 @@ def refresh_quota(registry: Registry, drive: DriveClient, account: Account) -> A
         account.quota_checked_at = now_iso()
         if not account.email:
             account.email = service_account_email(registry.settings, account.token_env_var)
-        if account.drive_id and drive.shared_drive(account.drive_id) is None:
-            account.notes = (account.notes + " " if account.notes else "") + f"[shared drive {account.drive_id} not reachable {now_iso()}]"
+        if account.drive_id and drive.container(account.drive_id) is None:
+            account.notes = (account.notes + " " if account.notes else "") + f"[container {account.drive_id} not reachable {now_iso()}]"
         registry.upsert_account(account)
         return account
     info = drive.quota()

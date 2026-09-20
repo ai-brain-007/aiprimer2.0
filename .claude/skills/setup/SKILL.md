@@ -9,10 +9,12 @@ Everything here is idempotent: running it twice changes nothing the second time.
 
 ## Two credential modes
 
-- **Service account (primary).** The key JSON is in the environment variable `GOOGLE_SERVICE_ACCOUNT_JSON`;
-  `AIPRIMER_RAW_DRIVE_ID` and `AIPRIMER_SUMMARY_DRIVE_ID` name the Google Workspace Shared Drives the key
-  writes to. A service account has no storage of its own: without a Shared Drive it can read and edit the
-  control sheet but every upload fails. Say this plainly whenever a check reports it.
+- **Service account (primary).** The key JSON is in `GOOGLE_SERVICE_ACCOUNT_JSON_RAW` / `GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY`
+  (or one shared `GOOGLE_SERVICE_ACCOUNT_JSON`); `AIPRIMER_RAW_DRIVE_ID` and `AIPRIMER_SUMMARY_DRIVE_ID` name
+  the place each key writes to: a Google Workspace Shared Drive id, or the id of a folder the Gmail account
+  shared with the service account's email (Editor). A service account has no storage of its own, so Google is
+  expected to refuse uploads into a folder of a personal Gmail Drive; `auth check` settles it with a real
+  write test (`write_test.can_write`). Report Google's verdict plainly; never argue with it.
 - **Refresh token (fallback for plain Gmail).** `GOOGLE_OAUTH_CLIENT_ID/SECRET` plus one
   `GOOGLE_REFRESH_TOKEN_*` per Gmail account, obtained with `pipeline auth url` / `auth exchange` or
   `scripts/auth_local.py`.
@@ -34,8 +36,10 @@ Never ask the user to paste a key or token into the chat. If they do, tell them 
      sign-in: `python -m pipeline auth url --pretty` → the user opens the link, clicks Allow, pastes back the
      localhost address → `python -m pipeline auth exchange "<address>" --pretty` → they copy the printed
      `refresh_token` into the environment variable named in `env_var`, then start a new session.
-   - Per account, read `auth_kind`, `shared_drive.reachable` and any `warning`. A service account whose Shared
-     Drive is unreachable needs to be added as **Content manager** of that drive (its email is in the output).
+   - Per account, read `auth_kind`, `writes_into` (kind `shared_drive` or `folder`, `reachable`), `write_test`
+     and any `warning`. Unreachable → the drive/folder must be shared with the service account's email (its
+     email is in the output). `write_test.can_write: false` → Google refuses uploads there; say so, quote the
+     `write_test.error`, and offer the two ways out (a Workspace Shared Drive, or the Gmail sign-in below).
 2. **Bootstrap**:
    ```bash
    python -m pipeline setup all --pretty

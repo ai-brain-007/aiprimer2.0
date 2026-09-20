@@ -66,12 +66,17 @@ def auth_check(ctx: AppContext) -> dict[str, Any]:
                 account = refresh_quota(ctx.registry, drive, account)
                 entry.update({"ok": True, "email": account.email, "status": account.status})
                 if kind == "service_account":
-                    sd = drive.shared_drive(account.drive_id) if account.drive_id else None
-                    entry["shared_drive"] = {"id": account.drive_id, "name": sd.get("name") if sd else None, "reachable": bool(sd)}
+                    container = drive.container(account.drive_id) if account.drive_id else None
+                    entry["writes_into"] = {"id": account.drive_id, "kind": container.get("kind") if container else None, "name": container.get("name") if container else None, "reachable": bool(container)}
                     if not account.drive_id:
-                        entry["warning"] = "no drive_id: " + GMAIL_QUOTA_HINT
-                    elif not sd:
-                        entry["warning"] = f"shared drive {account.drive_id} not reachable: add {account.email} as a Content manager of it"
+                        entry["warning"] = "no drive_id (Shared Drive id or shared folder id): " + GMAIL_QUOTA_HINT
+                    elif not container:
+                        entry["warning"] = f"{account.drive_id} not reachable: share it with {account.email} (Editor / Content manager)"
+                    else:
+                        test = drive.write_test(account.drive_id)
+                        entry["write_test"] = test
+                        if not test["can_write"]:
+                            entry["warning"] = "Google refused a test upload into that location: " + GMAIL_QUOTA_HINT
                 else:
                     entry.update({"quota_gb": _gb(account.quota_bytes), "used_gb": _gb(account.used_bytes), "free_gb": _gb(account.free_bytes)})
             except Exception as exc:
@@ -94,19 +99,18 @@ def create_control_sheet(ctx: AppContext, title: str = "AI Primer Control Panel"
     if kind == "service_account":
         drive_id = os.environ.get("AIPRIMER_SUMMARY_DRIVE_ID", "").strip()
         sa_email = service_account_email(ctx.settings, env)
+        by_hand = (
+            "Create a Google Sheet named 'AI Primer Control Panel' yourself, signed in as the summaries Gmail account, inside the "
+            f"folder shared with {sa_email} (it inherits the share; otherwise share the sheet with that email as Editor), then put its "
+            "id (from the address bar) in AIPRIMER_CONTROL_SHEET_ID and start a new session."
+        )
         if not drive_id:
-            return {
-                "created": False,
-                "how": [
-                    "Option A (Shared Drive): create a Google Workspace Shared Drive for summaries, add "
-                    f"{sa_email} as Content manager, put its id in AIPRIMER_SUMMARY_DRIVE_ID and run this command again.",
-                    "Option B (Gmail): create a Google Sheet named 'AI Primer Control Panel' in the Gmail account, share it with "
-                    f"{sa_email} as Editor, and put its id in AIPRIMER_CONTROL_SHEET_ID. Note: on Gmail the service account can edit "
-                    "this sheet but cannot upload files or create Docs.",
-                ],
-            }
+            return {"created": False, "how": [by_hand, "Or create a Google Workspace Shared Drive, add the service account as Content manager, and set AIPRIMER_SUMMARY_DRIVE_ID."]}
         body = {"name": title, "mimeType": SPREADSHEET_MIME, "parents": [drive_id]}
-        resp = services.drive.files().create(body=body, fields="id,webViewLink", supportsAllDrives=True).execute()
+        try:
+            resp = services.drive.files().create(body=body, fields="id,webViewLink", supportsAllDrives=True).execute()
+        except Exception as exc:
+            return {"created": False, "error": f"Google refused to create the sheet with the service account: {exc}", "how": [by_hand]}
         return {"created": True, "sheet_id": resp["id"], "url": resp.get("webViewLink"), "next": "add AIPRIMER_CONTROL_SHEET_ID=<sheet_id> to the environment variables and start a new session"}
     resp = services.sheets.spreadsheets().create(body={"properties": {"title": title}}, fields="spreadsheetId,spreadsheetUrl").execute()
     return {"created": True, "sheet_id": resp["spreadsheetId"], "url": resp.get("spreadsheetUrl"), "next": "add AIPRIMER_CONTROL_SHEET_ID=<sheet_id> to the environment variables and start a new session"}
