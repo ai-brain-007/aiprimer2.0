@@ -49,6 +49,8 @@ def test_import_seed_is_idempotent_and_paths_are_set(fake_sheets, settings):
     assert len([n for n in nodes if n.level == "primer"]) == 9
     assert len([n for n in nodes if n.level == "stage"]) == 65
     assert len(report.created) == 78
+    appends = [c for c in fake_sheets.calls if c.startswith("append:") and "Taxonomy" in c]
+    assert len(appends) == 1 and appends[0].endswith(":78"), appends  # one write request, not one per node
     tax = load_taxonomy(reg)
     stage = tax.resolve("Body / Immortal Yogi / Rest Body")
     assert stage and stage.level == "stage" and stage.path == "Body / Immortal Yogi / Rest Body"

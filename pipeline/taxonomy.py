@@ -187,6 +187,14 @@ def add_node(registry: Registry, level: str, name: str, parent_id: str = "", des
     existing = tax.find(level, name, parent_id)
     if existing:
         return existing
+    node = _new_node(tax, level, name, parent_id, description, order)
+    registry.upsert_nodes([node])
+    return node
+
+
+def _new_node(tax: Taxonomy, level: str, name: str, parent_id: str, description: str, order: int | None) -> TaxonomyNode:
+    """Build (without writing) a new node under `parent_id` of the in-memory taxonomy."""
+    parent = tax.by_id.get(parent_id) if parent_id else None
     siblings = tax.children(parent_id)
     node = TaxonomyNode(
         node_id=new_node_id(),
@@ -200,28 +208,36 @@ def add_node(registry: Registry, level: str, name: str, parent_id: str = "", des
         updated_at=now_iso(),
     )
     node.path = PATH_SEP.join([*tax.path_names(parent_id), node.name]) if parent_id else node.name
-    registry.upsert_nodes([node])
     return node
 
 
 def import_seed(registry: Registry, seed: dict[str, Any]) -> TaxonomyReport:
-    """Create nodes from config/taxonomy.seed.yaml that do not exist yet (matched by name under parent)."""
+    """Create nodes from config/taxonomy.seed.yaml that do not exist yet (matched by name under parent).
+
+    Every new node is written in ONE request at the end: the Sheets API allows 60 write requests per minute
+    per user and the seed has more nodes than that, so one write per node hits the rate limit half-way."""
     report = TaxonomyReport()
+    nodes = list(registry.nodes())
+    new_nodes: list[TaxonomyNode] = []
+
+    def ensure(level: str, name: str, parent_id: str, description: str, order: int) -> TaxonomyNode:
+        tax = Taxonomy(nodes)
+        existing = tax.find(level, name, parent_id)
+        if existing:
+            return existing
+        node = _new_node(tax, level, name, parent_id, description, order)
+        nodes.append(node)
+        new_nodes.append(node)
+        report.created.append(node.path)
+        return node
+
     for d_order, dom in enumerate(seed.get("domains", []), start=1):
-        before = {n.node_id for n in registry.nodes()}
-        d = add_node(registry, "domain", dom["name"], "", dom.get("description", ""), d_order)
-        if d.node_id not in before:
-            report.created.append(d.path)
+        d = ensure("domain", dom["name"], "", dom.get("description", ""), d_order)
         for p_order, primer in enumerate(dom.get("primers", []), start=1):
-            before = {n.node_id for n in registry.nodes()}
-            p = add_node(registry, "primer", primer["name"], d.node_id, primer.get("description", ""), p_order)
-            if p.node_id not in before:
-                report.created.append(p.path)
+            p = ensure("primer", primer["name"], d.node_id, primer.get("description", ""), p_order)
             for s_order, stage in enumerate(primer.get("stages", []), start=1):
-                before = {n.node_id for n in registry.nodes()}
-                s = add_node(registry, "stage", stage["name"], p.node_id, stage.get("description", ""), s_order)
-                if s.node_id not in before:
-                    report.created.append(s.path)
+                ensure("stage", stage["name"], p.node_id, stage.get("description", ""), s_order)
+    registry.upsert_nodes(new_nodes)
     return report
 
 

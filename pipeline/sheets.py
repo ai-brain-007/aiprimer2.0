@@ -64,8 +64,10 @@ class GoogleSheetsBackend:
         self._meta: dict | None = None
 
     # -- helpers
-    def _retry(self, fn, attempts: int = 5):
-        delay = 1.0
+    def _retry(self, fn, attempts: int = 6):
+        """Retry transient errors. The waits (2+4+8+16+32 s) add up to a minute, so a 429 from the
+        per-minute write quota (60 requests per user) clears instead of failing the command."""
+        delay = 2.0
         for i in range(attempts):
             try:
                 return fn()
