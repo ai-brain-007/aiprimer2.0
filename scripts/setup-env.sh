@@ -2,28 +2,56 @@
 # Cloud-environment setup script for AI Primer 2.0.
 # Paste the contents of this file into the "Setup script" box of the Claude Code cloud environment.
 #
-# Rules of that box (docs → Configure cloud environments → Setup scripts):
-#   - it must finish in about five minutes, otherwise it is cut off and the session does not start;
-#   - it must exit 0, otherwise the session does not start;
-#   - it runs as root on Ubuntu 24.04, in the repository root, once; the environment cache keeps what it
-#     installs and the script only runs again when its text or the allowed-domains list changes.
-# So: install only what ingestion needs now (OCR + PDF rendering + Python packages), run the two installs in
-# parallel, never abort, and print the errors instead of hiding them.
+# Rules of that box (docs → Configure cloud environments → Setup scripts), learned the hard way:
+#   - it does NOT start inside the repository folder (a plain `pip install -r requirements.txt` fails with
+#     "No such file or directory"), so this script carries its own package list and only uses the repo if it
+#     finds it;
+#   - it must finish in about five minutes and must exit 0, otherwise the session does not start;
+#   - it runs as root on Ubuntu 24.04, once; the environment cache keeps what it installs and the script only
+#     runs again when its text or the allowed-domains list changes.
+# Keep the PACKAGES list below in sync with requirements.txt.
 set -u
 start=$(date +%s)
 log() { echo "[setup +$(( $(date +%s) - start ))s] $*"; }
 
-# Work from the repository root even if the box runs elsewhere.
-if [ ! -f requirements.txt ]; then
-  for d in "${CLAUDE_PROJECT_DIR:-}" "$(cd "$(dirname "${BASH_SOURCE[0]:-.}")/.." 2>/dev/null && pwd)" /home/user/aiprimer2.0; do
-    if [ -n "$d" ] && [ -f "$d/requirements.txt" ]; then cd "$d" && break; fi
-  done
+PACKAGES='
+typer>=0.12
+pydantic>=2.6
+pyyaml>=6.0
+python-frontmatter>=1.1
+jinja2>=3.1
+rapidfuzz>=3.6
+python-slugify>=8.0
+charset-normalizer>=3.3
+tenacity>=8.2
+google-api-python-client>=2.120
+google-auth>=2.28
+google-auth-httplib2>=0.2
+google-auth-oauthlib>=1.2
+cffi>=1.16
+cryptography>=42
+pysocks>=1.7
+apify-client>=1.6
+pymupdf>=1.24
+python-docx>=1.1
+openpyxl>=3.1
+pandas>=2.2
+pytest>=8.0
+'
+
+# Locate the repository if it is around (not required).
+REPO=""
+for d in "$PWD" "${CLAUDE_PROJECT_DIR:-}" /home/user/aiprimer2.0 "$(cd "$(dirname "${BASH_SOURCE[0]:-.}")/.." 2>/dev/null && pwd)"; do
+  if [ -n "$d" ] && [ -f "$d/requirements.txt" ] && [ -d "$d/pipeline" ]; then REPO="$d"; break; fi
+done
+if [ -z "$REPO" ]; then
+  REPO="$(find /home /workspace /root /mnt -maxdepth 4 -type f -name requirements.txt -path '*aiprimer*' 2>/dev/null | head -n 1 | xargs -r dirname)"
 fi
-log "repo: $(pwd) | python: $(command -v python3) ($(python3 --version 2>&1))"
+log "cwd: $PWD | repo: ${REPO:-not found (using the built-in package list)} | python: $(command -v python3) ($(python3 --version 2>&1))"
 
 # 1) System tools, in the background: tesseract (OCR of scanned pages) and poppler (pdftoppm).
-#    ffmpeg and pandoc are optional (video probing, docx fallback) and would blow the five-minute budget;
-#    install them later from a session if needed: apt-get install -y --no-install-recommends ffmpeg pandoc
+#    ffmpeg and pandoc are optional (video probing, docx fallback); install them from a session if needed:
+#    apt-get install -y --no-install-recommends ffmpeg pandoc
 (
   if command -v apt-get >/dev/null 2>&1; then
     export DEBIAN_FRONTEND=noninteractive
@@ -47,14 +75,18 @@ apt_pid=$!
 #    backend; install a working pair beside it first (/usr/local takes precedence on sys.path).
 PIP="python3 -m pip --disable-pip-version-check --no-input"
 $PIP install -q --ignore-installed "cffi>=1.16" "cryptography>=42" >/tmp/aiprimer-pip.log 2>&1 || true
-if $PIP install -q -r requirements.txt >>/tmp/aiprimer-pip.log 2>&1; then
+printf '%s\n' "$PACKAGES" >/tmp/aiprimer-requirements.txt
+if $PIP install -q -r /tmp/aiprimer-requirements.txt >>/tmp/aiprimer-pip.log 2>&1; then
   log "python packages installed"
 else
-  log "WARNING: pip install -r requirements.txt failed; last lines of /tmp/aiprimer-pip.log:"
+  log "WARNING: pip install failed; last lines of /tmp/aiprimer-pip.log:"
   tail -n 15 /tmp/aiprimer-pip.log 2>/dev/null || true
   log "the session-start hook retries the install in the background; or run: python3 -m pip install -r requirements.txt"
 fi
-$PIP install -q -e . >>/tmp/aiprimer-pip.log 2>&1 || log "note: 'pip install -e .' failed (python -m pipeline still works from the repo root)"
+if [ -n "$REPO" ]; then
+  $PIP install -q -r "$REPO/requirements.txt" >>/tmp/aiprimer-pip.log 2>&1 || log "note: requirements.txt of the repo has extras that failed (see /tmp/aiprimer-pip.log)"
+  (cd "$REPO" && $PIP install -q -e . >>/tmp/aiprimer-pip.log 2>&1) || log "note: 'pip install -e .' failed (python -m pipeline still works from the repo root)"
+fi
 
 wait "$apt_pid" 2>/dev/null || true
 
@@ -73,7 +105,7 @@ for m in mods:
 print("[setup] python modules missing: " + (", ".join(missing) if missing else "none"))
 EOF
 for t in tesseract pdftoppm ffprobe pandoc; do
-  if command -v "$t" >/dev/null 2>&1; then echo "[setup] tool present: $t"; else echo "[setup] tool absent (optional unless noted): $t"; fi
+  if command -v "$t" >/dev/null 2>&1; then echo "[setup] tool present: $t"; else echo "[setup] tool absent (optional): $t"; fi
 done
 log "done"
 exit 0
