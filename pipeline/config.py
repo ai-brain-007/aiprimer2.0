@@ -100,6 +100,9 @@ class Settings:
     def env_report(self) -> dict[str, bool]:
         """Which settings are present (names only; values never returned)."""
         names = [
+            "GOOGLE_SERVICE_ACCOUNT_JSON",
+            "AIPRIMER_RAW_DRIVE_ID",
+            "AIPRIMER_SUMMARY_DRIVE_ID",
             "GOOGLE_OAUTH_CLIENT_ID",
             "GOOGLE_OAUTH_CLIENT_SECRET",
             "AIPRIMER_CONTROL_SHEET_ID",

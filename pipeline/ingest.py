@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from . import extract as ex
-from .accounts import NoStorageError, mark_full, pick_raw_account
+from .accounts import GMAIL_QUOTA_HINT, NoStorageError, is_service_account, mark_full, pick_raw_account
 from .apify_yt import ApifyYouTube, metadata_guess_from_video
 from .config import Settings
 from .context import AppContext
@@ -256,6 +256,10 @@ class Ingestor:
                 meta = {}
         except Exception as exc:
             if _is_quota_error(exc):
+                if is_service_account(self.registry, account):
+                    resource.error = f"upload refused: {exc}"
+                    self.registry.upsert_resource(resource)
+                    raise NoStorageError(f"upload refused for account {account.account_id}: {GMAIL_QUOTA_HINT}") from exc
                 mark_full(self.registry, account)
                 resource.status = "registered"
                 resource.error = f"account {account.account_id} full: {exc}"

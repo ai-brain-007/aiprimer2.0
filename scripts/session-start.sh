@@ -11,14 +11,23 @@ if [ -z "${HTTPLIB2_CA_CERTS:-}" ]; then
 fi
 
 missing=()
-for v in GOOGLE_OAUTH_CLIENT_ID GOOGLE_OAUTH_CLIENT_SECRET AIPRIMER_CONTROL_SHEET_ID; do
-  [ -n "${!v:-}" ] || missing+=("$v")
-done
-tokens=$(env | grep -o '^GOOGLE_REFRESH_TOKEN_[A-Z0-9_]*' | tr '\n' ' ')
+if [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON:-}" ]; then
+  mode="service account key present"
+  [ -n "${AIPRIMER_RAW_DRIVE_ID:-}" ] || missing+=("AIPRIMER_RAW_DRIVE_ID")
+  [ -n "${AIPRIMER_SUMMARY_DRIVE_ID:-}" ] || missing+=("AIPRIMER_SUMMARY_DRIVE_ID")
+else
+  tokens=$(env | grep -o '^GOOGLE_REFRESH_TOKEN_[A-Z0-9_]*' | tr '\n' ' ')
+  mode="refresh tokens: ${tokens:-none}"
+  for v in GOOGLE_OAUTH_CLIENT_ID GOOGLE_OAUTH_CLIENT_SECRET; do
+    [ -n "${!v:-}" ] || missing+=("$v")
+  done
+  [ -n "${tokens:-}" ] || missing+=("GOOGLE_SERVICE_ACCOUNT_JSON or GOOGLE_REFRESH_TOKEN_*")
+fi
+[ -n "${AIPRIMER_CONTROL_SHEET_ID:-}" ] || missing+=("AIPRIMER_CONTROL_SHEET_ID")
 
-echo "AI Primer pipeline: settings present -> refresh tokens: ${tokens:-none}"
+echo "AI Primer pipeline: Google credentials -> ${mode}"
 if [ ${#missing[@]} -gt 0 ]; then
   echo "AI Primer pipeline: MISSING settings -> ${missing[*]} (see README.md, section Setup). Run /setup for details."
 else
-  echo "AI Primer pipeline: core settings present. Run /setup for a health check, /ingest to add resources, /summarize <author> to build summaries."
+  echo "AI Primer pipeline: settings present. Run /setup for a health check, /ingest to add resources, /summarize <author> to build summaries."
 fi

@@ -2,18 +2,27 @@
 
 from __future__ import annotations
 
+import os
 from typing import Callable
 
 from .apify_yt import ApifyRunner, ApifyYouTube, RealApifyRunner
 from .config import Settings, load_settings
 from .drive import DriveBackend, DriveClient, GoogleDriveBackend
-from .google_auth import AuthError, GoogleServices
+from .google_auth import SERVICE_ACCOUNT_ENV_DEFAULT, AuthError, GoogleServices
 from .models import Account
 from .registry import Registry
 from .sheets import GoogleSheetsBackend, SheetsRepo
 
 DEFAULT_SUMMARY_TOKEN_ENV = "GOOGLE_REFRESH_TOKEN_SUMMARY01"
 DEFAULT_RAW_TOKEN_ENV = "GOOGLE_REFRESH_TOKEN_RAW01"
+
+
+def default_key_env(role: str) -> str:
+    """Which environment variable holds the credential for a role when the Accounts tab is empty:
+    the service-account key when present (one key serves every role), else the role's refresh token."""
+    if os.environ.get(SERVICE_ACCOUNT_ENV_DEFAULT):
+        return SERVICE_ACCOUNT_ENV_DEFAULT
+    return DEFAULT_SUMMARY_TOKEN_ENV if role == "summary" else DEFAULT_RAW_TOKEN_ENV
 
 
 class AppContext:
@@ -35,11 +44,11 @@ class AppContext:
     # ---- credentials
     @property
     def summary_token_env(self) -> str:
-        return (self.settings.section("accounts").get("summary_token_env_var")) or DEFAULT_SUMMARY_TOKEN_ENV
+        return (self.settings.section("accounts").get("summary_token_env_var")) or default_key_env("summary")
 
-    def services(self, token_env_var: str) -> GoogleServices:
+    def services(self, token_env_var: str, auth_kind: str = "auto") -> GoogleServices:
         if token_env_var not in self._services:
-            self._services[token_env_var] = GoogleServices(self.settings, token_env_var)
+            self._services[token_env_var] = GoogleServices(self.settings, token_env_var, auth_kind)
         return self._services[token_env_var]
 
     # ---- registry (control sheet, read with the summary account's credentials)
@@ -48,7 +57,7 @@ class AppContext:
         if self._registry is None:
             sheet_id = self.settings.control_sheet_id
             if not sheet_id:
-                raise AuthError("AIPRIMER_CONTROL_SHEET_ID is not set: run `pipeline setup init-sheet` first")
+                raise AuthError("AIPRIMER_CONTROL_SHEET_ID is not set: run `pipeline setup create-sheet` (or create the sheet and share it with the service account) first")
             backend = GoogleSheetsBackend(self.services(self.summary_token_env).sheets, sheet_id)
             self._registry = Registry(SheetsRepo(backend), self.settings)
         return self._registry
@@ -64,7 +73,7 @@ class AppContext:
             if account.backend != "gdrive" or not account.token_env_var:
                 return None
             try:
-                backend: DriveBackend = GoogleDriveBackend(self.services(account.token_env_var).drive, int(self.settings.drive.get("upload_chunk_mb", 8)))
+                backend: DriveBackend = GoogleDriveBackend(self.services(account.token_env_var, account.auth_kind).drive, int(self.settings.drive.get("upload_chunk_mb", 8)))
             except AuthError:
                 return None
             client = DriveClient(backend)

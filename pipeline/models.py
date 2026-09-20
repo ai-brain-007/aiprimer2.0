@@ -78,6 +78,10 @@ class Account(TabRow):
     status: Literal["active", "full", "disabled"] = "active"
     priority: int | None = 1
     notes: str = ""
+    # auto: decided from the shape of the setting's value (JSON key -> service account, else refresh token)
+    auth_kind: Literal["auto", "service_account", "oauth"] = "auto"
+    # Google Workspace Shared Drive id when files live in a shared drive (service-account mode)
+    drive_id: str = ""
 
     @property
     def free_bytes(self) -> int | None:

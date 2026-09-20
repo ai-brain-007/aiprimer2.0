@@ -1,54 +1,68 @@
 ---
 name: setup
-description: One-time bootstrap and health check of the AI Primer pipeline (accounts, control sheet, Drive folder tree, taxonomy, Apify formats). Use when the user says /setup, asks whether the system is ready, or after adding a new Google account.
+description: One-time bootstrap and health check of the AI Primer pipeline (Google service account or sign-in, control sheet, Shared Drive folder tree, taxonomy, Apify formats). Use when the user says /setup, asks whether the system is ready, or after adding a new Google account or Shared Drive.
 ---
 
 # /setup — bootstrap and health check
 
 Everything here is idempotent: running it twice changes nothing the second time.
 
+## Two credential modes
+
+- **Service account (primary).** The key JSON is in the environment variable `GOOGLE_SERVICE_ACCOUNT_JSON`;
+  `AIPRIMER_RAW_DRIVE_ID` and `AIPRIMER_SUMMARY_DRIVE_ID` name the Google Workspace Shared Drives the key
+  writes to. A service account has no storage of its own: without a Shared Drive it can read and edit the
+  control sheet but every upload fails. Say this plainly whenever a check reports it.
+- **Refresh token (fallback for plain Gmail).** `GOOGLE_OAUTH_CLIENT_ID/SECRET` plus one
+  `GOOGLE_REFRESH_TOKEN_*` per Gmail account, obtained with `pipeline auth url` / `auth exchange` or
+  `scripts/auth_local.py`.
+
+Never ask the user to paste a key or token into the chat. If they do, tell them to create a new one.
+
 ## Steps
 
-1. **Settings present?** Run:
+1. **Settings present?**
    ```bash
    python -m pipeline auth check --pretty
    ```
-   - If it reports `AIPRIMER_CONTROL_SHEET_ID is not set` but the summary account token is present, run
-     `python -m pipeline setup create-sheet --pretty`, then tell the user to add the printed sheet id to the
-     environment variables as `AIPRIMER_CONTROL_SHEET_ID` and start a new session. Stop there.
-   - If the client id/secret is missing, point the user to README.md → "Setup", step 2 and 4, and stop.
-   - If the client id/secret are present but a refresh token is missing, offer the in-chat sign-in:
-     run `python -m pipeline auth url --pretty`, give the user the link and the three-line instruction
-     (open it signed in as the account to authorise, click through the unverified-app warning, click Allow, then
-     paste back the full address of the localhost page that fails to load). When they paste it, run
-     `python -m pipeline auth exchange "<pasted address>" --pretty` and show them the `env_var` name and the
-     `refresh_token` value to copy into the cloud environment variables. Say clearly that they must then start a
-     new session. Never write the token anywhere yourself (no file, no sheet, no commit).
+   - `AIPRIMER_CONTROL_SHEET_ID is not set` → run `python -m pipeline setup create-sheet --pretty`.
+     In service-account mode with `AIPRIMER_SUMMARY_DRIVE_ID` set it creates the sheet inside that Shared Drive;
+     without a Shared Drive it prints the two options (create the drive, or create the sheet by hand in Gmail and
+     share it with the service account's email). Relay the option text, ask the user to add the sheet id to the
+     environment as `AIPRIMER_CONTROL_SHEET_ID`, and stop.
+   - Missing key/token → point to README.md → "Setup" and stop. In refresh-token mode you may offer the in-chat
+     sign-in: `python -m pipeline auth url --pretty` → the user opens the link, clicks Allow, pastes back the
+     localhost address → `python -m pipeline auth exchange "<address>" --pretty` → they copy the printed
+     `refresh_token` into the environment variable named in `env_var`, then start a new session.
+   - Per account, read `auth_kind`, `shared_drive.reachable` and any `warning`. A service account whose Shared
+     Drive is unreachable needs to be added as **Content manager** of that drive (its email is in the output).
 2. **Bootstrap**:
    ```bash
    python -m pipeline setup all --pretty
    ```
-   This creates the control-panel tabs, the `AI Primer Raw` folder (+ `_Inbox`) in each raw account, the
-   `AI Primer Summaries` folder in the summary account, imports `config/taxonomy.seed.yaml`, and prints health.
+   Creates the control-panel tabs, `AI Primer Raw` (+ `_Inbox`) in the raw Shared Drive (or the raw Gmail
+   Drive in refresh-token mode), `AI Primer Summaries` in the summary drive, imports `config/taxonomy.seed.yaml`,
+   prints health. An account entry with `ok: false` and "Shared Drive" in the error is the quota limitation: explain
+   it and stop; do not retry in a loop.
 3. **Apify formats** (needs `api.apify.com` allowed and the API credential set):
    ```bash
    python -m pipeline setup fetch-apify-schemas --pretty
    ```
-   If this fails with a network error, tell the user to create the "AI Primer" cloud environment as described in
-   README.md → "Setup", step 5. YouTube ingestion will not work until then; file ingestion will.
-4. **Report** a short health table: each account (email, free GB, status), the control sheet link, the number of
-   taxonomy nodes, resources by status. Mention the two things the user can do next: `/ingest` and `/summarize`.
+   On a network error, tell the user to create the "AI Primer" cloud environment as described in README.md →
+   "Setup". YouTube ingestion will not work until then; file ingestion will.
+4. **Report** a short health table: each account (mode, email, Shared Drive name or free GB, status), the
+   control sheet link, taxonomy node count, resources by status. Mention `/ingest` and `/summarize` as next steps.
 
 ## Questions you may ask (AskUserQuestion)
 
-- Only if the Accounts tab is empty and the config has no `accounts.bootstrap`: which environment variable holds
-  the raw account token and which the summary token (offer the defaults `GOOGLE_REFRESH_TOKEN_RAW01` /
-  `GOOGLE_REFRESH_TOKEN_SUMMARY01`).
+- Only if the Accounts tab is empty and the environment has neither the service-account key nor refresh tokens:
+  which mode the user wants (service account + Shared Drives, or Gmail sign-in).
 - Whether summary Docs should be "anyone with the link can view" (default) or restricted; write the answer to
   `config/pipeline.yaml` → `docs.sharing`.
 
-## Adding a raw account later
+## Adding storage later
 
-The user adds a new refresh-token variable (e.g. `GOOGLE_REFRESH_TOKEN_RAW02`) to the environment and a row in the
-Accounts tab (`account_id=raw02, role=raw, token_env_var=GOOGLE_REFRESH_TOKEN_RAW02, priority=2`), then runs `/setup`
-again: `setup all` creates the root folder for the new account and records its quota.
+- **Service-account mode:** create another Shared Drive, add the service account as Content manager, add an
+  Accounts row (`account_id=raw02, role=raw, token_env_var=GOOGLE_SERVICE_ACCOUNT_JSON, drive_id=<id>, priority=2`),
+  run `/setup` again.
+- **Refresh-token mode:** new Gmail, new `GOOGLE_REFRESH_TOKEN_RAW02`, Accounts row with that name, `/setup`.

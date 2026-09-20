@@ -68,7 +68,7 @@ class GoogleDriveBackend:
         while True:
             resp = self._retry(
                 lambda: self.service.files()
-                .list(q=q, pageSize=page_size, fields=f"nextPageToken,files({FILE_FIELDS})", pageToken=token, spaces="drive")
+                .list(q=q, pageSize=page_size, fields=f"nextPageToken,files({FILE_FIELDS})", pageToken=token, spaces="drive", supportsAllDrives=True, includeItemsFromAllDrives=True, corpora="allDrives")
                 .execute()
             )
             files.extend(resp.get("files", []))
@@ -77,13 +77,13 @@ class GoogleDriveBackend:
                 return files
 
     def get_file(self, file_id: str) -> dict:
-        return self._retry(lambda: self.service.files().get(fileId=file_id, fields=FILE_FIELDS).execute())
+        return self._retry(lambda: self.service.files().get(fileId=file_id, fields=FILE_FIELDS, supportsAllDrives=True).execute())
 
     def create_folder(self, name: str, parent_id: str | None) -> dict:
         body: dict[str, Any] = {"name": name, "mimeType": FOLDER_MIME}
         if parent_id:
             body["parents"] = [parent_id]
-        return self._retry(lambda: self.service.files().create(body=body, fields=FILE_FIELDS).execute())
+        return self._retry(lambda: self.service.files().create(body=body, fields=FILE_FIELDS, supportsAllDrives=True).execute())
 
     def upload_file(self, path: Path, name: str, parent_id: str, mime_type: str, app_properties: dict[str, str] | None, convert_to: str | None = None) -> dict:
         from googleapiclient.http import MediaFileUpload
@@ -95,7 +95,7 @@ class GoogleDriveBackend:
             body["mimeType"] = convert_to
         size = Path(path).stat().st_size
         media = MediaFileUpload(str(path), mimetype=mime_type, resumable=size > self.chunk, chunksize=self.chunk)
-        return self._retry(lambda: self.service.files().create(body=body, media_body=media, fields=FILE_FIELDS).execute(num_retries=3))
+        return self._retry(lambda: self.service.files().create(body=body, media_body=media, fields=FILE_FIELDS, supportsAllDrives=True).execute(num_retries=3))
 
     def update_file(self, file_id: str, *, name=None, add_parents=None, remove_parents=None, app_properties=None, media_path=None, media_mime=None) -> dict:
         from googleapiclient.http import MediaFileUpload
@@ -105,7 +105,7 @@ class GoogleDriveBackend:
             body["name"] = name
         if app_properties:
             body["appProperties"] = app_properties
-        kwargs: dict[str, Any] = {"fileId": file_id, "body": body, "fields": FILE_FIELDS}
+        kwargs: dict[str, Any] = {"fileId": file_id, "body": body, "fields": FILE_FIELDS, "supportsAllDrives": True}
         if add_parents:
             kwargs["addParents"] = ",".join(add_parents)
         if remove_parents:
@@ -119,7 +119,7 @@ class GoogleDriveBackend:
 
         dest = Path(dest)
         dest.parent.mkdir(parents=True, exist_ok=True)
-        request = self.service.files().get_media(fileId=file_id)
+        request = self.service.files().get_media(fileId=file_id, supportsAllDrives=True)
         with open(dest, "wb") as fh:
             downloader = MediaIoBaseDownload(fh, request, chunksize=self.chunk)
             done = False
@@ -152,7 +152,7 @@ class GoogleDriveBackend:
 
     def create_permission(self, file_id: str, role: str, type_: str) -> dict:
         body = {"role": role, "type": type_}
-        return self._retry(lambda: self.service.permissions().create(fileId=file_id, body=body, fields="id").execute())
+        return self._retry(lambda: self.service.permissions().create(fileId=file_id, body=body, fields="id", supportsAllDrives=True).execute())
 
     def list_comments(self, file_id: str) -> list[dict]:
         out: list[dict] = []
@@ -172,7 +172,15 @@ class GoogleDriveBackend:
         self._retry(lambda: self.service.replies().create(fileId=file_id, commentId=comment_id, body={"action": "resolve", "content": "Applied by the AI Primer summary agent."}, fields="id").execute())
 
     def trash_file(self, file_id: str) -> None:
-        self._retry(lambda: self.service.files().update(fileId=file_id, body={"trashed": True}).execute())
+        self._retry(lambda: self.service.files().update(fileId=file_id, body={"trashed": True}, supportsAllDrives=True).execute())
+
+    def get_drive(self, drive_id: str) -> dict:
+        """Metadata of a Google Workspace Shared Drive (name, id)."""
+        return self._retry(lambda: self.service.drives().get(driveId=drive_id, fields="id,name").execute())
+
+    def list_drives(self) -> list[dict]:
+        resp = self._retry(lambda: self.service.drives().list(pageSize=100, fields="drives(id,name)").execute())
+        return resp.get("drives", [])
 
 
 class DriveClient:
@@ -199,8 +207,15 @@ class DriveClient:
         return found[0] if found else None
 
     def ensure_folder(self, parent_id: str | None, name: str) -> dict:
+        """Find or create a folder. `parent_id` may be a folder id, a Shared Drive id (its root), or None for My Drive."""
         existing = self.find_child_folder(parent_id, name) if parent_id else self.find_root_folder(name)
         return existing or self.backend.create_folder(name, parent_id)
+
+    def shared_drive(self, drive_id: str) -> dict | None:
+        try:
+            return self.backend.get_drive(drive_id)  # type: ignore[attr-defined]
+        except Exception:
+            return None
 
     def ensure_path(self, root_id: str, names: list[str]) -> list[dict]:
         out: list[dict] = []

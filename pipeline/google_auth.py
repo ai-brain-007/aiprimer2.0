@@ -1,8 +1,16 @@
-"""Google credentials from a refresh token per account, and API service builders.
+"""Google credentials per account, and API service builders.
 
-Why refresh tokens: service accounts have no Drive storage quota (since 2023) and cannot own files
-in a consumer Gmail Drive. A refresh token obtained once with scripts/auth_local.py lets the pipeline
-act AS the Gmail account, so files are owned by that account and use its quota.
+Two kinds of credential, chosen per account (Accounts tab, column `auth_kind`, default `auto`):
+
+- **service_account** (primary): the JSON key of a Google Cloud service account, stored in one environment
+  variable (the whole JSON on one line, base64 of it, or a path to the file). The service account acts as
+  itself. Google gives service accounts NO Drive storage, so files must live in a Google Workspace
+  **Shared Drive** the service account is a member of; on a personal Gmail Drive it can read and edit files
+  shared with it but cannot upload or create anything.
+- **oauth** (fallback): a refresh token obtained once by a human clicking Allow (scripts/auth_local.py or
+  `pipeline auth url` / `auth exchange`). The pipeline then acts AS that Gmail account and uses its quota.
+
+`auto` looks at the value: it starts with `{` (or decodes to JSON) -> service account, otherwise refresh token.
 
 Behind the cloud-session proxy, httplib2 (used by google-api-python-client) needs the CA bundle and
 SOCKS/CONNECT support (pysocks); `_http()` wires both.
@@ -10,10 +18,15 @@ SOCKS/CONNECT support (pysocks); `_http()` wires both.
 
 from __future__ import annotations
 
+import base64
+import json
 import os
+from pathlib import Path
 from typing import Any
 
 from .config import GOOGLE_SCOPES, Settings
+
+SERVICE_ACCOUNT_ENV_DEFAULT = "GOOGLE_SERVICE_ACCOUNT_JSON"
 
 
 class AuthError(RuntimeError):
@@ -35,20 +48,75 @@ def _http():
     return httplib2.Http(ca_certs=_ca_certs(), timeout=120)
 
 
-def credentials_for(settings: Settings, token_env_var: str):
-    """Build google.oauth2 Credentials for the account whose refresh token lives in `token_env_var`."""
-    from google.oauth2.credentials import Credentials
+# ----------------------------------------------------------------------------- credential parsing
 
+
+def parse_service_account_value(value: str) -> dict[str, Any] | None:
+    """Accept the key JSON itself, its base64, or a path to the .json file. Returns the dict or None."""
+    text = (value or "").strip()
+    if not text:
+        return None
+    if text.startswith("{"):
+        try:
+            info = json.loads(text)
+        except json.JSONDecodeError:
+            return None
+        return info if info.get("type") == "service_account" else None
+    if len(text) < 4096 and os.path.exists(text) and Path(text).is_file():
+        try:
+            info = json.loads(Path(text).read_text(encoding="utf-8"))
+            return info if info.get("type") == "service_account" else None
+        except (OSError, json.JSONDecodeError):
+            return None
+    try:
+        decoded = base64.b64decode(text, validate=False).decode("utf-8")
+        info = json.loads(decoded)
+        return info if isinstance(info, dict) and info.get("type") == "service_account" else None
+    except Exception:
+        return None
+
+
+def detect_auth_kind(value: str) -> str:
+    return "service_account" if parse_service_account_value(value) else ("oauth" if value.strip() else "")
+
+
+def resolve_auth_kind(settings: Settings, env_var: str, declared: str = "auto") -> str:
+    if declared in ("service_account", "oauth"):
+        return declared
+    return detect_auth_kind(settings.refresh_token(env_var))
+
+
+def service_account_email(settings: Settings, env_var: str) -> str:
+    info = parse_service_account_value(settings.refresh_token(env_var))
+    return str(info.get("client_email", "")) if info else ""
+
+
+def credentials_for(settings: Settings, token_env_var: str, auth_kind: str = "auto"):
+    """Build Google credentials for the account whose key/token lives in `token_env_var`."""
     if not token_env_var:
         raise AuthError("account has no token_env_var set in the Accounts tab")
-    refresh_token = settings.refresh_token(token_env_var)
-    if not refresh_token:
+    value = settings.refresh_token(token_env_var)
+    if not value:
         raise AuthError(f"environment variable {token_env_var} is not set")
+    kind = resolve_auth_kind(settings, token_env_var, auth_kind)
+    if kind == "service_account":
+        from google.oauth2 import service_account
+
+        info = parse_service_account_value(value)
+        if info is None:
+            raise AuthError(f"{token_env_var} does not contain a service-account key (JSON with type=service_account)")
+        creds = service_account.Credentials.from_service_account_info(info, scopes=GOOGLE_SCOPES)
+        subject = os.environ.get("GOOGLE_SA_IMPERSONATE", "").strip()
+        if subject:  # domain-wide delegation (Workspace only)
+            creds = creds.with_subject(subject)
+        return creds
+    from google.oauth2.credentials import Credentials
+
     if not settings.google_client_id or not settings.google_client_secret:
-        raise AuthError("GOOGLE_OAUTH_CLIENT_ID / GOOGLE_OAUTH_CLIENT_SECRET are not set")
+        raise AuthError("GOOGLE_OAUTH_CLIENT_ID / GOOGLE_OAUTH_CLIENT_SECRET are not set (needed for refresh-token accounts)")
     return Credentials(
         token=None,
-        refresh_token=refresh_token,
+        refresh_token=value,
         token_uri="https://oauth2.googleapis.com/token",
         client_id=settings.google_client_id,
         client_secret=settings.google_client_secret,
@@ -63,6 +131,8 @@ def build_service(api: str, version: str, creds) -> Any:
     authed = AuthorizedHttp(creds, http=_http())
     return build(api, version, http=authed, cache_discovery=False)
 
+
+# ----------------------------------------------------------------------------- OAuth fallback helpers
 
 DEFAULT_LOOPBACK_PORT = 8765
 
@@ -99,9 +169,8 @@ def consent_url(settings: Settings, port: int = DEFAULT_LOOPBACK_PORT, client_id
 
 def extract_auth_code(pasted: str) -> str:
     """Accept the full http://localhost:PORT/?code=...&scope=... address, or a bare code."""
-    from urllib.parse import parse_qs, urlparse
-
     import re
+    from urllib.parse import parse_qs, urlparse
 
     text = pasted.strip()
     looks_like_url = "://" in text or "?" in text or "=" in text
@@ -117,9 +186,7 @@ def extract_auth_code(pasted: str) -> str:
 
 def exchange_code(settings: Settings, pasted: str, port: int = DEFAULT_LOOPBACK_PORT, client_id: str | None = None, client_secret: str | None = None) -> dict:
     """Turn the pasted redirect address into a refresh token. Returns {refresh_token, email, scopes}."""
-    import os as _os
-
-    _os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")  # the loopback redirect is plain http by design
+    os.environ.setdefault("OAUTHLIB_INSECURE_TRANSPORT", "1")  # the loopback redirect is plain http by design
     flow = _flow(settings, port, client_id, client_secret)
     flow.fetch_token(code=extract_auth_code(pasted))
     creds = flow.credentials
@@ -135,18 +202,23 @@ def exchange_code(settings: Settings, pasted: str, port: int = DEFAULT_LOOPBACK_
 
 
 class GoogleServices:
-    """Lazily built Drive / Sheets / Docs services for one account (identified by its token env var)."""
+    """Lazily built Drive / Sheets / Docs services for one account (identified by its key/token env var)."""
 
-    def __init__(self, settings: Settings, token_env_var: str):
+    def __init__(self, settings: Settings, token_env_var: str, auth_kind: str = "auto"):
         self.settings = settings
         self.token_env_var = token_env_var
+        self.auth_kind = auth_kind
         self._creds = None
         self._services: dict[str, Any] = {}
 
     @property
+    def kind(self) -> str:
+        return resolve_auth_kind(self.settings, self.token_env_var, self.auth_kind)
+
+    @property
     def creds(self):
         if self._creds is None:
-            self._creds = credentials_for(self.settings, self.token_env_var)
+            self._creds = credentials_for(self.settings, self.token_env_var, self.auth_kind)
         return self._creds
 
     def service(self, api: str, version: str) -> Any:

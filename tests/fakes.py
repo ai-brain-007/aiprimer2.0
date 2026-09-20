@@ -193,7 +193,21 @@ class FakeDriveBackend:
     def trash_file(self, file_id):
         self.files[file_id]["trashed"] = True
 
+    def get_drive(self, drive_id):
+        if drive_id in self.shared_drives:
+            return {"id": drive_id, "name": self.shared_drives[drive_id]}
+        raise KeyError(drive_id)
+
+    def list_drives(self):
+        return [{"id": k, "name": v} for k, v in self.shared_drives.items()]
+
     # -- test helpers
+    shared_drives: dict[str, str] = {}
+
+    def add_shared_drive(self, drive_id: str, name: str):
+        """A shared drive behaves like a parent folder whose id is the drive id."""
+        self.shared_drives = {**self.shared_drives, drive_id: name}
+        self.files[drive_id] = {"id": drive_id, "name": name, "mimeType": FOLDER_MIME, "parents": [], "trashed": False, "appProperties": {}, "webViewLink": f"https://drive.google.com/drive/folders/{drive_id}", "is_drive": True}
     def children(self, parent_id):
         return [m for m in self.files.values() if parent_id in m["parents"] and not m["trashed"]]
 
