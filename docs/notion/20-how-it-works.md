@@ -77,6 +77,7 @@ Under the "AI Primer" page you find one page per layer. Open a layer page to rea
 | LAYER 2 - SUMMARY BY AUTHORS | The Authors table (one row per author, the author's page inside the row) and the Summaries table (version history) |
 | LAYER 3 - DOMAINS > PRIMERS > STAGES | Your tree as pages: a page per domain, inside it a page per primer, inside that a page per stage. The stage pages will hold the study material |
 | LAYER 0 - CONFIG | The pipeline's bookkeeping: Accounts, Taxonomy, Folders and Jobs, plus these two guides |
+| WHITEBOARD | A drawing board (Excalidraw) for your own sketches. Drawings stay in your browser unless you save or share them from Excalidraw's menu |
 
 The tree pages are generated from the Taxonomy table. Adding or renaming a stage adds or renames its page; the page keeps its link. Nothing there is deleted automatically.
 

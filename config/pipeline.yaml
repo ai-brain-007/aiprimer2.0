@@ -93,3 +93,7 @@ notion:
   version: "2022-06-28"
   # How many top-level blocks of an author page are scanned for inline comments (rate limit: 3 calls/s).
   comment_scan_blocks: 300
+  # Board embedded on the "WHITEBOARD" page under "AI Primer" (setup layout). The plain Excalidraw app keeps a
+  # drawing in the viewer's browser only; paste an Excalidraw live-collaboration or share link here to pin one board.
+  # Empty = no whiteboard page.
+  whiteboard_url: "https://excalidraw.com/"

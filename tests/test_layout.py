@@ -5,7 +5,7 @@ from __future__ import annotations
 import pytest
 
 from pipeline.context import AppContext
-from pipeline.layout import SECTIONS, TREE_SECTION, apply_layout, home_titles, sync_tree_pages, table_homes
+from pipeline.layout import SECTIONS, TREE_SECTION, WHITEBOARD_TITLE, apply_layout, ensure_whiteboard, home_titles, sync_tree_pages, table_homes
 from pipeline.models import TAB_MODELS
 from pipeline.notion import NotionError, NotionRepo, child_pages, plain_text
 from pipeline.registry import Registry
@@ -144,6 +144,30 @@ def test_relocate_tab_rolls_back_when_the_copy_is_incomplete(world, monkeypatch)
     assert repo.database_id("Taxonomy") == old and notion.databases[old]["archived"] is False
     assert notion.child_databases(target) == {}, "the incomplete copy was archived"
     assert len(reg.nodes()) == 5
+
+
+def test_whiteboard_page_embeds_the_configured_board_and_follows_a_change(world):
+    ctx, reg, repo, notion, parent = world
+    ctx.settings.config.setdefault("notion", {})["whiteboard_url"] = "https://excalidraw.com/"
+    report = apply_layout(ctx)
+    board = report["whiteboard"]
+    assert board["created"] and board["embed_url"] == "https://excalidraw.com/"
+    page_id = child_pages(notion, parent)[WHITEBOARD_TITLE]
+    assert board["page_id"] == page_id and list(child_pages(notion, parent)) == [*[s.title for s in SECTIONS], WHITEBOARD_TITLE]
+    blocks = notion.list_block_children(page_id)
+    assert [b["type"] for b in blocks] == ["paragraph", "embed"] and blocks[1]["embed"]["url"] == "https://excalidraw.com/"
+    assert "sketchpad" in notion.page_plain_text(page_id)
+    # unchanged config: nothing happens
+    again = apply_layout(ctx)["whiteboard"]
+    assert again == {"page_id": page_id, "url": notion.page_url(page_id), "embed_url": "https://excalidraw.com/", "created": False, "updated": False}
+    # the owner pins a shared board: same page, new embed
+    changed = ensure_whiteboard(repo, "https://excalidraw.com/#room=abc,def")
+    assert changed["page_id"] == page_id and changed["updated"] is True
+    embeds = [b for b in notion.list_block_children(page_id) if b["type"] == "embed"]
+    assert [b["embed"]["url"] for b in embeds] == ["https://excalidraw.com/#room=abc,def"]
+    # an empty url in the config means no whiteboard page at all
+    ctx.settings.config["notion"]["whiteboard_url"] = ""
+    assert apply_layout(ctx)["whiteboard"] == {"skipped": "notion.whiteboard_url is empty"}
 
 
 def test_layout_is_skipped_outside_notion_mode(settings, fake_sheets):
