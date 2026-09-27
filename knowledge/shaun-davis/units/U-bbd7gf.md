@@ -5,11 +5,12 @@ type: claim
 name: Landlords are fed up, so deals have never been easier to close
 aliases:
 - Renters' Rights Bill makes landlords want out
+- The landlord mass exodus
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2026-01-22'
-last_seen: '2026-01-22'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-MVwwBYms0co
   location: 04:00
@@ -31,6 +32,16 @@ citations:
   quote: I started in 2018 and it was much harder because landlords didn't really understand the concept of social housing.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 06:00
+  quote: So, this is called a mass exodus in the property market. We've never been busier. The phone is ringing off the hook right now, and landlords are in fear. They either want to lease or they either want to sell.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 07:01
+  quote: So, what that means, the opportunity here is that landlords who want to ensure that they still have a long-term profitable solution on their asset.
+  verified: true
+  score: 100
 versions:
 - date: '2026-01-22'
   resource_id: R-YT-MVwwBYms0co
@@ -38,7 +49,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:06:06Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

@@ -21,11 +21,13 @@ aliases:
 - VA
 - Focus on high-value tasks, leverage the rest
 - Outsource the low-value tasks
+- 'Leverage: outsource what you can'
+- Leverage is my favourite word in business
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2026-05-14'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '26:01'
@@ -137,6 +139,11 @@ citations:
   quote: So, it's about leverage. Leverage is my favorite word in business because you know, often entrepreneurs, they get themselves into a bit of a pickle where they try and do everything themselves as opposed to leveraging.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '22:01'
+  quote: Leverage is my favorite word in business. You just need to leverage, you need to outsource, you need to find good partners, good maintenance companies that you can partner with, and then they can get all the maintenance boxed off for you.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -144,7 +151,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

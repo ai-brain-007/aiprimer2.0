@@ -5,11 +5,13 @@ type: principle
 name: Find the provider first, not the property
 aliases:
 - Provider first
+- Finding the property before the provider
+- Provider first, property second
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-12-14'
-last_seen: '2025-12-14'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-aRcmGZIV7Y4
   location: 01:00
@@ -36,6 +38,26 @@ citations:
   quote: start building relationships with agents, start looking for the exact properties that they need. You marry the two together and it won't be long before you close a deal.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 09:00
+  quote: So, the biggest mistake that I see people making in rent-to-rent social housing, it works a lot differently to serviced accommodation
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '10:02'
+  quote: Guys, that is the wrong way to do it, because here's the thing, you're going to have to promise the landlord or the agent the world
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '10:02'
+  quote: you can't fulfill your word in terms of renting the property off them because you don't have a provider. So, what that does, it makes you look incompetent.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '10:02'
+  quote: The best way to do it, the correct way to do it, is you find the provider, or you find the council first, you find out exactly what they're looking for
+  verified: true
+  score: 100
 versions:
 - date: '2025-12-14'
   resource_id: R-YT-aRcmGZIV7Y4
@@ -43,7 +65,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:50:16Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

@@ -9,11 +9,13 @@ aliases:
 - Government-backed income model
 - How the social housing business gets paid
 - Council contract
+- Social housing is not dependent on the economy
+- Recession-proof strategy
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2026-01-14'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '13:01'
@@ -55,6 +57,21 @@ citations:
   quote: Sometimes there might be issues getting paid, but because you're dealing with the government, you're more likely to get that money as opposed to renting to professional where they might just not have the money to pay you at all.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 01:01
+  quote: social housing is not dependent on the economy. It's not dependent on whether we have a booming economy.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 01:01
+  quote: like social housing is still going to be running strong because it's government-backed. And ultimately, it's helping people.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 02:00
+  quote: These people need housing. In fact, the government, they have a legal obligation to actually house these people.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -62,7 +79,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:59:46Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

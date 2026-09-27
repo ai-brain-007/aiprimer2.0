@@ -13,11 +13,15 @@ aliases:
 - Middleman model
 - Back-to-back leasing is deal sourcing paid monthly
 - Marry the provider and the landlord
+- The £3,000 in, £2,200 out, £800 margin deal
+- Back-to-back leasing margin example
+- Zero operations strategy
+- Mediator between provider and landlord
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-14'
-last_seen: '2026-05-14'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-4lFF_IDs08U
   location: 05:01
@@ -124,6 +128,41 @@ citations:
   quote: you find a provider, you find the landlord with the property, and you literally marry the two together.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '13:01'
+  quote: Now, they might pay you, you know, £3,000 for a
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '14:00'
+  quote: property and you can pay the landlord £2,200. So, in that scenario, you'll be making £800. Now, the game-changer is that there are zero operations involved in this.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '14:00'
+  quote: So, this is why back-to-back leasing is my favorite strategy because number one, back-to-back leasing can be with any provider.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '14:00'
+  quote: It doesn't matter what they're doing, whether it's temporary accommodation, emergency accommodation, could be like high-level social housing, it could be a children's home, it could be supported living. Doesn't matter what it is. As long as they're willing to scale.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '20:00'
+  quote: You're not involved in any operations. The provider would do all the operations. All you're having to do is be the mediator between the provider and the landlord.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '21:00'
+  quote: let's say something to do with the roof or structurally with the property, that's when you would then get involved and you would liaise on behalf of the provider to the landlord.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '21:00'
+  quote: But, other than that, nine times out of 10, most months you're just sitting there watching the rent come in every single month. And then, the rent comes in, you then take your cut, then you obviously you pay the landlord.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-14'
   resource_id: R-YT-4lFF_IDs08U
@@ -131,7 +170,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:26:16Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

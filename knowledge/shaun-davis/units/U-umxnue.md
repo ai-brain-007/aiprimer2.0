@@ -8,11 +8,14 @@ aliases:
 - Live with a stranger for a week
 - The council that would take 300 properties tomorrow
 - The Sandhu challenge
+- The live-with-a-stranger challenge
+- Sandhu challenge
+- Luton Council deal
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2026-05-14'
-last_seen: '2026-05-27'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-NuYOOjmh0ZI
   location: '10:00'
@@ -49,6 +52,31 @@ citations:
   quote: So that shows you the demand that certain councils have across the UK.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '11:01'
+  quote: the challenge was to live with a stranger for 1 week and get them a temporary accommodation deal
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '11:01'
+  quote: that you can change your life very, very quickly with the right education. And number two, the right attitude. And number three, the willingness to actually want to make it work.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '11:01'
+  quote: I wanted to prove to myself that if I was start again from scratch, with zero contacts, zero resources, that I could do it. And guys, we did it in two and a half days.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '16:01'
+  quote: We closed Luton Council and then we went directly to the estate agents.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '22:01'
+  quote: We became a provider directly with Luton Council.
+  verified: true
+  score: 100
 versions:
 - date: '2026-05-14'
   resource_id: R-YT-NuYOOjmh0ZI
@@ -56,7 +84,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:27:15Z'
-updated_at: '2026-09-27T14:33:44Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

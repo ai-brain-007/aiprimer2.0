@@ -3,12 +3,14 @@ id: U-omyd7o
 author_id: A-shaun-davis
 type: technique
 name: Check Contracts Finder daily and delegate it
-aliases: []
+aliases:
+- One hour a day finding providers
+- Daily provider outreach hour
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-12-14'
-last_seen: '2025-12-14'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-aRcmGZIV7Y4
   location: 06:00
@@ -25,6 +27,16 @@ citations:
   quote: Like, this has taken me less than 5 minutes, and I've already found a few already.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '20:00'
+  quote: Imagine if I was spending an hour every single day doing this. One hour dedicated just to find and reach out to providers. If I do it in a week, I'd end up closing a provider and partnering with them. It's inevitable.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '20:00'
+  quote: but you can clearly see how easy it is to find providers.
+  verified: true
+  score: 100
 versions:
 - date: '2025-12-14'
   resource_id: R-YT-aRcmGZIV7Y4
@@ -32,7 +44,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:50:16Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

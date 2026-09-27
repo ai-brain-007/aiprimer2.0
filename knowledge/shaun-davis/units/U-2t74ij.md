@@ -12,11 +12,14 @@ aliases:
 - Get in front of people
 - Do not hide behind a laptop
 - Get from behind the laptop
+- Go face-to-face; velocity is crucial
+- Build and maintain relationships
+- Go directly to the source
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2026-05-14'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '15:01'
@@ -108,6 +111,26 @@ citations:
   quote: the issue is you can't build relationships from a phone call, from sending an email, but you can build relationships so much stronger by actually physically going to see someone.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '16:01'
+  quote: It's very hard to build a relationship with a stranger over the phone, especially like in like a couple of phone calls. We don't have time.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '16:01'
+  quote: The velocity of this thing is is crucial.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '16:01'
+  quote: And then, definitely on email, it's so hard to build rapport. So, we like to go directly to the source, face-to-face, meet people,
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '17:01'
+  quote: we can provide value to their business from the estate agent point of view so that they will give us properties to be able to lease to these providers.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -115,7 +138,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

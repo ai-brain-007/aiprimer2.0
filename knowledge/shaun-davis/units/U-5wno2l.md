@@ -6,11 +6,13 @@ name: Extract pain points, then sell the solution
 aliases:
 - Make your offer so good they feel stupid saying no
 - Pain points first
+- Sell to the pain point
+- Be part of the solution
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '10:01'
@@ -27,6 +29,26 @@ citations:
   quote: it's all about being able to effectively and competently extract that information
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 07:01
+  quote: Whatever you're selling, if you're offering a service, it's really important that you understand the pain points of your client.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 07:01
+  quote: If you can clearly demonstrate that you can be part of that solution, the sale is easy.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 08:01
+  quote: Make your offer so good that people feel stupid for saying no.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 08:01
+  quote: And I love that because that means that you've solved the problem so well with your client that it's inevitable.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -34,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

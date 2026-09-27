@@ -24,11 +24,18 @@ aliases:
 - The social housing model in simple terms
 - Rent-to-social housing
 - Control, don't own
+- Rent-to-rent is commercial leasing
+- Commercial leasing
+- Commercial lease agreement
+- Company let agreement
+- Premier Inn does rent-to-rent
+- Social housing is the rent-to-rent sweet spot
+- Zero tenant marketing
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-05-27'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '10:00'
@@ -180,6 +187,51 @@ citations:
   quote: these are quick cash flow strategies and it's called rent-to-rent
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 02:00
+  quote: So, first things first, there's a skill that you need to learn to get involved in this strategy.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 03:00
+  quote: What makes it legal is a contract that you sign. So, what we do, we sign a commercial lease agreement.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 03:00
+  quote: But in the real world, it's called commercial leasing and it's the same strategy that many hotels do.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 04:01
+  quote: I find a building, a residential building, and I sign a commercial lease agreement. This commercial lease agreement allows me to be able to run my business from that property, and then I then run it.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 03:00
+  quote: You look at like Premier Inn, huge chain worldwide. They even have some here in Dubai. And they don't own their properties, guys. They do a rent-to-rent.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 03:00
+  quote: They find a developer, they find a building, and they lease that building for usually 5 to 10 years
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 08:01
+  quote: Now, rent to rent coupled with the social housing element is that's the sweet spot.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 08:01
+  quote: Because if you're doing rent to rent with serviced accommodation or HMO, of course, you can guarantee the rent, but it's not actually guaranteed because there is no guarantee that you're going to get bookings.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 08:01
+  quote: the one of the things I love about temporary accommodation, is the fact that there is zero tenant marketing.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -187,7 +239,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T14:33:44Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

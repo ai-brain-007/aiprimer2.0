@@ -13,11 +13,12 @@ aliases:
 - The three core questions
 - Three core questions to ask the council
 - What to find out from a provider
+- The three core questions for a provider
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-05-27'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -104,6 +105,26 @@ citations:
   quote: you find out the three core questions in terms of what they actually want, what specific types of properties, what they will pay.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '10:02'
+  quote: the three core questions, what areas do you need properties in, what specific types of properties do you need, what rent settings do you pay.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '10:02'
+  quote: So, once you've got these three core questions answered, it gives you the level of confidence that you need and the clarity to go out there and start closing properties.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '13:01'
+  quote: So then you then find out the three core questions of them in terms of what they're willing to pay, what they're looking for, etc.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '11:01'
+  quote: You can marry the two together and ultimately start making money very, very quickly.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -111,7 +132,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T14:33:44Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

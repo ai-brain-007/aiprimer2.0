@@ -5,11 +5,13 @@ type: principle
 name: Work with multiple councils
 aliases:
 - Don't put all your eggs in one basket
+- Diversify across providers and councils
+- Do not put all your eggs in one basket
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2025-09-29'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '1:28:00'
@@ -21,6 +23,16 @@ citations:
   quote: So, you don't want to have all your eggs in one basket. That's the first that's the first tip I I'd give you.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '21:00'
+  quote: So, you don't only put all your eggs in one basket and solely work with one provider directly. You want to ensure that you've got multiple different providers and multiple different councils.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '21:00'
+  quote: It's super scalable with a few different providers.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -28,7 +40,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:24Z'
-updated_at: '2026-09-27T13:37:24Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

@@ -11,11 +11,13 @@ aliases:
 - A contract end date means they must fill it fast
 - Find providers on Contracts Finder
 - contractsfinder.gov.uk
+- Contracts Finder method
+- contractsfinder.service.gov.uk
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2026-05-14'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: 04:00
@@ -87,6 +89,31 @@ citations:
   quote: Like you can just call them one by one and work through a list, but that's not really targeted
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '12:00'
+  quote: But one of my favorite ways of doing this is by going on Contracts Finder. So it's contractsfinder.service.gov.uk.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '12:00'
+  quote: And what I'm basically going to type in is temporary accommodation. And this will show me the results. Now, what I'm going to do, I want to see awarded contracts. So, I'm going to untick early engagement, future opportunity, and opportunity.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '12:00'
+  quote: I'm going to going to tick awarded contract. And this is going to then bring up all the contracts that have been won, the tenders.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '13:01'
+  quote: You can literally contact these providers. They're going to need properties because they need to fulfill this contract.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '18:01'
+  quote: What you do now is you Google who they are. You go on their website. You find out what they're about. And then it's very simple. You give them a call
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -98,7 +125,7 @@ versions:
   what_changed: Search keywords broadened from 'temporary accommodation' alone to 'supported living', 'temporary accommodation' and 'emergency accommodation'; steps added to read the contract description, to reference the contract when contacting a supplier, and to ask whether they are looking to scale before offering your properties.
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

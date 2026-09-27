@@ -3,16 +3,28 @@ id: U-fdzt2n
 author_id: A-shaun-davis
 type: technique
 name: Watch future opportunities to be first in
-aliases: []
+aliases:
+- Watch a notice to be first when it closes
+- Watch a Contracts Finder notice
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-12-14'
-last_seen: '2025-12-14'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-aRcmGZIV7Y4
   location: 08:00
   quote: And future opportunity tells you what's coming up. So you can keep an eye on the tenders that the government has and when it gets closed, you can be the first one to call and partner with that provider.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '17:01'
+  quote: then you can sign in and you can actually watch that notice and you can actually receive emails when
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '17:01'
+  quote: You received an email to say that it's now closed. You've got all the suppliers and you support all eight suppliers. You've got a much better chance of partnering with that organization to find them deals.
   verified: true
   score: 100
 versions:
@@ -22,7 +34,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:50:16Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

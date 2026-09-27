@@ -6,11 +6,12 @@ name: Confuse them and you lose them
 aliases:
 - Keep it simple
 - If you confuse them, you lose them
+- Explain it in simple terms
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2026-05-27'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '16:01'
@@ -37,6 +38,11 @@ citations:
   quote: So, with me, if I go into an agent and I speak to them, I keep it super simple. If you confuse them, you lose them. It's simple as that.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: '19:01'
+  quote: So, when you're explaining things, you want to explain it in simple terms. If you confuse them, you lose them.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -44,7 +50,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T14:33:44Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description

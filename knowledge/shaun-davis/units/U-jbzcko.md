@@ -12,11 +12,12 @@ aliases:
 - The forced pivot to social housing
 - Why Sean left Airbnb and working professionals for social housing
 - Shaun's pivot from failed strategies to social housing
+- Why Shaun left serviced accommodation
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2026-05-27'
+last_seen: '2026-06-06'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: 07:00
@@ -153,6 +154,26 @@ citations:
   quote: I used to be a car sales executive for a premium brand.
   verified: true
   score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 00:00
+  quote: I started off doing service accommodation and the rent-to-HMO strategy. And I quickly realized that these strategies are not recession-proof, they're not bulletproof. In COVID, I had to pivot.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 00:00
+  quote: Service accommodation has lots of cogs to turn. You know, guests checking in and out. And plus, it's a hospitality business, so it's certainly not passive.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 01:01
+  quote: I was having like 92, sometimes 100% occupancy. And then in the winter months, guess what happened? It died of death.
+  verified: true
+  score: 100
+- resource_id: R-YT-JygqeccwlQU
+  location: 01:01
+  quote: And then COVID happened and then that just completely wiped me out. For me, that was breaking point.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -160,7 +181,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T14:33:44Z'
+updated_at: '2026-09-27T14:39:53Z'
 ---
 
 ## Description
