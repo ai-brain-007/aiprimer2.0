@@ -41,7 +41,7 @@ Three layers. Layer 3 never reads raw data; it reads only layer 2 cards.
 
 | Purpose | Account | Notes |
 |---|---|---|
-| Backblaze owner | `ai.primer.rawfile.0001@gmail.com` | Backblaze account `b2-0001`; bucket `aiprimer-rawfile-0001` (private, `B2_BUCKET_0001`). No public media bucket: Backblaze wants a payment method for public buckets and the owner will not pay; pictures go into Notion, videos are YouTube embeds |
+| Backblaze owner | `ai.primer.rawfile.0001@gmail.com` | Backblaze account `b2-0001`; buckets `aiprimer-rawfile-0001` (Private, encryption on; `B2_BUCKET_0001`) and `aiprimer-media-0001` (Public, for excerpts shown in pages; `B2_MEDIA_BUCKET_0001`). The owner paid Backblaze's one-time $1 fee (credited) to unlock public buckets. Originals never go into the public bucket |
 | Notion owner | `ai.primer.brain.0001@gmail.com` | Single-member workspace, top page "AI Primer", integration "AI Primer pipeline" |
 | Retired | `ai.primer.summary.0001@gmail.com` | Was for Google Sheets/Docs (v1); no longer used |
 
@@ -114,8 +114,9 @@ be readable by the agent through an API.
   yet), per-card Notion pages and the Cards database (v2 publishes the whole author page), layer 3, transcription
   of stored audio.
 - Owner's side: environment "AI Primer 2.0" exists with the Apify credential and the old Google keys. Done:
-  Backblaze account and private bucket `aiprimer-rawfile-0001` (encryption on, object lock off). Pending: one
-  application key (→ `B2_KEY_ID_0001` / `B2_APPLICATION_KEY_0001`), `B2_BUCKET_0001=aiprimer-rawfile-0001`;
+  Backblaze account, private bucket `aiprimer-rawfile-0001` (encryption on, object lock off) and public bucket
+  `aiprimer-media-0001`. Pending: one application key (→ `B2_KEY_ID_0001` / `B2_APPLICATION_KEY_0001`),
+  `B2_BUCKET_0001=aiprimer-rawfile-0001`, `B2_MEDIA_BUCKET_0001=aiprimer-media-0001`;
   Notion workspace under
   `ai.primer.brain.0001`, page "AI Primer", integration "AI Primer pipeline" connected to it (secret → API
   credential for `api.notion.com`; page id → `AIPRIMER_NOTION_PAGE_ID`); allowed domains
@@ -147,8 +148,10 @@ be readable by the agent through an API.
 - 2026-09-27: first live example wanted soon: one author, one resource, one Notion author page.
 - 2026-09-27: v2 built: bucket folders named by node ids (renames free), Notion API pinned to 2022-06-28, video
   files stored as audio + key frames by default, storage accounts seeded from `B2_APPLICATION_KEY_<n>` variables.
-- 2026-09-27: no public media bucket (Backblaze requires a payment method for public buckets). Pictures are
-  uploaded into Notion, videos are embedded from YouTube; the media bucket stays optional in the code.
+- 2026-09-27: the media bucket is optional in the code (Backblaze requires a payment method for public buckets).
+  The owner then chose to pay the one-time $1 fee and created `aiprimer-media-0001` (Public) next to the private
+  raw bucket, after the agent advised against making the raw bucket itself public (originals would be exposed).
+  Small pictures still go into Notion; the public bucket serves clips and large images.
 
 ## 8. Open points
 
