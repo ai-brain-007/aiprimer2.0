@@ -5,11 +5,13 @@ type: example
 name: One day off a week in the motor trade
 aliases:
 - 'Tuesdays: massive action day'
+- 'Shaun''s Tuesdays: one day a week in a 60-hour job'
+- Building the business on one day off
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2026-01-08'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '17:01'
@@ -21,6 +23,21 @@ citations:
   quote: So, when I first start my business, I had to ensure that the Tuesdays that I had off work was super productive.
   verified: true
   score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 00:00
+  quote: I had to work a 60-hour job in the motor trade. Early mornings, late finishes, no flexibility. My only day off was Tuesday, just one single day. And on that Tuesday, I had to make it count. Every minute was intentional. Every minute had to be high value tasks.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 00:00
+  quote: If I could build a property business with one day a week, you can absolutely build yours around your job, around your family, and around your current commitments.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 03:00
+  quote: That's exactly what I did on Tuesdays. I dedicated everything I could and I devoted my full attention to finding councils, finding opportunities to building relationships that would later become the foundation of the business that I have today.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -28,7 +45,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:54:02Z'
 ---
 
 ## Description

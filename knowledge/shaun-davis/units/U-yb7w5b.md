@@ -5,11 +5,13 @@ type: principle
 name: Don't make your wages track the business
 aliases:
 - Let the business breathe
+- Keep your job and leave money in the business
+- Build on top of your current commitments
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2025-09-29'
+last_seen: '2026-01-08'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '36:00'
@@ -36,6 +38,21 @@ citations:
   quote: And this is something I learned from my dad actually.
   verified: true
   score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 09:01
+  quote: In fact, it's perfect if you have a job because you already have stability, you already have income, so that allows you to be able to let the business breathe.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 09:01
+  quote: What you don't want to do is start taking lots of money out the business. You want to leave money in the business and you can only do that if you got primary income coming in.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 09:01
+  quote: So, I would highly recommend for you to build this on top of your current commitments that you already have.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -43,7 +60,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T13:54:02Z'
 ---
 
 ## Description

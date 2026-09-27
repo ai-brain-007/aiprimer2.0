@@ -7,11 +7,14 @@ aliases:
 - 'Low value tasks: admin, research, emails'
 - Focus on high value tasks as CEO
 - High value vs low value tasks
+- Tasks that move the needle
+- Low value tasks
+- Tasks that drain your time
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-09-29'
+last_seen: '2026-01-08'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '17:01'
@@ -53,6 +56,21 @@ citations:
   quote: Um, I'd have um, telephone calls booked in for me.
   verified: true
   score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 01:00
+  quote: Not all tasks in property have the same impact. Some tasks barely move forward. They barely move the needle. Others transform your entire progress.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 01:00
+  quote: These tasks drain your time. They barely push the business forward. High value tasks are completely different.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 01:00
+  quote: Low value tasks look like this. Admin, emails, chasing documents, fixing more problems, trying to do everything yourself. These tasks drain your time. They barely push the business forward.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -60,7 +78,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T13:54:02Z'
 ---
 
 ## Description

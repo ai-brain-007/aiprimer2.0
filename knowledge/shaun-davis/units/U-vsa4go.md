@@ -6,11 +6,16 @@ name: Use a VA to pack your day off
 aliases:
 - Virtual assistant for admin and lead generation
 - Get a VA from day one
+- Hire a full-time virtual assistant
+- VA
+- Hiring a VA
+- Tasks your VA should handle
+- What to give a virtual assistant
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2026-01-08'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '17:01'
@@ -32,6 +37,31 @@ citations:
   quote: It's a super lowc costed, effective option. And what I love about VAS, it's not just for people that are starting out, it's for businesses of any sizes
   verified: true
   score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 02:01
+  quote: One of the biggest turning points for me was hiring a VA.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 03:00
+  quote: You can hire a full-time VA for anywhere from 200 to 600 a month
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 03:00
+  quote: And that VA honestly can save you 10 to 15 hours every single week
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 03:00
+  quote: So this is what your VA should handle. admin, inbox management, calendar and scheduling, document preparation, compliance support, following up on leads, which is super important, chasing paperwork, basic research, any repetitive task that doesn't require you specifically.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 03:00
+  quote: That frees you up to focus on high value tasks that actually make you money and move the needle.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -39,7 +69,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:54:02Z'
 ---
 
 ## Description

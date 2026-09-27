@@ -19,11 +19,13 @@ aliases:
 - Build and maintain relationships
 - Where property transactions turn into relationships
 - Property is a relationship-based game
+- Be on the council's radar
+- Attend the inspection yourself
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-12-14'
+last_seen: '2026-01-08'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -195,6 +197,21 @@ citations:
   quote: But today, I've got over 500 social housing rooms. But here's the thing. It wasn't always like that. I had to go out there and really build the relationships.
   verified: true
   score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 06:00
+  quote: And I would highly recommend if you're able to do this yourself because this is where you can build relationships. Remember, property is a relationship based game.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 06:00
+  quote: So, you want to be able to build relationships and you want the council, the surveyors, you want everyone to understand and know who you are and build that relationship effectively.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 06:00
+  quote: But if you're not available, guess what? Viewer can also do this inspection on your behalf as well.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -202,7 +219,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T13:54:02Z'
 ---
 
 ## Description

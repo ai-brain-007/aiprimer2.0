@@ -5,11 +5,13 @@ type: concept
 name: Work on the business, not in the business
 aliases:
 - Working on the business as opposed to in the business
+- Let go to grow
+- On the business, not in it
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2026-01-08'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: 01:00
@@ -21,6 +23,16 @@ citations:
   quote: And I found that that's a much better a much more productive way to grow.
   verified: true
   score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 08:00
+  quote: Not only is this a cost- effective option, it's also a better use of your time so that you can spend your time working on the business as opposed to in the business.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 08:00
+  quote: I want you to understand the power of leverage, the power of letting go to grow and expanding your team and using third parties to get deals boxed off more quickly.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -28,7 +40,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:54:02Z'
 ---
 
 ## Description

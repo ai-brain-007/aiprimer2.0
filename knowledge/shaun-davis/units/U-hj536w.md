@@ -7,11 +7,21 @@ aliases:
 - The skill of leverage
 - 'Leverage: get yourself a VA'
 - Get yourself a VA
+- Leverage beats the time problem
+- Leverage
+- Letting go to grow
+- The three leverage questions
+- Delegate, automate, document
+- A busy life forces leverage from day one
+- The second mindset shift
+- Position of power from day one
+- Leverage cost benchmarks
+- What a VA and a viewing cost
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2025-09-29'
+last_seen: '2026-01-08'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '26:01'
@@ -43,6 +53,56 @@ citations:
   quote: First one is leverage. So, you want to get yourself a VA.
   verified: true
   score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 02:01
+  quote: You cannot scale a property business alone. Not with a limited time, not with a full-time job, and definitely not if you're trying to learn the industry. Leverage is how you beat the time problem. Leverage is how you build momentum faster.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 02:01
+  quote: The moment you start leveraging properly, your entire schedule opens up.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 08:00
+  quote: I want you to understand the power of leverage, the power of letting go to grow and expanding your team and using third parties to get deals boxed off more quickly.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 02:01
+  quote: Ask yourself these three questions. What can I delegate? What can I automate? And what can I document once and hand over to someone else?
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 09:01
+  quote: The second mindset shift is when you've already got a job, especially a highressured job like what I had. It makes you work differently. It puts you in a position where you have no choice but to leverage.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: '10:01'
+  quote: processes in place from day one to gear your business up for scaling as opposed to someone who has all the time in the world and they're trying to do every single thing themselves. That can really hold you back.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: '10:01'
+  quote: So, I think if you've got a busy life already, it actually puts you in a position of power from day one.
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 03:00
+  quote: You can hire a full-time VA for anywhere from 200 to 600 a month
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 03:00
+  quote: And that VA honestly can save you 10 to 15 hours every single week
+  verified: true
+  score: 100
+- resource_id: R-YT-S47NRKnb9Ic
+  location: 06:00
+  quote: And this costs around 35 to 40 per viewing. So, it's very cost effective, especially if you're 2 to three hours away from the property.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -50,7 +110,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T13:54:02Z'
 ---
 
 ## Description
