@@ -2,8 +2,25 @@
 
 This repository is the brain of a chat-driven knowledge pipeline. The user pastes resources
 (YouTube links, PDFs, Word/Excel files, screenshots, video files) into a Claude Code session;
-the **ingestion agent** stores them in Google Drive and logs them; the **summary agent** turns them
-into deduplicated, fact-checked, per-author knowledge summaries.
+the **ingestion agent** stores them and logs them; the **summary agent** turns them into deduplicated,
+fact-checked, per-author knowledge cards; a **learning layer** builds per-stage study material from the cards.
+
+> **Read `docs/working-agreement.md` first.** It is the project's memory: who the owner is and how to talk to
+> them, the security rules, the decided v2 architecture (Backblaze B2 for files, Notion for pages and logs, three
+> layers), the state of the build, the decision log and the open points.
+>
+> **Status (2026-09-27):** the code in this repo implements v1 (Google Drive / Sheets / Docs) and was never run
+> live. v2 (Backblaze + Notion) is decided and not yet built. Do not run `/setup`, `/ingest` or `/summarize`
+> against live accounts until v2 lands; the sections below describe v1 and stay valid for the offline tests.
+
+## How we work (summary; details in the working agreement)
+
+- The owner is non-technical and steers from the chat: plain language, click-by-click steps, diagrams on request,
+  honest and critical recommendations. Files dropped into the chat are the normal input.
+- Secrets exist only in the cloud environment (API credentials box or variables). Never paste, echo, log, store
+  or commit one; a key pasted in the chat must be rotated.
+- All AI steps run on the session model; helpers are never downgraded.
+- Every decision goes into the decision log with a date; update the working agreement when something changes.
 
 ## The four skills (how the user talks to the system)
 
@@ -29,7 +46,7 @@ Read the skill file in `.claude/skills/<name>/SKILL.md` before running any of th
 - **One model for every AI step**: helpers run on the session's model; never pass a `model` override
   to the Agent tool. The user decided this; do not downgrade helpers for cost.
 
-## Where things live
+## Where things live (v1 code; v2 targets are in the working agreement)
 
 - Control panel (registry, taxonomy, accounts, authors, summaries, jobs): the Google Sheet whose id is
   `AIPRIMER_CONTROL_SHEET_ID`, owned by the summary Gmail account. Tabs and columns: `pipeline/models.py`.
@@ -77,7 +94,7 @@ python -m pytest -q                                    # all tests use in-memory
   (Custom network access) and the Apify token stored as an API credential for that host.
 - System tools used when present: `tesseract`, `pdftoppm`, `pandoc`, `ffprobe`.
 
-## Google credentials (two modes, chosen per account row)
+## Google credentials (v1 only; dropped in v2)
 
 - **Refresh token (primary, for the Gmail accounts).** `GOOGLE_REFRESH_TOKEN_<ACCOUNT>` +
   `GOOGLE_OAUTH_CLIENT_ID/SECRET`; the pipeline acts as that Gmail account and uses its quota. Keys are obtained
