@@ -96,6 +96,7 @@ For one stage, in dialogue with you: a brief, procedures, practice, lists, scrip
 - Keys and passwords live only in the cloud environment, never in the chat, a file or a page.
 - Storage stays free: a full account rolls over to the next one. Nothing is deleted.
 - All AI work runs on the same model as your session. Helpers are never downgraded to a cheaper one.
+- This page and the Command guide are regenerated from the repository whenever the pipeline changes. A change to the pipeline is not published without the two pages being checked and refreshed.
 
 ## Words used here
 

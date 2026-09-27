@@ -103,6 +103,12 @@ be readable by the agent through an API.
   is written for that. The Google variables can be removed once v2 lands.
 - IDs are permanent: `T-…` taxonomy nodes, `A-…` authors, `R-YT-<video id>` / `R-F-<fingerprint>` resources,
   `U-…` cards, `b2-000N` storage accounts.
+- The owner's reference pages in Notion ("Command guide", "How the pipeline works") are part of every change that
+  alters a command, a skill, the process or a visible rule: edit `docs/notion/*.md` in the same commit and republish.
+  The gate `scripts/hooks/guide_gate.py` (run with `--check` before each push, or registered by the owner as a
+  PreToolUse hook on Bash) fails a push that changes `pipeline/`, `.claude/skills/` or `config/` without touching
+  `docs/notion/` unless a commit message says `Guide: unchanged`; when `docs/notion/` changed it runs
+  `python -m pipeline doc guide` first and holds the push if publishing fails.
 
 ## 5. State of the build (2026-09-27)
 
@@ -165,6 +171,11 @@ be readable by the agent through an API.
 - 2026-09-27: owner-facing documentation lives in Notion next to the databases: "Command guide" and "How the pipeline
   works", generated from `docs/notion/*.md` by `python -m pipeline doc guide` (idempotent, refreshed in place).
   The owner asked for a page to refer to; the agent keeps it current.
+- 2026-09-27: the owner asked that the two reference pages be updated every time the pipeline changes, without
+  fail. Decided: a gate, not a reminder (rule 11 of CLAUDE.md, script `scripts/hooks/guide_gate.py`). A push that
+  changes the pipeline without the pages fails until the pages are updated or a commit states `Guide: unchanged`; a
+  push that changes the pages republishes them first. The agent runs the gate before every push; registering it as
+  a Claude Code hook (so it runs automatically) is a settings change the owner makes, see README → Setup.
 - 2026-09-27: the first live `/setup` surfaced three defects, fixed the same day. (1) Backblaze answered the empty
   folder markers with an HTML 400: `requests` adds `Transfer-Encoding: chunked` to an empty file body next to
   `Content-Length: 0`; zero-byte uploads now go as bytes. (2) The environment installs `apify-client` 3.x, which

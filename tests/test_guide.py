@@ -78,3 +78,123 @@ def test_the_real_reference_documents_publish_cleanly(tmp_path, monkeypatch):
         text = fake.page_plain_text(page["page_id"])
         assert "—" not in body, "style: no em dashes in owner-facing text"
         assert "ingest" in text.lower() and "notion" in text.lower()
+
+
+# --------------------------------------------------------------------------- the pages describe the current pipeline
+
+
+def test_reference_pages_cover_the_skills_the_tables_and_the_cost_gate():
+    from pipeline.config import load_settings
+    from pipeline.models import TAB_MODELS
+
+    commands = (REPO_ROOT / GUIDE_DIR / "10-command-guide.md").read_text(encoding="utf-8")
+    how = (REPO_ROOT / GUIDE_DIR / "20-how-it-works.md").read_text(encoding="utf-8")
+    skills = sorted(p.name for p in (REPO_ROOT / ".claude" / "skills").iterdir() if p.is_dir())
+    assert skills and all(f"`/{s}" in commands for s in skills), skills
+    assert all(f"| {table} |" in how for table in TAB_MODELS), list(TAB_MODELS)
+    dollars = f"{int(load_settings(repo_root=REPO_ROOT).config['apify']['cost_confirm_usd'])} dollars"
+    assert dollars in commands and dollars in how
+
+
+# --------------------------------------------------------------------------- the push gate (scripts/hooks/guide_gate.py)
+
+import json
+import os
+import subprocess
+import sys
+
+GATE = REPO_ROOT / "scripts" / "hooks" / "guide_gate.py"
+
+
+def _git(cwd, *args):
+    return subprocess.run(["git", *args], cwd=cwd, check=True, capture_output=True, text=True).stdout
+
+
+def _repo(tmp_path):
+    """A working clone with an `origin` that already holds the first commit on `main`."""
+    origin = tmp_path / "origin.git"
+    subprocess.run(["git", "init", "-q", "--bare", str(origin)], check=True)
+    work = tmp_path / "work"
+    work.mkdir()
+    _git(work, "init", "-q")
+    _git(work, "checkout", "-q", "-b", "main")
+    _git(work, "config", "user.email", "t@example.com")
+    _git(work, "config", "user.name", "t")
+    for rel, text in (("pipeline/x.py", "x = 1\n"), ("docs/notion/10-command-guide.md", "# Command guide\n\nold\n"), ("tests/test_x.py", "def test(): pass\n")):
+        (work / rel).parent.mkdir(parents=True, exist_ok=True)
+        (work / rel).write_text(text)
+    _git(work, "add", ".")
+    _git(work, "commit", "-q", "-m", "init")
+    _git(work, "remote", "add", "origin", str(origin))
+    _git(work, "push", "-q", "-u", "origin", "main")
+    return work
+
+
+def _gate(work, command="git push -u origin main", tool="Bash", check=False, **env):
+    payload = {"tool_name": tool, "tool_input": {"command": command}}
+    e = {k: v for k, v in os.environ.items() if k not in ("AIPRIMER_NOTION_PAGE_ID", "AIPRIMER_GUIDE_PUBLISH_CMD")}
+    e.update(env)
+    args = [sys.executable, str(GATE)] + (["--check"] if check else [])
+    return subprocess.run(args, cwd=work, input=json.dumps(payload), capture_output=True, text=True, env=e)
+
+
+def _commit(work, rel, text, message):
+    (work / rel).write_text(text)
+    _git(work, "add", rel)
+    _git(work, "commit", "-q", "-m", message)
+
+
+def test_gate_in_hook_mode_ignores_other_commands_and_tools(tmp_path):
+    work = _repo(tmp_path)
+    _commit(work, "pipeline/x.py", "x = 2\n", "change the pipeline")
+    for command in ("git status", "python -m pytest -q", "git commit -m x"):
+        r = _gate(work, command)
+        assert r.returncode == 0 and r.stdout == "" and r.stderr == "", command
+    assert _gate(work, tool="Read").returncode == 0
+    assert _gate(work).returncode == 2  # the same state, but a push
+
+
+def test_gate_blocks_a_pipeline_change_without_a_guide_update_until_marked_or_fixed(tmp_path):
+    work = _repo(tmp_path)
+    _commit(work, "tests/test_x.py", "def test(): assert True\n", "tests only")
+    assert _gate(work, check=True).returncode == 0  # tests are not the pipeline
+    _commit(work, "pipeline/x.py", "x = 2\n", "change the pipeline")
+    blocked = _gate(work, check=True)
+    assert blocked.returncode == 2 and "reference pages" in blocked.stderr and "pipeline/x.py" in blocked.stderr and "Guide: unchanged" in blocked.stderr
+    # in hook mode a push inside a compound command with retries is still a push
+    assert _gate(work, "for d in 0 2; do git push -u origin main && break; sleep $d; done").returncode == 2
+    _commit(work, "pipeline/y.py", "y = 1\n", "more pipeline\n\nGuide: unchanged, internal refactor")
+    ok = _gate(work, check=True)
+    assert ok.returncode == 0 and "nothing the owner sees has changed" in ok.stderr
+    # the marker is per push range: a later pipeline commit without it is blocked again
+    _git(work, "push", "-q", "origin", "main")
+    _commit(work, "pipeline/z.py", "z = 1\n", "again")
+    assert _gate(work, check=True).returncode == 2
+    _commit(work, "docs/notion/10-command-guide.md", "# Command guide\n\nnew\n", "guide: describe z")
+    allowed = _gate(work, check=True)  # Notion mode off here: allowed with a note, nothing to publish from
+    assert allowed.returncode == 0 and "Notion mode is off" in allowed.stderr
+
+
+def test_gate_republishes_changed_guides_before_the_push_and_holds_it_when_publishing_fails(tmp_path):
+    work = _repo(tmp_path)
+    _commit(work, "docs/notion/10-command-guide.md", "# Command guide\n\nnew\n", "guide: wording")
+    page = {"AIPRIMER_NOTION_PAGE_ID": "0123456789abcdef0123456789abcdef"}
+    ok_cmd = f"{sys.executable} -c \"import json; print(json.dumps({{'ok': True, 'pages': [{{'title': 'Command guide', 'created': False}}]}}))\""
+    r = _gate(work, check=True, AIPRIMER_GUIDE_PUBLISH_CMD=ok_cmd, **page)
+    assert r.returncode == 0 and "republished" in r.stderr and "Command guide (refreshed)" in r.stderr
+    bad_cmd = f"{sys.executable} -c \"import json; print(json.dumps({{'ok': False, 'error': 'NotionError: 401 unauthorized'}}))\""
+    r = _gate(work, check=True, AIPRIMER_GUIDE_PUBLISH_CMD=bad_cmd, **page)
+    assert r.returncode == 2 and "push is held" in r.stderr and "401 unauthorized" in r.stderr
+    crash_cmd = f"{sys.executable} -c \"import sys; sys.stderr.write('Traceback: boom\\n'); sys.exit(1)\""
+    r = _gate(work, check=True, AIPRIMER_GUIDE_PUBLISH_CMD=crash_cmd, **page)
+    assert r.returncode == 2 and "boom" in r.stderr
+
+
+def test_gate_on_a_new_branch_compares_against_the_remote_default_branch(tmp_path):
+    work = _repo(tmp_path)
+    _git(work, "remote", "set-head", "origin", "main")
+    _git(work, "checkout", "-q", "-b", "claude/feature")
+    _commit(work, "pipeline/x.py", "x = 3\n", "feature")
+    assert _gate(work, "git push -u origin claude/feature").returncode == 2
+    _commit(work, "docs/notion/20-how-it-works.md", "# How the pipeline works\n\nx is 3\n", "guide")
+    assert _gate(work, "git push -u origin claude/feature").returncode == 0

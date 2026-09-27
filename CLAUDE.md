@@ -55,8 +55,8 @@ Read the skill file in `.claude/skills/<name>/SKILL.md` before running any of th
   Authors database (same link every version).
 - Working files: `.cache/` (downloads, Apify responses) and `.work/<author>/` (chunks, helper outputs). Both gitignored.
 - Reference pages for the owner ("Command guide", "How the pipeline works"): written in `docs/notion/*.md`, published as
-  child pages of the "AI Primer" page by `python -m pipeline doc guide`. Update the markdown and republish whenever a
-  command or the process changes.
+  child pages of the "AI Primer" page by `python -m pipeline doc guide`. Rule 11: update them with every change the
+  owner would notice; the gate `scripts/hooks/guide_gate.py` checks it before each push.
 - Legacy v1 (Google Drive / Sheets / Docs) code remains in `pipeline/drive.py`, `sheets.py`, `docs.py`,
   `google_auth.py`; it is used only when no v2 variable is set and is covered by the offline tests.
 
@@ -79,6 +79,14 @@ Read the skill file in `.claude/skills/<name>/SKILL.md` before running any of th
    Commit nothing else unless the user asks.
 10. **Storage stays free by rollover.** A free Backblaze account refuses uploads past 10 GB; the pipeline marks
     it full and uses the next `b2-000N` row. Never delete files to make room.
+11. **The owner's reference pages stay current.** "Command guide" and "How the pipeline works" (`docs/notion/*.md`,
+    published by `python -m pipeline doc guide`) must describe the pipeline as it is. Whenever you change a command,
+    a skill, the process or a rule the owner sees, update the markdown in the same commit and republish before you
+    push. Before every `git push`, run the gate yourself: `python3 scripts/hooks/guide_gate.py --check`. It fails
+    when the push changes `pipeline/`, `.claude/skills/` or `config/` without touching `docs/notion/` (unless a
+    commit message in the push says `Guide: unchanged`, written only after you checked the pages), and it
+    republishes the pages when `docs/notion/` changed. When the owner has registered it as a PreToolUse hook in
+    `.claude/settings.json`, it runs on its own before each push.
 
 ## Useful commands
 
@@ -93,6 +101,7 @@ python -m pipeline resource move <R-id or title part> --stage "<path>"
 python -m pipeline summarize plan --author <A-id> --pretty
 python -m pipeline doc comments --author <A-id> --pretty
 python -m pipeline doc guide --pretty                  # republish docs/notion/*.md as reference pages under "AI Primer"
+python3 scripts/hooks/guide_gate.py --check            # before git push: guides updated? republished? (rule 11)
 python -m pytest -q                                    # all tests use in-memory fakes; no network
 ```
 
