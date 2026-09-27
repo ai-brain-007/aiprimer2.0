@@ -671,13 +671,16 @@ class B2StorageClient:
             entries = self._files_under("", recursive=True)
         return [self._file_dict(e) for e in entries if (e.get("info") or {}).get(key) == value]
 
-    def upload(self, path: Path, name: str, parent_id: str, app_properties: dict[str, str] | None = None, mime_type: str | None = None, convert_to: str | None = None) -> dict:
-        """Upload, or return the existing file when one with the same resource_id+role info is already in the folder."""
+    def upload(self, path: Path, name: str, parent_id: str, app_properties: dict[str, str] | None = None, mime_type: str | None = None, convert_to: str | None = None, replace: bool = False) -> dict:
+        """Upload, or return the existing file when one with the same resource_id+role info is already in the folder.
+        With `replace`, such a file is deleted first and the new content stored (a forced re-ingest)."""
         if app_properties and app_properties.get("resource_id"):
             role = app_properties.get("role", "")
             for f in self.find_by_app_property("resource_id", app_properties["resource_id"], parent_id):
                 if (f.get("appProperties") or {}).get("role", "") == role:
-                    return f
+                    if not replace:
+                        return f
+                    self.b2.delete(f["id"], f["file_id"])
         mime = mime_type or mimetypes.guess_type(str(path))[0] or OCTET
         key = self._prefix(parent_id) + _check_name(name, "file")
         return self._file_dict(self.b2.put(Path(path), key, mime, _str_info(app_properties)))

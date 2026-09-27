@@ -282,13 +282,13 @@ class Ingestor:
                         if old.get("role") == "raw" and old.get("derived") == "audio":
                             drive.backend.update_file(f["id"], app_properties={**old, "role": "raw-audio"})
                             resource.notes = (resource.notes + " " if resource.notes else "") + "full video stored on request (--keep-full); the audio track is kept too"
-                meta = drive.upload(upload_path, raw_name, folder.folder_id, props)
+                meta = drive.upload(upload_path, raw_name, folder.folder_id, props, replace=force)
                 if store_derived:
                     frame_ids = []
                     for role, p, mime in extraction.derived_files:
                         if role.startswith("frame:"):
                             fname = f"{Path(raw_name).stem} - {role.replace(':', '-')}{Path(p).suffix}"
-                            fmeta = drive.upload(p, fname, folder.folder_id, {"resource_id": resource.resource_id, "role": role, "aiprimer": "1"}, mime_type=mime)
+                            fmeta = drive.upload(p, fname, folder.folder_id, {"resource_id": resource.resource_id, "role": role, "aiprimer": "1"}, mime_type=mime, replace=force)
                             frame_ids.append(fmeta.get("id", ""))
                     resource.data_file_ids = frame_ids
                     original_mb = round(local_path.stat().st_size / 1e6, 1) if local_path and local_path.exists() else 0
@@ -347,7 +347,7 @@ class Ingestor:
         text_name = extracted_filename(resource, author_name, int(self.settings.drive.get("max_title_chars", 80)))
         extra = {"toc": extraction.toc, "warnings": extraction.warnings, "source_kind": kind, "transcript_kind": extraction.transcript_kind, "extracted_at": now_iso()}
         text_path = write_extracted_markdown(workdir / text_name, resource, extra, extraction.text)
-        tmeta = drive.upload(text_path, text_name, folder.folder_id, {"resource_id": resource.resource_id, "role": "text", "aiprimer": "1"}, mime_type=TEXT_MIME)
+        tmeta = drive.upload(text_path, text_name, folder.folder_id, {"resource_id": resource.resource_id, "role": "text", "aiprimer": "1"}, mime_type=TEXT_MIME, replace=force)
         resource.text_file_id = tmeta.get("id", "")
         resource.text_file_url = tmeta.get("webViewLink") or file_url(resource.text_file_id)
         data_ids = []

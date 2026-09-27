@@ -138,3 +138,28 @@ def test_full_summary_flow(settings, fake_sheets, fake_drive, fake_apify, tmp_pa
     assert st["units"] == 4 and st["version"] == 2 and st["pending"] == []
     # third run: nothing pending
     assert sc.plan(ctx, "A-teddy-atlas")["proposed"] == []
+
+
+def test_prepare_refreshes_its_local_text_copy_when_the_resource_was_re_ingested(settings, fake_sheets, fake_drive, fake_apify, tmp_path, monkeypatch):
+    """Seen live: a video re-ingested with --force after a transcript retry kept an empty local copy from the first attempt."""
+    ctx, reg, fd = build(settings, fake_sheets, fake_drive, fake_apify, tmp_path, monkeypatch)
+    first = sc.prepare(ctx, "A-teddy-atlas", ["R-YT-bbbbbbbbbbb"])
+    chunk = Path(first["resources"][0]["chunks"][0]["path"]).read_text(encoding="utf-8")
+    assert "The jab is the most important punch" in chunk and "counter with the lead hook" not in chunk
+    # the resource is re-ingested: a new text file, a new size, a later update
+    new_text = TEXT_2021.replace("counter with the rear hand", "counter with the lead hook")
+    p = tmp_path / "bbb-v2.md"
+    p.write_text(new_text, encoding="utf-8")
+    drive = ctx.drive_by_id("raw01")
+    meta = drive.upload(p, "R-YT-bbbbbbbbbbb.v2.extracted.md", drive.ensure_folder(None, "AI Primer Raw")["id"], {"resource_id": "R-YT-bbbbbbbbbbb", "role": "text"})
+    row = reg.resource("R-YT-bbbbbbbbbbb")
+    row.text_file_id, row.extracted_chars, row.updated_at = meta["id"], len(new_text), "2026-09-27T12:00:00Z"
+    reg.upsert_resource(row)
+    second = sc.prepare(ctx, "A-teddy-atlas", ["R-YT-bbbbbbbbbbb"])
+    chunk2 = Path(second["resources"][0]["chunks"][0]["path"]).read_text(encoding="utf-8")
+    assert "counter with the lead hook" in chunk2 and second["resources"][0]["text_chars"] > 0
+    # unchanged row: the local copy is reused, no new download
+    downloads_before = sum(1 for c in getattr(fd, "calls", []) if "download" in str(c).lower())
+    sc.prepare(ctx, "A-teddy-atlas", ["R-YT-bbbbbbbbbbb"])
+    downloads_after = sum(1 for c in getattr(fd, "calls", []) if "download" in str(c).lower())
+    assert downloads_after == downloads_before

@@ -185,3 +185,25 @@ def test_video_without_captions_is_ingested_with_the_actor_reason_as_warning(set
     calls_before = len([c for c in fake_apify.calls if c[0] == "supreme_coder/youtube-transcript-scraper"])
     Ingestor(ctx).run("https://www.youtube.com/watch?v=signinwall1", "Body / Olympic Spartan / Boxing", force=True)
     assert len([c for c in fake_apify.calls if c[0] == "supreme_coder/youtube-transcript-scraper"]) == calls_before + 1
+
+
+def test_forced_reingest_replaces_the_stored_text_instead_of_keeping_the_old_file(settings, fake_sheets, fake_drive, fake_apify, tmp_path):
+    """Seen live: a video re-ingested with --force after a transcript retry kept its first, empty text file in storage,
+    because uploads are idempotent per resource and role."""
+    fake_apify.responses["apidojo/youtube-scraper"] = [{"id": "replaceme01", "title": "Later captions", "channelName": "Teddy Atlas", "date": "2021-06-10T00:00:00Z", "duration": "10:00"}]
+    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = [{"videoId": "replaceme01", "errorCode": "TranscriptNotFound", "error": "The video is unplayable for the following reason: Sign in to confirm you're not a bot"}]
+    ctx, reg, drive, root, inbox = build_ctx(settings, fake_sheets, fake_drive, fake_apify)
+    ing = Ingestor(ctx)
+    ing.run("https://www.youtube.com/watch?v=replaceme01", "Body / Olympic Spartan / Boxing")
+    first = reg.resource("R-YT-replaceme01")
+    assert not first.extracted_chars and "no transcript" in first.warnings[0]
+    old_text_id = first.text_file_id
+    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = [{"videoId": "replaceme01", "transcript": [{"start": 0, "dur": 3, "text": "Keep the rear hand high and pivot."}], "language": "en"}]
+    r = ing.run("https://www.youtube.com/watch?v=replaceme01", "Body / Olympic Spartan / Boxing", force=True)
+    row = reg.resource("R-YT-replaceme01")
+    assert r["status"] == "ingested" and row.extracted_chars and row.warnings == []
+    stored = drive.download(row.text_file_id, tmp_path / "stored.md").read_text(encoding="utf-8")
+    assert "Keep the rear hand high and pivot." in stored, "the stored text version carries the new transcript"
+    texts = [f for f in drive.find_by_app_property("resource_id", "R-YT-replaceme01") if (f.get("appProperties") or {}).get("role") == "text"]
+    assert [f["id"] for f in texts] == [row.text_file_id], "exactly one text file is left for the resource"
+    assert old_text_id != row.text_file_id

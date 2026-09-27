@@ -79,15 +79,26 @@ def _text_path(ctx: AppContext, r: Resource) -> Path:
     return ctx.settings.cache_dir / "text" / f"{r.resource_id}.extracted.md"
 
 
+def _text_stamp(r: Resource) -> str:
+    """What version of the text the local copy holds. A re-ingested resource (new text file, new size or a later
+    update) gets a new stamp, so the stale copy is replaced (seen live: a transcript fetched on a retry was ignored
+    because the copy from the first, empty attempt was still there)."""
+    return f"{r.text_file_id}|{r.extracted_chars}|{r.updated_at}"
+
+
 def _fetch_text(ctx: AppContext, r: Resource) -> tuple[dict[str, Any], str]:
     path = _text_path(ctx, r)
-    if not path.exists():
+    stamp = path.with_suffix(path.suffix + ".stamp")
+    fresh = path.exists() and stamp.exists() and stamp.read_text(encoding="utf-8") == _text_stamp(r)
+    if not fresh:
         if not r.text_file_id:
             raise FileNotFoundError(f"{r.resource_id} has no text version (status {r.status})")
         drive = ctx.drive_by_id(r.account_id)
         if drive is None:
             raise RuntimeError(f"no credentials for account {r.account_id}")
+        path.parent.mkdir(parents=True, exist_ok=True)
         drive.download(r.text_file_id, path)
+        stamp.write_text(_text_stamp(r), encoding="utf-8")
     return read_extracted_markdown(path)
 
 

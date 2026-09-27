@@ -211,7 +211,10 @@ that day was archived. Miro remains the option if the agent must read a board th
   `R-YT-cGXUmBexdJo`, `R-YT-yvgUe4VK5lk`) and wait for the audio-transcription phase. Two of the first five
   failures were passing problems (YouTube's sign-in wall, unparsable data) that a retry fixed. The transcript
   actor's reason is now kept on the row ("no transcript: ..."), only definite no-caption answers are cached,
-  passing failures are asked again on the next run.
+  passing failures are asked again on the next run. Two more defects surfaced when the summary agent prepared the
+  texts: a forced re-ingest kept the old stored files (uploads were idempotent per resource and role; `--force`
+  now replaces them), and the summary step reused a stale local copy of the text (the copy is now stamped with
+  the row's file id, size and update time and refreshed when they change).
 - 2026-09-27: the owner asked that the two reference pages be updated every time the pipeline changes, without
   fail. Decided: a gate, not a reminder (rule 11 of CLAUDE.md, script `scripts/hooks/guide_gate.py`). A push that
   changes the pipeline without the pages fails until the pages are updated or a commit states `Guide: unchanged`; a

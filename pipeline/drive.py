@@ -271,13 +271,16 @@ class DriveClient:
             q += f" and '{_q_escape(parent_id)}' in parents"
         return self.backend.list_files(q)
 
-    def upload(self, path: Path, name: str, parent_id: str, app_properties: dict[str, str] | None = None, mime_type: str | None = None, convert_to: str | None = None) -> dict:
-        """Upload, or return the existing file when one with the same resource_id+role label is already in the folder."""
+    def upload(self, path: Path, name: str, parent_id: str, app_properties: dict[str, str] | None = None, mime_type: str | None = None, convert_to: str | None = None, replace: bool = False) -> dict:
+        """Upload, or return the existing file when one with the same resource_id+role label is already in the folder.
+        With `replace`, such a file is trashed first and the new content stored (a forced re-ingest)."""
         if app_properties and app_properties.get("resource_id"):
             role = app_properties.get("role", "")
             for f in self.find_by_app_property("resource_id", app_properties["resource_id"], parent_id):
                 if (f.get("appProperties") or {}).get("role", "") == role:
-                    return f
+                    if not replace:
+                        return f
+                    self.backend.trash_file(f["id"])
         mime = mime_type or mimetypes.guess_type(str(path))[0] or "application/octet-stream"
         return self.backend.upload_file(Path(path), name, parent_id, mime, app_properties, convert_to=convert_to)
 
