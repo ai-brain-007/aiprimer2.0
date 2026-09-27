@@ -152,7 +152,9 @@ that day was archived. Miro remains the option if the agent must read a board th
 
 1. Live smoke test, continued. `/setup` passed on 2026-09-27 (fixes in the decision log). Still to do: a temporary
    stage, one short public video, `/summarize`, open the Notion page, comment, republish, clean up.
-2. First real example: one boxing coach, one jab video, one author page. Style check against the sample.
+2. First real example, in progress: Shaun Davis (25 videos ingested into Money / Property Investor / Social
+   Housing on 2026-09-27); next `/summarize A-shaun-davis`, then the owner reads the page and the style is
+   checked against the sample.
 3. Pictures in pages (key frames and screenshots as image blocks) and the Cards database with one page per card.
 4. Transcription of stored audio (video files dropped into the chat).
 5. Layer 3: `/learn <stage>` dialogue that builds the Stage brief and its artefacts (Stages database).
@@ -205,9 +207,11 @@ that day was archived. Miro remains the option if the agent must read a board th
   written by property id (one `retrieve_database` per table, cached); the fake Notion assigns ids like the API
   and resolves ids first, so this class of bug fails offline from now on. Result: 25 rows ingested, author
   `A-shaun-davis` created, 50 objects in the bucket (details JSON + transcript per video, 4.6 MB), Apify cost 3
-  cents. 20 videos have auto captions; 5 came back without: one has subtitles disabled, one hit YouTube's sign-in
-  wall, one the actor could not parse. The transcript actor's reason is now kept on the row ("no transcript:
-  ..."), only definite no-caption answers are cached, passing failures are asked again on the next run.
+  cents. After two retries 22 videos have auto captions; 3 have subtitles disabled (`R-YT-0hlETEoAQDI`,
+  `R-YT-cGXUmBexdJo`, `R-YT-yvgUe4VK5lk`) and wait for the audio-transcription phase. Two of the first five
+  failures were passing problems (YouTube's sign-in wall, unparsable data) that a retry fixed. The transcript
+  actor's reason is now kept on the row ("no transcript: ..."), only definite no-caption answers are cached,
+  passing failures are asked again on the next run.
 - 2026-09-27: the owner asked that the two reference pages be updated every time the pipeline changes, without
   fail. Decided: a gate, not a reminder (rule 11 of CLAUDE.md, script `scripts/hooks/guide_gate.py`). A push that
   changes the pipeline without the pages fails until the pages are updated or a commit states `Guide: unchanged`; a
