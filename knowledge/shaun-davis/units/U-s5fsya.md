@@ -9,11 +9,13 @@ aliases:
 - What the company offers the landlord
 - Agents refuse company lets through lack of education
 - Company let objection
+- Leasing to a company beats renting to a tenant
+- Lease to a company, not a tenant
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-06-09'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '20:00'
@@ -60,6 +62,21 @@ citations:
   quote: So, they need to be on board to be able to explain to the landlord uh to explain the benefits. And then once you find an agent that can do that, then it's a game changer.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 04:00
+  quote: So from the from the landlord's perspective to lease a property to a company, it's way better.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 04:00
+  quote: They've made it extremely favorable for the tenants.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 03:01
+  quote: And for the landlord, one of the main benefits is the fact that they're leasing their
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -67,7 +84,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

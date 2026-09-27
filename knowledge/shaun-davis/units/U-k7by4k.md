@@ -5,11 +5,13 @@ type: list
 name: Tenant types in social housing
 aliases:
 - Choose your tenant type first
+- Who social housing tenants are
+- The people councils need to house
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2025-09-29'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '1:18:00'
@@ -41,6 +43,21 @@ citations:
   quote: I've also got quite a few domestic violence houses as well so people that have been a victim of domestic violence I provide a safe house
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: '11:01'
+  quote: It might be a mother and daughter. It might be, you know, a vulnerable person
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: '11:01'
+  quote: or it might just be someone that's been made homeless.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: '11:01'
+  quote: So, it's a range of different people.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -48,7 +65,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:24Z'
-updated_at: '2026-09-27T13:37:24Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

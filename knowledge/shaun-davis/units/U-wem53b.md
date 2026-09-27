@@ -6,11 +6,13 @@ name: Negotiating away the deposit
 aliases:
 - No deposit
 - Work backwards from the deposit
+- 'Deposit response: this is not a normal tenancy'
+- Why we do not pay a deposit
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-07-08'
-last_seen: '2025-07-08'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-VPA30_DJvZs
   location: '19:01'
@@ -32,6 +34,21 @@ citations:
   quote: A lot of landlords haven't let in this way before. So a lot of landlords they'll treat you as a normal tenant.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 03:01
+  quote: But it's very important that when you're doing the strategy you remind the landlord that this is not a normal teny.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 03:01
+  quote: We're guarantee the rent. We're covering maintenance and we're also guaranteeing that you won't have any voids.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 03:01
+  quote: I prefer to put that money into the property and also have that money in in my bank account so I can have it as a buffer if any circumstances occur that are going to be costly.
+  verified: true
+  score: 100
 versions:
 - date: '2025-07-08'
   resource_id: R-YT-VPA30_DJvZs
@@ -39,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:15:49Z'
-updated_at: '2026-09-27T13:15:49Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

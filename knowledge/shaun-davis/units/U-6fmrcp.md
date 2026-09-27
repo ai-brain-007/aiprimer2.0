@@ -5,11 +5,13 @@ type: claim
 name: Zero tenant marketing needed
 aliases:
 - Zero tenant marketing
+- 'No tenant marketing: tenants are ready to move in'
+- No tenant marketing
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-12-14'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 09:01
@@ -36,6 +38,21 @@ citations:
   quote: unlike other strategies where you have to get the property first then go out and find the tenant, this strategy you have the tenant up front.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 05:00
+  quote: The game changer with um social housing is that there's no tenant marketing involved.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 05:00
+  quote: it gives me the utmost confidence in taking that property on, taking multiple properties on at one go because I know that the tenants are already ready to move in.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 05:00
+  quote: So, that gives me confidence, it gives the landlord confidence and ultimately it makes the deal much better.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -43,7 +60,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

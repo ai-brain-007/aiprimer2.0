@@ -8,11 +8,14 @@ aliases:
 - Council incentives replacing nightly rates
 - Upfront incentive
 - Longer-form temporary accommodation
+- Council incentives
+- Incentive payments
+- Cash up front from councils
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-09-29'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '36:01'
@@ -54,6 +57,26 @@ citations:
   quote: a lot of councils are doing the a model and that's what that's what a deal's done now.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: '10:01'
+  quote: They need to incentivize landlords. So what they do, they will pay you an incentive. Not all councils do this, but a lot of councils are doing it.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: '10:01'
+  quote: The incentives are based on a deposit up front, a cash incentive, and
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: '11:01'
+  quote: they usually they pay even up to four months in advance some councils.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: '11:01'
+  quote: So, you've got all the cash flow up front and that allows you to then scale and put that into other deals as well.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -61,7 +84,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T13:37:24Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

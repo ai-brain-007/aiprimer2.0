@@ -8,11 +8,23 @@ aliases:
 - Three ways to find rent to rent deals
 - How to get involved in rent to rent
 - Rent-to-rent
+- Rent to rent social housing
+- Rent to social housing
+- 'Rent to rent vs rent to social housing: provider first'
+- Provider first
+- Two different strategies
+- Setting up a rent to social housing deal
+- A typical deal
+- How rent to rent works
+- Rent to rent is a low barrier to entry
+- Start with what you have
+- Getting stung by a rent to rent serviced accommodation deal
+- Rent to rent Airbnb deal
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-10-29'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '10:00'
@@ -64,6 +76,76 @@ citations:
   quote: because it means that you can then control the property. You can make money from the property without actually owning the property.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 00:00
+  quote: rent to rent social housing is a great way of making profit every single month from a property that you don't even own.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 05:00
+  quote: it's a profitable solution where you can lease a property. You can make money from a property that you don't own.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 01:00
+  quote: I've been doing this strategy since 2018. And honestly, it really has changed my life.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 00:00
+  quote: So with rent to rent, you get the property first. With rent to social housing, it's very very different. You find the social housing provider firstly.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 00:00
+  quote: So rent to rent and rent to social housing, two different strategies.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 00:00
+  quote: Once you've got this core information, you can then go out, find the property, lease it off
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 01:00
+  quote: the landlord, sign a commercial lease agreement, usually typically three to five years.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 01:00
+  quote: We lease the property, got a commercial lease. We now have the right to control that asset. We then lease it to the social house provider. We get paid every single month.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 06:01
+  quote: You then find a social housing provider, you lease it to the social housing provider, and you're getting paid money every single month.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 01:00
+  quote: what I love about rent to rent, it's a low barrier to entry.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 01:00
+  quote: I had £1,500 when I first started, so I couldn't go out there and buy a property.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 01:00
+  quote: And a lot of people just don't have 50, 60, £80,000 sitting down.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 08:01
+  quote: they've been stung by providers that are selling them a rentto- rent service accommodation deal. So, a rentto- rent Airbnb deal.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 08:01
+  quote: They've signed a contract. They've not read it through properly or had the right mentors or guidance. And guess what? They've end up losing a lot of money.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -71,7 +153,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:43:33Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

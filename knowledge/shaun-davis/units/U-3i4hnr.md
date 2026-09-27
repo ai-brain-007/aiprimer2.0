@@ -9,11 +9,12 @@ aliases:
 - Guaranteed rent
 - The landlord offer
 - Guaranteed rent offer
+- Guaranteed rent means government-backed contracts
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-08-14'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 09:01
@@ -55,6 +56,16 @@ citations:
   quote: So that in itself holds a lot of weight, hold a lot of power.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 04:00
+  quote: when we say guaranteed rent to a landlord, we literally are guaranteeing the rent. We have governmentbacked contracts.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 05:00
+  quote: it's not a case of we're leasing the property off you and we're going to hope to do something with it
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -62,7 +73,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:26:16Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

@@ -5,11 +5,13 @@ type: claim
 name: Perfection is procrastination, procrastination is lack of clarity
 aliases:
 - Clarity gives confidence
+- Lack of clarity causes procrastination
+- Clarity before action
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-04-09'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: '19:01'
@@ -21,6 +23,21 @@ citations:
   quote: Once people have clarity, they have the confidence to go out there and take that massive, imperfect, relentless action.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 07:00
+  quote: when people lack clarity that causes procrastination.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 07:00
+  quote: You want to have clarity so that you can execute with confidence.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 00:00
+  quote: When people lack clarity, that causes procrastination.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -28,7 +45,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

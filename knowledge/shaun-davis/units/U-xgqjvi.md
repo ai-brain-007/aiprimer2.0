@@ -6,11 +6,14 @@ name: No money down deal
 aliases:
 - Infinite ROI
 - No deposit, no upfront rent
+- Nothing up front
+- Three levers to structure a no money down deal
+- Delayed rent, furniture, no deposit
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-07-08'
-last_seen: '2025-07-08'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-VPA30_DJvZs
   location: 07:00
@@ -27,6 +30,36 @@ citations:
   quote: So, like you said, zero money in, it's an infinite return and investment.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 02:00
+  quote: if you're very clever with the way you structure the deal, you can actually structure it in a way where you put nothing up front.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 02:00
+  quote: So, that's called a no money down deal.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 02:00
+  quote: So we can say to the landlord, okay, we get paid 30 days after.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 03:01
+  quote: So the landlord will happily wait for 30 days to get paid because the landlord is looking at the bigger picture as opposed to the short term.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 03:01
+  quote: And then also you can negotiate with the landlord if there's furniture that's needed. A lot of landlords furnish a property for you in advance. It's all in the way you negotiate.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 03:01
+  quote: And then the third aspect is deposits.
+  verified: true
+  score: 100
 versions:
 - date: '2025-07-08'
   resource_id: R-YT-VPA30_DJvZs
@@ -34,7 +67,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:15:49Z'
-updated_at: '2026-09-27T13:15:49Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

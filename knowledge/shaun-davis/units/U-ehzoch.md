@@ -8,11 +8,13 @@ aliases:
 - Assess the area
 - Three core questions for the council or provider
 - Three key questions to ask the council
+- The three core questions for a social housing provider
+- Three core questions
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-12-14'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -59,6 +61,16 @@ citations:
   quote: Three core questions is what areas are you looking to scale? What specific types of properties are you looking for? and also what are you willing to pay per property.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 00:00
+  quote: You ensure that you ask the three core questions. What specific areas are you looking for? What type of properties do you need? And also what the rent settings, what do they pay?
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 00:00
+  quote: Once you've got this core information, you can then go out, find the property, lease it off
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -66,7 +78,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

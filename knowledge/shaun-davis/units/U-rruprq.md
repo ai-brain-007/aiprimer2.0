@@ -12,7 +12,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-01-14'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 00:00
@@ -54,6 +54,21 @@ citations:
   quote: There's lots of people that are that are on universal credit.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: '10:01'
+  quote: The council have more tenants than properties. The demand is through the roof
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: '10:01'
+  quote: So councils have an obligation to house these tenants and they need landlords.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: '11:01'
+  quote: the councils have got massive waiting lists of people that they need to house. They've got targets. They've got goals that they need to hit.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -61,7 +76,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T13:59:46Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description

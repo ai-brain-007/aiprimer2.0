@@ -6,11 +6,13 @@ name: Working out the profit on a council property
 aliases:
 - Deal maths
 - Nightly rate times 30
+- 'Worked example: pay the landlord £1,500, keep £1,000'
+- Deal arithmetic
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-06-09'
+last_seen: '2026-01-22'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '12:02'
@@ -42,6 +44,16 @@ citations:
   quote: Even if you're making like 450 of the property, 10 properties, they need 300.
   verified: true
   score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 06:01
+  quote: You've negotiated with the landlord to pay him £1,500 per month. M. So that means you're making a profit of £1,000 per month.
+  verified: true
+  score: 100
+- resource_id: R-YT-MVwwBYms0co
+  location: 06:01
+  quote: Let's say, for instance, you're getting £25,000 from the social housing provider.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -49,7 +61,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T14:06:06Z'
 ---
 
 ## Description
