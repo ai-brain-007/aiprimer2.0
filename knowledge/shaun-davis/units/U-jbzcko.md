@@ -6,11 +6,14 @@ name: Shaun's pivot from serviced accommodation to social housing
 aliases:
 - Shaun's property journey
 - Shaun's Covid pivot to social housing
+- The COVID pivot to social housing
+- Losing all my tenants and rebuilding
+- Pivoting big in lockdown
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-12'
+last_seen: '2025-03-27'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: 07:00
@@ -57,6 +60,26 @@ citations:
   quote: I've been in property now for 6 and a half years I've got over 90 rent to rent social housing properties
   verified: true
   score: 100
+- resource_id: R-YT-nuKBUiE3Afc
+  location: 00:00
+  quote: covid hit and I was like okay cool like 40% of my tent's not paying I've got no guests for stopping in my airbnbs what am I going to do
+  verified: true
+  score: 100
+- resource_id: R-YT-nuKBUiE3Afc
+  location: 03:01
+  quote: at the time I had I think it was just just under 100 rooms back in covid and no one was paying everyone was going a well had students moving back into their parents
+  verified: true
+  score: 100
+- resource_id: R-YT-nuKBUiE3Afc
+  location: 04:00
+  quote: space with strangers so I was like wow this model now is failing in real time what am I going to do
+  verified: true
+  score: 100
+- resource_id: R-YT-nuKBUiE3Afc
+  location: 01:02
+  quote: in that experience I learned so much about myself through the those three months more than like years
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -64,7 +87,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:56:25Z'
+updated_at: '2026-09-27T12:59:20Z'
 ---
 
 ## Description

@@ -6,11 +6,14 @@ name: Work on yourself more than your business
 aliases:
 - Your business cannot outgrow your personal identity
 - Work on yourself more than your job
+- Your business can't outgrow who you are
+- Work on yourself first
+- Put yourself first
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2025-03-27'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '46:00'
@@ -27,6 +30,16 @@ citations:
   quote: work yourself mentally physically spiritually everything else fall into place because you become a stronger person in all those areas and then you have the resilience to handle business
   verified: true
   score: 100
+- resource_id: R-YT-nuKBUiE3Afc
+  location: '16:01'
+  quote: I only started to achieve any success when I start to work on myself first put myself first
+  verified: true
+  score: 100
+- resource_id: R-YT-nuKBUiE3Afc
+  location: '16:01'
+  quote: your business can't out grow who you are I can't out grow your personal identity so always put yourself first and then ever since I did that everything else happened organically
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -34,7 +47,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T12:59:20Z'
 ---
 
 ## Description
