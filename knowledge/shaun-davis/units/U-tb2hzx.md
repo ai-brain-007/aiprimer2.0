@@ -9,11 +9,15 @@ aliases:
 - Go big or go bigger
 - 'Whatever it takes: massive imperfect action'
 - Massive action
+- Take action before you are ready
+- Taking action before I was ready
+- Habit four
+- Start before you're ready
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2026-02-15'
+last_seen: '2026-06-21'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: '18:00'
@@ -60,6 +64,16 @@ citations:
   quote: if you're not willing to go above and beyond, if you're willing to do own the bare minimum, you're not going to get really far.
   verified: true
   score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 05:00
+  quote: Taking action before I was ready.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 06:01
+  quote: But, I'm telling you if you start before you're ready, if you just put one foot in front of the other, then you're going to succeed. And that's what I've always done. I've never understood every step of the way.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -67,7 +81,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T14:14:19Z'
+updated_at: '2026-09-27T14:45:12Z'
 ---
 
 ## Description

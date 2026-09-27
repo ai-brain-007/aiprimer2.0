@@ -14,11 +14,14 @@ aliases:
 - Your business can't outgrow your personal identity
 - You can't outgrow who you are
 - Build yourself first
+- Working on myself
+- Habit one
+- Work on yourself more than on your job
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2026-02-15'
+last_seen: '2026-06-21'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '46:00'
@@ -100,6 +103,21 @@ citations:
   quote: personal identity. It can't outgrow who you are.
   verified: true
   score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 00:00
+  quote: Habit number one, working on myself. Sounds so simple, but it means everything. It's the foundation of it all.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 00:00
+  quote: Work on yourself more than you work on your job. Your business cannot outgrow your personal identity.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 00:00
+  quote: You can't skip the process without working on the foundation, and the foundation is you, it's yourself, it's your mindset, it's who you are, and until you get this right, you're always fall short.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -107,7 +125,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T14:14:19Z'
+updated_at: '2026-09-27T14:45:12Z'
 ---
 
 ## Description

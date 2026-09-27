@@ -8,11 +8,16 @@ aliases:
 - Family and friends are not the solution
 - Surround yourself with high performers
 - You become a product of your environment
+- Protect your environment and your energy
+- Protecting my environment
+- Protecting my energy
+- Habit six
+- Surround yourself with growth-minded winners
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2026-01-14'
+last_seen: '2026-06-21'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: 06:00
@@ -44,6 +49,26 @@ citations:
   quote: And I do believe that you become a product of your your environment.
   verified: true
   score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 09:00
+  quote: is protecting my environment, protecting my energy, and, you know, we don't have an infinite amount of energy, guys.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 09:00
+  quote: We do have a limited amount of energy. So, who you spend your time with matters.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 09:00
+  quote: If you're constantly around naysayers, negative people, people who make you feel a certain way, people who have this sort of negative energy, of course, it's going to have a direct impact
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: '10:00'
+  quote: So, you need to surround yourself with positive, growth-minded winners. That's going to really build you up.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -51,7 +76,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:59:46Z'
+updated_at: '2026-09-27T14:45:12Z'
 ---
 
 ## Description

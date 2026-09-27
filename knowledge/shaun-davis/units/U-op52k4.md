@@ -7,11 +7,15 @@ aliases:
 - Remain a student
 - Forever be a student
 - Ambition and a willingness to learn
+- Stay a student to the game
+- Staying a student to the game
+- Habit two
+- Forever a student
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2026-01-14'
+last_seen: '2026-06-21'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '1:31:01'
@@ -38,6 +42,26 @@ citations:
   quote: I wanted to show people that you can actually change your life in a very short space of time.
   verified: true
   score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 01:00
+  quote: The second habit is staying a student to the game.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 01:00
+  quote: There's levels of everything, and you know, I will forever be a student to the game.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 02:02
+  quote: courses, mentorship, then of course, you're going to come up short every time.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 02:02
+  quote: Things are evolving so quickly. You've got AIs now, for instance, and
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -45,7 +69,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:24Z'
-updated_at: '2026-09-27T13:59:46Z'
+updated_at: '2026-09-27T14:45:12Z'
 ---
 
 ## Description

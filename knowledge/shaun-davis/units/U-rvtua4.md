@@ -9,11 +9,13 @@ aliases:
 - 'Mind, health and wealth: you can have it all'
 - HPA slogan
 - Mindset is the foundation
+- Mindset is the foundation of it all
+- Get the mindset right
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2026-05-14'
+last_seen: '2026-06-21'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: 00:00
@@ -45,6 +47,16 @@ citations:
   quote: The mindset's the foundation of it all.
   verified: true
   score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 00:00
+  quote: Now, it's no secret that mindset is the foundation of it all. Without mindset, ultimately, you're always going to fail.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 00:00
+  quote: So, get the habits right, get the mindset right, and I promise you everything will fall into place.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -52,7 +64,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:45:12Z'
 ---
 
 ## Description

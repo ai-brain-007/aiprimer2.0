@@ -15,11 +15,13 @@ aliases:
 - Go face-to-face; velocity is crucial
 - Build and maintain relationships
 - Go directly to the source
+- Sending emails from behind the phone
+- Looking for the easy route
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2026-06-06'
+last_seen: '2026-06-21'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '15:01'
@@ -131,6 +133,11 @@ citations:
   quote: we can provide value to their business from the estate agent point of view so that they will give us properties to be able to lease to these providers.
   verified: true
   score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 04:01
+  quote: People spend too much time sending emails behind the phone trying to look for the easy route and I'm going to be honest with you there is no easy route. You need to get out there and build relationships with people.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -138,7 +145,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T14:39:53Z'
+updated_at: '2026-09-27T14:45:12Z'
 ---
 
 ## Description

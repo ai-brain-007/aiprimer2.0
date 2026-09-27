@@ -7,11 +7,13 @@ aliases:
 - No excuses mentality
 - Results or excuses, never both
 - Success is your duty
+- Take responsibility and you keep the power
+- It's never the team, it's my leadership
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-04-09'
+last_seen: '2026-06-21'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: '10:00'
@@ -33,6 +35,21 @@ citations:
   quote: Success is your duty. You are responsible for your success. No one else is responsible. It's no one else's fault if you fail. It's only your fault.
   verified: true
   score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 01:00
+  quote: it's never because of the team, it's because of me, it's because of my leadership.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 01:00
+  quote: responsibility for yourself, with your actions, and your results, then you then have the power.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 01:00
+  quote: If you're constantly putting the blame on everyone else all the time, it means that you no longer have the responsibility of making a change.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -40,7 +57,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T14:45:12Z'
 ---
 
 ## Description

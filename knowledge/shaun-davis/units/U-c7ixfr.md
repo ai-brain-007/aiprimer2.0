@@ -23,11 +23,15 @@ aliases:
 - Attend the inspection yourself
 - People buy from people they know, like and trust
 - Know, like and trust
+- Business is a relationship based game
+- Building relationships
+- Habit three
+- The people who build relationships win
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-05-27'
+last_seen: '2026-06-21'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -234,6 +238,21 @@ citations:
   quote: So, once you've got all the information, you then go out there and start to build relationships. Relationships are key.
   verified: true
   score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 04:01
+  quote: Number three is building relationships. Business is a relationship based game. The people who build the relationships win the game. It's as simple as that.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 04:01
+  quote: I've spent countless hours and time and even money investing in people, investing in relationships, building and maintaining relationships and I can't tell you how much that has paid off.
+  verified: true
+  score: 100
+- resource_id: R-YT-eutIKciI3fo
+  location: 05:00
+  quote: building relationships is key.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -241,7 +260,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T14:33:44Z'
+updated_at: '2026-09-27T14:45:12Z'
 ---
 
 ## Description
