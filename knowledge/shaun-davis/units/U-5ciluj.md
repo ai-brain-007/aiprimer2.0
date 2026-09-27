@@ -3,12 +3,15 @@ id: U-5ciluj
 author_id: A-shaun-davis
 type: claim
 name: Make money while you sleep or work till you die
-aliases: []
+aliases:
+- Make a living while you sleep
+- You are responsible for your own financial security
+- Financial stability
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2025-09-29'
+last_seen: '2026-01-14'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '21:01'
@@ -25,6 +28,16 @@ citations:
   quote: one of the quotes I read when I was in Miami was from Roman Buffett
   verified: true
   score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 01:01
+  quote: If you don't find a way to make a living while you sleep, you're working until you die.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 01:01
+  quote: At the end of the day, the way I see life is like you are responsible for your own financial security. So, I wanted to take it in my own hands.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -32,7 +45,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T13:59:46Z'
 ---
 
 ## Description

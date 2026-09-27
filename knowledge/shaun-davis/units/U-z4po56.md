@@ -6,11 +6,13 @@ name: Surround yourself with like-minded entrepreneurs
 aliases:
 - Community of entrepreneurs
 - Family and friends are not the solution
+- Surround yourself with high performers
+- You become a product of your environment
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2026-01-14'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: 06:00
@@ -27,6 +29,21 @@ citations:
   quote: You need to be surrounded with like-minded people. You need to be surrounded with other high performers. I'd actually go as far as saying this is crucial for your success.
   verified: true
   score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 07:01
+  quote: You become a product of your environment.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 07:01
+  quote: Firstly, you need to surround yourself with high performers.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 09:01
+  quote: And I do believe that you become a product of your your environment.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -34,7 +51,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:59:46Z'
 ---
 
 ## Description

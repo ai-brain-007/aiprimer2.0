@@ -13,11 +13,15 @@ aliases:
 - Paid to house and paid to support
 - 'Supported accommodation: what it really takes'
 - Support and accommodation
+- Housing the homeless
+- Social housing strategy one
+- Duty of care and liability in supported accommodation
+- Responsibility when a tenant dies
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-09-29'
+last_seen: '2026-01-14'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '12:00'
@@ -99,6 +103,41 @@ citations:
   quote: build the relationships with the homeless shelters to ensure that you've got an influx of referrals coming in.
   verified: true
   score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 00:00
+  quote: The first one is supported accommodation. That's like working with high-level tenants and essentially housing the homeless.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 00:00
+  quote: And uh these tenants have mental health needs and we're there to help and support them.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 00:00
+  quote: They put them through our tailor-made support program and essentially get them back into independent living through working on their mindset, their skill set, and then you're taking it from there.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '17:00'
+  quote: Like, you got to imagine people come to us on the verge of committing suicide. They've got suicidal thoughts.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '18:01'
+  quote: If someone is in um our property and they pass away, the first thing that happens is the council want to ensure that they didn't pass away because of negligence.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '18:01'
+  quote: They want to ensure that we did everything that we could. The risk assessment was there. And we tried everything in our power to prevent this from happening.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '18:01'
+  quote: Um and if you didn't, then it you could be liable.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -106,7 +145,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T13:59:46Z'
 ---
 
 ## Description

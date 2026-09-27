@@ -12,11 +12,13 @@ aliases:
 - Be obsessed with your personal development
 - Take personal development seriously
 - Your business can't outgrow your personal identity
+- You can't outgrow who you are
+- Build yourself first
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-09-29'
+last_seen: '2026-01-14'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '46:00'
@@ -73,6 +75,21 @@ citations:
   quote: So because I've grown through all the struggles I've been through, that's what's now enabled me to be able to run the business much more efficiently and be be and be a better leader as well.
   verified: true
   score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 04:00
+  quote: One of the biggest things, tips I can give you is that your business cannot outgrow your personal identity. Like, it can't outgrow who you are.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 04:00
+  quote: You've got to build the character. You've got to continually work on
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: 07:01
+  quote: I've been able to build myself and the character and the resilience in order to solve those challenges.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -80,7 +97,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T13:59:46Z'
 ---
 
 ## Description

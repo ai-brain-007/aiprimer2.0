@@ -5,11 +5,12 @@ type: concept
 name: What people don't see behind closed doors
 aliases:
 - Keeping the cogs turning
+- People only see the end product
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2026-01-14'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '44:00'
@@ -21,6 +22,16 @@ citations:
   quote: I wish we could document more yeah I wish we could like show more of the actual real stuff that goes on
   verified: true
   score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '19:01'
+  quote: People see just the end product, but they don't see what I'm having to do on a daily basis to just to be able to keep the cogs turning, keep everything running smoothly and efficiently.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '19:01'
+  quote: And it does come with a heavy weight that I that to be honest I do love to bear.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -28,7 +39,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T13:59:46Z'
 ---
 
 ## Description

@@ -6,11 +6,14 @@ name: The government cannot go bankrupt
 aliases:
 - Government-backed income
 - Councils pay a nightly rate, government-backed
+- Government-backed income model
+- How the social housing business gets paid
+- Council contract
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-10-29'
+last_seen: '2026-01-14'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '13:01'
@@ -32,6 +35,26 @@ citations:
   quote: you're getting a guaranteed payment straight from the council that's governmentbacked.
   verified: true
   score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '16:00'
+  quote: So, the way it works is we have a contract with the government. Uh well, it's actually the council, but the council get paid from the government.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '16:00'
+  quote: And then the council, as a result, they pay us.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '17:00'
+  quote: Cuz we get paid, I can budget, I can plan, and I know exactly what's coming in. It's more guaranteed, predictable.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '17:00'
+  quote: Sometimes there might be issues getting paid, but because you're dealing with the government, you're more likely to get that money as opposed to renting to professional where they might just not have the money to pay you at all.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -39,7 +62,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:43:33Z'
+updated_at: '2026-09-27T13:59:46Z'
 ---
 
 ## Description

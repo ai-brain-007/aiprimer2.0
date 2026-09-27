@@ -3,12 +3,14 @@ id: U-ev2s4h
 author_id: A-shaun-davis
 type: principle
 name: Solve a problem, get paid in proportion to the value
-aliases: []
+aliases:
+- You get paid in proportion to the problems you solve
+- Compensation follows value
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-06-09'
+last_seen: '2026-01-14'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: 06:00
@@ -20,6 +22,21 @@ citations:
   quote: The problem right now is there's a massive housing crisis. They've won a great contract, a governmentbacked contract. They're going to need housing, right?
   verified: true
   score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '18:01'
+  quote: You get paid in direct proportion of the value you're creating, the problems that you're solving. If you solve bigger problems, you'll get paid more.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '18:01'
+  quote: You always get compensated in proportion to that. But, it comes with a huge responsibility. Comes with huge accountability.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '17:00'
+  quote: And that's the thing, you know, it can pay quite well because
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -27,7 +44,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T13:59:46Z'
 ---
 
 ## Description

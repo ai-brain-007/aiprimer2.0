@@ -5,11 +5,13 @@ type: principle
 name: Keep a student mindset
 aliases:
 - Remain a student
+- Forever be a student
+- Ambition and a willingness to learn
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2025-09-29'
+last_seen: '2026-01-14'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '1:31:01'
@@ -26,6 +28,16 @@ citations:
   quote: Always trying to improve. Always trying to get better. We're both obsessed with self-development.
   verified: true
   score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '22:02'
+  quote: What you need is ambition and a willingness to learn. And to be a student. And for me, I have to forever be a student.
+  verified: true
+  score: 100
+- resource_id: R-YT-V0CJIg1RIwc
+  location: '22:02'
+  quote: I wanted to show people that you can actually change your life in a very short space of time.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -33,7 +45,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:24Z'
-updated_at: '2026-09-27T13:37:24Z'
+updated_at: '2026-09-27T13:59:46Z'
 ---
 
 ## Description
