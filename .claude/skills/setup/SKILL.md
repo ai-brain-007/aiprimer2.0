@@ -1,72 +1,62 @@
 ---
 name: setup
-description: One-time bootstrap and health check of the AI Primer pipeline (Google service account or sign-in, control sheet, Shared Drive folder tree, taxonomy, Apify formats). Use when the user says /setup, asks whether the system is ready, or after adding a new Google account or Shared Drive.
+description: One-time bootstrap and health check of the AI Primer pipeline (Backblaze buckets, Notion databases under the "AI Primer" page, folder prefixes, taxonomy, Apify formats). Use when the user says /setup, asks whether the system is ready, or after adding a Backblaze account or changing the Notion page.
 ---
 
 # /setup — bootstrap and health check
 
-Everything here is idempotent: running it twice changes nothing the second time.
+Everything here is idempotent: running it twice changes nothing the second time. Every command prints JSON.
 
-## Two credential modes
+## Modes
 
-- **Service account (primary).** The key JSON is in `GOOGLE_SERVICE_ACCOUNT_JSON_RAW` / `GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY`
-  (or one shared `GOOGLE_SERVICE_ACCOUNT_JSON`); `AIPRIMER_RAW_DRIVE_ID` and `AIPRIMER_SUMMARY_DRIVE_ID` name
-  the place each key writes to: a Google Workspace Shared Drive id, or the id of a folder the Gmail account
-  shared with the service account's email (Editor). A service account has no storage of its own, so Google is
-  expected to refuse uploads into a folder of a personal Gmail Drive; `auth check` settles it with a real
-  write test (`write_test.can_write`). Report Google's verdict plainly; never argue with it.
-- **Refresh token (fallback for plain Gmail).** `GOOGLE_OAUTH_CLIENT_ID/SECRET` plus one
-  `GOOGLE_REFRESH_TOKEN_*` per Gmail account, obtained with `pipeline auth url` / `auth exchange` or
-  `scripts/auth_local.py`.
+- **v2 (current): Backblaze + Notion.** On when `AIPRIMER_NOTION_PAGE_ID` (the "AI Primer" page) and at least one
+  `B2_KEY_ID_000N` / `B2_APPLICATION_KEY_000N` pair are set. The Notion secret and the Apify token live in the
+  environment's API credentials box (hosts `api.notion.com`, `api.apify.com`); the pipeline never sees them.
+  Each Backblaze key pair becomes a storage account `b2-000N` with buckets `ai-primer-raw-000N` (private) and
+  `ai-primer-media-000N` (public), overridable with `B2_BUCKET_000N` / `B2_MEDIA_BUCKET_000N`.
+- **v1 (legacy): Google Drive / Sheets / Docs.** Kept for the offline tests; only used when no v2 variable is set.
 
 Never ask the user to paste a key or token into the chat. If they do, tell them to create a new one.
 
 ## Steps
 
-1. **Settings present?**
+1. **Settings and access**
    ```bash
    python -m pipeline auth check --pretty
    ```
-   - `AIPRIMER_CONTROL_SHEET_ID is not set` → run `python -m pipeline setup create-sheet --pretty`.
-     In service-account mode with `AIPRIMER_SUMMARY_DRIVE_ID` set it creates the sheet inside that Shared Drive;
-     without a Shared Drive it prints the two options (create the drive, or create the sheet by hand in Gmail and
-     share it with the service account's email). Relay the option text, ask the user to add the sheet id to the
-     environment as `AIPRIMER_CONTROL_SHEET_ID`, and stop.
-   - Missing key/token → point to README.md → "Setup" and stop. In refresh-token mode you may offer the in-chat
-     sign-in: `python -m pipeline auth url --pretty` → the user opens the link, clicks Allow, pastes back the
-     localhost address → `python -m pipeline auth exchange "<address>" --pretty` → they copy the printed
-     `refresh_token` into the environment variable named in `env_var`, then start a new session.
-   - Per account, read `auth_kind`, `writes_into` (kind `shared_drive` or `folder`, `reachable`), `write_test`
-     and any `warning`. Unreachable → the drive/folder must be shared with the service account's email (its
-     email is in the output). `write_test.can_write: false` → Google refuses uploads there; say so, quote the
-     `write_test.error`, and offer the two ways out (a Workspace Shared Drive, or the Gmail sign-in below).
-2. **Bootstrap**:
+   - `control_panel.ok: false` → the Notion page id is wrong, the integration is not connected to the page
+     (page menu → Connections → "AI Primer pipeline"), `api.notion.com` is not allowed, or the secret is not in the
+     API credentials box. Say which, using the `hint`, and stop.
+   - Per Backblaze account read `writes_into.reachable`, `write_test.can_write`, `used_gb`, `cap_gb`, `status`,
+     and `media.public`. Unreachable bucket → wrong bucket name or a key not allowed on it. `can_write: false`
+     with a cap message → the free 10 GB are used: the account is marked full; the next account is needed.
+     `media.public: false` → the media bucket must be set to Public in Backblaze, else pictures will not display.
+   - Missing variables → point to README.md → "Setup" and stop.
+2. **Bootstrap**
    ```bash
    python -m pipeline setup all --pretty
    ```
-   Creates the control-panel tabs, `AI Primer Raw` (+ `_Inbox`) in the raw Shared Drive (or the raw Gmail
-   Drive in refresh-token mode), `AI Primer Summaries` in the summary drive, imports `config/taxonomy.seed.yaml`,
-   prints health. An account entry with `ok: false` and "Shared Drive" in the error is the quota limitation: explain
-   it and stop; do not retry in a loop.
-3. **Apify formats** (needs `api.apify.com` allowed and the API credential set):
+   Creates the databases under the "AI Primer" page (Accounts, Taxonomy, Folders, Resources, Authors, Summaries,
+   Jobs), the `raw/` and `raw/_Inbox/` prefixes in each raw bucket, imports `config/taxonomy.seed.yaml`, prints
+   health. Stage folders inside the bucket are named by node id (`raw/T-xxxxxx/`), so renaming a stage never
+   touches storage; the readable path is in the Resources database.
+3. **Apify formats** (needs `api.apify.com` allowed and the credential set):
    ```bash
    python -m pipeline setup fetch-apify-schemas --pretty
    ```
-   On a network error, tell the user to create the "AI Primer" cloud environment as described in README.md →
-   "Setup". YouTube ingestion will not work until then; file ingestion will.
-4. **Report** a short health table: each account (mode, email, Shared Drive name or free GB, status), the
-   control sheet link, taxonomy node count, resources by status. Mention `/ingest` and `/summarize` as next steps.
+   On a network error, tell the user to check the environment's allowed domains and API credentials. YouTube
+   ingestion will not work until then; file ingestion will.
+4. **Report** a short health table: mode, each storage account (bucket, used GB of cap, status, media public?),
+   the Notion page link, taxonomy node count, resources by status. Mention `/ingest` and `/summarize` as next steps.
 
 ## Questions you may ask (AskUserQuestion)
 
-- Only if the Accounts tab is empty and the environment has neither the service-account key nor refresh tokens:
-  which mode the user wants (service account + Shared Drives, or Gmail sign-in).
-- Whether summary Docs should be "anyone with the link can view" (default) or restricted; write the answer to
-  `config/pipeline.yaml` → `docs.sharing`.
+- Whether summary pages may be shared publicly from Notion (default: no, the owner shares by hand); write the
+  answer to `config/pipeline.yaml` → `docs.sharing`.
 
-## Adding storage later
+## Adding storage later (free-tier rollover)
 
-- **Service-account mode:** create another Shared Drive, add the service account as Content manager, add an
-  Accounts row (`account_id=raw02, role=raw, token_env_var=GOOGLE_SERVICE_ACCOUNT_JSON, drive_id=<id>, priority=2`),
-  run `/setup` again.
-- **Refresh-token mode:** new Gmail, new `GOOGLE_REFRESH_TOKEN_RAW02`, Accounts row with that name, `/setup`.
+Create Backblaze account 000N with its two buckets and a key allowed on both; add `B2_KEY_ID_000N` and
+`B2_APPLICATION_KEY_000N` (and bucket overrides if the default names were taken) to the environment; start a new
+session; run `/setup`. The row `b2-000N` is added with the next priority and receives uploads once the earlier
+accounts are full.

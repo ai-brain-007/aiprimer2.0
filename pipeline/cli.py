@@ -353,6 +353,7 @@ def ingest_run(
     ocr_patch: Optional[Path] = typer.Option(None, help="JSON {page: text} replacing given pages"),
     account: Optional[str] = typer.Option(None, help="force a raw account id"),
     dataset_note: Optional[str] = typer.Option(None, help="for spreadsheets: what the dataset represents"),
+    keep_full: bool = typer.Option(False, "--keep-full", help="video files: store the full original instead of audio track + key frames"),
     force: bool = False,
     pretty: bool = Pretty,
 ):
@@ -360,8 +361,8 @@ def ingest_run(
 
     run_command(
         "ingest run",
-        lambda: Ingestor(get_ctx()).run(source, stage, author, title=title, date_text=date, date_precision=date_precision, extracted_file=extracted_file, ocr_patch=ocr_patch, account_id=account, force=force, dataset_note=dataset_note),
-        {"source": source, "stage": stage, "author": author, "title": title, "date": date, "force": force},
+        lambda: Ingestor(get_ctx()).run(source, stage, author, title=title, date_text=date, date_precision=date_precision, extracted_file=extracted_file, ocr_patch=ocr_patch, account_id=account, force=force, dataset_note=dataset_note, keep_full=keep_full),
+        {"source": source, "stage": stage, "author": author, "title": title, "date": date, "force": force, "keep_full": keep_full},
         pretty,
     )
 

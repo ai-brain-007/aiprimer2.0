@@ -82,6 +82,10 @@ class Account(TabRow):
     auth_kind: Literal["auto", "service_account", "oauth"] = "auto"
     # Google Workspace Shared Drive id when files live in a shared drive (service-account mode)
     drive_id: str = ""
+    # --- v2 storage accounts (Backblaze B2): appended columns
+    key_id_env_var: str = ""      # name of the setting holding the B2 key id (token_env_var holds the application key's name)
+    bucket: str = ""              # private bucket: originals, text versions, audio and key frames
+    media_bucket: str = ""        # public bucket: pictures and clips embedded in pages
 
     @property
     def free_bytes(self) -> int | None:

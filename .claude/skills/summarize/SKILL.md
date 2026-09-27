@@ -1,6 +1,6 @@
 ---
 name: summarize
-description: Build or update an author's knowledge base (deduplicated principles, concepts, techniques, drills, lists, scripts, examples, glossary; with evolution tracking and two fact-check gates) and refresh the author's summary Google Doc. Use when the user says /summarize, asks for a summary of an author, or asks to update summaries after ingesting.
+description: Build or update an author's knowledge base (deduplicated principles, concepts, techniques, drills, lists, scripts, examples, glossary; with evolution tracking and two fact-check gates) and refresh the author's page in Notion. Use when the user says /summarize, asks for a summary of an author, or asks to update summaries after ingesting.
 ---
 
 # /summarize <author> — the summary agent
@@ -63,17 +63,19 @@ Spawn ONE reviewer helper with `pipeline/prompts/review_units.md` (placeholders 
 
 ## 7. Confirm with the user
 Show: cards new / same / evolved / contradicted / rejected, the contradictions found, the reviewer's verdict.
-Check the Doc's comments first if a Doc exists: `python -m pipeline doc comments --author <A-id> --pretty`;
-offer to apply them to the cards (edit the unit files directly, then `doc comments --resolve <id>`).
-Ask to finalise.
+Check the page's comments first if a page exists: `python -m pipeline doc comments --author <A-id> --pretty`;
+offer to apply them to the cards (edit the unit files directly, then `doc comments --resolve <id>`, which replies
+in the Notion thread because the API cannot resolve it). Ask to finalise.
 
 ## 8. Finalise
 ```bash
 python -m pipeline summarize finalize --author <A-id> --note "<what this version adds>" --pretty
 ```
-Applies the review verdicts (rejected → `_rejected/`), renders `summary.md`, creates or refreshes the Google Doc
-in place (same link), commits `knowledge/<author-slug>/`, logs the Summaries row, marks resources summarised.
-Report the Doc link, the version and the commit. Running the whole flow again for the same resources adds nothing.
+Applies the review verdicts (rejected → `_rejected/`), renders `summary.md`, rewrites the author's page in Notion
+in place (the author's row in the Authors database is the page; same link), commits `knowledge/<author-slug>/`,
+logs the Summaries row, marks resources summarised. Publishing a large author takes a few minutes (Notion allows
+about three calls per second). Report the page link, the version and the commit. Running the whole flow again for
+the same resources adds nothing. (Legacy Google mode publishes a Google Doc instead.)
 
 ## Writing style (owner's decision, 2026-09-27)
 Everything a reader sees follows `pipeline/prompts/style.md` and the approved sample `docs/style-sample-jab.md`:
@@ -84,5 +86,5 @@ write to the user in the chat about the summary. Style never adds content: quote
 ## Rules
 - Never write a card without a verbatim quote; never edit `summary.md` by hand (it is regenerated).
 - EVOLVED needs dated sources on both sides; when unsure prefer SAME over NEW, and NEW over EVOLVED.
-- Contradictions are flagged, never silently resolved: the Doc lists them for the user.
+- Contradictions are flagged, never silently resolved: the page lists them for the user.
 - Commit only `knowledge/<author-slug>/**`.

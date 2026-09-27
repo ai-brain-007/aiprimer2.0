@@ -235,11 +235,15 @@ def ensure_node_folder(registry: Registry, drive: DriveClient, account: Account,
         raise KeyError(node_id)
     parent_folder_id = account.root_folder_id
     result: FolderMap | None = None
+    # Object storage (Backblaze) uses the node id as the folder name: ids never change, so renames cost nothing
+    # and the readable path lives in the Resources log. Drive keeps human names.
+    id_folders = bool(getattr(drive, "id_folders", False))
     for node in chain:
         fm = registry.folder_for(node.node_id, account.account_id)
         if fm is None:
-            folder = drive.ensure_folder(parent_folder_id, node.name)
-            fm = FolderMap(node_id=node.node_id, account_id=account.account_id, folder_id=folder["id"], folder_url=folder_url(folder["id"]), created_at=now_iso())
+            folder = drive.ensure_folder(parent_folder_id, node.node_id if id_folders else node.name)
+            link = (folder.get("webViewLink") or f"b2:{folder['id']}") if id_folders else folder_url(folder["id"])
+            fm = FolderMap(node_id=node.node_id, account_id=account.account_id, folder_id=folder["id"], folder_url=link, created_at=now_iso())
             registry.upsert_folder(fm)
         parent_folder_id = fm.folder_id
         result = fm
@@ -320,6 +324,8 @@ def sync(registry: Registry, drives: dict[str, DriveClient], create_missing_for:
         except Exception as exc:
             report.errors.append(f"folder {fm.folder_id} ({fm.account_id}) unreachable: {exc}")
             continue
+        if getattr(drive, "id_folders", False):
+            continue  # object storage folders are named by node id; nothing to rename
         if meta.get("name") != node.name:
             drive.rename(fm.folder_id, node.name)
             report.folders_renamed.append(f"{fm.account_id}:{meta.get('name')} -> {node.name}")

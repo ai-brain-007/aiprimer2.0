@@ -33,6 +33,9 @@ class Extraction:
     data_exports: list[Path] = field(default_factory=list)  # CSV exports for spreadsheets
     toc: list[dict] = field(default_factory=list)  # [{"level": int, "title": str, "page": int}]
     warnings: list[str] = field(default_factory=list)
+    # Smaller stand-ins for a big original (video files: the audio track + a few key frames), as
+    # (role, path, mime). Ingest stores these instead of the original unless told to keep the full file.
+    derived_files: list[tuple[str, Path, str]] = field(default_factory=list)
 
 
 # --------------------------------------------------------------------------- external tools

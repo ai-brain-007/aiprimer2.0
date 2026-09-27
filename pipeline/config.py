@@ -9,7 +9,7 @@ from typing import Any
 
 import yaml
 
-SECRET_ENV_PREFIXES = ("GOOGLE_REFRESH_TOKEN_", "GOOGLE_OAUTH_CLIENT_SECRET", "APIFY_TOKEN")
+SECRET_ENV_PREFIXES = ("GOOGLE_REFRESH_TOKEN_", "GOOGLE_OAUTH_CLIENT_SECRET", "APIFY_TOKEN", "B2_APPLICATION_KEY", "NOTION_TOKEN")
 GOOGLE_SCOPES = [
     "https://www.googleapis.com/auth/drive",
     "https://www.googleapis.com/auth/spreadsheets",
@@ -65,6 +65,25 @@ class Settings:
     def apify_token(self) -> str | None:
         return os.environ.get("APIFY_TOKEN") or None
 
+    # ---- v2: Notion control panel + pages, Backblaze B2 storage
+    @property
+    def notion_parent_page_id(self) -> str:
+        """Id of the "AI Primer" Notion page (32 hex chars at the end of its address). Set => Notion mode."""
+        return os.environ.get("AIPRIMER_NOTION_PAGE_ID", "").strip().replace("-", "")
+
+    @property
+    def notion_token(self) -> str | None:
+        """Only set when the token is given as a variable; normally the proxy attaches it (API credentials box)."""
+        return os.environ.get("NOTION_TOKEN") or None
+
+    @property
+    def b2(self) -> dict[str, Any]:
+        return self.section("b2")
+
+    @property
+    def notion(self) -> dict[str, Any]:
+        return self.section("notion")
+
     @property
     def session_ref(self) -> str:
         sid = os.environ.get("CLAUDE_CODE_REMOTE_SESSION_ID", "")
@@ -100,6 +119,9 @@ class Settings:
     def env_report(self) -> dict[str, bool]:
         """Which settings are present (names only; values never returned)."""
         names = [
+            "AIPRIMER_NOTION_PAGE_ID",
+            "NOTION_TOKEN",
+            *sorted(k for k in os.environ if k.startswith(("B2_KEY_ID_", "B2_APPLICATION_KEY_", "B2_BUCKET_", "B2_MEDIA_BUCKET_"))),
             "GOOGLE_SERVICE_ACCOUNT_JSON",
             "GOOGLE_SERVICE_ACCOUNT_JSON_RAW",
             "GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY",

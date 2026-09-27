@@ -407,7 +407,9 @@ def finalize(ctx: AppContext, author_ref: str, note: str = "", publish_doc: bool
         written.append(str(p))
     # 3. publish the doc(s)
     doc_info: dict[str, Any] = {}
-    if publish_doc:
+    if publish_doc and ctx.notion is not None:
+        doc_info = _publish_to_notion(ctx, author, files, meta)
+    elif publish_doc:
         summary_account = reg.summary_account()
         drive = ctx.drive_for(summary_account) if summary_account else None
         if drive is None or not summary_account or not summary_account.summaries_folder_id:
@@ -504,10 +506,53 @@ def status(ctx: AppContext, author_ref: str) -> dict[str, Any]:
     return {"author_id": author.author_id, "units": len(units), "by_type": by_type, "version": _author_meta(store, author).get("version", 0), "doc_url": author.summary_doc_url, "in_progress": {rid: e.get("status") for rid, e in manifest.get("resources", {}).items()}, "pending": plan(ctx, author_ref)["pending"]}
 
 
+def _publish_to_notion(ctx: AppContext, author, files: dict[str, str], meta: dict[str, Any]) -> dict[str, Any]:
+    """Notion mode: the author's row in the Authors database IS the author page; its body is replaced with the
+    rendered summary. Domain parts (when the summary is split) become child pages of it, refreshed in place."""
+    from .notion import NotionPublisher
+
+    reg = ctx.registry
+    repo = reg.repo
+    page_id = repo.page_id("Authors", author.author_id)
+    if page_id is None:
+        reg.upsert_author(author)
+        page_id = repo.page_id("Authors", author.author_id)
+    if page_id is None:
+        return {"skipped": "author row not found in the Notion Authors database"}
+    publisher = NotionPublisher(ctx.notion, scan_blocks_for_comments=int(ctx.settings.notion.get("comment_scan_blocks", 300)))
+    title_prefix = str(ctx.settings.docs.get("title_prefix", "Summary — "))
+    main = publisher.publish_markdown(files["summary.md"], f"{title_prefix}{author.canonical_name}", page_id, page_id)
+    info: dict[str, Any] = {"doc_id": main["doc_id"], "url": main["url"], "created": main["created"], "kind": "notion_page"}
+    meta["summary_doc_id"], meta["summary_doc_url"] = main["doc_id"], main["url"]
+    if not meta.get("summary_doc_created_at"):
+        meta["summary_doc_created_at"] = now_iso()
+    meta["summary_folder_url"] = repo.url()
+    part_ids = dict(meta.get("part_doc_ids", {}))
+    parts = {}
+    for name, text in files.items():
+        if name == "summary.md":
+            continue
+        pub = publisher.publish_markdown(text, f"{title_prefix}{author.canonical_name} — {Path(name).stem.replace('summary - ', '')}", page_id, part_ids.get(name))
+        part_ids[name] = pub["doc_id"]
+        parts[name] = pub["url"]
+    if parts:
+        meta["part_doc_ids"] = part_ids
+        info["parts"] = parts
+    return info
+
+
 def doc_comments(ctx: AppContext, author_ref: str, resolve: str | None = None) -> dict[str, Any]:
     author = _author(ctx, author_ref)
     if not author.summary_doc_id:
-        return {"comments": [], "note": "no summary Doc yet"}
+        return {"comments": [], "note": "no summary page yet"}
+    if ctx.notion is not None:
+        from .notion import NotionPublisher
+
+        publisher = NotionPublisher(ctx.notion, scan_blocks_for_comments=int(ctx.settings.notion.get("comment_scan_blocks", 300)))
+        if resolve:
+            publisher.resolve(author.summary_doc_id, resolve)
+            return {"resolved": resolve, "note": "Notion cannot resolve a comment through its API; the agent replied in the thread instead"}
+        return {"doc_url": author.summary_doc_url, "comments": publisher.unresolved_comments(author.summary_doc_id)}
     summary_account = ctx.registry.summary_account()
     drive = ctx.drive_for(summary_account) if summary_account else None
     if drive is None:

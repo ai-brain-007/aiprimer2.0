@@ -17,13 +17,35 @@ GMAIL_QUOTA_HINT = (
 )
 
 
+B2_CAP_HINT = (
+    "this Backblaze account refused the upload because it reached its storage cap (10 GB on a free account); "
+    "it is marked full. Add the next account (variables B2_KEY_ID_000N / B2_APPLICATION_KEY_000N and its buckets), "
+    "run /setup, and run the same command again"
+)
+
+
 def is_service_account(registry: Registry, account: Account) -> bool:
+    if account.backend != "gdrive":
+        return False
     return resolve_auth_kind(registry.settings, account.token_env_var, account.auth_kind) == "service_account"
 
 
 def refresh_quota(registry: Registry, drive: DriveClient, account: Account) -> Account:
     """Record free space. Service accounts report their own (empty, 0-byte) quota, which says nothing about
-    the Shared Drive they write to, so their quota is recorded as unknown and they are never marked full here."""
+    the Shared Drive they write to, so their quota is recorded as unknown and they are never marked full here.
+    Backblaze accounts have no quota API: usage is the sum of object sizes, the limit is the free-tier cap
+    recorded on the row (None = paid account, unlimited)."""
+    if account.backend == "b2":
+        info = drive.quota()
+        account.used_bytes = info.get("usage")
+        if info.get("limit") is not None:
+            account.quota_bytes = info["limit"]
+        account.quota_checked_at = now_iso()
+        if account.quota_bytes is not None and account.used_bytes is not None and account.status == "active":
+            if account.quota_bytes - account.used_bytes < 50 * 1024 * 1024:
+                account.status = "full"
+        registry.upsert_account(account)
+        return account
     if is_service_account(registry, account):
         account.quota_bytes = None
         account.used_bytes = None
@@ -75,8 +97,9 @@ def pick_raw_account(registry: Registry, needed_bytes: int, preferred_id: str | 
     if not accounts:
         raise NoStorageError("no active raw-file account in the Accounts tab; run /setup")
     raise NoStorageError(
-        f"no raw-file account has {needed_bytes} bytes free; add a new account "
-        "(see README: adding a raw account) and a row in the Accounts tab"
+        f"no storage account has {needed_bytes} bytes free; add the next account "
+        "(Backblaze: create account 000N with its two buckets, set B2_KEY_ID_000N / B2_APPLICATION_KEY_000N, run /setup; "
+        "see README: adding storage later)"
     )
 
 

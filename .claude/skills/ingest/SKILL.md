@@ -1,13 +1,18 @@
 ---
 name: ingest
-description: Ingest resources (YouTube videos or channels, PDFs, Word, Excel/CSV, text, screenshots, video files) into the AI Primer library - identify metadata, ask Domain > Primer > Stage and author, store in Google Drive, log in the control panel. Use when the user pastes links, attaches files, says /ingest, "ingest this", "add this resource", or mentions the inbox.
+description: Ingest resources (YouTube videos or channels, PDFs, Word, Excel/CSV, text, screenshots, video files) into the AI Primer library - identify metadata, ask Domain > Primer > Stage and author, store in Backblaze, log in the Notion control panel. Use when the user pastes links, attaches files, says /ingest, "ingest this", "add this resource", or mentions the inbox.
 ---
 
 # /ingest — the ingestion agent
 
 Inputs are whatever the user gave: URLs, files attached to the chat (use their local paths), or the word
-`inbox` (files dropped into the `_Inbox` folder of the raw Drive). Optional overrides in the message:
-`author=…`, `stage=…`, `title=…`, `date=…`.
+`inbox` (files uploaded by hand into the `raw/_Inbox/` folder of the raw bucket). Optional overrides in the
+message: `author=…`, `stage=…`, `title=…`, `date=…`.
+
+Storage: the original and its text version go to the raw bucket of the first storage account with room, under
+`raw/<stage id>/`; the Resources database in Notion records the readable path, the object keys, the links, the
+date, the kind, the extraction method, the Apify cost and any warnings. Every source needs a date when one can be
+found: evolution tracking depends on it.
 
 Never run `ingest run` before the checklist below is answered, except when `stage=` (and `author=` if the
 author cannot be detected) were given in the message.
@@ -94,8 +99,12 @@ python -m pipeline ingest run <source> --stage "<Domain / Primer / Stage>" --aut
 - `--author` accepts an existing id (`A-teddy-atlas`) or a name; a new name creates the author, a detected
   channel/author name different from the chosen author is recorded as an alias.
 - Spreadsheets: ask "what does this dataset represent?" and pass it with `--dataset-note`.
-- `status: retry` → an account was marked full; run the same command again (the next account is used).
+- `status: retry` → an account was marked full (a free Backblaze account past its 10 GB); run the same command
+  again: the next account is used. If there is none, tell the user to add `B2_KEY_ID_000N` /
+  `B2_APPLICATION_KEY_000N` for a new account and run `/setup` (see the setup skill).
 - `status: needs_transcription` → a video/audio file was stored; transcription comes in a later phase.
+  Video files are stored as their audio track plus a few key frames (free-tier saver), not the full video; the
+  Resources row says so in `notes`. Only when the user explicitly wants the full file, add `--keep-full`.
 
 Report a table: resource id · title · author · date · stage path · link, plus any warnings. End with:
 "If a resource landed in the wrong stage: `/taxonomy move <R-id> to "<Domain / Primer / Stage>"`."

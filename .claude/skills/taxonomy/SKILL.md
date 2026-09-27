@@ -1,12 +1,14 @@
 ---
 name: taxonomy
-description: Manage the Domain > Primer > Stage tree of the AI Primer library (list, add, rename, sync Drive folders with the sheet) and move a mis-filed resource to another stage. Use when the user says /taxonomy, wants to rename a domain/primer/stage, edited names in the Taxonomy tab, or says a resource is in the wrong place.
+description: Manage the Domain > Primer > Stage tree of the AI Primer library (list, add, rename, sync storage folders with the control panel) and move a mis-filed resource to another stage. Use when the user says /taxonomy, wants to rename a domain/primer/stage, edited names in the Taxonomy database, or says a resource is in the wrong place.
 ---
 
 # /taxonomy — tree and moves
 
-The **Taxonomy tab** of the control panel is the source of truth. Node ids (`T-…`) never change; names do.
-Drive folders carry the names and are renamed to match. Every command prints JSON.
+The **Taxonomy database** of the control panel is the source of truth. Node ids (`T-…`) never change; names do.
+In Backblaze storage the folders are named by node id (`raw/T-xxxxxx/`), so a rename touches no file: only the
+readable `stage_path` on the resources is refreshed. (In the legacy Google mode the Drive folders carry the names
+and are renamed.) Every command prints JSON.
 
 ## list
 ```bash
@@ -48,7 +50,8 @@ python -m pipeline resource move "<R-id or a distinctive part of the title>" --s
 ```
 If the title fragment matches several resources the command lists them: ask the user which one. If the target
 stage does not exist, offer to create it (see add). The original file, the text version and any CSV exports move
-together and the Resources row is updated.
+together (in Backblaze a move is a server-side copy plus delete, so the object keys change) and the Resources row
+is updated with the new keys and links.
 
 ## correct a resource's metadata
 ```bash

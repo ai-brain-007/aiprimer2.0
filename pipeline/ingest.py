@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from . import extract as ex
-from .accounts import GMAIL_QUOTA_HINT, NoStorageError, is_service_account, mark_full, pick_raw_account
+from .accounts import B2_CAP_HINT, GMAIL_QUOTA_HINT, NoStorageError, is_service_account, mark_full, pick_raw_account
 from .apify_yt import ApifyYouTube, metadata_guess_from_video
 from .config import Settings
 from .context import AppContext
@@ -150,6 +150,7 @@ class Ingestor:
         force: bool = False,
         drive_file_id: str | None = None,
         dataset_note: str | None = None,
+        keep_full: bool = False,
     ) -> dict[str, Any]:
         kind = ex.detect_kind(source)
         if kind in ("youtube_channel", "youtube_playlist"):
@@ -252,15 +253,44 @@ class Ingestor:
         self.registry.upsert_resource(resource)
 
         # 5. raw upload (or move of an inbox file)
+        #    Video files: unless --keep-full, store the audio track + key frames instead of the original
+        #    (the knowledge layer needs speech and a few pictures, not gigabytes of video).
         author_name = self._author_name(resource)
-        ext = Path(local_path).suffix if local_path else ".json"
+        derived_audio = next((p for role, p, _m in extraction.derived_files if role == "audio"), None)
+        store_derived = kind == "video" and not keep_full and derived_audio is not None and not drive_file_id
+        upload_path = derived_audio if store_derived else local_path
+        ext = Path(upload_path).suffix if upload_path else ".json"
         raw_name = drive_filename(resource, ext, author_name, int(self.settings.drive.get("max_title_chars", 80)))
         try:
             if drive_file_id:
                 meta = drive.move(drive_file_id, folder.folder_id)
-                meta = drive.backend.update_file(drive_file_id, name=raw_name, app_properties={"resource_id": resource.resource_id, "role": "raw", "natural_key": nk.natural_key, "aiprimer": "1"})
-            elif local_path is not None:
-                meta = drive.upload(local_path, raw_name, folder.folder_id, {"resource_id": resource.resource_id, "role": "raw", "natural_key": nk.natural_key, "source_url": resource.source_url or "", "aiprimer": "1"})
+                moved_id = meta.get("id", drive_file_id)  # object storage: the key (id) changes on move
+                meta = drive.backend.update_file(moved_id, name=raw_name, app_properties={"resource_id": resource.resource_id, "role": "raw", "natural_key": nk.natural_key, "aiprimer": "1"})
+            elif upload_path is not None:
+                props = {"resource_id": resource.resource_id, "role": "raw", "natural_key": nk.natural_key, "source_url": resource.source_url or "", "aiprimer": "1"}
+                if store_derived:
+                    props["derived"] = "audio"
+                elif kind == "video" and keep_full:
+                    # the full file was asked for after an audio-only store: keep the audio under another role
+                    for f in drive.find_by_app_property("resource_id", resource.resource_id, folder.folder_id):
+                        old = f.get("appProperties") or {}
+                        if old.get("role") == "raw" and old.get("derived") == "audio":
+                            drive.backend.update_file(f["id"], app_properties={**old, "role": "raw-audio"})
+                            resource.notes = (resource.notes + " " if resource.notes else "") + "full video stored on request (--keep-full); the audio track is kept too"
+                meta = drive.upload(upload_path, raw_name, folder.folder_id, props)
+                if store_derived:
+                    frame_ids = []
+                    for role, p, mime in extraction.derived_files:
+                        if role.startswith("frame:"):
+                            fname = f"{Path(raw_name).stem} - {role.replace(':', '-')}{Path(p).suffix}"
+                            fmeta = drive.upload(p, fname, folder.folder_id, {"resource_id": resource.resource_id, "role": role, "aiprimer": "1"}, mime_type=mime)
+                            frame_ids.append(fmeta.get("id", ""))
+                    resource.data_file_ids = frame_ids
+                    original_mb = round(local_path.stat().st_size / 1e6, 1) if local_path and local_path.exists() else 0
+                    stored_mb = round(derived_audio.stat().st_size / 1e6, 1)
+                    note = f"full video not stored (free-tier saver): audio track {stored_mb} MB + {len(frame_ids)} key frames instead of {original_mb} MB; re-ingest with --keep-full to store the original"
+                    resource.notes = (resource.notes + " " if resource.notes else "") + note
+                    resource.warnings = [*resource.warnings, "stored as audio + key frames"]
             else:
                 meta = {}
         except Exception as exc:
@@ -273,7 +303,10 @@ class Ingestor:
                 resource.status = "registered"
                 resource.error = f"account {account.account_id} full: {exc}"
                 self.registry.upsert_resource(resource)
-                return {"status": "retry", "reason": "account full, marked; run again to use the next account", "resource_id": resource.resource_id}
+                reason = "account full, marked; run again to use the next account"
+                if account.backend == "b2":
+                    reason += ". " + B2_CAP_HINT
+                return {"status": "retry", "reason": reason, "resource_id": resource.resource_id, "account_id": account.account_id}
             raise
         if meta:
             resource.raw_file_id = meta.get("id", "")
@@ -521,7 +554,10 @@ def _write_partial(workdir: Path, text: str) -> Path:
 
 def _is_quota_error(exc: Exception) -> bool:
     s = str(exc).lower()
-    return "storagequotaexceeded" in s or "storage quota" in s or "quota has been exceeded" in s
+    if "storagequotaexceeded" in s or "storage quota" in s or "quota has been exceeded" in s:
+        return True
+    # Backblaze: a free account past its 10 GB answers 403 cap_exceeded / storage_cap_exceeded
+    return "cap_exceeded" in s or "storage_cap" in s or ("cap" in s and "exceeded" in s)
 
 
 def cleanup_cache(settings: Settings, resource_id: str) -> None:

@@ -45,10 +45,21 @@ def move(ctx: AppContext, ref: str, stage: str) -> dict[str, Any]:
         raise RuntimeError(f"no credentials for account {account.account_id}")
     folder = ensure_node_folder(reg, drive, account, node.node_id)
     moved = []
+    new_ids: dict[str, dict] = {}
     for fid in [resource.raw_file_id, resource.text_file_id, *resource.data_file_ids]:
         if fid:
-            drive.move(fid, folder.folder_id)
+            new_ids[fid] = drive.move(fid, folder.folder_id) or {}
             moved.append(fid)
+    # object storage changes a file's id (its key) on move; Drive keeps it
+    if resource.raw_file_id in new_ids:
+        meta = new_ids[resource.raw_file_id]
+        resource.raw_file_id = meta.get("id", resource.raw_file_id)
+        resource.raw_file_url = meta.get("webViewLink", resource.raw_file_url) or resource.raw_file_url
+    if resource.text_file_id in new_ids:
+        meta = new_ids[resource.text_file_id]
+        resource.text_file_id = meta.get("id", resource.text_file_id)
+        resource.text_file_url = meta.get("webViewLink", resource.text_file_url) or resource.text_file_url
+    resource.data_file_ids = [new_ids.get(d, {}).get("id", d) for d in resource.data_file_ids]
     old = resource.stage_path
     resource.stage_id, resource.stage_path, resource.folder_id = node.node_id, tax.path(node.node_id), folder.folder_id
     resource.folder_url = folder.folder_url
@@ -86,12 +97,16 @@ def set_metadata(ctx: AppContext, ref: str, *, title: str | None = None, author:
         if resource.raw_file_id:
             ext = Path(resource.raw_filename).suffix if resource.raw_filename else ""
             new_name = drive_filename(resource, ext, author_name, max_chars)
-            drive.rename(resource.raw_file_id, new_name)
+            meta = drive.rename(resource.raw_file_id, new_name) or {}
+            resource.raw_file_id = meta.get("id", resource.raw_file_id)  # object storage: the key changes
+            resource.raw_file_url = meta.get("webViewLink") or resource.raw_file_url
             resource.raw_filename = new_name
             renamed.append(new_name)
         if resource.text_file_id:
             new_name = extracted_filename(resource, author_name, max_chars)
-            drive.rename(resource.text_file_id, new_name)
+            meta = drive.rename(resource.text_file_id, new_name) or {}
+            resource.text_file_id = meta.get("id", resource.text_file_id)
+            resource.text_file_url = meta.get("webViewLink") or resource.text_file_url
             renamed.append(new_name)
         reg.upsert_resource(resource)
     for a in reg.authors():

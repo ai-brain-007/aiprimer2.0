@@ -42,6 +42,11 @@ extract:
   # A [mm:ss] marker is inserted in transcripts about every N seconds.
   transcript_marker_seconds: 60
   tabular_sample_rows: 20
+  # Video files dropped into the chat: store the audio track + key frames (audio_frames) or the full file (full).
+  # `ingest run --keep-full` overrides per file. Keeps a free 10 GB Backblaze account useful for ~150 hours.
+  video_store: audio_frames
+  video_audio_kbps: 48
+  video_key_frames: 6
 
 kb:
   # Chunk size for helper agents (approximate tokens, computed as characters / 4).
@@ -66,3 +71,23 @@ docs:
   # anyone_with_link (viewer) or restricted (owner only until shared by hand)
   sharing: anyone_with_link
   title_prefix: "Summary — "
+
+# v2 storage: Backblaze B2. One account row per B2 application key found in the environment
+# (B2_KEY_ID_0001 + B2_APPLICATION_KEY_0001 -> account b2-0001). Bucket names are global across Backblaze,
+# so the defaults carry the account number; override per account with B2_BUCKET_0001 / B2_MEDIA_BUCKET_0001.
+b2:
+  raw_bucket_pattern: "ai-primer-raw-{n}"
+  media_bucket_pattern: "ai-primer-media-{n}"
+  # Top prefix inside the private bucket. Stage folders are "<raw_prefix>/<T-stage id>/" (ids never change,
+  # so renaming a stage costs nothing); the readable path lives in the Resources log.
+  raw_prefix: "raw"
+  inbox_prefix: "_Inbox"
+  # Free Backblaze accounts refuse uploads past 10 GB; the pipeline then marks the account full and rolls over.
+  free_tier_bytes: 10000000000
+  large_file_threshold_mb: 100
+
+# v2 control panel and pages: Notion. Mode is on when AIPRIMER_NOTION_PAGE_ID is set.
+notion:
+  version: "2022-06-28"
+  # How many top-level blocks of an author page are scanned for inline comments (rate limit: 3 calls/s).
+  comment_scan_blocks: 300

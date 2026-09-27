@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "aiprimer-pipeline"
 version = "0.1.0"
-description = "AI Primer 2.0: chat-driven ingestion of resources into Google Drive and per-author knowledge summaries"
+description = "AI Primer 2.0: chat-driven ingestion of resources into Backblaze B2, per-author knowledge cards, Notion pages"
 requires-python = ">=3.11"
 dependencies = [
     "typer>=0.12",
@@ -22,6 +22,7 @@ dependencies = [
     "google-auth-httplib2>=0.2",
     "google-auth-oauthlib>=1.2",
     "pysocks>=1.7",
+    "requests>=2.31",
     "apify-client>=1.6",
     "pymupdf>=1.24",
     "python-docx>=1.1",

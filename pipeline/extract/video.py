@@ -44,6 +44,44 @@ def _tag(info: dict, *names: str) -> str:
     return ""
 
 
+def _has_video_stream(info: dict) -> bool:
+    return any((s.get("codec_type") == "video") for s in (info.get("streams") or []))
+
+
+def derive_audio_and_frames(path: Path, workdir: Path, duration: int | None, settings: Settings | None = None) -> tuple[list[tuple[str, Path, str]], list[str]]:
+    """Free-tier saver for video files: the mono audio track (AAC) and a few evenly spaced key frames (JPEG).
+    A two-hour video shrinks from gigabytes to roughly 100 MB while keeping everything the knowledge layer needs
+    (speech for the transcript, pictures for the pages). Returns ([(role, path, mime)], warnings)."""
+    ffmpeg = tool_path("ffmpeg")
+    if not ffmpeg:
+        return [], ["ffmpeg not found; the full video will be stored"]
+    cfg = (settings.extract if settings else {}) or {}
+    kbps = int(cfg.get("video_audio_kbps", 48))
+    n_frames = int(cfg.get("video_key_frames", 6))
+    workdir = Path(workdir)
+    workdir.mkdir(parents=True, exist_ok=True)
+    out: list[tuple[str, Path, str]] = []
+    warnings: list[str] = []
+    audio = workdir / f"{path.stem}.audio.m4a"
+    proc = run_tool([ffmpeg, "-y", "-v", "error", "-i", str(path), "-vn", "-ac", "1", "-ar", "22050", "-c:a", "aac", "-b:a", f"{kbps}k", str(audio)], timeout=3600)
+    if proc is not None and proc.returncode == 0 and audio.exists() and audio.stat().st_size > 0:
+        out.append(("audio", audio, "audio/mp4"))
+    else:
+        detail = (proc.stderr.decode("utf-8", "replace").strip().splitlines() or ["unknown error"])[-1] if proc is not None else "could not run"
+        warnings.append(f"audio extraction failed ({detail}); the full video will be stored")
+        return [], warnings
+    total = float(duration or 0)
+    times = [total * (i + 0.5) / n_frames for i in range(n_frames)] if total > 0 and n_frames > 0 else [1.0]
+    for i, t in enumerate(times, start=1):
+        frame = workdir / f"{path.stem}.frame-{i:02d}.jpg"
+        proc = run_tool([ffmpeg, "-y", "-v", "error", "-ss", f"{t:.2f}", "-i", str(path), "-frames:v", "1", "-vf", "scale=640:-2", "-q:v", "4", str(frame)], timeout=300)
+        if proc is not None and proc.returncode == 0 and frame.exists() and frame.stat().st_size > 0:
+            out.append((f"frame:{i:02d}", frame, "image/jpeg"))
+    if len(out) == 1:
+        warnings.append("no key frame could be extracted")
+    return out, warnings
+
+
 def extract_media(path: Path, settings: Settings | None = None, workdir: Path | None = None, kind: str = "video") -> Extraction:
     path = Path(path)
     source_type = "audio" if kind == "audio" else "video"
@@ -95,6 +133,11 @@ def extract_media(path: Path, settings: Settings | None = None, workdir: Path | 
         duration_sec=duration,
     )
     warnings.append("needs transcription")
+    derived: list[tuple[str, Path, str]] = []
+    store = str(((settings.extract if settings else {}) or {}).get("video_store", "audio_frames"))
+    if kind == "video" and workdir is not None and store == "audio_frames" and _has_video_stream(info):
+        derived, more = derive_audio_and_frames(path, Path(workdir) / "derived", duration, settings)
+        warnings.extend(more)
     return Extraction(
         text=MEDIA_STUB,
         metadata=metadata,
@@ -102,4 +145,5 @@ def extract_media(path: Path, settings: Settings | None = None, workdir: Path | 
         transcript_kind="none",
         duration_sec=duration,
         warnings=warnings,
+        derived_files=derived,
     )

@@ -21,7 +21,16 @@ if ! python3 -c "import typer, pydantic, googleapiclient, apify_client, fitz, pa
 fi
 
 missing=()
-if [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON:-}" ] || [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON_RAW:-}" ] || [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY:-}" ]; then
+b2_keys=$(env | grep -o '^B2_APPLICATION_KEY_[A-Z0-9_]*' | tr '\n' ' ')
+if [ -n "${AIPRIMER_NOTION_PAGE_ID:-}" ] || [ -n "${b2_keys:-}" ]; then
+  mode="v2: Notion page $( [ -n "${AIPRIMER_NOTION_PAGE_ID:-}" ] && echo set || echo MISSING ), Backblaze keys: ${b2_keys:-none}"
+  [ -n "${AIPRIMER_NOTION_PAGE_ID:-}" ] || missing+=("AIPRIMER_NOTION_PAGE_ID")
+  [ -n "${b2_keys:-}" ] || missing+=("B2_KEY_ID_0001 B2_APPLICATION_KEY_0001")
+  for k in $b2_keys; do
+    n=${k#B2_APPLICATION_KEY_}
+    [ -n "$(eval echo "\${B2_KEY_ID_${n}:-}")" ] || missing+=("B2_KEY_ID_${n}")
+  done
+elif [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON:-}" ] || [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON_RAW:-}" ] || [ -n "${GOOGLE_SERVICE_ACCOUNT_JSON_SUMMARY:-}" ]; then
   mode="service account key(s) present"
   [ -n "${AIPRIMER_RAW_DRIVE_ID:-}" ] || missing+=("AIPRIMER_RAW_DRIVE_ID")
   [ -n "${AIPRIMER_SUMMARY_DRIVE_ID:-}" ] || missing+=("AIPRIMER_SUMMARY_DRIVE_ID")
@@ -33,9 +42,11 @@ else
   done
   [ -n "${tokens:-}" ] || missing+=("GOOGLE_SERVICE_ACCOUNT_JSON or GOOGLE_REFRESH_TOKEN_*")
 fi
-[ -n "${AIPRIMER_CONTROL_SHEET_ID:-}" ] || missing+=("AIPRIMER_CONTROL_SHEET_ID")
+if [ -z "${AIPRIMER_NOTION_PAGE_ID:-}" ] && [ -z "${b2_keys:-}" ]; then
+  [ -n "${AIPRIMER_CONTROL_SHEET_ID:-}" ] || missing+=("AIPRIMER_CONTROL_SHEET_ID (v1) or AIPRIMER_NOTION_PAGE_ID (v2)")
+fi
 
-echo "AI Primer pipeline: Google credentials -> ${mode}"
+echo "AI Primer pipeline: credentials -> ${mode}"
 if [ ${#missing[@]} -gt 0 ]; then
   echo "AI Primer pipeline: MISSING settings -> ${missing[*]} (see README.md, section Setup). Run /setup for details."
 else
