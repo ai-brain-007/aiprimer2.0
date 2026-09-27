@@ -199,7 +199,11 @@ that day was archived. Miro remains the option if the agent must read a board th
   Social Housing). The transcript actor refused plain URL strings: its `urls` field is typed only by the Apify
   editor `requestListSources` (objects `{"url": ...}`), which the schema check did not read. The check now
   looks at the item type, the editor and the prefill; the config carries `objects` for the transcript actor.
-  Channel listing and cost line worked first time.
+  Channel listing and cost line worked first time. Second surprise of the same run: Notion refused every
+  Resources row with "title is expected to be title": the API resolves a property key as an id before a name,
+  and every title column has the fixed id `title`, so our rich-text column named `title` clashed. Rows are now
+  written by property id (one `retrieve_database` per table, cached); the fake Notion assigns ids like the API
+  and resolves ids first, so this class of bug fails offline from now on.
 - 2026-09-27: the owner asked that the two reference pages be updated every time the pipeline changes, without
   fail. Decided: a gate, not a reminder (rule 11 of CLAUDE.md, script `scripts/hooks/guide_gate.py`). A push that
   changes the pipeline without the pages fails until the pages are updated or a commit states `Guide: unchanged`; a

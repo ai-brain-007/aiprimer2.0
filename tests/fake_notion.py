@@ -135,21 +135,33 @@ class FakeNotionBackend:
             kind = next((k for k in spec if k not in ("name", "id")), None)
             if kind is None:
                 raise _bad(f"property {name} has no type")
-            schema[name] = {"id": name, "name": name, "type": kind, kind: copy.deepcopy(spec[kind] or {})}
+            # Like Notion: the title property always has the id "title"; every other property gets an opaque id,
+            # so a rich-text column *named* "title" does not carry the id "title".
+            pid = "title" if kind == "title" else f"%7C{next(self._ids):04x}"
+            schema[name] = {"id": pid, "name": name, "type": kind, kind: copy.deepcopy(spec[kind] or {})}
         titles = [n for n, p in schema.items() if p["type"] == "title"]
         if len(titles) != 1:
             raise _bad("a database needs exactly one title property")
         return schema
 
+    @staticmethod
+    def _resolve_property(schema: dict, key: str) -> str | None:
+        """A property key is an id or a name; like the API, ids win (so the key "title" is the title column)."""
+        for name, prop in schema.items():
+            if prop.get("id") == key:
+                return name
+        return key if key in schema else None
+
     def _db_page_props(self, db: dict, properties: dict, current: dict | None = None) -> dict:
         schema = db["properties"]
         props = copy.deepcopy(current or {})
-        for name, value in properties.items():
-            if name not in schema:
-                raise _bad(f"{name} is not a property that exists.")
+        for key, value in properties.items():
+            name = self._resolve_property(schema, key)
+            if name is None:
+                raise _bad(f"{key} is not a property that exists.")
             kind = schema[name]["type"]
             if not isinstance(value, dict) or kind not in value:
-                raise _bad(f"{name} is expected to be {kind}.")
+                raise _bad(f"{key} is expected to be {kind}.")
             payload = value[kind]
             if kind in ("title", "rich_text"):
                 payload = self._rt(payload)

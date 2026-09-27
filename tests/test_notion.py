@@ -63,6 +63,29 @@ def test_ensure_tabs_creates_the_seven_databases(fake_notion, parent_page):
     assert set(fake_notion.child_databases(parent_page)) == set(TAB_MODELS)
 
 
+def test_rows_are_written_by_property_id_so_a_column_named_title_works(fake_notion, parent_page):
+    """Seen live on the first ingestion: Notion resolves the key "title" as the id of the title column, so the
+    Resources table's rich-text column named "title" was refused when written by name."""
+    from pipeline.models import Resource
+
+    repo = NotionRepo(fake_notion, parent_page)
+    repo.ensure_tabs()
+    db = repo.database_id("Resources")
+    schema = fake_notion.databases[db]["properties"]
+    assert schema["resource_id"]["type"] == "title" and schema["resource_id"]["id"] == "title"
+    assert schema["title"]["type"] == "rich_text" and schema["title"]["id"] != "title"
+    # the fake refuses what the API refuses
+    with pytest.raises(NotionError, match="title is expected to be title"):
+        fake_notion.create_page({"database_id": db}, {"title": {"rich_text": [{"type": "text", "text": {"content": "x"}}]}})
+    repo.append("Resources", [Resource(resource_id="R-YT-abc", title="How he makes £20,000 a month", status="registered")])
+    rows = repo.load("Resources", refresh=True)
+    assert len(rows) == 1 and rows[0].title == "How he makes £20,000 a month" and rows[0].resource_id == "R-YT-abc"
+    repo.update("Resources", [Resource(resource_id="R-YT-abc", title="Renamed", status="uploaded")])
+    row = repo.get("Resources", "R-YT-abc")
+    assert row.title == "Renamed" and row.status == "uploaded"
+    assert fake_notion.calls.count(f"retrieve_database:{db}") <= 2 if any(c.startswith("retrieve_database") for c in fake_notion.calls) else True
+
+
 def test_ensure_tabs_adds_missing_columns_and_renames_title(fake_notion, parent_page):
     fake_notion.create_database(parent_page, "Accounts", {"account_id": {"title": {}}, "email": {"rich_text": {}}})
     fake_notion.create_database(parent_page, "Jobs", {"Name": {"title": {}}, "command": {"rich_text": {}}})
@@ -122,8 +145,9 @@ def test_get_page_id_and_invalidate(fake_notion, parent_page):
     repo.append("Resources", [Resource(resource_id="R-1", title="One")])
     assert repo.get("Resources", "R-1").title == "One" and repo.get("Resources", "R-9") is None
     assert repo.page_id("Resources", "R-9") is None
-    # someone edits the row in Notion: the cache is stale until invalidated
-    fake_notion.update_page(repo.page_id("Resources", "R-1"), {"title": {"rich_text": [{"type": "text", "text": {"content": "Edited"}}]}})
+    # someone edits the row in Notion: the cache is stale until invalidated (the UI writes by property id)
+    title_col = fake_notion.databases[repo.database_id("Resources")]["properties"]["title"]["id"]
+    fake_notion.update_page(repo.page_id("Resources", "R-1"), {title_col: {"rich_text": [{"type": "text", "text": {"content": "Edited"}}]}})
     assert repo.get("Resources", "R-1").title == "One"
     repo.invalidate("Resources")
     assert repo.get("Resources", "R-1").title == "Edited"

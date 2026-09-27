@@ -412,6 +412,7 @@ class NotionRepo:
         self.tab_models = tab_models or TAB_MODELS
         self._db_ids: dict[str, str] | None = None
         self._db_parents: dict[str, str] = {}
+        self._prop_ids: dict[str, dict[str, str]] = {}  # database id -> {property name: property id}
         self._cache: dict[str, tuple[list[str], list[dict[str, str]], dict[str, str]]] = {}
 
     # ---- structure
@@ -449,7 +450,7 @@ class NotionRepo:
         headers, rows, _ = self._load_raw(tab, refresh=True)
         new_id = self.backend.create_database(page_id, tab, self._schema(model))["id"]
         for cells in rows:
-            self.backend.create_page({"database_id": new_id}, self._properties_of(tab, model.headers(), cells))
+            self.backend.create_page({"database_id": new_id}, self._properties_of(tab, model.headers(), cells, db_id=new_id))
         copied = [p for p in self.backend.query_database(new_id) if not p.get("archived")]
         if len(copied) != len(rows):
             self.backend.delete_block(new_id)
@@ -490,6 +491,7 @@ class NotionRepo:
                 self.backend.update_database(db_id, {h: {"rich_text": {}} for h in missing})
                 report["columns_added"][tab] = missing
         self._cache.clear()
+        self._prop_ids.clear()
         return report
 
     def database_id(self, tab: str) -> str | None:
@@ -583,6 +585,7 @@ class NotionRepo:
         if tab is None:
             self._cache.clear()
             self._db_ids = None
+            self._prop_ids.clear()
         else:
             self._cache.pop(tab, None)
 
@@ -590,12 +593,22 @@ class NotionRepo:
     def _properties(self, tab: str, headers: list[str], row: TabRow) -> dict[str, dict]:
         return self._properties_of(tab, headers, row.to_row())
 
-    def _properties_of(self, tab: str, headers: list[str], cells: dict[str, str]) -> dict[str, dict]:
+    def _property_ids(self, db_id: str) -> dict[str, str]:
+        """{property name: property id} of a database, fetched once. Rows are written by id: a name is also
+        accepted by the API, but it resolves ids first, and every title column has the fixed id "title", so a
+        rich-text column *named* "title" (the Resources table) is refused when written by name (seen live)."""
+        if db_id not in self._prop_ids:
+            props = (self.backend.retrieve_database(db_id) or {}).get("properties") or {}
+            self._prop_ids[db_id] = {name: str(p.get("id") or name) for name, p in props.items()}
+        return self._prop_ids[db_id]
+
+    def _properties_of(self, tab: str, headers: list[str], cells: dict[str, str], db_id: str | None = None) -> dict[str, dict]:
         key_field = self.tab_models[tab].key_field
+        ids = self._property_ids(db_id or self._require_db(tab))
         props: dict[str, dict] = {}
         for h in headers:
             items = _capped(rich_text(cells.get(h, "")))
-            props[h] = {"title": items} if h == key_field else {"rich_text": items}
+            props[ids.get(h, h)] = {"title": items} if h == key_field else {"rich_text": items}
         return props
 
     def append(self, tab: str, rows: list[TabRow]) -> None:
