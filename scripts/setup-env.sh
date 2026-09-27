@@ -31,6 +31,7 @@ google-auth-oauthlib>=1.2
 cffi>=1.16
 cryptography>=42
 pysocks>=1.7
+requests>=2.31
 apify-client>=1.6
 pymupdf>=1.24
 python-docx>=1.1
@@ -94,7 +95,7 @@ wait "$apt_pid" 2>/dev/null || true
 python3 - <<'EOF' || true
 import importlib
 mods = ["typer", "pydantic", "yaml", "googleapiclient", "google.oauth2.service_account", "google_auth_oauthlib",
-        "apify_client", "fitz", "docx", "openpyxl", "pandas", "rapidfuzz", "frontmatter", "jinja2",
+        "apify_client", "fitz", "docx", "openpyxl", "pandas", "rapidfuzz", "frontmatter", "jinja2", "requests",
         "cryptography.hazmat.primitives.serialization"]
 missing = []
 for m in mods:
