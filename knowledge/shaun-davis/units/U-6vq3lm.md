@@ -14,11 +14,12 @@ aliases:
 - An entrepreneur solves problems and creates value
 - 'The entrepreneur''s job: create value, solve problems'
 - Role of an entrepreneur
+- Create value, solve problems
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-02-15'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 08:01
@@ -100,6 +101,16 @@ citations:
   quote: Remember what I said earlier, the role of an entrepreneur is to create value and solve meaningful problems.
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 01:01
+  quote: The role of an entrepreneur is number one, create value. Number two, solve problems. You get paid in proportion to the level of problems that you are solving.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 01:01
+  quote: That's when I decided to solve huge problems. And social housing, honestly, it changed my life.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -107,7 +118,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T14:14:19Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description

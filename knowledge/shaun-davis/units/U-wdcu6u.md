@@ -8,11 +8,14 @@ aliases:
 - Same energy online and in person
 - Keep that same energy
 - Authenticity
+- Build an authentic personal brand
+- Document your journey
+- Share your journey
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '18:00'
@@ -49,6 +52,26 @@ citations:
   quote: how are we on social media and how we are on YouTube it's exactly the way we are in person there is no different it's the same energy that you're going to get
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 04:02
+  quote: I've been sharing content now on my journey since 2020. So, for the last 6 years, I've been consistent with sharing my journey.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 04:02
+  quote: So, when you build a brand and you keep it real and people can see the authenticity of your character, what ends up happening is people really become engaged in your journey.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 05:00
+  quote: I've had so many people that have messaged me and said they'd love to do a joint venture or invest in me.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 04:02
+  quote: I've been able to build not just a decent following base, but an engaged following base.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -56,7 +79,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description

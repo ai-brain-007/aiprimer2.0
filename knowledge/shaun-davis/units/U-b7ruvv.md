@@ -12,11 +12,13 @@ aliases:
 - Nightly rate temporary accommodation model
 - TA core model
 - Nightly rate model
+- Emergency accommodation
+- Rent-to-council
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2026-02-15'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '35:01'
@@ -83,6 +85,41 @@ citations:
   quote: Although this model is great because there are very minimal operations involved once the tenants has moved in.
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '12:01'
+  quote: So, another model that I love is called a temporary accommodation.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '13:00'
+  quote: emergency accommodation, but both of them work very similar.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '14:00'
+  quote: you will get paid on a nightly rate basis. So it's like a long-term tenant, but you're getting paid as if it's a hotel because councils actually house a lot of tenants in hotels.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '14:00'
+  quote: you can then lease a property from a landlord, do a rent-to-rent on it on a long-term commercial lease
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '15:00'
+  quote: can then rent that to the council. The council put their tenants in there and they will then pay you a nightly rate for the property.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '15:00'
+  quote: With temporary accommodation, there is no provider in place. you're expected to house that tenant and make sure that tenant is well looked after in terms of maintenance-wise, etc.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '15:00'
+  quote: The key thing to mention about this property strategy is it does cost a little bit of money to get involved because it's not like a back-to-back lease where you're renting it to a provider, where the provider would basically provide the service.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -90,7 +127,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T14:14:19Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description

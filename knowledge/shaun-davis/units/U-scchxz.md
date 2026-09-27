@@ -5,11 +5,12 @@ type: concept
 name: Control assets, do not own them
 aliases:
 - Controlling assets that produce cash flow
+- The biggest UK property businesses control, not own
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-10-29'
-last_seen: '2025-10-29'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-y6ixpf6kK8Y
   location: 00:00
@@ -21,6 +22,11 @@ citations:
   quote: You can make money from the property without actually owning the property.
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 06:00
+  quote: Some of the biggest property businesses in the UK, I'm talking tens of millions of pounds in revenue, they don't actually own the property, they control the property.
+  verified: true
+  score: 100
 versions:
 - date: '2025-10-29'
   resource_id: R-YT-y6ixpf6kK8Y
@@ -28,7 +34,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:43:33Z'
-updated_at: '2026-09-27T13:43:33Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description

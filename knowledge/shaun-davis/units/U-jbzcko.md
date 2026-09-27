@@ -11,11 +11,12 @@ aliases:
 - Pivoting big in lockdown
 - The forced pivot to social housing
 - Why Sean left Airbnb and working professionals for social housing
+- Shaun's pivot from failed strategies to social housing
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-12-14'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: 07:00
@@ -137,6 +138,21 @@ citations:
   quote: when I first started, I really wanted financial stability.
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 00:00
+  quote: I tried various strategies such as service accommodation, such as like professional HMOs and students. And ultimately, these strategies failed miserably, especially in COVID.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 01:01
+  quote: So, cut a long story short, I'm 8 years into property now. I've got over 500 rooms.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 02:01
+  quote: I used to be a car sales executive for a premium brand.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -144,7 +160,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description

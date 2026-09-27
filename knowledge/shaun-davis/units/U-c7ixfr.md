@@ -27,7 +27,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-05-14'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -224,6 +224,16 @@ citations:
   quote: if you're building the right level of rapport with the landlord, the landlord is going to trust you to be able to use that property as you wish basically.
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '11:00'
+  quote: The fundamentals is property is a relationship based game. The people who build the most relationships, they win the game, guys. It's that simple.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 08:00
+  quote: So, once you've got all the information, you then go out there and start to build relationships. Relationships are key.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -231,7 +241,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description

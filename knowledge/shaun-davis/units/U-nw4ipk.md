@@ -22,11 +22,13 @@ aliases:
 - Rent to rent Airbnb deal
 - Rent-to-rent social housing from start to finish
 - The social housing model in simple terms
+- Rent-to-social housing
+- Control, don't own
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-05-14'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '10:00'
@@ -158,6 +160,26 @@ citations:
   quote: So, the council or the provider will pay you a set amount. You're obviously paying the landlord a lower amount, and you're pocketing the difference.
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 06:00
+  quote: And that's what rent-to-rent is, it's very simple. You lease the property, you sign a commercial lease with the landlord
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 06:00
+  quote: you don't need mortgages, you don't need lots of capital to get started. And here's the one that might shock you, you don't even need good credit to do this strategy.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 06:00
+  quote: And there's a strategy that I've been doing for the last 6 years and it's called rent-to-social housing.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 06:00
+  quote: these are quick cash flow strategies and it's called rent-to-rent
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -165,7 +187,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description

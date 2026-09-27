@@ -12,11 +12,12 @@ aliases:
 - Three core questions
 - The three core questions
 - Three core questions to ask the council
+- What to find out from a provider
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-05-14'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -93,6 +94,16 @@ citations:
   quote: But you need to ask three core questions. Number one, what areas are you looking for properties in? Number two, what specific types of properties do you need? Number three, what the rent settings are.
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 07:01
+  quote: what specific type of property do they need? Is it a HMO? What size HMO do they need? Is it a, I don't know, two or three bedroom flat? Is it a studio? What specific area do they have the most demand in? And also, what are they willing to pay?
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '11:00'
+  quote: you find out the three core questions in terms of what they actually want, what specific types of properties, what they will pay.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -100,7 +111,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description

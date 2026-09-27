@@ -3,12 +3,13 @@ id: U-ckechj
 author_id: A-shaun-davis
 type: script
 name: Estate agent walk-in pitch
-aliases: []
+aliases:
+- The estate agent pitch
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-06-09'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '20:00'
@@ -40,6 +41,16 @@ citations:
   quote: We've been tasked by the council to look for three and four bed properties.
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 09:00
+  quote: I work with X council and I've been tasked to house families. I need three bedroom properties as soon as possible. Do you have anything available?
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 09:00
+  quote: If you notice something, I didn't mention the word social housing.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -47,7 +58,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description

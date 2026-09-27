@@ -5,11 +5,12 @@ type: principle
 name: Confuse them and you lose them
 aliases:
 - Keep it simple
+- If you confuse them, you lose them
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-06-09'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '16:01'
@@ -31,6 +32,11 @@ citations:
   quote: It's all about the way you come across.
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: 09:00
+  quote: So, with me, if I go into an agent and I speak to them, I keep it super simple. If you confuse them, you lose them. It's simple as that.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -38,7 +44,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description

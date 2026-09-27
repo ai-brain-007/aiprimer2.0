@@ -6,11 +6,13 @@ name: The Sandu challenge
 aliases:
 - Sandhu documentary
 - Live with a stranger for a week
+- The council that would take 300 properties tomorrow
+- The Sandhu challenge
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2026-05-14'
-last_seen: '2026-05-14'
+last_seen: '2026-05-27'
 citations:
 - resource_id: R-YT-NuYOOjmh0ZI
   location: '10:00'
@@ -32,6 +34,21 @@ citations:
   quote: he was trying to do this strategy by himself a few months prior, and he had no luck. So, he was at the place where his mindset was just all wrong.
   verified: true
   score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '13:00'
+  quote: If you was to give me 300 properties tomorrow, I'd take it.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '13:00'
+  quote: I did a challenge with Sandhu last year, literally this time last year, and the aim was to basically live with him for a week.
+  verified: true
+  score: 100
+- resource_id: R-YT-fUN_l7UYES4
+  location: '13:00'
+  quote: So that shows you the demand that certain councils have across the UK.
+  verified: true
+  score: 100
 versions:
 - date: '2026-05-14'
   resource_id: R-YT-NuYOOjmh0ZI
@@ -39,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:27:15Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:33:44Z'
 ---
 
 ## Description
