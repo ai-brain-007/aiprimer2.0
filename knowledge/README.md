@@ -43,7 +43,7 @@ updated_at: ...
 ---
 
 ## Description
-One to three sentences in the pipeline's words.
+Two to four short sentences for a beginner, addressed to "you" (voice: pipeline/prompts/style.md).
 
 ## Details
 The full teaching as the sources give it.

@@ -50,12 +50,15 @@ deduplication step merges duplicates, but it can never recover what you left out
    mistakes and datasets. Ten to forty units per chunk is normal for dense material.
 2. `name`: short, specific, how the author would call it (2 to 8 words). Put the author's
    other names for it in `aliases`.
-3. `description`: one to three sentences in your own words that let a reader understand
-   the unit without the source. It clarifies; it does not copy.
+3. `description`: two to four short sentences in your own words, written for a beginner who
+   asked "what is this and why should I care?", talking to them as "you". It clarifies; it
+   does not copy. Voice and layout follow `pipeline/prompts/style.md` and the approved sample
+   `docs/style-sample-jab.md`; read both before writing your first unit.
 4. `details`: as complete as the source allows: the full steps, numbers, conditions,
-   variations, caveats and reasoning. Use markdown lists where the source enumerates.
-   Do not compress a procedure into a summary; the card is the reader's substitute for the
-   source. Only content the source contains.
+   variations, caveats and reasoning, organised so a reader can follow them: numbered steps
+   for anything done in order, bullet lists for sets, a fix next to every mistake. Do not
+   compress a procedure into a summary; the card is the reader's substitute for the source.
+   Only content the source contains; the style guide changes how you write, never what.
 5. `citations`: at least one, ideally two or three, each with a VERBATIM quote of at most
    300 characters copied exactly from the chunk text: same words, same order, no
    paraphrase, no ellipses, no inserted words, no fixing typos. A citation that does not

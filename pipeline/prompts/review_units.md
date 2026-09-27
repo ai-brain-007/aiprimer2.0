@@ -42,6 +42,8 @@ For every card that was created or changed:
    the evidence shows it, not merely differ in emphasis.
 5. **Type and name fit** the content (an ordered set of steps is a procedure, a defined
    term is a glossary entry). Mismatches are flags, not rejections.
+   Writing style (see `pipeline/prompts/style.md`) is likewise a flag at most: a clumsy
+   description is never a reason to reject a card the evidence supports.
 6. **"quote not located"** on every citation of a card is a rejection; on some of them,
    a flag.
 

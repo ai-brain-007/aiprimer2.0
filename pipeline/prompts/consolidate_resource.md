@@ -18,7 +18,8 @@ into ONE `ExtractionOutput` for the whole resource.
    - keep the clearest name; put the other names in `aliases`;
    - keep the fuller `details` and enrich it with anything the other copies add (steps,
      numbers, caveats), without repeating the same point twice;
-   - keep or rewrite the `description` so it covers the merged unit;
+   - keep or rewrite the `description` so it covers the merged unit, in the voice of
+     `pipeline/prompts/style.md` (short sentences, addressed to "you", beginner first);
    - keep ALL distinct citations from every copy (same location and quote counts as the
      same citation; different passages are all kept, ordered by location).
 3. Keep units that are genuinely different as separate units, even when related (for

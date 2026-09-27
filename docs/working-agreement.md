@@ -83,7 +83,9 @@ be readable by the agent through an API.
 - Straight to the point: lead with the answer, one idea per paragraph, no filler, no hype, no repetition.
 - Concrete: numbers, cues, examples, and in pipeline output a verified quote with page or timestamp behind every claim.
 - Layered: one line, one paragraph, full details, so the reader can stop at any depth.
-- Approved sample: `docs/style-sample-jab.md`. Renderers and helper prompts imitate it.
+- Approved sample: `docs/style-sample-jab.md`. The operative guide for helpers and renderers is
+  `pipeline/prompts/style.md`; the extraction, consolidation and review prompts, the summarize skill and the
+  summary template follow it. Layer 3 builders must follow it too when they are written.
 
 ## 4. Engineering rules
 

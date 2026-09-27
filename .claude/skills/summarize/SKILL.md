@@ -75,6 +75,12 @@ Applies the review verdicts (rejected → `_rejected/`), renders `summary.md`, c
 in place (same link), commits `knowledge/<author-slug>/`, logs the Summaries row, marks resources summarised.
 Report the Doc link, the version and the commit. Running the whole flow again for the same resources adds nothing.
 
+## Writing style (owner's decision, 2026-09-27)
+Everything a reader sees follows `pipeline/prompts/style.md` and the approved sample `docs/style-sample-jab.md`:
+conversational, addressed to "you", beginner first, straight to the point, concrete, layered. This applies to the
+helpers (the prompts already point to it), to any card text you edit by hand when applying feedback, and to what you
+write to the user in the chat about the summary. Style never adds content: quotes and the no-invention rule stand.
+
 ## Rules
 - Never write a card without a verbatim quote; never edit `summary.md` by hand (it is regenerated).
 - EVOLVED needs dated sources on both sides; when unsure prefer SAME over NEW, and NEW over EVOLVED.
