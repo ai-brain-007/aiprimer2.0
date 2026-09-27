@@ -17,7 +17,7 @@ you read lives in Notion, and the verified knowledge cards live in this reposito
 ## How the data flows
 
 ```
-you (chat) ── /ingest ──► ingestion agent ──► scripts ──► Backblaze bucket ai-primer-raw-0001: raw/<stage id>/
+you (chat) ── /ingest ──► ingestion agent ──► scripts ──► Backblaze bucket ai-primer-raw-0001: raw/<domain id>/<primer id>/<stage id>/
                                               │            original file + "<name>.extracted.md" (+ meta.json)
                                               └──────────► Notion · Resources database (+ Jobs log)
 you (chat) ── /summarize <author> ──► summary agent ──► helper agents extract / match / review
@@ -27,7 +27,7 @@ you (chat) ── /summarize <author> ──► summary agent ──► helper a
 
 | Data | Where it lives |
 |---|---|
-| Original files, text versions, audio and key frames | Backblaze bucket `ai-primer-raw-000N` (private), `raw / <stage id> /` |
+| Original files, text versions, audio and key frames | Backblaze bucket `ai-primer-raw-000N` (private), `raw / <domain id> / <primer id> / <stage id> /` |
 | Files uploaded by hand for later | the same bucket, `raw / _Inbox /` |
 | Pictures and clips embedded in pages | Backblaze bucket `ai-primer-media-000N` (public), or uploaded into Notion when small |
 | Registry, taxonomy, storage accounts, authors, summaries, activity log | Notion databases under the page "AI Primer" |

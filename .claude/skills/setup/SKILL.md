@@ -38,7 +38,7 @@ Never ask the user to paste a key or token into the chat. If they do, tell them 
    ```
    Creates the databases under the "AI Primer" page (Accounts, Taxonomy, Folders, Resources, Authors, Summaries,
    Jobs), the `raw/` and `raw/_Inbox/` prefixes in each raw bucket, imports `config/taxonomy.seed.yaml`, prints
-   health. Stage folders inside the bucket are named by node id (`raw/T-xxxxxx/`), so renaming a stage never
+   health. Folders inside the bucket are named by node id (`raw/<domain id>/<primer id>/<stage id>/`), so renaming a stage never
    touches storage; the readable path is in the Resources database.
 3. **Apify formats** (needs `api.apify.com` allowed and the credential set):
    ```bash

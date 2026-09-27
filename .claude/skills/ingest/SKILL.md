@@ -10,7 +10,7 @@ Inputs are whatever the user gave: URLs, files attached to the chat (use their l
 message: `author=…`, `stage=…`, `title=…`, `date=…`.
 
 Storage: the original and its text version go to the raw bucket of the first storage account with room, under
-`raw/<stage id>/`; the Resources database in Notion records the readable path, the object keys, the links, the
+`raw/<domain id>/<primer id>/<stage id>/`; the Resources database in Notion records the readable path, the object keys, the links, the
 date, the kind, the extraction method, the Apify cost and any warnings. Every source needs a date when one can be
 found: evolution tracking depends on it.
 

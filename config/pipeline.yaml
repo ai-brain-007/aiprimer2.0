@@ -78,7 +78,7 @@ docs:
 b2:
   raw_bucket_pattern: "ai-primer-raw-{n}"
   media_bucket_pattern: "ai-primer-media-{n}"
-  # Top prefix inside the private bucket. Stage folders are "<raw_prefix>/<T-stage id>/" (ids never change,
+  # Top prefix inside the private bucket. Folders are "<raw_prefix>/<domain id>/<primer id>/<stage id>/" (ids never change,
   # so renaming a stage costs nothing); the readable path lives in the Resources log.
   raw_prefix: "raw"
   inbox_prefix: "_Inbox"

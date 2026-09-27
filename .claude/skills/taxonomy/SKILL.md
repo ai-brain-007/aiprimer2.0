@@ -6,7 +6,7 @@ description: Manage the Domain > Primer > Stage tree of the AI Primer library (l
 # /taxonomy — tree and moves
 
 The **Taxonomy database** of the control panel is the source of truth. Node ids (`T-…`) never change; names do.
-In Backblaze storage the folders are named by node id (`raw/T-xxxxxx/`), so a rename touches no file: only the
+In Backblaze storage the folders are named by node id (`raw/<domain id>/<primer id>/<stage id>/`), so a rename touches no file: only the
 readable `stage_path` on the resources is refreshed. (In the legacy Google mode the Drive folders carry the names
 and are renamed.) Every command prints JSON.
 

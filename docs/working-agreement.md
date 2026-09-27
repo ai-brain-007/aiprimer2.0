@@ -101,25 +101,34 @@ be readable by the agent through an API.
 - IDs are permanent: `T-…` taxonomy nodes, `A-…` authors, `R-YT-<video id>` / `R-F-<fingerprint>` resources,
   `U-…` cards, `b2-000N` storage accounts.
 
-## 5. State of the build
+## 5. State of the build (2026-09-27)
 
-- v1 (Google Drive / Sheets / Docs) is implemented and tested (176 offline tests) but was never run live: Google
-  service accounts cannot upload to a personal Gmail Drive, and the owner did not want the OAuth sign-in.
-- v2 (Backblaze + Notion) is decided and not yet built. Until it lands, do not run `/setup`, `/ingest` or
-  `/summarize` against live accounts; the skills still describe v1.
-- Done on the owner's side: environment "AI Primer 2.0" created with the Apify credential; Google keys stored
-  (to be removed). Pending: Backblaze account and buckets, application key; Notion workspace, page and integration;
-  allowed-domains update.
+- **v2 code has landed and is tested offline (246 tests), never yet run live.** Backblaze B2 storage backend
+  (`pipeline/storage_b2.py`: native API, large files, retries, free-tier cap detection, id-named folders
+  `raw/<domain id>/<primer id>/<stage id>/`), Notion backend (`pipeline/notion.py`: databases as the control
+  panel, markdown-to-blocks, author page published in place into the author's row, comments read and replied),
+  mode wiring from the environment, health check with a real bucket write test, rollover to the next account,
+  video files stored as audio + key frames unless `--keep-full`.
+- v1 (Google Drive / Sheets / Docs) code remains for the offline tests and is used only when no v2 variable is set.
+- Not yet built: pictures inside pages (image upload is in the Notion client; the renderer does not emit images
+  yet), per-card Notion pages and the Cards database (v2 publishes the whole author page), layer 3, transcription
+  of stored audio.
+- Owner's side: environment "AI Primer 2.0" exists with the Apify credential and the old Google keys. Pending:
+  Backblaze account with buckets `ai-primer-raw-0001` (private) and `ai-primer-media-0001` (public) and one
+  application key (→ `B2_KEY_ID_0001` / `B2_APPLICATION_KEY_0001`); Notion workspace under
+  `ai.primer.brain.0001`, page "AI Primer", integration "AI Primer pipeline" connected to it (secret → API
+  credential for `api.notion.com`; page id → `AIPRIMER_NOTION_PAGE_ID`); allowed domains
+  `*.backblazeb2.com`, `*.backblaze.com`, `api.notion.com`; Google variables removed.
 
 ## 6. Next engineering steps
 
-1. Write the v2 plan (this file is the summary; a fuller `docs/plan-v2.md` may accompany it).
-2. Storage backend for Backblaze B2 (native API, own thin client), with a fake for tests; storage-account rollover;
-   audio + key-frame extraction for videos.
-3. Notion backend: registry databases, author page renderer (cards → blocks), image upload, comment intake.
-4. `/setup` for v2: health check of Backblaze and Notion, creation of the databases under the "AI Primer" page.
-5. Layer 3: `/learn <stage>` dialogue that builds the Stage brief and its artefacts.
-6. Live smoke test with a temporary stage, then first real `/ingest` and `/summarize`.
+1. Live smoke test in the "AI Primer 2.0" environment once the credentials are in: `/setup`, a temporary stage,
+   one short public video, `/summarize`, open the Notion page, comment, republish, clean up. Expect surprises in
+   the Notion API version and the Backblaze credential handling; fix and record them here.
+2. First real example: one boxing coach, one jab video, one author page. Style check against the sample.
+3. Pictures in pages (key frames and screenshots as image blocks) and the Cards database with one page per card.
+4. Transcription of stored audio (video files dropped into the chat).
+5. Layer 3: `/learn <stage>` dialogue that builds the Stage brief and its artefacts (Stages database).
 
 ## 7. Decision log
 
@@ -135,6 +144,8 @@ be readable by the agent through an API.
 - 2026-09-27: three-layer model confirmed; layer 3 built in dialogue; Cards is one library across authors.
 - 2026-09-27: writing style fixed (conversational, newcomer-first, concise); sample `docs/style-sample-jab.md`.
 - 2026-09-27: first live example wanted soon: one author, one resource, one Notion author page.
+- 2026-09-27: v2 built: bucket folders named by node ids (renames free), Notion API pinned to 2022-06-28, video
+  files stored as audio + key frames by default, storage accounts seeded from `B2_APPLICATION_KEY_<n>` variables.
 
 ## 8. Open points
 
