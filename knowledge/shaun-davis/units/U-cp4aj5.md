@@ -5,11 +5,12 @@ type: principle
 name: A leader cannot afford negativity
 aliases:
 - You're only as good as your leader
+- Your team follows the leader
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2025-04-09'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '10:00'
@@ -26,6 +27,16 @@ citations:
   quote: you're only as good as your leader and we're leaders in our spaces so like we have to ensure that our energy is correct
   verified: true
   score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 01:02
+  quote: you're only as good as your leader. Your team will only ever be as good as you are.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 01:02
+  quote: you can have the same players but a different leader but total different results because everyone follows the leader essentially.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -33,7 +44,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T13:05:45Z'
 ---
 
 ## Description

@@ -13,7 +13,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-27'
+last_seen: '2025-04-09'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: 07:00
@@ -80,6 +80,26 @@ citations:
   quote: in that experience I learned so much about myself through the those three months more than like years
   verified: true
   score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 06:01
+  quote: So I left my job on the 20th of Feb 2020. Three weeks after COVID happened.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 08:00
+  quote: I had about two months worth of expenses. I was really under pressure to make something work and to be able to fill these houses again with a different tenant type.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 09:00
+  quote: We now have hundreds of rooms across the country and we generate multi-seven figures per year in revenue.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 09:00
+  quote: All you need is a vision and a relentless work ethic.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -87,7 +107,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:59:20Z'
+updated_at: '2026-09-27T13:05:45Z'
 ---
 
 ## Description

@@ -5,11 +5,14 @@ type: principle
 name: Fall in love with the process
 aliases:
 - Love the process more than the results
+- Obsess over the process, not the outcome
+- Growth-focused, not goal-focused
+- Become more to have more
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-27'
-last_seen: '2025-03-27'
+last_seen: '2025-04-09'
 citations:
 - resource_id: R-YT-nuKBUiE3Afc
   location: 08:00
@@ -26,6 +29,21 @@ citations:
   quote: there's always an aim cuz I feel like you need to have something to to strive towards but you need to really enjoy the process like find a way to be able to enjoy the process
   verified: true
   score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: '10:00'
+  quote: you have to be obsessed with the process, not the outcome. If you're obsessed with the outcome, what will happen is you'll always skip corners and you'll always come short.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: '11:00'
+  quote: '"When I was goal-focused, I used to always miss my goals. Now I''m growth-focused, I hit goals by default."'
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: '11:00'
+  quote: Who you become will be your greatest asset, not exactly what you get.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-27'
   resource_id: R-YT-nuKBUiE3Afc
@@ -33,7 +51,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:59:20Z'
-updated_at: '2026-09-27T12:59:20Z'
+updated_at: '2026-09-27T13:05:45Z'
 ---
 
 ## Description

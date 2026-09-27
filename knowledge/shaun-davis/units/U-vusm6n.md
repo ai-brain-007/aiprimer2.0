@@ -6,11 +6,16 @@ name: Your network is your net worth
 aliases:
 - Get in bigger rooms
 - You are who you hang around with
+- Get yourself into different rooms
+- You can't unsee it
+- The Miami trip
+- Be intentional about your circle
+- No yes men
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2025-04-09'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '39:00'
@@ -37,6 +42,31 @@ citations:
   quote: I want to hang around with people that make me feel like I can do more I can be more I don't want to hang around with people that want to take the power away from me
   verified: true
   score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 04:00
+  quote: If you hang around entrepreneurs, if you hang around billionaires, and you adapt the mindset, you can't unsee it. And what happens is that energy and the mindset rubs off on you, even on a subconscious level.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 03:01
+  quote: It taught me a lot about wealth, and I was exposed to a different level of wealth. And this is why I love getting myself into different rooms
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 04:00
+  quote: I came back from America, sat at my desk, and I was like, "Okay, I no longer want to sell cars anymore. I want to create my own business. I want to be responsible for my own financial future."
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: '15:00'
+  quote: Your circle should be empowering you. Your circle should be motivating and inspiring you. And also, you shouldn't be surrounded with yes men. You want to be surrounded with people that actually give you constructive criticism.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: '15:00'
+  quote: You want to be with people that pour energy into you as opposed to draining it. And the same is true, your network is your net worth.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -44,7 +74,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T13:05:45Z'
 ---
 
 ## Description

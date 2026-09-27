@@ -9,11 +9,12 @@ aliases:
 - Your business can't outgrow who you are
 - Work on yourself first
 - Put yourself first
+- Be obsessed with your personal development
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-27'
+last_seen: '2025-04-09'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '46:00'
@@ -40,6 +41,16 @@ citations:
   quote: your business can't out grow who you are I can't out grow your personal identity so always put yourself first and then ever since I did that everything else happened organically
   verified: true
   score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 00:00
+  quote: Your business cannot outgrow your personal identity. It can't outgrow who you are.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 00:00
+  quote: I'm in the transition right now where we're scaling massively and everything is going well because I put myself first.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -47,7 +58,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:59:20Z'
+updated_at: '2026-09-27T13:05:45Z'
 ---
 
 ## Description

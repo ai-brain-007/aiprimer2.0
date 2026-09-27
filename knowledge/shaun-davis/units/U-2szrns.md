@@ -5,11 +5,14 @@ type: concept
 name: Supported versus temporary accommodation
 aliases:
 - Why Shaun scales temporary accommodation nationwide
+- Supported accommodation
+- Social housing
+- Temporary to permanent accommodation
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2025-04-09'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '33:00'
@@ -31,6 +34,21 @@ citations:
   quote: my plan now is just continue scaling temporary accommodation working with lots of different councils around the UK
   verified: true
   score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 08:00
+  quote: I was able to start a social housing business called supported accommodation, which is a great business
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 09:00
+  quote: model because you're housing the homeless, you're housing those who need it most, and you're providing value and support to those tenants.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: '19:01'
+  quote: I teach people how to start and scale, specifically a temporary to permanent accommodation business.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -38,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T13:05:45Z'
 ---
 
 ## Description

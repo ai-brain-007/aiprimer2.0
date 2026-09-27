@@ -6,11 +6,13 @@ name: Create value and solve a big problem
 aliases:
 - Solve problems and create value
 - The role of an entrepreneur
+- 'The role of an entrepreneur: create value, solve problems'
+- The bigger the problem, the bigger the pay
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-03-27'
+last_seen: '2025-04-09'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 08:01
@@ -37,6 +39,16 @@ citations:
   quote: there surely must be somewhere that I can give value to these people
   verified: true
   score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 07:01
+  quote: the role of an entrepreneur is number one, create value. And number two, solve problems. Now, here's the thing, the bigger the problem is the more you'll get compensated.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 08:00
+  quote: So, I had to look at what problem is there right now that I could solve.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -44,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T12:59:20Z'
+updated_at: '2026-09-27T13:05:45Z'
 ---
 
 ## Description

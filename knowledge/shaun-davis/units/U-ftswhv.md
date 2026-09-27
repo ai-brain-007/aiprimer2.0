@@ -6,11 +6,14 @@ name: Let go to grow
 aliases:
 - The power of letting go to grow
 - The team is crucial
+- Leverage, outsource, hire
+- Work smarter, not harder
+- Stop being leveraged, start leveraging
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-27'
-last_seen: '2025-03-27'
+last_seen: '2025-04-09'
 citations:
 - resource_id: R-YT-nuKBUiE3Afc
   location: 04:00
@@ -27,6 +30,21 @@ citations:
   quote: when I was able to let go to grow and hire people who are experienc in all different levels I realize actually I can be a facilitator I can be an actual manager and manage these people Empower them ensure that they can do their job to their best of their ability
   verified: true
   score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: '20:01'
+  quote: I started to notice a big difference in my business when I started to let go to grow.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: '20:01'
+  quote: There's so many cases that shows that working harder will not necessarily get you better results. The key is working smarter. And you work smarter by leveraging, by outsourcing, by hiring.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: '21:00'
+  quote: the low-value tasks should be outsourced to someone else in your team. Because the key is not how many hours you're working, it's where you're working.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-27'
   resource_id: R-YT-nuKBUiE3Afc
@@ -34,7 +52,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:59:20Z'
-updated_at: '2026-09-27T12:59:20Z'
+updated_at: '2026-09-27T13:05:45Z'
 ---
 
 ## Description

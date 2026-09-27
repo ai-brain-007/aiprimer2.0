@@ -7,11 +7,12 @@ aliases:
 - Rent to rent strategy
 - Three ways to find rent to rent deals
 - How to get involved in rent to rent
+- Rent-to-rent
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-03-12'
+last_seen: '2025-04-09'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '10:00'
@@ -38,6 +39,16 @@ citations:
   quote: and the last one that I like to do is direct to vendor marketing you can do this by online or offline
   verified: true
   score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 04:00
+  quote: I discovered a strategy called rent-to-rent, which is essentially very simple. You get a property and you rent it from a landlord on a long-term lease, and then you rent it back out to your end user.
+  verified: true
+  score: 100
+- resource_id: R-YT-O1krmmSq5Zo
+  location: 05:00
+  quote: So, after 18 months of starting that business, I was in the very fortunate position that I was able to leave my job.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -45,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T12:56:25Z'
+updated_at: '2026-09-27T13:05:45Z'
 ---
 
 ## Description
