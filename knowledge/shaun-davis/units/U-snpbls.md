@@ -5,11 +5,14 @@ type: technique
 name: Stop working when stressed and switch task
 aliases:
 - Know what recalibrates your mind
+- Recalibrate your mind to manage stress
+- Things that reset you
+- Switch your brain off
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2025-08-05'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '20:01'
@@ -31,6 +34,21 @@ citations:
   quote: I need stop doing that specific task that's stressing me out do something else get on mind off it come back to it at a later date and honestly always works for business owners
   verified: true
   score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 07:00
+  quote: one thing I would say in order to manage stress is understand how to recalibrate your mind and do things that can just reset you
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 07:00
+  quote: And for me that is playing the drums and that is going to the gym. That is going for a run. It's going for a cycle.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 07:00
+  quote: it's doing things that completely switch my brain off so that I'm able to navigate, come back to what I was doing and actually perform at a much better rate
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -38,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T13:20:40Z'
 ---
 
 ## Description

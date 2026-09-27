@@ -8,11 +8,13 @@ aliases:
 - Massive action
 - Business is constant pressure
 - Whatever it takes
+- Hardship reveals your character
+- Come out swinging or back down
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-27'
-last_seen: '2025-04-09'
+last_seen: '2025-08-05'
 citations:
 - resource_id: R-YT-nuKBUiE3Afc
   location: 03:01
@@ -44,6 +46,16 @@ citations:
   quote: I was working relentless hours, and the mindset was, I'm going to do whatever it takes to make this business work.
   verified: true
   score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 02:01
+  quote: Here's when you really understand your character and here's when you really will understand whether you're going to have longevity in this game. And that point is when you hit hardship
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 02:01
+  quote: when your back is against the wall you can go all out and you come out swinging or you can actually retract and basically back down in the corner
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-27'
   resource_id: R-YT-nuKBUiE3Afc
@@ -51,7 +63,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:59:20Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:20:40Z'
 ---
 
 ## Description

@@ -10,11 +10,12 @@ aliases:
 - Work on yourself first
 - Put yourself first
 - Be obsessed with your personal development
+- Take personal development seriously
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-04-09'
+last_seen: '2025-08-05'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '46:00'
@@ -51,6 +52,16 @@ citations:
   quote: I'm in the transition right now where we're scaling massively and everything is going well because I put myself first.
   verified: true
   score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 06:00
+  quote: I take my personal development very seriously your business cannot outgrow your personal identity
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 06:00
+  quote: you're going to come across hardship you're going to come across cash flow issues you're going to come across growing pains and you got to understand how to navigate through all this
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -58,7 +69,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:20:40Z'
 ---
 
 ## Description

@@ -5,11 +5,12 @@ type: script
 name: What is this teaching me?
 aliases:
 - Rather than why is this happening to me
+- Not why is this happening to me
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2025-08-05'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '49:00'
@@ -21,6 +22,16 @@ citations:
   quote: so that's one thing that I would say to myself is like what is this teaching me and I try and learn from it
   verified: true
   score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 08:00
+  quote: The second thing is I think to myself, what is this teaching me? Not why is this happening to me?
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 08:00
+  quote: Every L carries a lesson and the quicker you extract that L is the quicker you can bounce back from it.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -28,7 +39,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T13:20:40Z'
 ---
 
 ## Description

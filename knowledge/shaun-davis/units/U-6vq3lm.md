@@ -8,11 +8,13 @@ aliases:
 - The role of an entrepreneur
 - 'The role of an entrepreneur: create value, solve problems'
 - The bigger the problem, the bigger the pay
+- Two traits of a successful entrepreneur
+- Create value and solve meaningful problems
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-04-09'
+last_seen: '2025-08-05'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 08:01
@@ -49,6 +51,11 @@ citations:
   quote: So, I had to look at what problem is there right now that I could solve.
   verified: true
   score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 02:01
+  quote: I had to quickly understand the traits of a successful entrepreneur and that is number one to create value and number two is to solve meaningful problems.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -56,7 +63,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:20:40Z'
 ---
 
 ## Description

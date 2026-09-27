@@ -9,11 +9,13 @@ aliases:
 - Leverage, outsource, hire
 - Work smarter, not harder
 - Stop being leveraged, start leveraging
+- The power of letting go to growth
+- Outsource instead of doing it all yourself
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-27'
-last_seen: '2025-04-09'
+last_seen: '2025-08-05'
 citations:
 - resource_id: R-YT-nuKBUiE3Afc
   location: 04:00
@@ -45,6 +47,21 @@ citations:
   quote: the low-value tasks should be outsourced to someone else in your team. Because the key is not how many hours you're working, it's where you're working.
   verified: true
   score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 00:00
+  quote: the first thing that comes to mind is the power of letting go to growth
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 00:00
+  quote: I quickly realized that by me hiring, leveraging, employing, and actually outsourcing, that was a much more effective way to learn and grow.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 01:00
+  quote: The first lesson is definitely let go to grow and understand the power of outsourcing as opposed to doing it all yourself.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-27'
   resource_id: R-YT-nuKBUiE3Afc
@@ -52,7 +69,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:59:20Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:20:40Z'
 ---
 
 ## Description

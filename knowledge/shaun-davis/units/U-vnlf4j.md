@@ -5,11 +5,14 @@ type: concept
 name: Motivation comes in bursts, discipline fills the gaps
 aliases:
 - When motivation fades, discipline needs to occur
+- Discipline, not motivation
+- Motivation comes and goes like Wi-Fi
+- Rely on discipline as opposed to motivation
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-04-09'
+last_seen: '2025-08-05'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: '12:01'
@@ -26,6 +29,21 @@ citations:
   quote: It's not because they're gifted with some motivated personality. Everyone feels different levels of motivation, different bursts of motivations at different times.
   verified: true
   score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 01:00
+  quote: Motivation comes and goes like Wi-Fi.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 02:01
+  quote: everyone's motivated when they first start a new business.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 03:00
+  quote: for you to be a successful entrepreneur, you need to rely on discipline and not motivation
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -33,7 +51,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:20:40Z'
 ---
 
 ## Description

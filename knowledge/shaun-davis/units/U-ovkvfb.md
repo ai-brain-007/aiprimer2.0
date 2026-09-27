@@ -8,11 +8,14 @@ aliases:
 - Busy as a disguise for procrastination
 - Start with high income generating tasks
 - Move the needle
+- Busy is not productive
+- Grinding 24/7 is not a badge of honour
+- Being busy, not productive
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-06-09'
+last_seen: '2025-08-05'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: '14:00'
@@ -49,6 +52,26 @@ citations:
   quote: So, now all our energy will be going towards finding the property.
   verified: true
   score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 00:00
+  quote: grinding 24/7 is not a badge and honor
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 01:00
+  quote: busy doesn't necessarily mean that you're productive.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: 01:00
+  quote: One of the metrics that I track now that I didn't used to track is how productive am I being.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '17:01'
+  quote: taking action on the right things, taking action on the things that would move the needle as opposed to just being busy and not productive
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -56,7 +79,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T13:20:40Z'
 ---
 
 ## Description

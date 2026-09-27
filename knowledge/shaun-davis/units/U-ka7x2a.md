@@ -8,11 +8,18 @@ aliases:
 - Temporary accommodation management
 - TA management
 - Management deal for high-mortgage landlords
+- TA
+- Start with temporary accommodation
+- TA is the better model to start out with
+- Location, time and financial freedom
+- Three reasons temporary accommodation beats serviced accommodation
+- Serviced accommodation vs temporary accommodation
+- TA vs SA
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-07-08'
-last_seen: '2025-07-08'
+last_seen: '2025-08-05'
 citations:
 - resource_id: R-YT-VPA30_DJvZs
   location: 00:00
@@ -44,6 +51,56 @@ citations:
   quote: So she's actually a portfolio landlord. So she has about four more in this area and she's like, "Michael, I want to give it to you."
   verified: true
   score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '14:00'
+  quote: Now Tempe accommodation is actually my favorite because it's nationwide.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '15:00'
+  quote: You're dealing with families. And the families are typically a mom and kids and maybe a mom and dad and kids. So, you don't typically get any trouble with temporary accommodation tenants. They're just very grateful.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '20:00'
+  quote: Now with temporary accommodation you might have someone running for months. A lot of the time it's 6 months plus if not years. So what that means is operation wise it's very minimal.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '14:00'
+  quote: it's actually a better model to start out with because there's no support, which means that there's less operation
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '15:00'
+  quote: once a tenant is in that property there is literally minimal operations
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '15:00'
+  quote: this business gives you that opportunity to be able to scale nationwide minimal operation costs and then you can have the time location and financial freedom as a result
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '19:00'
+  quote: I think it's subjective because I know people that are smashing it in surface accommodation, but for me personally with my goals and my needs, there's no comparison.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '19:00'
+  quote: One of the best things I love about temporary accommodation is the operation costs. So lower startup costs, there's no tenant marketing.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '19:00'
+  quote: Now service accommodation is a hospitality business. You've got guests checking in and out all the time.
+  verified: true
+  score: 100
+- resource_id: R-YT-z6Ei9suvXX0
+  location: '21:00'
+  quote: The final factor I would say comparing temporary accommodation to service accommodation is the fact that temporary accommodation is consistent.
+  verified: true
+  score: 100
 versions:
 - date: '2025-07-08'
   resource_id: R-YT-VPA30_DJvZs
@@ -51,7 +108,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:15:49Z'
-updated_at: '2026-09-27T13:15:49Z'
+updated_at: '2026-09-27T13:20:40Z'
 ---
 
 ## Description
