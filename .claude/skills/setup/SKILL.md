@@ -21,6 +21,12 @@ Never ask the user to paste a key or token into the chat. If they do, tell them 
 
 ## Steps
 
+First, renew the time-limited file links of the Resources rows (7-day Backblaze links; cheap, no output to show unless it fails):
+```bash
+python -m pipeline resource refresh-links --pretty
+```
+
+
 1. **Settings and access**
    ```bash
    python -m pipeline auth check --pretty

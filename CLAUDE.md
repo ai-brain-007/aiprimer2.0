@@ -104,6 +104,7 @@ python -m pipeline ingest probe <source...> --pretty   # no side effects
 python -m pipeline ingest run <source> --stage "<Domain / Primer / Stage>" --author "<name or A-id>" [--title ..] [--date ..]
 python -m pipeline ingest channel <url> --list --pretty
 python -m pipeline resource move <R-id or title part> --stage "<path>"
+python -m pipeline resource refresh-links [--all] --pretty    # renew the 7-day links of the Resources rows (link, text_link)
 python -m pipeline summarize plan --author <A-id> --pretty
 python -m pipeline doc comments --author <A-id> --pretty
 python -m pipeline doc guide --pretty                  # republish docs/notion/*.md as reference pages under "AI Primer"

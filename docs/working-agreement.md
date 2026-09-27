@@ -215,6 +215,12 @@ that day was archived. Miro remains the option if the agent must read a board th
   texts: a forced re-ingest kept the old stored files (uploads were idempotent per resource and role; `--force`
   now replaces them), and the summary step reused a stale local copy of the text (the copy is now stamped with
   the row's file id, size and update time and refreshed when they change).
+- 2026-09-27: the owner asked for a clickable link to the raw file on every Resources row. Two Notion `url`
+  columns, `link` (the YouTube video, or the stored original for a file) and `text_link` (the stored transcript or
+  extracted text), filled at ingest; links into the private bucket are Backblaze download authorizations, valid
+  7 days at most, renewed by `python -m pipeline resource refresh-links` (run it at the start of `/ingest` and
+  `/setup` sessions; `--all` renews everything). Column order in a Notion view is not settable through the API:
+  the owner drags the column. Row models can declare `url_fields`; the repo writes them as `url` properties.
 - 2026-09-27: the owner asked that the two reference pages be updated every time the pipeline changes, without
   fail. Decided: a gate, not a reminder (rule 11 of CLAUDE.md, script `scripts/hooks/guide_gate.py`). A push that
   changes the pipeline without the pages fails until the pages are updated or a commit states `Guide: unchanged`; a

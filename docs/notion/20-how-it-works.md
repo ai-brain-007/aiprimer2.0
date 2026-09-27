@@ -43,7 +43,7 @@ Checks that the system can reach Notion and Backblaze, creates the layer pages a
 1. You paste a link or drop a file.
 2. The agent identifies it and proposes title, author, date and stage. You confirm.
 3. The script stores the original in Backblaze in a folder named after the stage, extracts the text and stores that too. A transcript for a video, the text of a PDF, the table of a spreadsheet, the agent's reading of a screenshot. A video without captions is kept with its details only, and the row says so; transcribing the audio is a later phase.
-4. A row is written to the Resources table: what it is, where it is, when it was published, how it was extracted, what it cost.
+4. A row is written to the Resources table: what it is, where it is, when it was published, how it was extracted, what it cost, and two clickable links: the resource itself (the YouTube video, or the stored original) and its stored text. Links to stored files last 7 days and are renewed by the pipeline.
 5. Duplicates are recognised by a fingerprint of the content and skipped.
 
 ### 3. Taxonomy, when needed

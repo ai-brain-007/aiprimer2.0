@@ -197,3 +197,24 @@ def test_author_page_is_published_in_place_and_comments_read(v2):
     assert got["comments"] and got["comments"][0]["comment"].startswith("This is wrong")
     res = doc_comments(ctx, author.author_id, resolve=got["comments"][0]["comment_id"])
     assert res["resolved"]
+
+
+def test_resources_carry_clickable_links_that_refresh_links_renews(v2, tmp_path):
+    from pipeline.resources import refresh_links
+
+    ctx, reg, notion, bucket, parent = v2
+    _bootstrap(ctx)
+    src = tmp_path / "guide.txt"
+    src.write_text("Keep your feet under you and pivot on the ball of the foot. " * 30, encoding="utf-8")
+    ing = Ingestor(ctx)
+    r = ing.run(str(src), STAGE, author="Jane Doe", title="Guide", date_text="2024-01-01")
+    row = reg.resource(r["resource_id"])
+    assert row.link.startswith("https://") and "Authorization=fake-download-token" in row.link, "a stored file gets a time-limited link"
+    assert "Authorization=fake-download-token" in row.text_link and row.links_expire_at > "2026"
+    # nothing due: nothing renewed; --all renews everything
+    assert refresh_links(ctx)["renewed"] == 0
+    row.links_expire_at = "2020-01-01T00:00:00Z"
+    reg.upsert_resource(row)
+    out = refresh_links(ctx)
+    assert out["renewed"] == 1 and reg.resource(row.resource_id).links_expire_at > "2026" and out["valid_days"] == 7
+    assert refresh_links(ctx, all_rows=True)["renewed"] == 1

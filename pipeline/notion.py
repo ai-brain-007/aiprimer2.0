@@ -463,7 +463,15 @@ class NotionRepo:
 
     @staticmethod
     def _schema(model: type[TabRow]) -> dict[str, dict]:
-        return {h: ({"title": {}} if h == model.key_field else {"rich_text": {}}) for h in model.headers()}
+        return {h: self_type for h, self_type in ((h, NotionRepo._property_type(model, h)) for h in model.headers())}
+
+    @staticmethod
+    def _property_type(model: type[TabRow], header: str) -> dict[str, dict]:
+        if header == model.key_field:
+            return {"title": {}}
+        if header in model.url_fields:
+            return {"url": {}}
+        return {"rich_text": {}}
 
     def ensure_tabs(self, homes: dict[str, str] | None = None) -> dict[str, Any]:
         """Create the missing databases (under `homes[tab]` when given, else the parent page) and add missing
@@ -488,7 +496,7 @@ class NotionRepo:
                 report.setdefault("title_renamed", {})[tab] = f"{title_name} -> {model.key_field}"
             missing = [h for h in headers if h not in props]
             if missing:
-                self.backend.update_database(db_id, {h: {"rich_text": {}} for h in missing})
+                self.backend.update_database(db_id, {h: self._property_type(model, h) for h in missing})
                 report["columns_added"][tab] = missing
         self._cache.clear()
         self._prop_ids.clear()
@@ -603,12 +611,16 @@ class NotionRepo:
         return self._prop_ids[db_id]
 
     def _properties_of(self, tab: str, headers: list[str], cells: dict[str, str], db_id: str | None = None) -> dict[str, dict]:
-        key_field = self.tab_models[tab].key_field
+        model = self.tab_models[tab]
         ids = self._property_ids(db_id or self._require_db(tab))
         props: dict[str, dict] = {}
         for h in headers:
-            items = _capped(rich_text(cells.get(h, "")))
-            props[ids.get(h, h)] = {"title": items} if h == key_field else {"rich_text": items}
+            value = cells.get(h, "")
+            if h in model.url_fields:
+                props[ids.get(h, h)] = {"url": value or None}
+                continue
+            items = _capped(rich_text(value))
+            props[ids.get(h, h)] = {"title": items} if h == model.key_field else {"rich_text": items}
         return props
 
     def append(self, tab: str, rows: list[TabRow]) -> None:

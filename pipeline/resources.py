@@ -13,6 +13,68 @@ from .ingest import drive_path_for
 from .taxonomy import ensure_node_folder, load_taxonomy
 
 
+LINK_DAYS = 7  # Backblaze issues download links for at most 7 days (MAX_SIGNED_SECONDS)
+
+
+def share_links(resource: Resource, drive: Any) -> dict[str, str]:
+    """{link, text_link, links_expire_at} for a row. `link` opens the resource where a reader expects it: the
+    video on YouTube, otherwise the stored original file. `text_link` opens the stored transcript / extracted text.
+    Files in the private bucket get a time-limited link (7 days); Drive files keep their view link."""
+    from datetime import datetime, timedelta, timezone
+
+    signed = getattr(drive, "signed_url", None) if drive is not None else None
+    timed = False
+
+    def stored(file_id: str, fallback: str) -> str:
+        nonlocal timed
+        if not file_id:
+            return ""
+        if signed is not None:
+            try:
+                timed = True
+                return signed(file_id)
+            except Exception:
+                return fallback
+        return fallback
+
+    if resource.source_type == "youtube" and resource.source_url:
+        link = resource.source_url
+    else:
+        link = stored(resource.raw_file_id, resource.raw_file_url if resource.raw_file_url.startswith("http") else "")
+    text_link = stored(resource.text_file_id, resource.text_file_url if resource.text_file_url.startswith("http") else "")
+    expires = (datetime.now(timezone.utc) + timedelta(days=LINK_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ") if timed else ""
+    return {"link": link, "text_link": text_link, "links_expire_at": expires}
+
+
+def refresh_links(ctx: AppContext, all_rows: bool = False, within_hours: int = 48) -> dict[str, Any]:
+    """Renew the time-limited links of the Resources rows: those expiring within `within_hours`, missing, or all."""
+    from datetime import datetime, timedelta, timezone
+
+    horizon = (datetime.now(timezone.utc) + timedelta(hours=within_hours)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    renewed: list[str] = []
+    skipped = 0
+    errors: dict[str, str] = {}
+    for r in ctx.registry.resources():
+        has_files = bool(r.raw_file_id or r.text_file_id)
+        due = all_rows or (has_files and (not r.text_link and not r.link)) or (r.links_expire_at and r.links_expire_at <= horizon)
+        if not due:
+            skipped += 1
+            continue
+        try:
+            drive = ctx.drive_by_id(r.account_id) if r.account_id else None
+            links = share_links(r, drive)
+        except Exception as exc:
+            errors[r.resource_id] = str(exc)
+            continue
+        if all_rows or links["link"] != r.link or links["text_link"] != r.text_link or links["links_expire_at"] != r.links_expire_at:
+            r.link, r.text_link, r.links_expire_at = links["link"], links["text_link"], links["links_expire_at"]
+            ctx.registry.upsert_resource(r)
+            renewed.append(r.resource_id)
+        else:
+            skipped += 1
+    return {"renewed": len(renewed), "skipped": skipped, "errors": errors, "resource_ids": renewed, "valid_days": LINK_DAYS}
+
+
 def _resolve(ctx: AppContext, ref: str) -> Resource:
     reg = ctx.registry
     r = reg.resource(ref)

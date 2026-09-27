@@ -30,6 +30,17 @@ Good to know:
 - A YouTube video without captions is kept with its details only, and its row in the Resources table says why. Transcribing the audio comes in a later phase. A passing problem on YouTube's side, such as a sign-in check, is retried the next time the video is ingested.
 - "Ingest the inbox": the agent picks up files you uploaded by hand into the `raw/_Inbox` folder of the storage bucket.
 
+## The links in the Resources table
+
+Every row in LAYER 1 > Resources has two link columns:
+
+- **link**: opens the resource. For a YouTube video that is the video itself. For a file you added, it is the stored original in Backblaze.
+- **text_link**: opens the stored text version, the transcript or the extracted text, in Backblaze.
+
+The files live in a private bucket, so a link to a stored file works for 7 days, which is the longest Backblaze allows. The pipeline renews the links whenever it runs; if one has expired, say "refresh the links" and every row is renewed at once. Links to YouTube never expire.
+
+To see a link column first, drag its header to the left in Notion: the title column (resource_id) always stays first, the rest is yours to arrange.
+
 ## /taxonomy: the tree of categories
 
 - "Show the tree": lists every Domain > Primer > Stage.

@@ -357,6 +357,10 @@ class Ingestor:
             data_ids.append(dmeta.get("id", ""))
         resource.data_file_ids = data_ids
         resource.extracted_chars = len(extraction.text)
+        from .resources import share_links
+
+        for k, v in share_links(resource, drive).items():
+            setattr(resource, k, v)
         resource.status = "ingested"
         resource.error = ""
         resource.ingested_at = now_iso()

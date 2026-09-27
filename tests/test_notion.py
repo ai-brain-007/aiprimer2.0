@@ -55,7 +55,7 @@ def test_ensure_tabs_creates_the_seven_databases(fake_notion, parent_page):
         schema = fake_notion.databases[dbs[tab]]["properties"]
         assert set(schema) == set(model.headers())
         assert schema[model.key_field]["type"] == "title"
-        assert all(p["type"] == "rich_text" for name, p in schema.items() if name != model.key_field)
+        assert all(p["type"] == ("url" if name in model.url_fields else "rich_text") for name, p in schema.items() if name != model.key_field)
         assert repo.database_id(tab) == dbs[tab]
     # second run creates nothing
     report2 = repo.ensure_tabs()
@@ -632,3 +632,17 @@ def test_write_calls_have_the_documented_shapes(tmp_path):
     assert reqs[5][2]["json"] == {"archived": True}
     assert reqs[6][0] == "DELETE" and reqs[6][1].endswith("/blocks/blk")
     assert backend.page_url("0123-4567") == "https://www.notion.so/01234567"
+
+
+def test_url_columns_are_url_properties_and_round_trip(fake_notion, parent_page):
+    from pipeline.models import Resource
+
+    repo = NotionRepo(fake_notion, parent_page)
+    repo.ensure_tabs()
+    schema = fake_notion.databases[repo.database_id("Resources")]["properties"]
+    assert schema["link"]["type"] == "url" and schema["text_link"]["type"] == "url" and schema["links_expire_at"]["type"] == "rich_text"
+    repo.append("Resources", [Resource(resource_id="R-YT-x", link="https://www.youtube.com/watch?v=x", text_link="")])
+    row = repo.load("Resources", refresh=True)[0]
+    assert row.link == "https://www.youtube.com/watch?v=x" and row.text_link == ""
+    page = fake_notion.pages[repo.page_id("Resources", "R-YT-x")]
+    assert page["properties"]["link"]["url"] == "https://www.youtube.com/watch?v=x" and page["properties"]["text_link"]["url"] is None

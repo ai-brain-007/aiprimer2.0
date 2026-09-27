@@ -324,6 +324,14 @@ def resource_set(
     run_command("resource set", lambda: set_metadata(get_ctx(), ref, title=title, author=author, date_text=date, date_precision=date_precision, alias_of=alias_of), {"ref": ref, "title": title, "author": author, "date": date}, pretty)
 
 
+@resource_app.command("refresh-links")
+def resource_refresh_links(all_rows: bool = typer.Option(False, "--all", help="renew every row, not only the links about to expire"), pretty: bool = Pretty):
+    """Renew the time-limited links (Link, Text link) of the Resources rows; stored-file links last 7 days."""
+    from .resources import refresh_links
+
+    run_command("resource refresh-links", lambda: refresh_links(get_ctx(), all_rows), {"all": all_rows}, pretty)
+
+
 @resource_app.command("list")
 def resource_list(author: Optional[str] = None, status: Optional[str] = None, pretty: bool = Pretty):
     def _fn():

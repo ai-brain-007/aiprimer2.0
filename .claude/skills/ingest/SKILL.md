@@ -19,6 +19,12 @@ author cannot be detected) were given in the message.
 
 ## 1. Look before touching
 
+First, renew the time-limited file links of the Resources rows (7-day Backblaze links; cheap, no output to show unless it fails):
+```bash
+python -m pipeline resource refresh-links --pretty
+```
+
+
 ```bash
 python -m pipeline ingest probe <source…> --pretty
 ```

@@ -27,6 +27,7 @@ def _to_cell(value: Any) -> str:
 class TabRow(BaseModel):
     model_config = ConfigDict(extra="ignore", validate_assignment=True)
     key_field: ClassVar[str] = ""
+    url_fields: ClassVar[frozenset[str]] = frozenset()  # columns stored as clickable links (Notion "url" type)
 
     @classmethod
     def headers(cls) -> list[str]:
@@ -130,7 +131,11 @@ DatePrecision = Literal["day", "month", "year", "unknown"]
 
 class Resource(TabRow):
     key_field: ClassVar[str] = "resource_id"
+    url_fields: ClassVar[frozenset[str]] = frozenset({"link", "text_link"})
     resource_id: str
+    link: str = ""  # open the resource: the video on YouTube, or the stored original file (7-day link)
+    text_link: str = ""  # the stored transcript / extracted text (7-day link)
+    links_expire_at: str = ""  # when the stored-file links stop working; `resource refresh-links` renews them
     status: ResourceStatus = "registered"
     title: str = ""
     author_id: str = ""
