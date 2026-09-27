@@ -56,9 +56,9 @@ Read the skill file in `.claude/skills/<name>/SKILL.md` before running any of th
 - Rendered summaries: `knowledge/<author-slug>/summary.md`, published into the author's row page of the Notion
   Authors database (same link every version).
 - Working files: `.cache/` (downloads, Apify responses) and `.work/<author>/` (chunks, helper outputs). Both gitignored.
-- Reference pages for the owner ("Command guide", "How the pipeline works"): written in `docs/notion/*.md`, published as
-  child pages of the "AI Primer" page by `python -m pipeline doc guide`. Rule 11: update them with every change the
-  owner would notice; the gate `scripts/hooks/guide_gate.py` checks it before each push.
+- Reference pages for the owner ("Command guide", "How the pipeline works"): written in `docs/notion/*.md`, published
+  into the "LAYER 0 - CONFIG" page under "AI Primer" by `python -m pipeline doc guide`. Rule 11: update them with
+  every change the owner would notice; the gate `scripts/hooks/guide_gate.py` checks it before each push.
 - Legacy v1 (Google Drive / Sheets / Docs) code remains in `pipeline/drive.py`, `sheets.py`, `docs.py`,
   `google_auth.py`; it is used only when no v2 variable is set and is covered by the offline tests.
 

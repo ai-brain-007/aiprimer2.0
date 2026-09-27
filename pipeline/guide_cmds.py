@@ -1,9 +1,10 @@
 """Reference pages for the owner in Notion, generated from `docs/notion/*.md`.
 
-`python -m pipeline doc guide` publishes every markdown file of `docs/notion/` as a child page of the
-"AI Primer" page. The page title is the file's first `# ` heading (the file name without its number otherwise).
-A page that already exists under that title is refreshed in place, so its link never changes. Deterministic:
-no model is called; the agent edits the markdown, the script publishes it.
+`python -m pipeline doc guide` publishes every markdown file of `docs/notion/` as a page inside
+"LAYER 0 - CONFIG" under the "AI Primer" page (`pipeline.layout.guide_home`). The page title is the file's first
+`# ` heading (the file name without its number otherwise). A page that already exists under that title is
+refreshed in place, so its link never changes; a copy left directly under "AI Primer" by an earlier version is
+moved, not duplicated. Deterministic: no model is called; the agent edits the markdown, the script publishes it.
 """
 
 from __future__ import annotations
@@ -50,11 +51,21 @@ def publish_guide(ctx: AppContext, only: str | None = None) -> dict[str, Any]:
     files = [p for p in guide_files(ctx.settings.repo_root) if not only or only.lower() in p.name.lower()]
     if not files:
         raise RuntimeError(f"no markdown file to publish in {GUIDE_DIR}/" + (f" matching {only!r}" if only else ""))
+    from .layout import GUIDES_SECTION, guide_home
+
+    home = guide_home(ctx)
     publisher = NotionPublisher(backend, scan_blocks_for_comments=0)
-    existing = child_pages(backend, parent_id)
+    existing = child_pages(backend, home)
+    stray = child_pages(backend, parent_id)  # guides published before the layer layout sat directly under "AI Primer"
     pages: list[dict[str, Any]] = []
     for path in files:
         title, body = split_title(path.read_text(encoding="utf-8"), _NUMBER_PREFIX.sub("", path.stem).replace("-", " ").strip() or path.stem)
-        info = publisher.publish_markdown(body, title, parent_id, existing.get(title))
-        pages.append({"title": title, "file": str(path.relative_to(ctx.settings.repo_root)), "url": info["url"], "page_id": info["doc_id"], "created": info["created"]})
-    return {"parent_url": backend.page_url(parent_id), "pages": pages, "kept_block_types": list(CONTAINER_BLOCK_TYPES)}
+        page_id = existing.get(title)
+        moved = False
+        if page_id is None and title in stray:
+            backend.move_page(stray[title], home)
+            page_id = existing[title] = stray[title]
+            moved = True
+        info = publisher.publish_markdown(body, title, home, page_id)
+        pages.append({"title": title, "file": str(path.relative_to(ctx.settings.repo_root)), "url": info["url"], "page_id": info["doc_id"], "created": info["created"], "moved": moved})
+    return {"parent_url": backend.page_url(parent_id), "home": GUIDES_SECTION, "home_url": backend.page_url(home), "pages": pages, "kept_block_types": list(CONTAINER_BLOCK_TYPES)}

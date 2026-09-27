@@ -310,6 +310,24 @@ class FakeNotionBackend:
                 self.blocks[page_id]["archived"] = bool(archived)
         return self._page_view(page)
 
+    def move_page(self, page_id, parent_page_id):
+        page_id, parent_page_id = self._id(page_id), self._id(parent_page_id)
+        self.calls.append(f"move_page:{page_id}->{parent_page_id}")
+        page = self.pages.get(page_id)
+        if page is None or page_id in self.databases:
+            raise NotionError(404, "object_not_found", f"Could not find page with ID: {page_id}")
+        if parent_page_id not in self.pages:
+            raise NotionError(404, "object_not_found", f"Could not find page with ID: {parent_page_id}")
+        old = page["parent"]
+        if old.get("type") == "page_id":
+            self.children[old["page_id"]] = [b for b in self.children.get(old["page_id"], []) if b != page_id]
+        page["parent"] = {"type": "page_id", "page_id": parent_page_id}
+        block = self.blocks.get(page_id) or {"object": "block", "id": page_id, "type": "child_page", "has_children": bool(self.children.get(page_id)), "archived": False, "created_time": page["created_time"], "child_page": {"title": plain_text(page["properties"]["title"]["title"])}}
+        block["parent"] = page["parent"]
+        self.blocks[page_id] = block
+        self.children.setdefault(parent_page_id, []).append(page_id)
+        return self._page_view(page)
+
     def retrieve_page(self, page_id):
         page_id = self._id(page_id)
         self.calls.append(f"retrieve_page:{page_id}")

@@ -78,8 +78,8 @@ Credentials never live in this repository or in any page: they are settings of t
 6. **Adding storage later.** Create Backblaze account 0002 (a new Gmail, its own bucket `…-0002`, its own
    key), add `B2_KEY_ID_0002` / `B2_APPLICATION_KEY_0002` to the environment, start a new session, run `/setup`.
    The row `b2-0002` appears in the Accounts database and receives uploads once `b2-0001` is full.
-7. **Keep the two reference pages in step automatically (recommended).** Under the "AI Primer" page, Notion holds
-   two pages written for you, "Command guide" and "How the pipeline works". They are generated from
+7. **Keep the two reference pages in step automatically (recommended).** Inside "LAYER 0 - CONFIG" under the
+   "AI Primer" page, Notion holds two pages written for you, "Command guide" and "How the pipeline works". They are generated from
    `docs/notion/*.md`, and rule 11 of `CLAUDE.md` obliges the agent to update them with every change you would
    notice and to run the gate `scripts/hooks/guide_gate.py` before each push. To have Claude Code run that gate on
    its own before every push, register it as a hook once: open `.claude/settings.json` in the repository and, inside

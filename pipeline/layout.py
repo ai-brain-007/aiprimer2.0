@@ -7,7 +7,8 @@ Under "AI Primer", one page per layer, in this order, each holding the registry 
     LAYER 3 - DOMAINS > PRIMERS > STAGES  one page per domain > primer > stage, generated from the Taxonomy table
     LAYER 0 - CONFIG                      Accounts, Taxonomy, Folders, Jobs
 
-The two guide pages ("Command guide", "How the pipeline works") stay directly under "AI Primer".
+The two guide pages ("Command guide", "How the pipeline works") live inside LAYER 0 - CONFIG (`guide_home`);
+`doc guide` publishes them there and moves a copy left at the top by an earlier version.
 `apply_layout` is idempotent: it creates what is missing, moves a table that sits in the wrong place (copy rows,
 verify, archive the old one: the API cannot move databases) and keeps the tree pages named after the nodes.
 Everything here is deterministic; no model is called.
@@ -60,6 +61,7 @@ SECTIONS: tuple[Section, ...] = (
     ),
 )
 TREE_SECTION = SECTIONS[2].title
+GUIDES_SECTION = SECTIONS[3].title
 
 
 def home_titles() -> dict[str, str]:
@@ -85,6 +87,14 @@ def ensure_sections(repo: NotionRepo) -> dict[str, Any]:
             created.append(section.title)
         pages[section.title] = page_id
     return {"pages": pages, "created": created}
+
+
+def guide_home(ctx: AppContext) -> str:
+    """Page id of the layer page that holds the owner's guides (LAYER 0 - CONFIG), created if missing."""
+    repo = _notion_repo(ctx)
+    if repo is None:
+        raise RuntimeError("Notion mode is off: AIPRIMER_NOTION_PAGE_ID is not set (see README.md, Setup)")
+    return ensure_sections(repo)["pages"][GUIDES_SECTION]
 
 
 def table_homes(ctx: AppContext) -> dict[str, str] | None:

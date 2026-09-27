@@ -60,14 +60,14 @@ conditions (for whom, when), stage tags, dates, and at least one verbatim quote 
 over time is tracked per card (dated versions, statuses current/superseded/retracted/contradicted); it requires
 source dates, so ingest asks for a date when none is found.
 
-**Notion layout (decided 2026-09-27, `pipeline/layout.py`).** Top page "AI Primer" → the two reference pages for
-the owner ("Command guide", "How the pipeline works", generated from `docs/notion/*.md` by `python -m pipeline doc
-guide`, refreshed in place) and one page per layer, in this order: `LAYER 1 - RAW MATERIAL` (Resources),
+**Notion layout (decided 2026-09-27, `pipeline/layout.py`).** Top page "AI Primer" → one page per layer, in this
+order: `LAYER 1 - RAW MATERIAL` (Resources),
 `LAYER 2 - SUMMARY BY AUTHORS` (Authors with the rendered author page inside each row, Summaries as version history),
 `LAYER 3 - DOMAINS > PRIMERS > STAGES` (one page per taxonomy node, nested domain > primer > stage, generated from
 the Taxonomy table; the layer 3 artefacts will be published into the stage pages, the way author pages are
-published into Authors rows), `LAYER 0 - CONFIG` last (Accounts, Taxonomy, Folders, Jobs). The Notion API cannot
-move a database, so `setup layout` relocates a table by creating it in its layer page, copying the rows, verifying
+published into Authors rows), `LAYER 0 - CONFIG` last (Accounts, Taxonomy, Folders, Jobs, and the two reference
+pages for the owner, "Command guide" and "How the pipeline works", generated from `docs/notion/*.md` by
+`python -m pipeline doc guide` and refreshed in place). The Notion API cannot move a database, so `setup layout` relocates a table by creating it in its layer page, copying the rows, verifying
 the count and archiving the old one; the registry finds its tables inside the layer pages. A Cards database (one
 library for all authors) is still planned. The reference pages are the owner-facing documentation: update the
 markdown and republish whenever a command or the process changes. Pictures under 5 MB are
@@ -182,6 +182,10 @@ be readable by the agent through an API.
   (78 node pages), `LAYER 0 - CONFIG` last; the seven tables were moved into their layers live (rows copied and
   counted, old tables archived to Notion's trash). Stage pages are the future home of layer 3; `/taxonomy add` and
   `rename` keep the node pages in step. Earlier idea of a separate Stages database is superseded.
+- 2026-09-27: the owner asked for the two reference pages inside `LAYER 0 - CONFIG`. Moved live through the API's
+  move-page endpoint (sent with version 2026-03-11 for that one call; the pinned 2022-06-28 lacks it), links
+  unchanged; `doc guide` now publishes there and moves a stray copy from the top. Pages can be moved by the API,
+  databases cannot.
 - 2026-09-27: the owner asked that the two reference pages be updated every time the pipeline changes, without
   fail. Decided: a gate, not a reminder (rule 11 of CLAUDE.md, script `scripts/hooks/guide_gate.py`). A push that
   changes the pipeline without the pages fails until the pages are updated or a commit states `Guide: unchanged`; a

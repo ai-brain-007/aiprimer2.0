@@ -69,15 +69,14 @@ For one stage, in dialogue with you: a brief, procedures, practice, lists, scrip
 
 ## How Notion is organised
 
-Under the "AI Primer" page you find the two guides and one page per layer. Open a layer page to reach its tables and pages. The sidebar shows the same tree, so you can jump straight to the layer or page you want.
+Under the "AI Primer" page you find one page per layer. Open a layer page to reach its tables and pages. The sidebar shows the same tree, so you can jump straight to the layer or page you want.
 
 | Page under AI Primer | What is inside |
 |---|---|
-| Command guide, How the pipeline works | These two guides |
 | LAYER 1 - RAW MATERIAL | The Resources table: everything you added, with links to the stored originals |
 | LAYER 2 - SUMMARY BY AUTHORS | The Authors table (one row per author, the author's page inside the row) and the Summaries table (version history) |
 | LAYER 3 - DOMAINS > PRIMERS > STAGES | Your tree as pages: a page per domain, inside it a page per primer, inside that a page per stage. The stage pages will hold the study material |
-| LAYER 0 - CONFIG | The pipeline's bookkeeping: Accounts, Taxonomy, Folders and Jobs |
+| LAYER 0 - CONFIG | The pipeline's bookkeeping: Accounts, Taxonomy, Folders and Jobs, plus these two guides |
 
 The tree pages are generated from the Taxonomy table. Adding or renaming a stage adds or renames its page; the page keeps its link. Nothing there is deleted automatically.
 

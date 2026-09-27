@@ -9,6 +9,7 @@ import pytest
 from pipeline.config import Settings
 from pipeline.context import AppContext
 from pipeline.guide_cmds import GUIDE_DIR, child_pages, publish_guide, split_title
+from pipeline.layout import GUIDES_SECTION, SECTIONS
 from pipeline.notion import markdown_to_blocks, plain_text
 from tests.fake_notion import FakeNotionBackend
 
@@ -37,10 +38,14 @@ def test_publish_guide_creates_pages_then_refreshes_them_in_place(tmp_path, monk
 
     first = publish_guide(ctx)
     assert [p["title"] for p in first["pages"]] == ["Command guide", "How it works"]
-    assert all(p["created"] for p in first["pages"]) and first["parent_url"] == fake.page_url(parent)
+    assert all(p["created"] and not p["moved"] for p in first["pages"]) and first["parent_url"] == fake.page_url(parent)
     assert first["pages"][0]["file"] == "docs/notion/10-command-guide.md"
     ids = {p["title"]: p["page_id"] for p in first["pages"]}
-    assert child_pages(fake, parent) == ids
+    layers = child_pages(fake, parent)
+    assert set(layers) == {s.title for s in SECTIONS}, "the guides live inside LAYER 0 - CONFIG, not at the top"
+    home = layers[GUIDES_SECTION]
+    assert first["home"] == GUIDES_SECTION and first["home_url"] == fake.page_url(home)
+    assert child_pages(fake, home) == ids and fake.pages[ids["Command guide"]]["parent"]["page_id"] == home
     assert fake.page_plain_text(ids["Command guide"]) == "Type /ingest."  # the title is not repeated in the body
     assert plain_text(fake.pages[ids["Command guide"]]["properties"]["title"]["title"]) == "Command guide"
 
@@ -48,12 +53,30 @@ def test_publish_guide_creates_pages_then_refreshes_them_in_place(tmp_path, monk
     second = publish_guide(ctx)
     assert {p["title"]: p["page_id"] for p in second["pages"]} == ids and not any(p["created"] for p in second["pages"])
     assert fake.page_plain_text(ids["Command guide"]) == "Type /ingest or /summarize."
-    assert set(fake.child_databases(parent)) == {"Authors"} and len(child_pages(fake, parent)) == 2
+    assert set(fake.child_databases(parent)) == {"Authors"} and len(child_pages(fake, home)) == 2
 
     only = publish_guide(ctx, only="how-it")
     assert [p["title"] for p in only["pages"]] == ["How it works"]
     with pytest.raises(RuntimeError, match="no markdown file"):
         publish_guide(ctx, only="nothing-like-this")
+
+
+def test_publish_guide_moves_a_guide_left_at_the_top_into_layer_0(tmp_path, monkeypatch):
+    (tmp_path / GUIDE_DIR).mkdir(parents=True)
+    (tmp_path / GUIDE_DIR / "10-command-guide.md").write_text("# Command guide\n\nnew text\n", encoding="utf-8")
+    fake = FakeNotionBackend()
+    parent = fake.add_page("AI Primer")
+    old = fake.create_page({"page_id": parent}, {"title": {"title": [{"type": "text", "text": {"content": "Command guide"}}]}}, children=markdown_to_blocks("old text"))["id"]
+    ctx = _ctx(tmp_path, fake, parent, monkeypatch)
+    result = publish_guide(ctx)
+    page = result["pages"][0]
+    assert page["page_id"] == old and page["moved"] is True and page["created"] is False, "same page, same link"
+    home = child_pages(fake, parent)[GUIDES_SECTION]
+    assert fake.pages[old]["parent"]["page_id"] == home and "Command guide" not in child_pages(fake, parent)
+    assert fake.page_plain_text(old) == "new text"
+    assert any(c.startswith(f"move_page:{old}->") for c in fake.calls)
+    again = publish_guide(ctx)
+    assert again["pages"][0]["moved"] is False and again["pages"][0]["page_id"] == old
 
 
 def test_publish_guide_needs_notion_mode(tmp_path, monkeypatch):

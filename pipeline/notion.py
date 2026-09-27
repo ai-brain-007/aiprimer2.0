@@ -37,6 +37,7 @@ REQUEST_BLOCK_LIMIT = 1000  # blocks in one request, nested ones included
 TABLE_ROWS_PER_BLOCK = 90  # body rows per table block (a table block holds at most 100 rows)
 MAX_ATTEMPTS = 6
 CONTAINER_BLOCK_TYPES = ("child_database", "child_page")
+MOVE_PAGE_VERSION = "2026-03-11"  # POST /pages/{id}/move is not in the pinned 2022-06-28 version
 
 # What each database is for, in the words of the v1 Readme tab (the Notion API cannot set a database
 # description through the create call we use, so /setup prints these instead).
@@ -190,6 +191,7 @@ class NotionBackend(Protocol):
     def list_comments(self, block_id: str) -> list[dict]: ...
     def create_comment(self, *, page_id: str | None = None, discussion_id: str | None = None, text: str) -> dict: ...
     def upload_file(self, path: Path, content_type: str) -> str: ...  # returns the file_upload id
+    def move_page(self, page_id: str, parent_page_id: str) -> dict: ...  # pages only, never a database
     def page_url(self, page_id: str) -> str: ...
 
 
@@ -235,8 +237,8 @@ class RealNotionBackend:
             self.session = requests.Session()
         return self.session
 
-    def _headers(self) -> dict[str, str]:
-        headers = {"Notion-Version": self.version, "Accept": "application/json"}
+    def _headers(self, version: str | None = None) -> dict[str, str]:
+        headers = {"Notion-Version": version or self.version, "Accept": "application/json"}
         if self._token:
             headers["Authorization"] = f"Bearer {self._token}"
         return headers
@@ -262,13 +264,13 @@ class RealNotionBackend:
             return {}
         return body if isinstance(body, dict) else {}
 
-    def _request(self, method: str, path: str, *, params: dict | None = None, json: dict | None = None, files: dict | None = None) -> dict:
+    def _request(self, method: str, path: str, *, params: dict | None = None, json: dict | None = None, files: dict | None = None, version: str | None = None) -> dict:
         url = path if path.startswith("http") else f"{self.base_url}{path}"
         backoff = 1.0
         for attempt in range(1, MAX_ATTEMPTS + 1):
             self._throttle()
             try:
-                resp = self._http().request(method, url, headers=self._headers(), params=params, json=json, files=files, timeout=self.timeout)
+                resp = self._http().request(method, url, headers=self._headers(version), params=params, json=json, files=files, timeout=self.timeout)
             except OSError as exc:  # requests' exceptions derive from IOError; no header ever appears in them
                 self._last_request = self._clock()
                 if attempt == MAX_ATTEMPTS:
@@ -356,6 +358,11 @@ class RealNotionBackend:
         if archived is not None:
             body["archived"] = archived
         return self._request("PATCH", f"/pages/{page_id}", json=body)
+
+    def move_page(self, page_id: str, parent_page_id: str) -> dict:
+        """Move a page (never a database) under another page; its id and link stay the same. The endpoint exists
+        only in the newer API versions, so this one call is sent with MOVE_PAGE_VERSION."""
+        return self._request("POST", f"/pages/{page_id}/move", json={"parent": {"type": "page_id", "page_id": parent_page_id}}, version=MOVE_PAGE_VERSION)
 
     def retrieve_page(self, page_id: str) -> dict:
         return self._request("GET", f"/pages/{page_id}")
