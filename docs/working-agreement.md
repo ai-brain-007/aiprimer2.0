@@ -42,8 +42,8 @@ Three layers. Layer 3 never reads raw data; it reads only layer 2 cards.
 | Purpose | Account | Notes |
 |---|---|---|
 | Backblaze owner | `ai.primer.rawfile.0001@gmail.com` | Backblaze account `b2-0001`; buckets `aiprimer-rawfile-0001` (Private, encryption on; `B2_BUCKET_0001`) and `aiprimer-media-0001` (Public, for excerpts shown in pages; `B2_MEDIA_BUCKET_0001`). The owner paid Backblaze's one-time $1 fee (credited) to unlock public buckets. Originals never go into the public bucket |
-| Notion owner | `ai.primer.brain.0001@gmail.com` | Single-member workspace, top page "AI Primer", integration "AI Primer pipeline" |
-| Retired | `ai.primer.summary.0001@gmail.com` | Was for Google Sheets/Docs (v1); no longer used |
+| Notion owner | the owner's personal Google account (not written here) | Separate single-member workspace "AI Primer", top page "AI Primer", integration "AI Primer pipeline" |
+| Retired | `ai.primer.summary.0001@gmail.com`, `ai.primer.brain.0001@gmail.com` | The first was for Google Sheets/Docs (v1); the second was suspended by Google right after creation (new accounts created in quick succession get suspended). Do not create more throwaway Gmail accounts; for a future Backblaze account use a plus-address of the personal Gmail (`…+b2-0002@gmail.com`) |
 
 **Storage policy.** The owner wants storage to stay free: Backblaze gives 10 GB per account, so the pipeline
 keeps a Storage-accounts table (`b2-0001`, `b2-0002`, …) and rolls over to the next account when one refuses an
@@ -116,11 +116,11 @@ be readable by the agent through an API.
 - Owner's side: environment "AI Primer 2.0" exists with the Apify credential and the old Google keys. Done:
   Backblaze account, private bucket `aiprimer-rawfile-0001` (encryption on, object lock off) and public bucket
   `aiprimer-media-0001`. Pending: one application key (→ `B2_KEY_ID_0001` / `B2_APPLICATION_KEY_0001`),
-  `B2_BUCKET_0001=aiprimer-rawfile-0001`, `B2_MEDIA_BUCKET_0001=aiprimer-media-0001`;
-  Notion workspace under
-  `ai.primer.brain.0001`, page "AI Primer", integration "AI Primer pipeline" connected to it (secret → API
-  credential for `api.notion.com`; page id → `AIPRIMER_NOTION_PAGE_ID`); allowed domains
-  `*.backblazeb2.com`, `*.backblaze.com`, `api.notion.com`; Google variables removed.
+  `B2_BUCKET_0001=aiprimer-rawfile-0001`, `B2_MEDIA_BUCKET_0001=aiprimer-media-0001` (all four variables are in
+  the environment as of 2026-09-27); Notion workspace under the owner's personal account (the plan to use
+  `ai.primer.brain.0001` died with that account's suspension), page "AI Primer", integration "AI Primer
+  pipeline" connected to it (secret → API credential for `api.notion.com`; page id → `AIPRIMER_NOTION_PAGE_ID`).
+  Done: allowed domains `*.backblazeb2.com`, `*.backblaze.com`, `api.notion.com`; setup script updated.
 
 ## 6. Next engineering steps
 
@@ -152,6 +152,8 @@ be readable by the agent through an API.
   The owner then chose to pay the one-time $1 fee and created `aiprimer-media-0001` (Public) next to the private
   raw bucket, after the agent advised against making the raw bucket itself public (originals would be exposed).
   Small pictures still go into Notion; the public bucket serves clips and large images.
+- 2026-09-27: Notion runs under the owner's personal Google account (the dedicated Gmail was suspended by Google);
+  no more throwaway Gmail accounts; plus-addresses for future Backblaze accounts.
 
 ## 8. Open points
 
