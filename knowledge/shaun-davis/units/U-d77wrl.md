@@ -7,11 +7,13 @@ aliases:
 - Landlord pack
 - Staying credible
 - Get personal numbers to maintain the relationship
+- Losing the landlord while the council catches up
+- Keeping the landlord warm
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-06-09'
+last_seen: '2025-07-08'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '33:00'
@@ -38,6 +40,16 @@ citations:
   quote: I'll send you a pack cuz that would make you more memorable than
   verified: true
   score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '13:00'
+  quote: They find a property which is great and they can't facilitate keeping the landlord warm from the point of viewing the property and the surveyor going out and the council saying yeah cool like we're ready to go ahead with it.
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '13:00'
+  quote: So the relationship building on that is really crucial and what about the council at the other end cuz that again is a crucial part of the process is keeping the council warm
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -45,7 +57,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T13:15:49Z'
 ---
 
 ## Description

@@ -3,12 +3,15 @@ id: U-3i4hnr
 author_id: A-shaun-davis
 type: claim
 name: Guaranteed rent from councils
-aliases: []
+aliases:
+- Full maintenance and no voids for the landlord
+- No void periods
+- Guaranteed rent
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-03-12'
+last_seen: '2025-07-08'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 09:01
@@ -25,6 +28,16 @@ citations:
   quote: landlords seem to understand and want to be involved in the strategy more because they love the fact that their property is used for a great purpose
   verified: true
   score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: 01:00
+  quote: my company looks after 100% of the maintenance and there is no void pays as well because again as you know it's a government back scheme.
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '16:03'
+  quote: a lot of the time the the full maintenance of a property relies on my company
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -32,7 +45,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T12:56:25Z'
+updated_at: '2026-09-27T13:15:49Z'
 ---
 
 ## Description

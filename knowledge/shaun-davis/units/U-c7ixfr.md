@@ -8,11 +8,16 @@ aliases:
 - Relationship business
 - The person who builds the most relationships wins
 - People buy people they know, like and trust
+- People buy into people
+- Build rapport
+- Rapport first
+- Social housing is a relationship game
+- Relationship game
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-06-09'
+last_seen: '2025-07-08'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -64,6 +69,36 @@ citations:
   quote: to know, like, and trust you if you make the relationship less transactional.
   verified: true
   score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: 03:01
+  quote: It's about building rapport, isn't it? If you can build rapport effectively, then it's going to be a game changer. The results are inevitable and people work with you because of you.
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: 08:01
+  quote: I've realized that people like people buy into people. And if someone likes you, what they're willing to do for you is a lot more than someone that you're just pitching to.
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: 08:01
+  quote: Because I know for a fact there's hundreds of estate agencies that have approached her pitching the same strategy. But it's about who she remembers.
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '12:01'
+  quote: What I've seen is that social housing is a relationship game
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '12:01'
+  quote: sometimes landlords just genuinely wait a week or two for me to get everything sorted with the local authorities because of how slow they're moving because of that relationship we've built prior.
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '12:01'
+  quote: a lot of the times they are calling me to say, "Michael, I'm about to purchase this property. Can you do anything with it?"
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -71,7 +106,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T13:15:49Z'
 ---
 
 ## Description

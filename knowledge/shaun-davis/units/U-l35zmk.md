@@ -6,11 +6,13 @@ name: Direct to vendor
 aliases:
 - Direct to landlord
 - OpenRent landlord
+- Source landlords directly on OpenRent
+- Open Rent
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-06-09'
+last_seen: '2025-07-08'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '53:02'
@@ -32,6 +34,21 @@ citations:
   quote: asked us about any personal guarantees or anything like that.
   verified: true
   score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: 00:00
+  quote: We use a platform called Open Rent. Okay. So, Open Rent is where we reach out directly to all our landlords.
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: 00:00
+  quote: When you meet the landlord directly on um Open Rent, you can pitch them straight as opposed to pitching through someone and they can mess up the pitch and give it to the landlord.
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '15:04'
+  quote: again direct reopen rent. Yeah. Met the landlord in person. Yeah. Pitched them exactly what I did.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -39,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T13:15:49Z'
 ---
 
 ## Description

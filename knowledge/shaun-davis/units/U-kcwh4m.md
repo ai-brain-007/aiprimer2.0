@@ -9,11 +9,14 @@ aliases:
 - Council first, property second
 - Council first
 - Close a high-demand council first, then hunt properties
+- Local authority first, then the property
+- The formula
+- Council before property
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-06-09'
+last_seen: '2025-07-08'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -65,6 +68,26 @@ citations:
   quote: But what I would say guys, most important thing, you need to find a good good council.
   verified: true
   score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '17:01'
+  quote: A lot of people get the property first and then get the um local authorities. But you have to do the other way around. You need to get the local authority on board. You need to figure out what they pay per night and then you need to go and find the property.
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '17:01'
+  quote: Best way to go about it is basically to call your local authority, try to speak to the housing sector and basically figure out what is it, what type of properties they're looking for and how much they're willing to pay for a property that you can bring in that they're looking for
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '17:01'
+  quote: Finding the property is the easy the easier part. Yeah, finding a local authority that you can shift that property to once you get it is is probably the harder part.
+  verified: true
+  score: 100
+- resource_id: R-YT-VPA30_DJvZs
+  location: '17:01'
+  quote: Once you got that information, then you're good to go. 100% and you go out, find the property, marry the two together, you start making money.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -72,7 +95,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T13:15:49Z'
 ---
 
 ## Description
