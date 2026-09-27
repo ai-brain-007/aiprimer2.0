@@ -6,11 +6,12 @@ name: What landlords want
 aliases:
 - Profitable, zero-hassle solution
 - Long-term, safe and secure
+- Landlords want a hands-off, long-term return
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2026-07-22'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '11:01'
@@ -27,6 +28,21 @@ citations:
   quote: They just want a nice 5-year contract where in the ideal world, they don't get no headache. They don't get no voids. They get paid on time every single month.
   verified: true
   score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 08:01
+  quote: Landlords look at it from a return investment.
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 08:01
+  quote: They want like a long-term profitable solution especially now with like the right renters's right bill and you know all the red tape around that.
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 08:01
+  quote: Um, because it's completely hands off.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -34,7 +50,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T14:51:39Z'
 ---
 
 ## Description

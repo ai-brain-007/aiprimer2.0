@@ -10,11 +10,13 @@ aliases:
 - Build agent relationships face to face
 - 'Estate agents: relationship first, then WhatsApp'
 - Off-market deals through agents
+- Winning a letting agent over
+- Getting property through letting agents
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-05-14'
+last_seen: '2026-07-22'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -76,6 +78,21 @@ citations:
   quote: And that's because I've done the groundwork of building relationships, but not only building relationships, maintaining relationships, too.
   verified: true
   score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 02:00
+  quote: Um this one was acquired through a letting agent which is a lot more hard work than than most other ways.
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 02:00
+  quote: I told them what my requirements were and every time they wanted something um it it was letters from the council or whoever you were working through just to just to say that you've got that backing
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 03:00
+  quote: They didn't even bother put it on the market.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -83,7 +100,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:51:39Z'
 ---
 
 ## Description

@@ -5,11 +5,13 @@ type: concept
 name: The snowball effect
 aliases:
 - Each deal closes the next
+- Get agents on side and property flows to you
+- Snowball effect
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-07-08'
-last_seen: '2025-07-08'
+last_seen: '2026-07-22'
 citations:
 - resource_id: R-YT-VPA30_DJvZs
   location: '18:00'
@@ -26,6 +28,21 @@ citations:
   quote: So a lot of the times my other properties allow me to close new properties.
   verified: true
   score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 03:00
+  quote: they can see the scale and they see the vision of your of your business, they'll just pass property to you. It'll become easy.
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 03:00
+  quote: Once you get them on side and they understand the way you work and they understand that you're a man of your word.
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 03:00
+  quote: then it does snowball effect
+  verified: true
+  score: 100
 versions:
 - date: '2025-07-08'
   resource_id: R-YT-VPA30_DJvZs
@@ -33,7 +50,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:15:49Z'
-updated_at: '2026-09-27T13:15:49Z'
+updated_at: '2026-09-27T14:51:39Z'
 ---
 
 ## Description

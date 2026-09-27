@@ -3,16 +3,23 @@ id: U-zn35fs
 author_id: A-shaun-davis
 type: concept
 name: LHA rate plus Universal Credit top-up
-aliases: []
+aliases:
+- LHA rate
+- Local housing rate
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2026-02-15'
-last_seen: '2026-02-15'
+last_seen: '2026-07-22'
 citations:
 - resource_id: R-YT-E9HYGweF8Aw
   location: '15:01'
   quote: you'll get paid usually the LHA rate um or a little bit above the LHA rate and then the tenant will actually make a top up out of their universal credit. So that's where the risk comes into play
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 05:00
+  quote: You find a property that's close to the uh LHA rate, which is the lo local housing rate.
   verified: true
   score: 100
 versions:
@@ -22,7 +29,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:14:19Z'
-updated_at: '2026-09-27T14:14:19Z'
+updated_at: '2026-09-27T14:51:39Z'
 ---
 
 ## Description

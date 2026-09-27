@@ -6,11 +6,12 @@ name: Do the work once and get paid over and over
 aliases:
 - Do the work once, get paid repeatedly
 - The blank canvas problem
+- Sourcing pays once; back-to-back pays every month
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2025-10-29'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '1:09:00'
@@ -47,14 +48,28 @@ citations:
   quote: Once the tenant is in the property, there's very little work to do.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '17:02'
+  quote: a backto-back leases like sourcing a property, but better. The issue with sourcing a property, you get paid once, and yeah, you might get 3 to5,000, but that's it.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '17:02'
+  quote: you can sign a 5year deal. You know, you might to make,000, even up to £2,000 per month and beyond from doing this model from one property.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
   summary: Sourcing paid well per deal, but every month Shaun had to find new investors and new properties. He wanted a vehicle where the work is done once and the income keeps coming. That test is why he left s
   what_changed: ''
+- date: '2026-02-15'
+  resource_id: R-YT-E9HYGweF8Aw
+  summary: Sourcing a property for someone earns a one-off fee of perhaps £3,000 to £5,000 and then stops. A back-to-back lease on the same property can pay up to £2,000 a month for the length of a five-year dea
+  what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:43:33Z'
+updated_at: '2026-09-27T14:51:42Z'
 ---
 
 ## Description
@@ -68,6 +83,12 @@ Sourcing paid well per deal, but every month Shaun had to find new investors and
 - Preferred: recurring income from work done once.
 - He describes the vehicle he moved into as safer than rent-to-HMO.
 
+### Also taught as: Sourcing pays once; back-to-back pays every month
+
+- Sourcing: paid once, maybe £3,000 to £5,000, then nothing
+- Back-to-back: residual passive income; a 5-year deal paying up to £2,000 per month and beyond from one property
+- The author's aim is residual passive income over time
+
 ## Notes
 
-
+The transcript garbles the lower monthly figure ("might to make,000"); only the upper figure of £2,000 per month is legible.

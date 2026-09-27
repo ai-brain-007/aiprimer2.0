@@ -6,11 +6,13 @@ name: Three core strategies for 2026
 aliases:
 - The three core social housing strategies
 - Three main ways within rent-to-rent
+- Three core strategies
+- The three strategies taught on the programme
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2026-02-15'
-last_seen: '2026-05-14'
+last_seen: '2026-07-22'
 citations:
 - resource_id: R-YT-E9HYGweF8Aw
   location: 01:01
@@ -42,6 +44,11 @@ citations:
   quote: All three work amazingly well.
   verified: true
   score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 03:00
+  quote: So on the on the program we teach three core strategies. First one is temporary accommodation. Second one is backto-back leasing and the third one is just called the AP model or assured periodic tenencies.
+  verified: true
+  score: 100
 versions:
 - date: '2026-02-15'
   resource_id: R-YT-E9HYGweF8Aw
@@ -49,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:14:19Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:51:39Z'
 ---
 
 ## Description

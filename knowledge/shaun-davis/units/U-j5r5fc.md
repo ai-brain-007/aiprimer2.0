@@ -6,11 +6,12 @@ name: How the High Performance Academy started
 aliases:
 - HPA
 - High Performance Academy
+- HBA
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2026-05-14'
-last_seen: '2026-05-14'
+last_seen: '2026-07-22'
 citations:
 - resource_id: R-YT-NuYOOjmh0ZI
   location: '28:00'
@@ -37,6 +38,11 @@ citations:
   quote: Probably close to touching 300 people now. So we're getting close now to 500 students, all social housing.
   verified: true
   score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 00:00
+  quote: I've also spent the last 6 years running the High Performance Academy with my business partner Luigi Newton. It's a training and mentorship program for people wanting to scale a business through temporary accommodation and find time and location freedom.
+  verified: true
+  score: 100
 versions:
 - date: '2026-05-14'
   resource_id: R-YT-NuYOOjmh0ZI
@@ -44,7 +50,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:27:15Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T14:51:39Z'
 ---
 
 ## Description

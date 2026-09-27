@@ -11,7 +11,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-01-22'
+last_seen: '2026-07-22'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 09:01
@@ -53,6 +53,21 @@ citations:
   quote: So, that gives me confidence, it gives the landlord confidence and ultimately it makes the deal much better.
   verified: true
   score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 07:00
+  quote: you would have to go and source your own tenants.
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 07:00
+  quote: There's no tenant marketing.
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 07:00
+  quote: dealings with with these people for extended amounts of time.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -60,7 +75,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T14:51:39Z'
 ---
 
 ## Description

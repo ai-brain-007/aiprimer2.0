@@ -7,11 +7,13 @@ aliases:
 - Let the business breathe
 - Keep your job and leave money in the business
 - Build on top of your current commitments
+- Reinvest everything in the early months
+- Keep rolling the same money
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2026-01-08'
+last_seen: '2026-07-22'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '36:00'
@@ -53,6 +55,21 @@ citations:
   quote: So, I would highly recommend for you to build this on top of your current commitments that you already have.
   verified: true
   score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: '10:00'
+  quote: No, we we pretty much reinvest everything um and just and just keep rolling the same basically re recycling the same money
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: '10:00'
+  quote: I remember in my business for the first 18 to 20 months I didn't pay myself a penny.
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: '10:00'
+  quote: It's it's just bare it's very very minimal what you get what you get and it's the same when you start any business.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -60,7 +77,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:54:02Z'
+updated_at: '2026-09-27T14:51:39Z'
 ---
 
 ## Description

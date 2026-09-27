@@ -6,11 +6,12 @@ name: You do not need big money to start
 aliases:
 - Misinformation, not money, stops people
 - Believing you need money to start
+- Believing you need a lot of money to start
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-10-29'
-last_seen: '2026-05-27'
+last_seen: '2026-07-22'
 citations:
 - resource_id: R-YT-y6ixpf6kK8Y
   location: 00:00
@@ -42,6 +43,21 @@ citations:
   quote: I definitely wouldn't sit there saying that I need money before I get started
   verified: true
   score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 08:01
+  quote: I was under the impression that you needed a lot of money
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 09:02
+  quote: at the time I thought that was the only way in.
+  verified: true
+  score: 100
+- resource_id: R-YT-bqJS1k17GVo
+  location: 09:02
+  quote: Surely it can't be that straightforward.
+  verified: true
+  score: 100
 versions:
 - date: '2025-10-29'
   resource_id: R-YT-y6ixpf6kK8Y
@@ -49,7 +65,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:43:33Z'
-updated_at: '2026-09-27T14:33:44Z'
+updated_at: '2026-09-27T14:51:39Z'
 ---
 
 ## Description
