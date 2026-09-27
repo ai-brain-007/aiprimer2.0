@@ -36,6 +36,13 @@ class FakeNotionBackend:
         self._ticks = itertools.count(1)
 
     # -- internals
+    @staticmethod
+    def _id(value):
+        """Like the API, accept an id with or without dashes; everything is stored under the dashed UUID form."""
+        if isinstance(value, str) and len(value) == 32 and all(c in "0123456789abcdefABCDEF" for c in value):
+            return str(uuid.UUID(value))
+        return value
+
     def _new_id(self) -> str:
         return str(uuid.UUID(int=next(self._ids)))
 
@@ -66,6 +73,7 @@ class FakeNotionBackend:
         return out
 
     def _parent_of(self, parent_id: str) -> dict:
+        parent_id = self._id(parent_id)
         if parent_id in self.pages:
             return {"type": "page_id", "page_id": parent_id}
         if parent_id in self.blocks:
@@ -185,16 +193,19 @@ class FakeNotionBackend:
 
     # -- blocks
     def list_block_children(self, block_id):
+        block_id = self._id(block_id)
         self.calls.append(f"list_children:{block_id}")
         self._parent_of(block_id)
         return [copy.deepcopy(self.blocks[b]) for b in self.children.get(block_id, []) if not self.blocks[b]["archived"]]
 
     def append_block_children(self, block_id, children):
+        block_id = self._id(block_id)
         self.calls.append(f"append_children:{block_id}:{len(children)}")
         self._parent_of(block_id)
         return [self._store_block(block_id, c, 0) for c in children]
 
     def delete_block(self, block_id):
+        block_id = self._id(block_id)
         self.calls.append(f"delete_block:{block_id}")
         block = self.blocks.get(block_id)
         if block is None:
@@ -207,6 +218,7 @@ class FakeNotionBackend:
 
     # -- databases
     def create_database(self, parent_page_id, title, properties):
+        parent_page_id = self._id(parent_page_id)
         self.calls.append(f"create_database:{title}")
         if parent_page_id not in self.pages:
             raise NotionError(404, "object_not_found", f"Could not find page with ID: {parent_page_id}")
@@ -226,12 +238,14 @@ class FakeNotionBackend:
         return copy.deepcopy(db)
 
     def update_database(self, database_id, properties):
+        database_id = self._id(database_id)
         self.calls.append(f"update_database:{database_id}")
         db = self.retrieve_database(database_id)
         self.databases[database_id]["properties"] = self._schema(properties, db["properties"])
         return copy.deepcopy(self.databases[database_id])
 
     def retrieve_database(self, database_id):
+        database_id = self._id(database_id)
         self.calls.append(f"retrieve_database:{database_id}")
         db = self.databases.get(database_id)
         if db is None:
@@ -239,6 +253,7 @@ class FakeNotionBackend:
         return copy.deepcopy(db)
 
     def query_database(self, database_id, filter=None):
+        database_id = self._id(database_id)
         self.calls.append(f"query:{database_id}")
         if database_id not in self.databases:
             raise NotionError(404, "object_not_found", f"Could not find database with ID: {database_id}")
@@ -246,6 +261,7 @@ class FakeNotionBackend:
 
     # -- pages
     def create_page(self, parent, properties, children=None, icon=None):
+        parent = {k: self._id(v) for k, v in parent.items()}
         self.calls.append("create_page")
         if "database_id" in parent:
             db = self.databases.get(parent["database_id"])
@@ -274,6 +290,7 @@ class FakeNotionBackend:
         return self._page_view(page)
 
     def update_page(self, page_id, properties=None, archived=None):
+        page_id = self._id(page_id)
         self.calls.append(f"update_page:{page_id}")
         page = self.pages.get(page_id)
         if page is None:
@@ -294,6 +311,7 @@ class FakeNotionBackend:
         return self._page_view(page)
 
     def retrieve_page(self, page_id):
+        page_id = self._id(page_id)
         self.calls.append(f"retrieve_page:{page_id}")
         page = self.pages.get(page_id)
         if page is None:
@@ -306,11 +324,13 @@ class FakeNotionBackend:
         return parent.get("page_id") or parent.get("block_id") or ""
 
     def list_comments(self, block_id):
+        block_id = self._id(block_id)
         self.calls.append(f"list_comments:{block_id}")
         self._parent_of(block_id)
         return [copy.deepcopy(c) for c in self.comments.values() if self._comment_parent_id(c) == block_id and not c.get("_resolved")]
 
     def create_comment(self, *, page_id=None, discussion_id=None, text):
+        page_id = self._id(page_id)
         self.calls.append("create_comment")
         return self._add_comment(text, {"object": "user", "id": "bot-ai-primer", "name": "AI Primer pipeline", "type": "bot"}, page_id=page_id, discussion_id=discussion_id)
 

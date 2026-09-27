@@ -62,7 +62,10 @@ source dates, so ingest asks for a date when none is found.
 
 **Notion layout.** Top page "AI Primer" → databases: Authors (author pages rendered by the pipeline), Cards (one
 library for all authors, filtered per author page), Stages (layer 3 artefacts), Resources (ingestion log),
-Taxonomy, Storage accounts, Summaries (one row per published version), Jobs (activity log). Pictures under 5 MB are
+Taxonomy, Storage accounts, Summaries (one row per published version), Jobs (activity log). Next to the databases,
+two reference pages for the owner, "Command guide" and "How the pipeline works", generated from `docs/notion/*.md`
+by `python -m pipeline doc guide` and refreshed in place (same links). They are the owner-facing documentation:
+update the markdown and republish whenever a command or the process changes. Pictures under 5 MB are
 uploaded into Notion; videos and large media are shown from the public bucket or as YouTube embeds. Pages are
 generated: humans give feedback through Notion comments or the chat, the pipeline applies it to the cards and
 republishes only the changed cards.
@@ -159,6 +162,9 @@ be readable by the agent through an API.
   Small pictures still go into Notion; the public bucket serves clips and large images.
 - 2026-09-27: Notion runs under the owner's personal Google account (the dedicated Gmail was suspended by Google);
   no more throwaway Gmail accounts; plus-addresses for future Backblaze accounts.
+- 2026-09-27: owner-facing documentation lives in Notion next to the databases: "Command guide" and "How the pipeline
+  works", generated from `docs/notion/*.md` by `python -m pipeline doc guide` (idempotent, refreshed in place).
+  The owner asked for a page to refer to; the agent keeps it current.
 - 2026-09-27: the first live `/setup` surfaced three defects, fixed the same day. (1) Backblaze answered the empty
   folder markers with an HTML 400: `requests` adds `Transfer-Encoding: chunked` to an empty file body next to
   `Content-Length: 0`; zero-byte uploads now go as bytes. (2) The environment installs `apify-client` 3.x, which

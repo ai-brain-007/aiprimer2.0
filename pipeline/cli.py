@@ -28,7 +28,7 @@ taxonomy_app = typer.Typer(help="Domain > Primer > Stage tree")
 resource_app = typer.Typer(help="Move or correct an ingested resource")
 ingest_app = typer.Typer(help="Ingest resources")
 summarize_app = typer.Typer(help="Per-author knowledge base steps")
-doc_app = typer.Typer(help="Summary Google Docs")
+doc_app = typer.Typer(help="Published pages: author page comments, reference pages for the owner")
 for name, sub in (("auth", auth_app), ("setup", setup_app), ("taxonomy", taxonomy_app), ("resource", resource_app), ("ingest", ingest_app), ("summarize", summarize_app), ("doc", doc_app)):
     app.add_typer(sub, name=name)
 
@@ -482,6 +482,14 @@ def summarize_finalize(author: str = typer.Option(..., "--author"), note: str = 
 @summarize_app.command("status")
 def summarize_status(author: str = typer.Option(..., "--author"), pretty: bool = Pretty):
     run_command("summarize status", lambda: _summ().status(get_ctx(), author), {"author": author}, pretty, log=False)
+
+
+@doc_app.command("guide")
+def doc_guide(only: Optional[str] = typer.Option(None, help="publish only the docs/notion file whose name contains this"), pretty: bool = Pretty):
+    """Publish docs/notion/*.md as reference pages under the "AI Primer" page (refreshed in place)."""
+    from . import guide_cmds
+
+    run_command("doc guide", lambda: guide_cmds.publish_guide(get_ctx(), only), {"only": only}, pretty)
 
 
 @doc_app.command("comments")
