@@ -8,11 +8,15 @@ aliases:
 - Finding HMO landlords through the council's public register
 - HMO public register leads
 - HMO licences are public
+- HMO
+- House of multiple occupants
+- Direct-to-vendor letters from the HMO register
+- Direct to vendor letters
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-09-29'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '12:00'
@@ -74,6 +78,21 @@ citations:
   quote: But Wolampton and certain councils are very old school.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '14:01'
+  quote: So HMO is house of multiple occupants. So you have multiple tenants living in the house. They'll share the facilities. They'll have access to their own bedroom, which will obviously have a lock.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '26:00'
+  quote: every council has an HMO section and on the HMO section, you can find the HMO public register which you can download and you'll get access to all the different HMOs in that city, in that area and the landlord's names and addresses. And guess what? You can contact them directly.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '27:01'
+  quote: You need to send out a lot of letters to get maybe like a 10% response rate.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -81,7 +100,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

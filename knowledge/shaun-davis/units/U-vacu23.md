@@ -10,11 +10,12 @@ aliases:
 - Tasks that move the needle
 - Low value tasks
 - Tasks that drain your time
+- Low-value vs high-value tasks
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2026-01-08'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '17:01'
@@ -71,6 +72,16 @@ citations:
   quote: Low value tasks look like this. Admin, emails, chasing documents, fixing more problems, trying to do everything yourself. These tasks drain your time. They barely push the business forward.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '30:02'
+  quote: So low value tasks are still very important. Research, you know, outreach,
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '31:01'
+  quote: follow up, which is very important. And then you can then work on high value tasks. And that is moving the needle, getting deals off the line, speaking to agents, speaking to providers, having meetings, and doing things to move the business forward and scale.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -78,7 +89,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:54:02Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

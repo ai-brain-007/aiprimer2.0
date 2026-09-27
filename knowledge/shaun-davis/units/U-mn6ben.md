@@ -18,7 +18,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2026-01-14'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '46:00'
@@ -90,6 +90,16 @@ citations:
   quote: I've been able to build myself and the character and the resilience in order to solve those challenges.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '32:00'
+  quote: There's actually a famous quote by Jim Ron. He said, "Work on yourself more than you work on your job." Your business cannot outgrow your
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '33:00'
+  quote: personal identity. It can't outgrow who you are.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -97,7 +107,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T13:59:46Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

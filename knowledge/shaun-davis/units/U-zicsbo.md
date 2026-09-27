@@ -3,12 +3,13 @@ id: U-zicsbo
 author_id: A-shaun-davis
 type: procedure
 name: How to set up a back-to-back lease
-aliases: []
+aliases:
+- Setting up a back-to-back lease deal
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-14'
-last_seen: '2025-08-14'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-4lFF_IDs08U
   location: 05:01
@@ -20,6 +21,21 @@ citations:
   quote: rent that's lower than what the provider will pay and then marry the two together. You start making your profit in between.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '17:02'
+  quote: And it's simply about finding a provider who is looking to scale.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '17:02'
+  quote: There are thousands of providers out there in the UK. All you need to find is one provider.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '19:00'
+  quote: You find a provider, you find out exactly what they need. You then find a landlord and you negotiate with them a lower price than what they're paying you.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-14'
   resource_id: R-YT-4lFF_IDs08U
@@ -27,7 +43,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:26:16Z'
-updated_at: '2026-09-27T13:26:16Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

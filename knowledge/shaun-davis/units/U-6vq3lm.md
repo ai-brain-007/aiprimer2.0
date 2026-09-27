@@ -18,7 +18,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-01-14'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 08:01
@@ -90,6 +90,16 @@ citations:
   quote: So I thought to myself, what problem is there right now that I can solve? Social housing was it.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 00:00
+  quote: the role of an entrepreneur is to number one create value and number two solve meaningful problems. You get paid in proportion to the level of problems that you are solving.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '17:02'
+  quote: Remember what I said earlier, the role of an entrepreneur is to create value and solve meaningful problems.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -97,7 +107,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:59:46Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

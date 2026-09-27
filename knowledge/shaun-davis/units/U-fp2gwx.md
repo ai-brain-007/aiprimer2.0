@@ -3,12 +3,13 @@ id: U-fp2gwx
 author_id: A-shaun-davis
 type: example
 name: The first letter closed a £950 deal
-aliases: []
+aliases:
+- The first letter closed in a day
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2025-09-29'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '34:00'
@@ -30,6 +31,16 @@ citations:
   quote: But obviously it wasn't that easy in the end. I got lucky with that one.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '27:01'
+  quote: in 2018 I sent out my first letter but I actually handd delivered a letter and what's crazy is the very first letter I sent out the following day the landlord called me and I closed the deal.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '27:01'
+  quote: But turned out it wasn't that easy. You need to send out a lot of letters to get maybe like a 10% response rate.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -37,7 +48,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

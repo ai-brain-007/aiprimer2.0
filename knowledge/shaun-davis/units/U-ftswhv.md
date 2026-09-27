@@ -11,11 +11,13 @@ aliases:
 - Stop being leveraged, start leveraging
 - The power of letting go to growth
 - Outsource instead of doing it all yourself
+- You cannot scale alone
+- Leverage and scale
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-27'
-last_seen: '2025-08-05'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-nuKBUiE3Afc
   location: 04:00
@@ -62,6 +64,16 @@ citations:
   quote: The first lesson is definitely let go to grow and understand the power of outsourcing as opposed to doing it all yourself.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '29:00'
+  quote: So you can't scale a business by yourself.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '30:02'
+  quote: You can't scale a business without people. You need systems, processes, but most importantly you need eight players. You need a great team of people around you.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-27'
   resource_id: R-YT-nuKBUiE3Afc
@@ -69,7 +81,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:59:20Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

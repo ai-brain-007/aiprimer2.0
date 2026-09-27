@@ -13,7 +13,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-06-09'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: '18:00'
@@ -50,6 +50,16 @@ citations:
   quote: And just get yourself out there and provide massive value. And more importantly, take massive action because it's a massive imperfect action.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '25:02'
+  quote: If you want to compete at a high level, you need to be obsessed. Grant Kodong says it the best. He says, "Be obsessed or be average."
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '25:02'
+  quote: if you're not willing to go above and beyond, if you're willing to do own the bare minimum, you're not going to get really far.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -57,7 +67,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

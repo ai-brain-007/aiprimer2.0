@@ -7,11 +7,12 @@ aliases:
 - Registering a property with the council
 - Getting the council out to inspect
 - How Luton Council onboards a property
+- Getting a property onboarded and into payout
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-12-14'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '10:00'
@@ -93,6 +94,16 @@ citations:
   quote: that need to be carried out you'll need to do. And then once the property is literally ready to hand over keys and you've passed all the searchs over to our property negotiators, um we would list it and um move somebody in.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 07:01
+  quote: You simply find a property. You'll get a get dedicated account manager with the council. You send the property. You'll send the room sizes, the dimensions of the property to the council.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 07:01
+  quote: they will get one of their surveyors to come out and they will look at the property to ensure that it meets their standards and meets their criteria.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -100,7 +111,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

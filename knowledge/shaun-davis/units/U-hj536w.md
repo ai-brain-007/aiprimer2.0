@@ -17,11 +17,13 @@ aliases:
 - Position of power from day one
 - Leverage cost benchmarks
 - What a VA and a viewing cost
+- 'First hire: a virtual assistant'
+- VA
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2026-01-08'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '26:01'
@@ -103,6 +105,21 @@ citations:
   quote: And this costs around 35 to 40 per viewing. So, it's very cost effective, especially if you're 2 to three hours away from the property.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '30:02'
+  quote: Now, your very first hire should be a virtual assistant. Virtual assistants don't cost a lot of money.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '30:02'
+  quote: you can get a virtual assistant for as low as £150 to 2000 per month, 40 hours per week.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '30:02'
+  quote: But they can get the job done they can do what we call all the low value tasks.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -110,7 +127,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:54:02Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

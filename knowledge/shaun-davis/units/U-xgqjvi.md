@@ -9,11 +9,12 @@ aliases:
 - Nothing up front
 - Three levers to structure a no money down deal
 - Delayed rent, furniture, no deposit
+- No money down, as the author means it
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-07-08'
-last_seen: '2026-01-22'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-VPA30_DJvZs
   location: 07:00
@@ -60,6 +61,11 @@ citations:
   quote: And then the third aspect is deposits.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '16:01'
+  quote: Now no money down deals gets thrown around very loosely in the property market. But when I say no money down, I'm not talking about not using your own money and having to raise finance. I'm genuinely talking about zero money in
+  verified: true
+  score: 100
 versions:
 - date: '2025-07-08'
   resource_id: R-YT-VPA30_DJvZs
@@ -67,7 +73,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:15:49Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

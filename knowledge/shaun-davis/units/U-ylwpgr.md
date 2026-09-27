@@ -8,11 +8,12 @@ aliases:
 - Money at the forefront will sink you
 - Do not get into supported housing for the money
 - Shiny penny syndrome
+- Tenant first, money is a byproduct
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-09-29'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: 04:00
@@ -49,6 +50,21 @@ citations:
   quote: but it comes with a lot of accountability and responsibility as So you have to take on all that into consideration as well, which is why I don't recommend people to get into it for the money.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 00:00
+  quote: With this strategy, you will fail if you put the money first. The tenant has to be the number one priority.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 01:01
+  quote: promise you the money is a byproduct of the service that you're delivering.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '29:00'
+  quote: I've seen too many people fall to the wayside in this game because, as I said earlier, they're putting the money first.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -56,7 +72,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:37:24Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

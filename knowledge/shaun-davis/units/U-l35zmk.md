@@ -8,11 +8,13 @@ aliases:
 - OpenRent landlord
 - Source landlords directly on OpenRent
 - Open Rent
+- Direct to vendor is the best lead
+- Direct to vendor leads
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-07-08'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '53:02'
@@ -49,6 +51,16 @@ citations:
   quote: again direct reopen rent. Yeah. Met the landlord in person. Yeah. Pitched them exactly what I did.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '25:02'
+  quote: You can have all the councils in the world, but if you haven't got any properties, then you haven't got a business at the end of the day.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '25:02'
+  quote: And nine times out of 10, I'm able to get a better deal when I'm negotiating directly.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -56,7 +68,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:15:49Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

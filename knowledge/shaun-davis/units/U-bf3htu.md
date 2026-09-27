@@ -6,11 +6,13 @@ name: 'What the landlord gets: zero void, zero maintenance, zero hassle'
 aliases:
 - Landlord benefits
 - Zero void, zero maintenance, zero hassle
+- The hassles a company let removes for the landlord
+- Company let benefits
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2026-01-22'
-last_seen: '2026-01-22'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-MVwwBYms0co
   location: 01:00
@@ -27,6 +29,16 @@ citations:
   quote: We're guarantee the rent. We're covering maintenance and we're also guaranteeing that you won't have any voids.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '21:02'
+  quote: one of the game changers with company less is the fact that you remove all the hassle from the landlord. No voids, no daily maintenance, none of that hassle, no tenants defaulting and multiple tenants to manage.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '26:00'
+  quote: I have governmentbacked contracts, long-term leases, zero voids, zero maintenance, zero hassle that comes
+  verified: true
+  score: 100
 versions:
 - date: '2026-01-22'
   resource_id: R-YT-MVwwBYms0co
@@ -34,7 +46,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:06:06Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

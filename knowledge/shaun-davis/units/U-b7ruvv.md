@@ -6,11 +6,17 @@ name: The nightly-rate scheme
 aliases:
 - Nightly rate temporary accommodation
 - Nightly rate scheme
+- Temporary accommodation
+- TA
+- Emergency housing
+- Nightly rate temporary accommodation model
+- TA core model
+- Nightly rate model
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-12'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '35:01'
@@ -52,6 +58,31 @@ citations:
   quote: obviously with the nightly rate there is a bit more operation involved because you're managing the tenant directly
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 00:00
+  quote: Temporary accommodation is emergency housing. It's councilled and it's provider delivered.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 00:00
+  quote: So in the UK, the councils have a legal obligation to house tenants. And here's the thing, they have more tenants than houses.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 02:01
+  quote: So the temporary accommodation core model. So this is council or provider paid and it's long-term demand.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '11:00'
+  quote: So to recap on this model, it's higher income, but it's also higher responsibility. You are managing the property and you're also managing the tenant.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 09:01
+  quote: Although this model is great because there are very minimal operations involved once the tenants has moved in.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -59,7 +90,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:56:25Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

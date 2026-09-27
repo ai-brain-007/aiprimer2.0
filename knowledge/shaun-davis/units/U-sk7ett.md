@@ -11,7 +11,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2026-01-22'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: '19:01'
@@ -38,6 +38,16 @@ citations:
   quote: When people lack clarity, that causes procrastination.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 02:01
+  quote: What you need to take action is clarity. A lack of clarity is going to cause procrastination.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 02:01
+  quote: So it's very important that you have clarity, you do your research, you do your due diligence, speak to the councils, build relationships, maintain relationships with the councils.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -45,7 +55,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

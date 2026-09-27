@@ -10,11 +10,13 @@ aliases:
 - The landlord offer
 - Guaranteed rent offer
 - Guaranteed rent means government-backed contracts
+- Why guaranteed rent beats Airbnb and serviced accommodation
+- Guaranteed rent strategy
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-01-22'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 09:01
@@ -66,6 +68,21 @@ citations:
   quote: it's not a case of we're leasing the property off you and we're going to hope to do something with it
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '18:01'
+  quote: Unlike Airbnbs, unlike surface accommodation where you take on the property first in the hope of making profit, the game changer with this strategy is number one, it's governmentbacked.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '18:01'
+  quote: but also there is zero tenant marketing.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '19:00'
+  quote: if you're doing a rent to rent, it gives the landlord lots of confidence that you've got the full backing of the council.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -73,7 +90,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

@@ -10,11 +10,12 @@ aliases:
 - Three key questions to ask the council
 - The three core questions for a social housing provider
 - Three core questions
+- The three core questions
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-01-22'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -71,6 +72,21 @@ citations:
   quote: Once you've got this core information, you can then go out, find the property, lease it off
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 05:00
+  quote: the three core questions are what areas do you have the most demand in? What specific types of properties are you looking for?
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 05:00
+  quote: Once you've got a clear understanding on that, then you need to find out exactly what the rent settings are going to be.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '18:01'
+  quote: you understand the three core questions, what areas they're looking for, what specific types of properties they need, and also the rent setting.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -78,7 +94,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

@@ -7,11 +7,12 @@ aliases:
 - Working on the business as opposed to in the business
 - Let go to grow
 - On the business, not in it
+- Leverage
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2026-01-08'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: 01:00
@@ -33,6 +34,21 @@ citations:
   quote: I want you to understand the power of leverage, the power of letting go to grow and expanding your team and using third parties to get deals boxed off more quickly.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 05:00
+  quote: One of my favorite words in business is a word called leverage.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 06:00
+  quote: And I realized that me working too much in my business, I was actually sabotaging my own success because it's a bit of an ego thing.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: 06:00
+  quote: I'm better working on my team. I'm better empowering my team, working on the vision of the company to ensure that we are going the right direction.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -40,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:54:02Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

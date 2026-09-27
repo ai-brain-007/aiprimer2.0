@@ -7,11 +7,12 @@ aliases:
 - Off market deals through agents
 - Partnering with estate agents
 - Partner with agents
+- Build agent relationships face to face
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-09-29'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -48,6 +49,16 @@ citations:
   quote: also I'll be able to find properties a lot quicker. That's what I did.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '28:00'
+  quote: So my advice with agents is build relationships. And the only way I found to build relationships is by getting face to face.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '29:00'
+  quote: Whereas if you're in front of someone, they obviously have to give you their undivided attention.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -55,7 +66,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

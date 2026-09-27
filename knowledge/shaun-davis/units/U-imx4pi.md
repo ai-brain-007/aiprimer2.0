@@ -3,12 +3,13 @@ id: U-imx4pi
 author_id: A-shaun-davis
 type: principle
 name: A professional brand and image close deals
-aliases: []
+aliases:
+- A professional image is make or break
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-12-14'
-last_seen: '2025-12-14'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-aRcmGZIV7Y4
   location: '12:01'
@@ -25,6 +26,16 @@ citations:
   quote: And people buy from people that they know, like, and trust as well.
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '20:01'
+  quote: a professional image is very crucial and that it's make or break because the provider has a huge responsibility and obligation to get their tenants in there.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '20:01'
+  quote: Now the risk for the provider is that they don't know who the landlord is. All they know is you. You are the middleman.
+  verified: true
+  score: 100
 versions:
 - date: '2025-12-14'
   resource_id: R-YT-aRcmGZIV7Y4
@@ -32,7 +43,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:50:16Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description

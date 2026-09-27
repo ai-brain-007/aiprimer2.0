@@ -9,11 +9,13 @@ aliases:
 - Back-to-back lease
 - Rent-to-rent with a back-to-back lease
 - Source to a provider under a back-to-back lease
+- Back-to-back leases
+- Middleman model
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-14'
-last_seen: '2025-09-29'
+last_seen: '2026-02-15'
 citations:
 - resource_id: R-YT-4lFF_IDs08U
   location: 05:01
@@ -70,6 +72,21 @@ citations:
   quote: there's people out there doing deals with backto-back lease making up to £2,000 per month
   verified: true
   score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '16:01'
+  quote: if I was starting from scratch, again, this is a strategy that I would start out with first. And the reason why I would do this because it's honestly so simple. You are essentially the middleman and there's lots of power with being the middleman.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '17:02'
+  quote: You've got the landlord, you've got you in the middle and then you got the provider.
+  verified: true
+  score: 100
+- resource_id: R-YT-E9HYGweF8Aw
+  location: '19:00'
+  quote: There is zero operations involved in the strategy and that's what makes it an absolute game changer.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-14'
   resource_id: R-YT-4lFF_IDs08U
@@ -77,7 +94,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:26:16Z'
-updated_at: '2026-09-27T13:37:24Z'
+updated_at: '2026-09-27T14:14:19Z'
 ---
 
 ## Description
