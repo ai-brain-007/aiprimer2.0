@@ -195,6 +195,11 @@ that day was archived. Miro remains the option if the agent must read a board th
   same day at the owner's request: drawings belong at primer, stage or SOP level, and the agent should draw on its
   own. Done: Mermaid diagrams in pages (tree diagrams on all 78 node pages), Excalidraw links embed into any page,
   the publisher refreshes a page in place above its sub-pages (API `after`). `notion.whiteboard_url` removed.
+- 2026-09-27: first live ingestion (channel Shaun Davis, 25 videos, into the new Money / Property Investor /
+  Social Housing). The transcript actor refused plain URL strings: its `urls` field is typed only by the Apify
+  editor `requestListSources` (objects `{"url": ...}`), which the schema check did not read. The check now
+  looks at the item type, the editor and the prefill; the config carries `objects` for the transcript actor.
+  Channel listing and cost line worked first time.
 - 2026-09-27: the owner asked that the two reference pages be updated every time the pipeline changes, without
   fail. Decided: a gate, not a reminder (rule 11 of CLAUDE.md, script `scripts/hooks/guide_gate.py`). A push that
   changes the pipeline without the pages fails until the pages are updated or a commit states `Guide: unchanged`; a

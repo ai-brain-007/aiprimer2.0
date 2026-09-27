@@ -23,7 +23,7 @@ apify:
     transcript:
       start_urls_key: urls
       extra: {}
-      start_urls_format: strings
+      start_urls_format: objects
 
 drive:
   raw_root_name: "AI Primer Raw"

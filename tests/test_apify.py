@@ -32,10 +32,15 @@ def _urls_key(settings, kind: str) -> str:
     return settings.config["apify"]["input_templates"][kind]["start_urls_key"]
 
 
+def _urls(inp: dict, key: str) -> list[str]:
+    """The URLs of a fake actor call, whether the config sends plain strings or {"url": ...} objects."""
+    return [u["url"] if isinstance(u, dict) else u for u in inp[key]]
+
+
 def test_client_caching_and_batches(settings, fake_apify, tmp_path):
     mkey, tkey = _urls_key(settings, "metadata"), _urls_key(settings, "transcript")
-    fake_apify.responses["apidojo/youtube-scraper"] = lambda inp: [{"id": u.rsplit("=", 1)[-1] if "watch?v=" in u else f"vid{i:08d}", "title": f"T{i}", "channelName": "Chan", "date": "2020-01-0%d" % (i % 9 + 1)} for i, u in enumerate(inp[mkey])]
-    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [{"videoId": u.rsplit("=", 1)[-1], "transcript": [{"start": 0, "dur": 1, "text": "hello"}]} for u in inp[tkey]]
+    fake_apify.responses["apidojo/youtube-scraper"] = lambda inp: [{"id": u.rsplit("=", 1)[-1] if "watch?v=" in u else f"vid{i:08d}", "title": f"T{i}", "channelName": "Chan", "date": "2020-01-0%d" % (i % 9 + 1)} for i, u in enumerate(_urls(inp, mkey))]
+    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [{"videoId": u.rsplit("=", 1)[-1], "transcript": [{"start": 0, "dur": 1, "text": "hello"}]} for u in _urls(inp, tkey)]
     yt = ApifyYouTube(fake_apify, settings, cache_dir=tmp_path / "yt")
     meta = yt.video_metadata(["abcdefghijk"])
     assert meta["abcdefghijk"]["title"] == "T0"
@@ -162,3 +167,32 @@ def test_real_runner_adapts_apify_client_v3_models_and_arguments():
     assert runner.actor_input_schema("x") == {}
 
     assert _as_dict(None) == {} and _as_dict({"a": 1}) == {"a": 1} and _as_dict(_Model({"b": 2})) == {"b": 2}
+
+
+def test_url_field_format_is_read_from_item_type_editor_or_prefill():
+    from pipeline.apify_yt import _wants_url_objects
+
+    assert _wants_url_objects({"type": "array", "items": {"type": "object"}}) is True
+    # the live transcript actor: no item type, the requestListSources editor, object prefills
+    assert _wants_url_objects({"type": "array", "editor": "requestListSources", "prefill": [{"url": "https://www.youtube.com/watch?v=x"}]}) is True
+    assert _wants_url_objects({"type": "array", "editor": "requestListSources"}) is True
+    assert _wants_url_objects({"type": "array", "prefill": [{"url": "https://a"}]}) is True
+    # the live metadata actor: a stringList editor with string prefills
+    assert _wants_url_objects({"type": "array", "editor": "stringList", "prefill": ["https://www.youtube.com/watch?v=x"]}) is False
+    assert _wants_url_objects({"type": "array", "items": {"type": "string"}}) is False
+    assert _wants_url_objects({"type": "array"}) is False
+
+
+def test_schema_fetch_marks_a_request_list_field_as_objects(settings, fake_apify, tmp_path, monkeypatch):
+    fake_apify.schemas["apidojo/youtube-scraper"] = {"properties": {"startUrls": {"type": "array", "editor": "stringList"}, "maxItems": {"type": "integer"}}}
+    fake_apify.schemas["supreme_coder/youtube-transcript-scraper"] = {"properties": {"urls": {"type": "array", "editor": "requestListSources"}}}
+    import pipeline.apify_yt as mod
+
+    monkeypatch.setattr(mod, "save_config", lambda s: None)
+    yt = ApifyYouTube(fake_apify, settings, cache_dir=tmp_path / "yt")
+    report = yt.fetch_and_store_schemas()
+    assert report["metadata"]["fields"]["start_urls_format"] == "strings"
+    assert report["transcript"]["fields"] == {"start_urls_key": "urls", "start_urls_format": "objects"}
+    yt.transcripts(["abcdefghijk"])
+    actor, inp = fake_apify.calls[-1]
+    assert actor == "supreme_coder/youtube-transcript-scraper" and inp["urls"] == [{"url": "https://www.youtube.com/watch?v=abcdefghijk"}]

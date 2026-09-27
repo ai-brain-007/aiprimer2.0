@@ -111,12 +111,16 @@ def test_ingest_image_needs_vision_then_completes(settings, fake_sheets, fake_dr
 def test_channel_list_and_run(settings, fake_sheets, fake_drive, fake_apify, tmp_path):
     templates = settings.config["apify"]["input_templates"]
     mkey, tkey = templates["metadata"]["start_urls_key"], templates["transcript"]["start_urls_key"]
+
+    def urls(inp, key):  # plain strings or {"url": ...} objects, whatever the config says
+        return [u["url"] if isinstance(u, dict) else u for u in inp[key]]
+
     fake_apify.responses["apidojo/youtube-scraper"] = lambda inp: (
         [{"id": f"chanvid{i:04d}", "title": f"Video {i}", "channelName": "Chan", "date": f"2022-01-{i + 1:02d}", "duration": 600} for i in range(3)]
-        if "@chan" in inp[mkey][0]
-        else [{"id": u.rsplit("=", 1)[-1], "title": "Video", "channelName": "Chan", "date": "2022-01-01", "duration": 600} for u in inp[mkey]]
+        if "@chan" in urls(inp, mkey)[0]
+        else [{"id": u.rsplit("=", 1)[-1], "title": "Video", "channelName": "Chan", "date": "2022-01-01", "duration": 600} for u in urls(inp, mkey)]
     )
-    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [{"videoId": u.rsplit("=", 1)[-1], "transcript": [{"start": 0, "dur": 2, "text": "content"}]} for u in inp[tkey]]
+    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [{"videoId": u.rsplit("=", 1)[-1], "transcript": [{"start": 0, "dur": 2, "text": "content"}]} for u in urls(inp, tkey)]
     ctx, reg, *_ = build_ctx(settings, fake_sheets, fake_drive, fake_apify)
     ing = Ingestor(ctx)
     listing = ing.channel_list("https://www.youtube.com/@chan/videos")

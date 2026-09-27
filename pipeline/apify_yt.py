@@ -88,6 +88,19 @@ class RealApifyRunner:
 # ----------------------------------------------------------------------------- tolerant parsing
 
 
+def _wants_url_objects(spec: dict) -> bool:
+    """Does this array field take `{"url": ...}` objects rather than plain strings? Apify says so in three ways:
+    `items.type == "object"`, the `requestListSources` editor (items typed only by the editor), or object prefills.
+    Seen live: the transcript actor's `urls` field has the editor and no item type, and refused plain strings."""
+    items = spec.get("items") or {}
+    if items.get("type") == "object":
+        return True
+    if str(spec.get("editor") or "").lower() == "requestlistsources":
+        return True
+    samples = spec.get("prefill") or spec.get("default") or spec.get("example") or []
+    return bool(samples) and isinstance(samples, list) and all(isinstance(x, dict) for x in samples)
+
+
 def _first(item: dict, *keys: str, default: Any = None) -> Any:
     for k in keys:
         if "." in k:
@@ -350,8 +363,7 @@ class ApifyYouTube:
                 low = name.lower()
                 if "starturl" in low or low in ("urls", "videourls", "videos"):
                     found["start_urls_key"] = name
-                    items = spec.get("items") or {}
-                    found["start_urls_format"] = "objects" if items.get("type") == "object" else "strings"
+                    found["start_urls_format"] = "objects" if _wants_url_objects(spec) else "strings"
                 if kind == "metadata" and ("maxresult" in low or low in ("maxitems", "limit", "maxvideos")):
                     found["max_results_key"] = name
             tpl.update(found)
