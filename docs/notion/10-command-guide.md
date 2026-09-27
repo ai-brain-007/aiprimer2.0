@@ -6,7 +6,7 @@ How you talk to the AI Primer system. Everything happens in a Claude Code chat s
 
 | Command | When | What happens |
 |---|---|---|
-| `/setup` | Once at the start, or after you add a storage account or change the Notion page | Checks the connections, creates what is missing, prints a health table |
+| `/setup` | Once at the start, or after you add a storage account or change the Notion page | Checks the connections, creates what is missing (layer pages, tables, tree pages, storage folders), prints a health table |
 | `/ingest` | Every time you have a link or a file to add | Files the resource in storage and logs it in Notion |
 | `/taxonomy` | When a category needs adding, renaming or moving | Updates the Domain > Primer > Stage tree |
 | `/summarize <author>` | When you want an author's page built or refreshed | Builds the knowledge cards and publishes the author page |
@@ -32,8 +32,8 @@ Good to know:
 ## /taxonomy: the tree of categories
 
 - "Show the tree": lists every Domain > Primer > Stage.
-- "Add a stage Clinch under Body > Olympic Spartan > Muay Thai": adds a node.
-- "Rename Sales Man to Seller": renames. Names are labels only; nothing moves in storage.
+- "Add a stage Clinch under Body > Olympic Spartan > Muay Thai": adds a node and its page under LAYER 3.
+- "Rename Sales Man to Seller": renames the node and its page. Names are labels only; nothing moves in storage.
 - "Move the footwork video to Boxing": moves one resource to another stage.
 - "Sync the taxonomy": after you edited names directly in the Notion Taxonomy table, makes storage and the table consistent again.
 
@@ -42,7 +42,7 @@ Good to know:
 1. Type `/summarize` and the author's name.
 2. The agent shows the plan: which of the author's resources are new since the last run.
 3. Helper agents extract the ideas, every quote is checked against the source, and a reviewer reads the result. Long sources take a while; you can leave the session open.
-4. The author's page in Notion is created or refreshed. The link never changes.
+4. The author's page in Notion is created or refreshed: LAYER 2 - SUMMARY BY AUTHORS, table Authors, the author's row. The link never changes.
 5. You read it and comment, in Notion or in the chat.
 
 One author per session. Run it again after you ingest more of the author's material; only the new parts are processed.

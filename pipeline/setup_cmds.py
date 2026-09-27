@@ -168,7 +168,10 @@ def create_control_sheet(ctx: AppContext, title: str = "AI Primer Control Panel"
 
 
 def init_sheet(ctx: AppContext) -> dict[str, Any]:
-    report = ctx.registry.repo.ensure_tabs()
+    from .layout import table_homes
+
+    homes = table_homes(ctx)  # Notion mode: {tab: layer page id}; else None
+    report = ctx.registry.repo.ensure_tabs(homes) if homes else ctx.registry.repo.ensure_tabs()
     accounts = bootstrap_accounts(ctx)
     return {"tabs": report, "accounts": [a.account_id for a in accounts], "url": repo_url(ctx)}
 

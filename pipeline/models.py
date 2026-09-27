@@ -108,6 +108,8 @@ class TaxonomyNode(TabRow):
     previous_names: list[str] = Field(default_factory=list)
     created_at: str = ""
     updated_at: str = ""
+    page_id: str = ""  # the node's page under "LAYER 3 - DOMAINS > PRIMERS > STAGES" (pipeline.layout)
+    page_url: str = ""
 
 
 class FolderMap(TabRow):

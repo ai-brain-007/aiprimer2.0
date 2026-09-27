@@ -6,6 +6,9 @@ description: Manage the Domain > Primer > Stage tree of the AI Primer library (l
 # /taxonomy — tree and moves
 
 The **Taxonomy database** of the control panel is the source of truth. Node ids (`T-…`) never change; names do.
+Every node has a page under `LAYER 3 - DOMAINS > PRIMERS > STAGES` in Notion (`page_id`, `page_url` on the row);
+`add` and `rename` create or rename that page (`pages` in their JSON). `python -m pipeline setup layout` rebuilds
+the missing ones.
 In Backblaze storage the folders are named by node id (`raw/<domain id>/<primer id>/<stage id>/`), so a rename touches no file: only the
 readable `stage_path` on the resources is refreshed. (In the legacy Google mode the Drive folders carry the names
 and are renamed.) Every command prints JSON.

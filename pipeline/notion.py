@@ -157,6 +157,18 @@ def chunk_children(children: list[dict]) -> list[list[dict]]:
     return chunks
 
 
+def child_pages(backend: "NotionBackend", parent_id: str) -> dict[str, str]:
+    """Title -> page id of the pages directly under `parent_id` (a child page's block id is its page id).
+    The first page of a title wins."""
+    out: dict[str, str] = {}
+    for block in backend.list_block_children(parent_id):
+        if block.get("type") == "child_page":
+            title = ((block.get("child_page") or {}).get("title") or "").strip()
+            if title and title not in out:
+                out[title] = block["id"]
+    return out
+
+
 def page_url(page_id: str) -> str:
     return f"https://www.notion.so/{page_id.replace('-', '')}"
 
@@ -386,33 +398,71 @@ class NotionRepo:
         self.parent_page_id = parent_page_id
         self.tab_models = tab_models or TAB_MODELS
         self._db_ids: dict[str, str] | None = None
+        self._db_parents: dict[str, str] = {}
         self._cache: dict[str, tuple[list[str], list[dict[str, str]], dict[str, str]]] = {}
 
     # ---- structure
     def _databases(self, refresh: bool = False) -> dict[str, str]:
+        """Title -> database id of the registry databases. They live directly under the parent page or inside
+        one of its child pages (the layer pages of `pipeline.layout`); a database inside a layer page wins over
+        a same-titled one at the top, so a half-finished move is resumed, not repeated."""
         if self._db_ids is None or refresh:
             found: dict[str, str] = {}
-            for block in self.backend.list_block_children(self.parent_page_id):
-                if block.get("type") != "child_database":
-                    continue
-                title = (block.get("child_database") or {}).get("title", "")
-                found.setdefault(title, block["id"])
-            self._db_ids = found
+            parents: dict[str, str] = {}
+            top = self.backend.list_block_children(self.parent_page_id)
+            pages = [b["id"] for b in top if b.get("type") == "child_page"]
+            for page_id, blocks in [*((p, None) for p in pages), (self.parent_page_id, top)]:
+                for block in blocks if blocks is not None else self.backend.list_block_children(page_id):
+                    if block.get("type") != "child_database":
+                        continue
+                    title = (block.get("child_database") or {}).get("title", "")
+                    if title and title not in found:
+                        found[title] = block["id"]
+                        parents[title] = page_id
+            self._db_ids, self._db_parents = found, parents
         return self._db_ids
+
+    def database_parent(self, tab: str) -> str | None:
+        """Id of the page the database sits in (the parent page or a layer page); None when not found."""
+        self._databases()
+        return self._db_parents.get(tab)
+
+    def relocate_tab(self, tab: str, page_id: str) -> dict[str, Any]:
+        """Put a registry database under another page. The API cannot move a database, so a new one with the same
+        schema is created there, the rows are copied and counted, and only then is the old database archived
+        (recoverable from Notion's trash). A count mismatch archives the copy instead and raises."""
+        old_id = self._require_db(tab)
+        model = self.tab_models[tab]
+        headers, rows, _ = self._load_raw(tab, refresh=True)
+        new_id = self.backend.create_database(page_id, tab, self._schema(model))["id"]
+        for cells in rows:
+            self.backend.create_page({"database_id": new_id}, self._properties_of(tab, model.headers(), cells))
+        copied = [p for p in self.backend.query_database(new_id) if not p.get("archived")]
+        if len(copied) != len(rows):
+            self.backend.delete_block(new_id)
+            raise NotionError(500, "copy_mismatch", f"{tab}: copied {len(copied)} of {len(rows)} rows; the copy was discarded and the database stays where it is")
+        self.backend.delete_block(old_id)
+        self._db_ids[tab] = new_id  # type: ignore[index]
+        self._db_parents[tab] = page_id
+        self._cache.pop(tab, None)
+        return {"rows": len(rows), "old_id": old_id, "new_id": new_id, "columns_dropped": [h for h in headers if h not in model.headers()]}
 
     @staticmethod
     def _schema(model: type[TabRow]) -> dict[str, dict]:
         return {h: ({"title": {}} if h == model.key_field else {"rich_text": {}}) for h in model.headers()}
 
-    def ensure_tabs(self) -> dict[str, Any]:
-        """Create the missing databases and add missing properties to existing ones. Returns what changed."""
+    def ensure_tabs(self, homes: dict[str, str] | None = None) -> dict[str, Any]:
+        """Create the missing databases (under `homes[tab]` when given, else the parent page) and add missing
+        properties to existing ones. Returns what changed."""
         report: dict[str, Any] = {"created": [], "columns_added": {}}
         existing = self._databases(refresh=True)
         for tab, model in self.tab_models.items():
             headers = model.headers()
             if tab not in existing:
-                db = self.backend.create_database(self.parent_page_id, tab, self._schema(model))
+                parent = (homes or {}).get(tab) or self.parent_page_id
+                db = self.backend.create_database(parent, tab, self._schema(model))
                 existing[tab] = db["id"]
+                self._db_parents[tab] = parent
                 report["created"].append(tab)
                 continue
             db_id = existing[tab]
@@ -525,8 +575,10 @@ class NotionRepo:
 
     # ---- writing
     def _properties(self, tab: str, headers: list[str], row: TabRow) -> dict[str, dict]:
+        return self._properties_of(tab, headers, row.to_row())
+
+    def _properties_of(self, tab: str, headers: list[str], cells: dict[str, str]) -> dict[str, dict]:
         key_field = self.tab_models[tab].key_field
-        cells = row.to_row()
         props: dict[str, dict] = {}
         for h in headers:
             items = _capped(rich_text(cells.get(h, "")))

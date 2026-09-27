@@ -28,7 +28,7 @@ you  -->  agent  -->  helpers (extract, match, review)
 |---|---|---|
 | 1. Raw | The originals, their extracted text and one row of details per resource | Files in Backblaze; the row in the Notion Resources table |
 | 2. Per author | Knowledge cards, one idea each, with verified quotes; the author page rendered from them | Cards in the code repository; the page in the Notion Authors table |
-| 3. Per stage | Study material for one stage built from all authors' cards: brief, procedures, drills, lists, scripts, glossary, self-test | Notion Stages table (not built yet) |
+| 3. Per stage | Study material for one stage built from all authors' cards: brief, procedures, drills, lists, scripts, glossary, self-test | The stage's page under LAYER 3 in Notion (the material itself is not built yet) |
 
 Layer 3 only ever reads layer 2. It never goes back to the raw material. When something is missing, layer 2 is re-extracted for that gap.
 
@@ -36,7 +36,7 @@ Layer 3 only ever reads layer 2. It never goes back to the raw material. When so
 
 ### 1. Setup, once
 
-Checks that the system can reach Notion and Backblaze, creates the seven tables under the "AI Primer" page, creates the storage folders, loads the tree of categories and checks the YouTube tools. Safe to repeat: it only adds what is missing.
+Checks that the system can reach Notion and Backblaze, creates the layer pages and the seven tables under the "AI Primer" page, creates the storage folders, loads the tree of categories, builds the tree pages under LAYER 3 and checks the YouTube tools. Safe to repeat: it only adds what is missing.
 
 ### 2. Ingest, for every resource
 
@@ -48,7 +48,7 @@ Checks that the system can reach Notion and Backblaze, creates the seven tables 
 
 ### 3. Taxonomy, when needed
 
-The tree of Domain > Primer > Stage. Every node has a permanent id, so renaming costs nothing and moving a resource means updating its row and its storage folder. Four domains today: Body, Mind, People, Money.
+The tree of Domain > Primer > Stage. Every node has a permanent id, so renaming costs nothing and moving a resource means updating its row and its storage folder. Each node also has its page under LAYER 3, renamed with it. Four domains today: Body, Mind, People, Money.
 
 ### 4. Summarize, per author
 
@@ -57,7 +57,7 @@ The tree of Domain > Primer > Stage. Every node has a permanent id, so renaming 
 3. Verify: the script looks for every quote in the source text. No match, no card. Rejected cards are kept aside with the reason.
 4. Match: a helper compares each new card with the author's existing cards. Same idea: merge. Evolved idea: a new dated version. New idea: a new card.
 5. Review: a helper who only sees the evidence reads the result with fresh eyes and flags problems.
-6. Render and publish: the script writes the author page from the cards and publishes it into the author's row in Notion. The link never changes. A version row goes into the Summaries table.
+6. Render and publish: the script writes the author page from the cards and publishes it into the author's row in the Authors table under LAYER 2. The link never changes. A version row goes into the Summaries table.
 
 ### 5. Feedback
 
@@ -67,25 +67,40 @@ You comment in Notion or in the chat. The agent applies the feedback to the card
 
 For one stage, in dialogue with you: a brief, procedures, practice, lists, scripts, a glossary across authors and a self-test, all built from the cards. Agreement between independent authors weighs most, then how specific an author is, then how recent. Every sentence points to a card.
 
+## How Notion is organised
+
+Under the "AI Primer" page you find the two guides and one page per layer. Open a layer page to reach its tables and pages. The sidebar shows the same tree, so you can jump straight to the layer or page you want.
+
+| Page under AI Primer | What is inside |
+|---|---|
+| Command guide, How the pipeline works | These two guides |
+| LAYER 1 - RAW MATERIAL | The Resources table: everything you added, with links to the stored originals |
+| LAYER 2 - SUMMARY BY AUTHORS | The Authors table (one row per author, the author's page inside the row) and the Summaries table (version history) |
+| LAYER 3 - DOMAINS > PRIMERS > STAGES | Your tree as pages: a page per domain, inside it a page per primer, inside that a page per stage. The stage pages will hold the study material |
+| LAYER 0 - CONFIG | The pipeline's bookkeeping: Accounts, Taxonomy, Folders and Jobs |
+
+The tree pages are generated from the Taxonomy table. Adding or renaming a stage adds or renames its page; the page keeps its link. Nothing there is deleted automatically.
+
 ## Where things live
 
 - Original files and extracted text: the private Backblaze bucket `aiprimer-rawfile-0001`. Free up to 10 GB; when full, the system moves to the next account.
 - Pictures and clips shown inside pages: the public bucket `aiprimer-media-0001`. Originals never go there.
-- Control panel: the seven tables under the "AI Primer" page in Notion.
+- Control panel: the seven tables, each inside its layer page under "AI Primer" in Notion.
 - Knowledge cards: the code repository, folder `knowledge/<author>/units/`. This is the source of truth for every page.
-- Author pages: the Authors table in Notion, one row per author, the page inside the row.
+- Author pages: the Authors table under LAYER 2, one row per author, the page inside the row.
+- Stage pages: under LAYER 3, one page per stage; empty until the learning layer is built.
 
 ## The seven tables
 
-| Table | One row per |
-|---|---|
-| Accounts | Storage account, with its used and free space |
-| Taxonomy | Node of the tree: domain, primer or stage |
-| Folders | Storage folder, mapped to its node |
-| Resources | Ingested resource: title, author, stage, dates, links, status, cost |
-| Authors | Author, with the rendered page inside |
-| Summaries | Published version of an author page |
-| Jobs | Command that was run, with its result |
+| Table | Layer | One row per |
+|---|---|---|
+| Resources | LAYER 1 | Ingested resource: title, author, stage, dates, links, status, cost |
+| Authors | LAYER 2 | Author, with the rendered page inside |
+| Summaries | LAYER 2 | Published version of an author page |
+| Accounts | LAYER 0 | Storage account, with its used and free space |
+| Taxonomy | LAYER 0 | Node of the tree: domain, primer or stage, with the link to its page |
+| Folders | LAYER 0 | Storage folder, mapped to its node |
+| Jobs | LAYER 0 | Command that was run, with its result |
 
 ## Rules the system always follows
 

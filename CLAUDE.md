@@ -46,7 +46,9 @@ Read the skill file in `.claude/skills/<name>/SKILL.md` before running any of th
 ## Where things live (v2)
 
 - Control panel (accounts, taxonomy, folders, resources, authors, summaries, jobs): Notion databases under the
-  page whose id is `AIPRIMER_NOTION_PAGE_ID`. Columns: `pipeline/models.py`; store: `pipeline/notion.py`.
+  page whose id is `AIPRIMER_NOTION_PAGE_ID`, each inside its layer page (`pipeline/layout.py`: LAYER 1 - RAW
+  MATERIAL, LAYER 2 - SUMMARY BY AUTHORS, LAYER 3 - DOMAINS > PRIMERS > STAGES with one page per taxonomy node,
+  LAYER 0 - CONFIG). Columns: `pipeline/models.py`; store: `pipeline/notion.py`. `setup layout` is idempotent.
 - Raw files + `.extracted.md` text versions: Backblaze bucket `ai-primer-raw-000N` (private), keys
   `raw/<domain id>/<primer id>/<stage id>/<readable filename>`; `raw/_Inbox/` for hand-uploaded files. Client: `pipeline/storage_b2.py`.
   Pictures go into Notion (5 MB each) and videos are YouTube embeds; a public media bucket is optional.
@@ -92,7 +94,8 @@ Read the skill file in `.claude/skills/<name>/SKILL.md` before running any of th
 
 ```bash
 python -m pipeline auth check --pretty                 # access, write test, used space per account; Notion reachability
-python -m pipeline setup all --pretty                  # databases, bucket prefixes, taxonomy, health
+python -m pipeline setup all --pretty                  # databases, bucket prefixes, taxonomy, layer layout, health
+python -m pipeline setup layout --pretty               # layer pages, tables in their layer, Domain > Primer > Stage pages
 python -m pipeline taxonomy list --pretty
 python -m pipeline ingest probe <source...> --pretty   # no side effects
 python -m pipeline ingest run <source> --stage "<Domain / Primer / Stage>" --author "<name or A-id>" [--title ..] [--date ..]

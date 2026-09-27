@@ -38,9 +38,11 @@ Never ask the user to paste a key or token into the chat. If they do, tell them 
    ```bash
    python -m pipeline setup all --pretty
    ```
-   Creates the databases under the "AI Primer" page (Accounts, Taxonomy, Folders, Resources, Authors, Summaries,
-   Jobs), the `raw/` and `raw/_Inbox/` prefixes in each raw bucket, imports `config/taxonomy.seed.yaml`, prints
-   health. Folders inside the bucket are named by node id (`raw/<domain id>/<primer id>/<stage id>/`), so renaming a stage never
+   Creates the layer pages under the "AI Primer" page (`LAYER 1 - RAW MATERIAL`, `LAYER 2 - SUMMARY BY AUTHORS`,
+   `LAYER 3 - DOMAINS > PRIMERS > STAGES`, `LAYER 0 - CONFIG`) and the databases inside them (Accounts, Taxonomy,
+   Folders, Resources, Authors, Summaries, Jobs), the `raw/` and `raw/_Inbox/` prefixes in each raw bucket, imports
+   `config/taxonomy.seed.yaml`, builds one page per taxonomy node under LAYER 3 (`setup layout`, idempotent: a table
+   found in the wrong place is moved by copy, count check and archive of the old one), prints health. Folders inside the bucket are named by node id (`raw/<domain id>/<primer id>/<stage id>/`), so renaming a stage never
    touches storage; the readable path is in the Resources database.
 3. **Apify formats** (needs `api.apify.com` allowed and the credential set):
    ```bash
@@ -49,7 +51,7 @@ Never ask the user to paste a key or token into the chat. If they do, tell them 
    On a network error, tell the user to check the environment's allowed domains and API credentials. YouTube
    ingestion will not work until then; file ingestion will.
 4. **Report** a short health table: mode, each storage account (bucket, used GB of cap, status, media public?),
-   the Notion page link, taxonomy node count, resources by status. Mention `/ingest` and `/summarize` as next steps.
+   the Notion page link and the four layer pages, taxonomy node count, resources by status. Mention `/ingest` and `/summarize` as next steps.
 
 ## Questions you may ask (AskUserQuestion)
 

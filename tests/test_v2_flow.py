@@ -73,7 +73,10 @@ def test_storage_accounts_come_from_the_environment(settings, monkeypatch):
 def test_setup_creates_databases_prefixes_and_health(v2):
     ctx, reg, notion, bucket, parent = v2
     sheet = init_sheet(ctx)
-    assert set(notion.child_databases(parent)) >= {"Accounts", "Taxonomy", "Folders", "Resources", "Authors", "Summaries", "Jobs"}
+    assert all(reg.repo.database_id(t) for t in ("Accounts", "Taxonomy", "Folders", "Resources", "Authors", "Summaries", "Jobs"))
+    layers = {b["child_page"]["title"]: b["id"] for b in notion.list_block_children(parent) if b["type"] == "child_page"}
+    assert set(notion.child_databases(layers["LAYER 0 - CONFIG"])) == {"Accounts", "Taxonomy", "Folders", "Jobs"}  # tables live in their layer pages
+    assert notion.child_databases(parent) == {}
     assert sheet["accounts"] == ["b2-0001"]
     acc = reg.account("b2-0001")
     assert acc.backend == "b2" and acc.bucket == "ai-primer-raw-0001" and acc.quota_bytes == 10_000_000_000
@@ -120,14 +123,14 @@ def test_ingest_file_into_bucket_and_notion(v2, tmp_path):
     keys = bucket("ai-primer-raw-0001").keys()
     assert row.raw_file_id in keys and row.text_file_id in keys
     # the Notion Resources database holds the row
-    db = notion.child_databases(parent)["Resources"]
+    db = reg.repo.database_id("Resources")
     rows = notion.rows(db)
     assert any(r["resource_id"] == row.resource_id and r["status"] == "ingested" for r in rows)
     # duplicate is skipped
     again = Ingestor(ctx).run(str(src), STAGE, author="Jane Doe")
     assert again["status"] == "skipped"
     # a job was logged
-    jobs = notion.rows(notion.child_databases(parent)["Jobs"])
+    jobs = notion.rows(reg.repo.database_id("Jobs"))
     assert isinstance(jobs, list)
 
 

@@ -13,7 +13,9 @@ from pathlib import Path
 from typing import Any
 
 from .context import AppContext
-from .notion import CONTAINER_BLOCK_TYPES, NotionPublisher
+from .notion import CONTAINER_BLOCK_TYPES, NotionPublisher, child_pages
+
+__all__ = ["GUIDE_DIR", "child_pages", "guide_files", "publish_guide", "split_title"]
 
 GUIDE_DIR = Path("docs") / "notion"
 _HEADING = re.compile(r"^#\s+(.+?)\s*$")
@@ -37,17 +39,6 @@ def split_title(md_text: str, fallback: str) -> tuple[str, str]:
             return m.group(1), "\n".join(lines[i + 1 :]).strip() + "\n"
         break
     return fallback, md_text
-
-
-def child_pages(backend: Any, parent_id: str) -> dict[str, str]:
-    """Title -> page id of the pages directly under `parent_id` (a child page's block id is its page id)."""
-    out: dict[str, str] = {}
-    for block in backend.list_block_children(parent_id):
-        if block.get("type") == "child_page":
-            title = ((block.get("child_page") or {}).get("title") or "").strip()
-            if title and title not in out:
-                out[title] = block["id"]
-    return out
 
 
 def publish_guide(ctx: AppContext, only: str | None = None) -> dict[str, Any]:

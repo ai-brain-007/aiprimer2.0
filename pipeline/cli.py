@@ -169,14 +169,23 @@ def setup_status(pretty: bool = Pretty):
     run_command("setup status", lambda: health(get_ctx()), pretty=pretty, log=False)
 
 
+@setup_app.command("layout")
+def setup_layout(pretty: bool = Pretty):
+    """Notion only: the layer pages under "AI Primer", each table in its layer, the Domain > Primer > Stage pages."""
+    from .layout import apply_layout
+
+    run_command("setup layout", lambda: apply_layout(get_ctx()), pretty=pretty)
+
+
 @setup_app.command("all")
 def setup_all(pretty: bool = Pretty):
-    """init-sheet + init-drive + taxonomy import + status, in one go."""
+    """init-sheet + init-drive + taxonomy import + layout + status, in one go."""
+    from .layout import apply_layout
     from .setup_cmds import health, import_taxonomy, init_drive, init_sheet
 
     def _all():
         ctx = get_ctx()
-        return {"sheet": init_sheet(ctx), "drive": init_drive(ctx), "taxonomy": import_taxonomy(ctx), "health": health(ctx)}
+        return {"sheet": init_sheet(ctx), "drive": init_drive(ctx), "taxonomy": import_taxonomy(ctx), "layout": apply_layout(ctx), "health": health(ctx)}
 
     run_command("setup all", _all, pretty=pretty)
 
@@ -217,6 +226,9 @@ def taxonomy_add(level: str, name: str, parent: str = typer.Option("", help="par
             parent_id = p.node_id
         node = add_node(ctx.registry, level, name, parent_id, description)
         out: dict[str, Any] = {"node_id": node.node_id, "path": node.path, "level": node.level}
+        from .layout import sync_tree_pages
+
+        out["pages"] = sync_tree_pages(ctx)
         if create_folders:
             for acc in ctx.registry.raw_accounts():
                 drive = ctx.drive_for(acc)
@@ -240,7 +252,9 @@ def taxonomy_rename(node: str, name: str = typer.Option(..., "--name"), pretty: 
         if n is None:
             raise ValueError(f"unknown node {node!r}")
         report = rename_node(ctx.registry, n.node_id, name, ctx.drive_for)
-        return {"node_id": n.node_id, **report.__dict__}
+        from .layout import sync_tree_pages
+
+        return {"node_id": n.node_id, **report.__dict__, "pages": sync_tree_pages(ctx)}
 
     run_command("taxonomy rename", _fn, {"node": node, "name": name}, pretty)
 
