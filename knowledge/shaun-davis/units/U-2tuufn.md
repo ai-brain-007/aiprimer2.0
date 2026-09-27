@@ -5,11 +5,13 @@ type: technique
 name: Build relationships with agents
 aliases:
 - Off market deals through agents
+- Partnering with estate agents
+- Partner with agents
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-03-12'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -26,6 +28,26 @@ citations:
   quote: once you form a relationship with the agent you can then build on that relationship and they will then start sending you off Market deals
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:05:02'
+  quote: I work with some agents that have thousands of properties in their books and they work with hundreds of landlords.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:05:02'
+  quote: So if you can partner with an agent and they really understand exactly what it is you do, but more importantly how you can help them and how you can make their life easier, it's going to be an absolute game changer.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:06:01'
+  quote: There was no fancy um structure a sense. It was just going into an estate agent, introducing myself
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:06:01'
+  quote: also I'll be able to find properties a lot quicker. That's what I did.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -33,7 +55,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T12:56:25Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

@@ -6,11 +6,14 @@ name: Back-to-back leasing
 aliases:
 - Back to back lease
 - Middleman strategy
+- Back-to-back lease
+- Rent-to-rent with a back-to-back lease
+- Source to a provider under a back-to-back lease
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-14'
-last_seen: '2025-08-14'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-4lFF_IDs08U
   location: 05:01
@@ -27,6 +30,46 @@ citations:
   quote: People doing this literally making between £500 to £1,000 a month just by doing backto-back leases and not actually having to worry about the property, the tenants or the management of the property.
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:20:00'
+  quote: Do it under a backto-back lease.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:21:00'
+  quote: And there's zero risk because the the reason why it's zero risk is because it's a backto-back lease.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:21:00'
+  quote: on the terms of the contract you sign the exact same terms the landlord.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:20:00'
+  quote: you lease it back out to a social provider for £3,000.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:20:00'
+  quote: That means you're making £1,000 profit per month doing absolutely nothing
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:20:00'
+  quote: Once you done it once, you just do it again and again and again. It's rinse
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:21:00'
+  quote: They break the lease, they'll have to give you a certain amount of notice. You give the same notice period to the landlord, which means there's zero risk for you.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:21:00'
+  quote: there's people out there doing deals with backto-back lease making up to £2,000 per month
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-14'
   resource_id: R-YT-4lFF_IDs08U
@@ -34,7 +77,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:26:16Z'
-updated_at: '2026-09-27T13:26:16Z'
+updated_at: '2026-09-27T13:37:24Z'
 ---
 
 ## Description

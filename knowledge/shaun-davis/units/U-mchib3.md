@@ -6,11 +6,12 @@ name: Waiting for it to land on your plate
 aliases:
 - The recipe is there, you have to cook it
 - How badly do you want it
+- How badly do you want it?
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-27'
-last_seen: '2025-03-27'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-nuKBUiE3Afc
   location: '12:00'
@@ -27,6 +28,21 @@ citations:
   quote: the recipe is there but you've got to mix it and cook it that's your job and some people are not willing to do that they want it they have the desire comes down to like how badly do you actually want it
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '25:00'
+  quote: it all comes down to how badly do you want it?
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '25:00'
+  quote: I was working 60 hours per week. I only had one day off per week. I used to have a Tuesday off.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '25:00'
+  quote: That Tuesday was a day where I would get stuff boxed off.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-27'
   resource_id: R-YT-nuKBUiE3Afc
@@ -34,7 +50,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:59:20Z'
-updated_at: '2026-09-27T12:59:20Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

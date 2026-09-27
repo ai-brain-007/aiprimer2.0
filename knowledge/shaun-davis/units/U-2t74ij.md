@@ -7,11 +7,13 @@ aliases:
 - Face to face closes
 - Building rapport
 - Get in front of people to build rapport
+- Be proactive and get in front of people
+- People that are proactive win the game
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-06-09'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '15:01'
@@ -63,6 +65,21 @@ citations:
   quote: Get from behind the laptop, actually physically go and view properties, meet people, build rapport
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:29:00'
+  quote: a very crucial thing about scaling is being proactive. People that are proactive win the game.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:29:00'
+  quote: get from behind the laptop, get from behind the phones, actually get in front of people. as opposed to trying to do the easy way, trying to take the easy route
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:29:00'
+  quote: I will get in front of people. I will go I'll visit wherever I need to visit.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -70,7 +87,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T13:37:24Z'
 ---
 
 ## Description

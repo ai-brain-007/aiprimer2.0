@@ -6,11 +6,15 @@ name: One call to a partner maintenance company
 aliases:
 - Systemised maintenance
 - Boxing off maintenance
+- 'Make it passive: outsource maintenance and calls'
+- Get a virtual assistant
+- Use an emergency cover service for maintenance
+- Maintenance cover company
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '20:00'
@@ -22,6 +26,41 @@ citations:
   quote: So, it just gives me the level of location and time freedom that I always wanted and wished for.
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:24:00'
+  quote: which again, you can outsource that to a maintenance company for a very small fee, which is what we do.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:25:01'
+  quote: It's not 100% passive. I mean, sometimes you might get a call and you have to make one phone call.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:25:01'
+  quote: I'd even argue to say that you can make it passive if you have the right systems and people.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:25:01'
+  quote: one of the things that we teach is get a virtual assistant.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:25:01'
+  quote: So that them phone calls are not coming to you. It goes to your virtual
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:28:00'
+  quote: what I would highly recommend is using like an emergency cover service that can actually cover the maintenance.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:28:00'
+  quote: the tenant will have their number as well like you mentioned.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -29,7 +68,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:37:24Z'
 ---
 
 ## Description

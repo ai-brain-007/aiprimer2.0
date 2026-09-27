@@ -9,11 +9,15 @@ aliases:
 - Why supported accommodation is a viable business
 - Supported accommodation varies by council
 - Birmingham only for supported accommodation
+- What a supported housing provider does
+- Paid to house and paid to support
+- 'Supported accommodation: what it really takes'
+- Support and accommodation
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '12:00'
@@ -50,6 +54,51 @@ citations:
   quote: Supported accommodation works different in different councils. I only do supported accommodation specifically in Birmingham, but with temporary accommodation, it's nationwide.
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '59:01'
+  quote: We provide a safe, secure accommodation, um a safe environment. We provide a great level of support to them and we work on their mindset.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '59:01'
+  quote: We work on their skill set and the whole point of it is to get them into independent accommodation.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:11:02'
+  quote: So tenants that are on universal credit that have a need have a support need
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:11:02'
+  quote: then they go through our tailor made support program and then we get paid from from the council number one to house the tenant number two to provide support care support and supervision to their tenant.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '50:00'
+  quote: because now they've got this lot of red tape, but back then it was so easy because the council was desperate.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:12:02'
+  quote: So, supported accommodation is a lot harder to get into because it only works in certain councils. It depends on what demand they have available at the time.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:12:02'
+  quote: Um, there's a lot of red tape and it can take it can take a long time to get involved.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:12:02'
+  quote: you got to be able to build the referrals cuz the referrals don't come to you.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:12:02'
+  quote: build the relationships with the homeless shelters to ensure that you've got an influx of referrals coming in.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -57,7 +106,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

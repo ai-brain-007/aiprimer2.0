@@ -5,11 +5,12 @@ type: dataset
 name: Urban Housing in numbers
 aliases:
 - Shaun Davis portfolio figures
+- Shaun Davis's portfolio in numbers
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-27'
-last_seen: '2025-03-27'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-nuKBUiE3Afc
   location: 00:00
@@ -41,6 +42,31 @@ citations:
   quote: what he's achieved in the last four years Alone says a lot
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:04:02'
+  quote: So obviously right now you got over 90 deals.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:10:01'
+  quote: We've got over 500 rooms in our portfolio and that's where we are. We're currently striving to get to 1,000 rooms.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:10:01'
+  quote: We work with councils all over the UK and we house the homeless and we house families and we work with the council to do this
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:10:01'
+  quote: 10 beds, 14 beds, 13 beds.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:11:02'
+  quote: All HMOs. Yeah. Some of them apartments as well, but mainly HMOs.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-27'
   resource_id: R-YT-nuKBUiE3Afc
@@ -48,7 +74,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:59:20Z'
-updated_at: '2026-09-27T12:59:20Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

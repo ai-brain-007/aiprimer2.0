@@ -5,11 +5,13 @@ type: concept
 name: High-value versus low-value tasks
 aliases:
 - 'Low value tasks: admin, research, emails'
+- Focus on high value tasks as CEO
+- High value vs low value tasks
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '17:01'
@@ -26,6 +28,31 @@ citations:
   quote: So, what that means is you don't have an infinite amount of time. It means that time is a limited resource for you.
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '25:00'
+  quote: As a CEO of your business, you need to focus on high value tasks, not low value tasks.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '25:00'
+  quote: A low value task would be research, sending emails, um arranging appointments, arranging viewings, um sending letters out to
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '26:01'
+  quote: So the way I was able to do this would I'd get myself in a situation where I would only work on high value tasks on that day. So be viewings, um, appointments, speaking to councils at
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '26:01'
+  quote: I need this day to be as productive as possible. I need to be able to move the needle on this day. It's so important. It's imperative
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '27:01'
+  quote: Um, I'd have um, telephone calls booked in for me.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -33,7 +60,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

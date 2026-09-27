@@ -14,11 +14,15 @@ aliases:
 - Social housing is a relationship game
 - Relationship game
 - Build relationships with agents and landlords
+- 'Build rapport: make them feel like your best friend'
+- The power of building rapport
+- Build and maintain relationships
+- Where property transactions turn into relationships
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-08-14'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -115,6 +119,56 @@ citations:
   quote: If you can do that and they can see the value that you're providing to their business, if they're an agent or to their property and to their life, if they're a landlord, then they've got no reason not to go ahead with you.
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '14:01'
+  quote: the customer said oh he makes me feel like I'm his best friend
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '15:00'
+  quote: it's about you know the person needs to like you the person needs to trust you and he made the person feel like they're his best friend and that's how he was able to get lots of sales
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '15:00'
+  quote: I started to understand the power of building rapport which is crucial in business. It's crucial in sales. That's how I've literally built my whole portfolio is by you know building sustainable relationships.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '56:00'
+  quote: Now property is a relationship game. You need to build relationships.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '57:01'
+  quote: There's two core elements. You got to build the relationship and you got to maintain it.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '57:01'
+  quote: but landlords would choose me because of me
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:04:02'
+  quote: So first one is building relationships. I know I mentioned it quite a lot but that really is the key. Property is a relationship game.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:05:02'
+  quote: it was the slogan was where property transactions turn into relationships
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:29:00'
+  quote: I'll make the trip and I'll get in front of people and I will literally um build that relationship. Property is a relationship game.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:29:00'
+  quote: And that's how I've been able to sort of build great relationship with agents, close agents, and get lots of deals from them as well.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -122,7 +176,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:26:16Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

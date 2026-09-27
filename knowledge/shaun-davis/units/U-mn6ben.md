@@ -11,11 +11,12 @@ aliases:
 - Put yourself first
 - Be obsessed with your personal development
 - Take personal development seriously
+- Your business can't outgrow your personal identity
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-08-05'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '46:00'
@@ -62,6 +63,16 @@ citations:
   quote: you're going to come across hardship you're going to come across cash flow issues you're going to come across growing pains and you got to understand how to navigate through all this
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '11:00'
+  quote: your business can't outgo your personal identity. I need to build my character and then in the end, I'm now going to have an easy life
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: 01:01
+  quote: So because I've grown through all the struggles I've been through, that's what's now enabled me to be able to run the business much more efficiently and be be and be a better leader as well.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -69,7 +80,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

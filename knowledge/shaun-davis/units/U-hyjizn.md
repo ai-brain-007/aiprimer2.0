@@ -5,11 +5,14 @@ type: concept
 name: The council lease scheme with upfront incentive
 aliases:
 - Leasing to the council
+- Council incentives replacing nightly rates
+- Upfront incentive
+- Longer-form temporary accommodation
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '36:01'
@@ -31,6 +34,26 @@ citations:
   quote: a top out the housing benefits okay so still works really well and there mentees doing this strategy and it's working really well across the UK as well
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:34:00'
+  quote: So, what certain councils are doing now is they're actually offering incentives.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:34:00'
+  quote: certain councils um are moving away from the nightly rates
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:34:00'
+  quote: which is like a longer form, but because they're on as they're giving you an incentive up front to incentivize you
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:35:00'
+  quote: a lot of councils are doing the a model and that's what that's what a deal's done now.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -38,7 +61,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T13:37:24Z'
 ---
 
 ## Description

@@ -10,11 +10,14 @@ aliases:
 - Whatever it takes
 - Hardship reveals your character
 - Come out swinging or back down
+- Come out swinging
+- You control the scoreboard
+- Put your all in and you will win
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-27'
-last_seen: '2025-08-05'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-nuKBUiE3Afc
   location: 03:01
@@ -56,6 +59,21 @@ citations:
   quote: when your back is against the wall you can go all out and you come out swinging or you can actually retract and basically back down in the corner
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '44:02'
+  quote: Do you crawl into a corner, have a victim mentality, think the whole world's against you, or do you just literally come out swinging
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '44:02'
+  quote: I've never seen someone truly put their all into something and fail.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '45:01'
+  quote: You actually have the power to control the scoreboard.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-27'
   resource_id: R-YT-nuKBUiE3Afc
@@ -63,7 +81,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:59:20Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

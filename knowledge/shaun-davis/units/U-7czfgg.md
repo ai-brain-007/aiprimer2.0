@@ -10,7 +10,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: 05:02
@@ -27,6 +27,16 @@ citations:
   quote: You never get to the point where you don't have anyone to answer to. I have my team to answer to. I have landlords to answer to. I have the council to answer to.
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: 04:01
+  quote: it's true what they say if you want to leave your 9 to5 be prepared for the 5 to 9
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: 04:01
+  quote: when you're building a business people think oh you must be rich now because you're an entrepreneur you've got your own business you're managing your own time
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -34,7 +44,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

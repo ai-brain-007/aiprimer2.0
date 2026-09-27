@@ -9,11 +9,12 @@ aliases:
 - The COVID pivot to social housing
 - Losing all my tenants and rebuilding
 - Pivoting big in lockdown
+- The forced pivot to social housing
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-04-09'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: 07:00
@@ -100,6 +101,21 @@ citations:
   quote: All you need is a vision and a relentless work ethic.
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '46:00'
+  quote: And the only thing that kept coming back to me was social housing.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '46:00'
+  quote: Let me just work on this. Get this off the ground. Maybe get to like 10 grand a month. Then I'll then start to like pivot.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '46:00'
+  quote: It was so confusing.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -107,7 +123,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

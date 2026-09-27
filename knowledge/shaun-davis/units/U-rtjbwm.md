@@ -3,12 +3,13 @@ id: U-rtjbwm
 author_id: A-shaun-davis
 type: technique
 name: Direct to vendor marketing
-aliases: []
+aliases:
+- Direct-to-vendor marketing
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-03-12'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '12:00'
@@ -20,6 +21,11 @@ citations:
   quote: offline marketing works just as well you can print leaflets you can hand them out in local shops or you can pay someone to go out and deliver leaflets
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '1:08:00'
+  quote: And then I would do a lot of direct to vendor marketing as well. Loads of direct to vendor marketing.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -27,7 +33,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T12:56:25Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description

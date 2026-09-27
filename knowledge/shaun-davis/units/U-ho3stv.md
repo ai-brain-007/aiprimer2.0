@@ -5,11 +5,13 @@ type: principle
 name: There is no growth in your comfort zone
 aliases:
 - Your environment plays a key role
+- When it gets too easy, find a bigger challenge
+- Get out of your comfort zone
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2025-09-29'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '11:00'
@@ -26,6 +28,26 @@ citations:
   quote: if someone's in their home City their whole life they get so complacent comfortable yeah like subconsciously 100% like there's no growth in your comfort zone
   verified: true
   score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '16:01'
+  quote: I was sort of getting a bit bored working at Ford. It was almost becoming too easy.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '17:00'
+  quote: and essentially make it hard for myself and learn a new skill set.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '11:00'
+  quote: I've never been a person that that thrives in my comfort zone. I like to be outside of my comfort zone.
+  verified: true
+  score: 100
+- resource_id: R-YT-PKg8fPvSkfw
+  location: '16:01'
+  quote: A lot of people be like, you know what, this has become really easy for me. So now I'm going to stay here
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -33,7 +55,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T13:37:23Z'
 ---
 
 ## Description
