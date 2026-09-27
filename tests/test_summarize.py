@@ -85,6 +85,8 @@ def test_full_summary_flow(settings, fake_sheets, fake_drive, fake_apify, tmp_pa
     assert v["extracted"] == 4 and v["verified"] == 3 and v["rejected"] == 1
     m = sc.match(ctx, "A-teddy-atlas", "R-YT-aaaaaaaaaaa")
     assert m["units"] == 3 and m["auto_new"] == 3 and m["needs_helper"] == 0
+    cand = json.loads(Path(m["candidates_path"]).read_text(encoding="utf-8"))
+    assert cand["resource_date"] == "2015-03-01" and cand["resource_title"] == "Video aaa", "the matching helper needs the new source's date for EVOLVED"
     a = sc.apply(ctx, "A-teddy-atlas", "R-YT-aaaaaaaaaaa")
     assert a["new"] == 3 and a["errors"] == []
     rp = sc.review_prep(ctx, "A-teddy-atlas")

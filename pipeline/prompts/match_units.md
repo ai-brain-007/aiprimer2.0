@@ -12,7 +12,9 @@ the same idea and, where the case was clear, already decided. You decide the res
 Each `MatchItem` carries the new unit in full (`unit`: name, aliases, type, description,
 details, notes, verified citations with quotes) and up to a handful of `candidates`, each
 with the existing card's `unit_id`, `name`, `type`, `description`, `details`, `last_seen`
-and a similarity `score`. Everything you need is inlined; do not read other files.
+and a similarity `score`. The file's top level gives `resource_date` and `resource_title`:
+the publication date of the new source, to set against each candidate's `last_seen` when you
+weigh EVOLVED. Everything you need is inlined; do not read other files.
 
 ## The four decisions
 

@@ -285,7 +285,15 @@ def match(ctx: AppContext, author_ref: str, rid: str) -> dict[str, Any]:
     by_id = {u.id: u for u in units}
     items = [find_candidates(v, index, by_id, ctx.settings.kb) for v in verified]
     auto = {it.temp_id: it.auto_decision for it in items if it.auto_decision}
-    payload = {"resource_id": rid, "items": [it.model_dump() for it in items], "auto": auto}
+    resource = ctx.registry.resource(rid)
+    payload = {
+        "resource_id": rid,
+        # The new source's date and title: EVOLVED needs dated sources on both sides (each candidate carries `last_seen`).
+        "resource_date": resource.published_date if resource else "",
+        "resource_title": resource.title if resource else "",
+        "items": [it.model_dump() for it in items],
+        "auto": auto,
+    }
     ws.write_json(ws.candidates_path(rid), payload)
     manifest = ws.load_manifest()
     manifest.setdefault("resources", {}).setdefault(rid, {})["status"] = "matched"
