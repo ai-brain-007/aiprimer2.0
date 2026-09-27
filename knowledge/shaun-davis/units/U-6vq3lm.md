@@ -11,11 +11,12 @@ aliases:
 - Two traits of a successful entrepreneur
 - Create value and solve meaningful problems
 - Entrepreneurship is solving problems and creating value
+- An entrepreneur solves problems and creates value
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-09-29'
+last_seen: '2025-12-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 08:01
@@ -67,6 +68,16 @@ citations:
   quote: these properties where these landlords are struggling and solving a problem.
   verified: true
   score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 06:00
+  quote: You've got to remember that the role of an entrepreneur is actually to solve problems and to create value.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 06:00
+  quote: If you can solve bigger problems and you can clearly create meaningful value, you will scale your business and you'll close deals very quickly.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -74,7 +85,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T13:50:16Z'
 ---
 
 ## Description

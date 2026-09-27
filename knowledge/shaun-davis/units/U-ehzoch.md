@@ -6,11 +6,13 @@ name: Three core questions for the council
 aliases:
 - Three core questions for a provider
 - Assess the area
+- Three core questions for the council or provider
+- Three key questions to ask the council
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-10-29'
+last_seen: '2025-12-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -42,6 +44,21 @@ citations:
   quote: Once you got this key bit of information, you can then go out, start building relationships with estate agents, with landlord directly, find the properties, you know exactly the numbers, and then you can then marry the two together and start making money.
   verified: true
   score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 01:00
+  quote: Question one is, what areas do you need properties right now?
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 02:01
+  quote: you need? And number three, what do you pay? What are the rent settings?
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '11:00'
+  quote: Three core questions is what areas are you looking to scale? What specific types of properties are you looking for? and also what are you willing to pay per property.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -49,7 +66,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T13:43:33Z'
+updated_at: '2026-09-27T13:50:16Z'
 ---
 
 ## Description

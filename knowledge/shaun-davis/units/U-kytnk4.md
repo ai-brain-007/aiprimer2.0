@@ -6,11 +6,12 @@ name: From landlord yes to signed lease
 aliases:
 - Registering a property with the council
 - Getting the council out to inspect
+- How Luton Council onboards a property
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-06-09'
+last_seen: '2025-12-14'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '10:00'
@@ -77,6 +78,21 @@ citations:
   quote: Let's sort the contract out. Get the contract all signed and delivered. Let's sort the trades. We need to find some trades that can do all this.
   verified: true
   score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 09:01
+  quote: you would need to email in and then we can send you out the um link to join our platform which is the agent and landlord approved uh contractor's list.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 09:01
+  quote: And then you would just email us what you have. We'll send a surveyor out to survey the property.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '10:01'
+  quote: that need to be carried out you'll need to do. And then once the property is literally ready to hand over keys and you've passed all the searchs over to our property negotiators, um we would list it and um move somebody in.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -84,7 +100,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T13:50:16Z'
 ---
 
 ## Description

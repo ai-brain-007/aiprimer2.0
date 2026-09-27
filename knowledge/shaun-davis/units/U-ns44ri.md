@@ -3,12 +3,13 @@ id: U-ns44ri
 author_id: A-shaun-davis
 type: dataset
 name: Luton Council temporary accommodation rates
-aliases: []
+aliases:
+- Luton Council nightly rates and demand
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-06-09'
+last_seen: '2025-12-14'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: 03:02
@@ -40,6 +41,26 @@ citations:
   quote: So we need literally three and four beds.
   verified: true
   score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '10:01'
+  quote: If you offer us a three bed, we give you £65 a night and uh 75 on a four bed.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '10:01'
+  quote: Are these rates negotiable at all? No, they're the same for every agent.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '10:01'
+  quote: Take 300 three beds if you had them.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 09:01
+  quote: So, we need literally three and four beds.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -47,7 +68,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T13:50:16Z'
 ---
 
 ## Description

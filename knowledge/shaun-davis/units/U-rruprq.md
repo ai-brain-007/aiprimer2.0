@@ -5,11 +5,12 @@ type: claim
 name: The housing crisis drives demand
 aliases:
 - Nationwide housing crisis
+- The UK housing crisis makes councils pay a premium
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-03-12'
+last_seen: '2025-12-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 00:00
@@ -26,6 +27,16 @@ citations:
   quote: not only to mention that energy prices are currently through the roof this is cusing a lot of people to
   verified: true
   score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '16:00'
+  quote: I mean guys there's a nationwide housing crisis in the UK right now.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '16:00'
+  quote: because the supply of the housing is low and there's more tenants needed so the demand is high what that means is they're willing to pay a premium which creates better monthly cash flow on the deals.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -33,7 +44,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T12:56:24Z'
+updated_at: '2026-09-27T13:50:16Z'
 ---
 
 ## Description

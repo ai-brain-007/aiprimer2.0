@@ -10,11 +10,12 @@ aliases:
 - Losing all my tenants and rebuilding
 - Pivoting big in lockdown
 - The forced pivot to social housing
+- Why Sean left Airbnb and working professionals for social housing
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-09-29'
+last_seen: '2025-12-14'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: 07:00
@@ -116,6 +117,26 @@ citations:
   quote: It was so confusing.
   verified: true
   score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '15:01'
+  quote: working professionals lose their job. Working professionals come to financial issues
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '15:01'
+  quote: I quickly established that this isn't a bulletproof strategy because when there's a recession or a nationwide crisis and no one can travel, that business had to shut down.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '15:01'
+  quote: This strategy social housing is the one that's consistent in all seasons.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '14:01'
+  quote: when I first started, I really wanted financial stability.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -123,7 +144,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T13:50:16Z'
 ---
 
 ## Description

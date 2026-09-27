@@ -3,12 +3,13 @@ id: U-6fmrcp
 author_id: A-shaun-davis
 type: claim
 name: Zero tenant marketing needed
-aliases: []
+aliases:
+- Zero tenant marketing
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-03-12'
+last_seen: '2025-12-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 09:01
@@ -25,6 +26,16 @@ citations:
   quote: as a property investor I have the utmost confidence going out there acquiring the property knowing that I have a guaranteed ten at the end of this
   verified: true
   score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '15:01'
+  quote: One of the biggest game changers about this strategy as well is the fact that there's zero tenant marketing involved.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: '15:01'
+  quote: unlike other strategies where you have to get the property first then go out and find the tenant, this strategy you have the tenant up front.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -32,7 +43,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T12:56:25Z'
+updated_at: '2026-09-27T13:50:16Z'
 ---
 
 ## Description

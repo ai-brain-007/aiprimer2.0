@@ -23,7 +23,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-10-29'
+last_seen: '2025-12-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -180,6 +180,21 @@ citations:
   quote: Secondly is build relationships. Councils value reliability.
   verified: true
   score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 00:00
+  quote: People forget that property is a relationship based game. The people who build the most relationships always win the game.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 02:01
+  quote: Remember that property is a relationshipbased game.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 00:00
+  quote: But today, I've got over 500 social housing rooms. But here's the thing. It wasn't always like that. I had to go out there and really build the relationships.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -187,7 +202,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:43:33Z'
+updated_at: '2026-09-27T13:50:16Z'
 ---
 
 ## Description

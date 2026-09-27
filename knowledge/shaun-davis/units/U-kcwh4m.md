@@ -12,11 +12,12 @@ aliases:
 - Local authority first, then the property
 - The formula
 - Council before property
+- Start with the council
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-07-08'
+last_seen: '2025-12-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -88,6 +89,21 @@ citations:
   quote: Once you got that information, then you're good to go. 100% and you go out, find the property, marry the two together, you start making money.
   verified: true
   score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 01:00
+  quote: The smarter way is to start with the council because they already work with the providers every day and they know who's active.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 02:01
+  quote: Treat the officer like a partner. Follow up on the call and collect the provider's name that they give you.
+  verified: true
+  score: 100
+- resource_id: R-YT-aRcmGZIV7Y4
+  location: 01:00
+  quote: So firstly, you need to start with the council. Most people overcomplicate this.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -95,7 +111,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T13:15:49Z'
+updated_at: '2026-09-27T13:50:16Z'
 ---
 
 ## Description
