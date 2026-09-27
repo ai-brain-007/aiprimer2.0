@@ -32,7 +32,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:26:16Z'
-updated_at: '2026-09-27T13:26:16Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -46,7 +46,7 @@ Early on, the author did the refurb and bought the white goods himself. Now he n
 3. Your side of the bargain: look after the property and keep everything in working order
 4. If the landlord wants the property back, they get all the goods they provided in the same condition
 
-In this property the landlord replaced the worktops, cupboards, cooker and washing machine, painted the whole house, changed the fire alarm and fitted new carpets. Result: keys collected, sofas delivered, tenants moving in the following week.
+In this property the landlord replaced the worktops, cupboards, cooker and washing machine, painted the whole house, changed the fire alarm and fitted new carpets.
 
 ## Notes
 

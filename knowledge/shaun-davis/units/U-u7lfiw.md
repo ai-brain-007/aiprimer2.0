@@ -28,17 +28,16 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:27:15Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
 
-Hearing that a council has stopped temporary accommodation and deciding to quit for Airbnb is the wrong mindset. There are three main ways to do rent-to-rent social housing plus a fourth way to earn, so one closed door is not the end of the strategy.
+Hearing that a council has stopped temporary accommodation and deciding to quit for Airbnb is the wrong mindset.
 
 ## Details
 
 - The mistake: getting bogged down on one point, such as 'they no longer do temporary accommodation', and giving up.
-- Consequence: you leave a market that still has huge demand and drift to a strategy with less reliable income.
 - Fix: remember there are multiple ways in: temporary and emergency accommodation, back-to-back leasing, the AST model, and charging a sourcing fee. Ask the council where the demand has moved.
 
 ## Notes

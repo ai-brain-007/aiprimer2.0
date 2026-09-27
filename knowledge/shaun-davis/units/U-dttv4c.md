@@ -8,7 +8,7 @@ aliases:
 - Council requirements
 stages:
 - T-6t6qdp
-status: active
+status: needs_review
 first_seen: '2025-06-09'
 last_seen: '2025-06-09'
 citations:
@@ -44,7 +44,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T15:22:18Z'
 ---
 
 ## Description

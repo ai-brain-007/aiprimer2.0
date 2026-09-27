@@ -28,7 +28,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:06:06Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -38,7 +38,6 @@ This is the range Shaun gives for the monthly profit on one rent to rent social 
 ## Details
 
 - Monthly profit per deal: anything from £500 up to about £25,000.
-- Worked examples in the same talk: £1,000 a month after paying the landlord £1,500, and a student making £600, later £900, a month on one council deal.
 
 ## Notes
 

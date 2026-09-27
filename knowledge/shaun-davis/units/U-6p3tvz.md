@@ -38,7 +38,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:27:15Z'
-updated_at: '2026-09-27T14:27:15Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -50,7 +50,6 @@ Councils switch temporary accommodation on and off as funding changes, and the p
 1. When the council says it no longer pays for or provides temporary accommodation, ask: "Okay, well, where will all those people go?"
 2. Point out that funding may vanish but the people do not.
 3. Ask what other schemes they are introducing.
-4. Ask to be passed to the department or colleague running those schemes; often it is the AST model, which still works well.
 - Councils have different criteria and periods when they do and do not provide temporary accommodation.
 - Council staff are overworked and understaffed; they want off the phone fast and will not volunteer this, so you must be forefront in asking.
 - Do not close the door on a council because of one no.

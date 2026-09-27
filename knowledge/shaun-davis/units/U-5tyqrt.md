@@ -125,7 +125,7 @@ versions:
   what_changed: Search keywords broadened from 'temporary accommodation' alone to 'supported living', 'temporary accommodation' and 'emergency accommodation'; steps added to read the contract description, to reference the contract when contacting a supplier, and to ask whether they are looking to scale before offering your properties.
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T14:39:53Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -140,12 +140,9 @@ Contracts Finder is the government website that lists public contracts and who w
 4. Set the location by region or postcode (for example a postcode with a 50 mile radius), or leave it as all locations to see the whole country. All locations showed around 9,000 awarded contracts; not all are relevant, so sift through them. Be as specific as you like about the areas you want to work in.
 5. Open a contract. Read the description so you understand what the contract is for and what you would be getting into.
 6. Ignore the closing date; it is irrelevant and puts a lot of people off. Check the contract end date instead. A date still in the future (for example 2027) means the contract is active and the provider is likely to be scaling.
-7. Scroll down to the award date, contract date, value of contract and the list of suppliers. This is the game changer: it names every provider that won the contract. Example: a 6.8 million pound contract awarded in 2023 to eight suppliers.
 8. Copy and paste each supplier name into Google, find the company and its contact number, and get through to the person who can partner with you.
 9. Contact them first by phone and introduce yourself, then follow up by email. When you contact them, reference the contract you found them through.
 10. Find out whether they are looking to scale. If they are, offer your properties as the solution to their problem.
-
-All of this is public knowledge and free to use. Sean found over 40 providers this way in under five minutes.
 
 ## Notes
 

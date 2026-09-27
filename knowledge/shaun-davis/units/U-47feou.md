@@ -2,7 +2,7 @@
 id: U-47feou
 author_id: A-shaun-davis
 type: example
-name: 'Eddie: closer to everything, sleeping better'
+name: 'the tenant: closer to everything, sleeping better'
 aliases: []
 stages:
 - T-6t6qdp
@@ -32,12 +32,12 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:51:39Z'
-updated_at: '2026-09-27T14:51:39Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
 
-The second tenant interviewed had been living far from doctors and everything else in an area he did not know. Now he has amenities, restaurants and a bus straight into town, sleeps better and feels stable. He describes how quickly problems get fixed and why he keeps the place clean.
+Now he has amenities, restaurants and a bus straight into town, sleeps better and feels stable. He describes how quickly problems get fixed and why he keeps the place clean.
 
 ## Details
 

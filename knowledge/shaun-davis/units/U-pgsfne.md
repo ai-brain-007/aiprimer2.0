@@ -6,7 +6,7 @@ name: Temporary accommodation contracts seen on Contracts Finder
 aliases: []
 stages:
 - T-6t6qdp
-status: active
+status: needs_review
 first_seen: '2026-06-06'
 last_seen: '2026-06-06'
 citations:
@@ -47,7 +47,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:39:53Z'
-updated_at: '2026-09-27T14:39:53Z'
+updated_at: '2026-09-27T15:22:19Z'
 ---
 
 ## Description

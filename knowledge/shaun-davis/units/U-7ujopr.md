@@ -27,18 +27,17 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:06:06Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
 
-Because you are offering the landlord a better deal than a normal tenancy, you are not the weaker party. That gives you the leverage to ask for delayed rent, furniture and no deposit. Negotiate from that position.
+
 
 ## Details
 
 - Landlords want a long-term, secure, guaranteed solution rather than periodic tenancies, and rent to rent gives them exactly that.
 - Because you give favourable terms, you hold the power in the negotiation.
-- Use it to set the payment terms, paid 30 days after, the furnishing and the deposit.
 
 ## Notes
 

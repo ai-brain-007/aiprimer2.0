@@ -22,12 +22,12 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T12:56:24Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
 
-Councils deal with many people who say they can help. To be taken seriously, tell them exactly what you can do and what your intentions are. Vague offers get ignored.
+
 
 ## Details
 

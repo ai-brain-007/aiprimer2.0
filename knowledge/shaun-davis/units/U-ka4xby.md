@@ -33,7 +33,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:51:39Z'
-updated_at: '2026-09-27T14:51:39Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -42,12 +42,10 @@ The first property in the video shows the full shape of an AP deal on a large HM
 
 ## Details
 
-- Seven-bed HMO in Manchester, sourced through a letting agent.
 - Rent to rent: a five-year lease, paying £3,000 a month to the landlord.
 - Incentive: £600 per room, £4,200 in total, paid upfront.
 - Profit after all bills: about £700 a month.
 - Tenants placed by the local council, who match people to personalities.
-- Nothing had to be done to it; the landlord had used it as a standard HMO and chose the student because the arrangement is completely hands off.
 
 ## Notes
 

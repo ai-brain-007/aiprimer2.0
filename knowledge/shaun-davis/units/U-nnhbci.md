@@ -34,7 +34,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:20:35Z'
-updated_at: '2026-09-27T14:20:35Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -44,12 +44,10 @@ Alf is a long-standing tenant who came to Urban Homes in a very difficult situat
 ## Details
 
 - Long-standing tenant, helped out of a very difficult situation; now developing and launching a cake business
-- Product: blueberry and oats muffins, which Shaun has tasted and praises as moist and very nice
 - Alf's constraints: he is working around his condition, wants to do it without employing anyone at first, and does not want it to affect his daily living
 - His priority is being self-sufficient: things take him longer, but he still does them
 - If the business is successful he will take people on later
 - Shaun's coaching: small free tasters for the shops along the road, lead with value, a Google page with reviews, sale or return terms
-- Shaun's honest-feedback stance: if the muffin had not been good he would have told Alf it needed work
 
 ## Notes
 

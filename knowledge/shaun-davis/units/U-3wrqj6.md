@@ -32,7 +32,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -44,7 +44,6 @@ Shaun's parents ran their own businesses while he grew up. He watched them fail,
 - His parents went from 9 to 5 jobs to starting a business; they have now been in business for over 20 years.
 - It took the best part of 15 years before the business really took off, which Shaun calls becoming an overnight success.
 - His father runs a security company fitting alarms, burglar alarms, CCTV and fire alarms; just over 10 years ago he also acquired a Jamaican food company.
-- Shaun did work experience with his father, saw him put in serious hours, late nights in the office and early starts, even sleeping on sites.
 - The lesson he took: seeing a parent fail and pick themselves up, day in and day out, builds resilience in the child.
 
 ## Notes

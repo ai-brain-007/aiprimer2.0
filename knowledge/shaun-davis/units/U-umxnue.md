@@ -84,7 +84,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:27:15Z'
-updated_at: '2026-09-27T14:39:53Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -97,7 +97,6 @@ The author moved in with a stranger, Sandu, for a week with one goal: get him a 
 - Before: Sandu had tried the strategy by himself for a few months with no luck and doubted whether it even worked. He also nearly refused the documentary for fear of being judged online.
 - The author's bet: with what he had learned, living with someone for a week made a deal inevitable.
 - After: nine deals, multiple councils closed, multiple strategies, left his full-time lorry driving job, bought a Tesla.
-- What changed in him: he became a professional problem solver instead of being thrown by day-to-day issues.
 - The author says that if he repeated the challenge he would use back-to-back leasing, because it is quicker and simpler.
 
 ## Notes

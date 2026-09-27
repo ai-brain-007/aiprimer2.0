@@ -44,7 +44,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T14:51:39Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -59,7 +59,7 @@ Opening:
 When the landlord says they want a secure tenancy and to protect the property:
 - "That's what we do. We cover everything."
 
-Then explain, in order: it is a long-term, government-backed scheme; families stay 12 to 36 months; you manage the tenant and the maintenance; the rent is guaranteed even when the house is empty; minimum term 12 months, longer is fine.
+
 
 The landlord's typical concern in the source: "I need to have a secure tenancy agreement. That's all I'm really worried about. I want to protect my property."
 

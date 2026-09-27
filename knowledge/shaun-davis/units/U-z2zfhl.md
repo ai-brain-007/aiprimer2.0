@@ -6,37 +6,13 @@ name: Temporary accommodation
 aliases:
 - Temporary and emergency accommodation
 - Temp accommodation
-- Refugees start in temporary accommodation
-- Three temporary accommodation schemes
-- Three strategies within temporary accommodation
-- Temporary accommodation is recession proof
-- Recession proof business
-- Four reasons to be in temporary accommodation
 - Temporary accommodation with the council
 - TA
 - Emergency accommodation
 - Temporary accommodation scheme
 - In-between house
-- Temporary accommodation is long-term and government backed
 - Temporary accommodation management
 - TA management
-- Management deal for high-mortgage landlords
-- Start with temporary accommodation
-- TA is the better model to start out with
-- Location, time and financial freedom
-- Three reasons temporary accommodation beats serviced accommodation
-- Serviced accommodation vs temporary accommodation
-- TA vs SA
-- Rent to rent into temporary accommodation
-- Rent to rent
-- Two ways to do temporary accommodation
-- What temporary accommodation pays per month
-- Top five tips on temporary accommodation
-- Temporary accommodation is easy to systemise
-- Key advantages of temporary accommodation
-- Nothing touches temporary accommodation for stability
-- Getting started in temporary accommodation under £10k
-- Compliance requirements for temporary accommodation
 stages:
 - T-6t6qdp
 status: active
@@ -379,7 +355,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T14:51:42Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -398,7 +374,6 @@ Housing that a council uses for people and families who cannot get a permanent, 
 - Sit down together and crunch the numbers
 - Offer: your company takes 100% control of the property, looks after the tenant, much of the maintenance and all the payments
 - The landlord gets the hands-off experience with a slightly increased rent
-- Michael's result: no money down, £450 a month net profit, and a portfolio landlord with about four more properties in the area asking him to take them on
 
 ## Notes
 

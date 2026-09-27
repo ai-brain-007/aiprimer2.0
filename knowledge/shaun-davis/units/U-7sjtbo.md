@@ -32,7 +32,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -44,7 +44,6 @@ On commission with a low basic, Shaun would not spend even in good months. He ke
 - Cause: a very low basic wage in the motor trade, so income depended on each month's sales.
 - Thought loop: what happens if next month I do not sell any cars, what if the motor trade or the marketplace changes.
 - Effect: he did not want to overstretch himself and could not enjoy his hard work, even on holiday.
-- Earlier trips were taken with £500 or a grand in the account and ended broke; 2018 was the first with money behind him.
 
 ## Notes
 

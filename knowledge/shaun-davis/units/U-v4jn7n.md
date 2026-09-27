@@ -32,7 +32,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:51:39Z'
-updated_at: '2026-09-27T14:51:39Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -44,7 +44,6 @@ A tenant in the seven-bed tells his side. He had been homeless since the previou
 - Homeless from October of the previous year.
 - Got through the council and onto the list.
 - Moved in at the end of February; the other tenants arrived at about the same time.
-- Says it was pretty hard work before moving here and that everyone in the house has a totally different situation.
 
 ## Notes
 

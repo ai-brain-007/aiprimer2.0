@@ -47,7 +47,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:24Z'
-updated_at: '2026-09-27T13:37:24Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -60,8 +60,6 @@ The numbers quoted in the interview for each route, so you can compare them side
 - Back-to-back lease: example £2,000 in, £3,000 out, £1,000 a month; some make up to £2,000 a month from one deal; ten deals is £10,000 a month.
 - Property sourcing: one-off fee. Shaun charged £1,000, £1,500, £2,500 or £3,000; he says fees run from £1,500 up to £5,000 today. His first sourced deal is quoted as £25,000 (or 22K).
 - Estate agent management fee in Birmingham: 12 to 15% of rent.
-- Universal Credit offered to Shaun in 2020: £75 a week.
-- Rent-free period negotiated on his first two deals: three months; his own HMO rooms sat empty at six weeks rent free.
 
 ## Notes
 

@@ -37,7 +37,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -51,7 +51,6 @@ The numbers behind Shaun's first sales job show the low-basic, high-commission m
 - Take-home: roughly £3,000 to £3,500 a month after tax, given in the transcript as £3,000£35,000.
 - Age at the time: about 20 to 22.
 - Bought his first house at about 22 or 23.
-- Later at BMW he refers to making three£35,000 a month, the same range.
 
 ## Notes
 

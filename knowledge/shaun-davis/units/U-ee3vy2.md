@@ -2,7 +2,7 @@
 id: U-ee3vy2
 author_id: A-shaun-davis
 type: example
-name: 'Two-bed family let in Salford: £570 in, £1,200 out'
+name: 'Two-bed family let: £570 in, £1,200 out'
 aliases:
 - Property four
 stages:
@@ -38,7 +38,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T14:51:39Z'
-updated_at: '2026-09-27T14:51:39Z'
+updated_at: '2026-09-27T15:18:55Z'
 ---
 
 ## Description
@@ -47,7 +47,7 @@ The last property shows a non-HMO deal with a family placed in it. The house was
 
 ## Details
 
-- Two-bed in Salford, with a family in it.
+- Two-bed, with a family in it.
 - It was in a poor state when taken on. The landlord was given the option: the student carries out the works to a liveable standard, or the landlord does. The landlord was not in a position to, so they came to an agreement.
 - Rent to landlord: £570 a month.
 - Income: just under £1,200 a month.
