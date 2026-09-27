@@ -1,0 +1,58 @@
+---
+id: U-hyjizn
+author_id: A-shaun-davis
+type: concept
+name: The council lease scheme with upfront incentive
+aliases:
+- Leasing to the council
+stages:
+- T-6t6qdp
+status: active
+first_seen: '2025-03-09'
+last_seen: '2025-03-09'
+citations:
+- resource_id: R-YT-Lr_OKMBndUo
+  location: '36:01'
+  quote: the other one is that you lease it to to the count directly so there's lots of different schemes because what's happening The Temper accommodation sector is a it's a very um it's a very costly sector for the councils and some councils are starting to change the schemes
+  verified: true
+  score: 100
+- resource_id: R-YT-Lr_OKMBndUo
+  location: '36:01'
+  quote: rather than giving you a nightly rate what they're doing is giving you an upfront incentive yeah where they'll pay you like two months two to three months rent upfront and then what they'll do they'll lease the property off you instead of giving you a nightly rate
+  verified: true
+  score: 100
+- resource_id: R-YT-Lr_OKMBndUo
+  location: '36:01'
+  quote: they leas the property off you for like to five years sometimes longer and then um and then the way they're doing it now is the tenant will have to pay a top up
+  verified: true
+  score: 100
+- resource_id: R-YT-Lr_OKMBndUo
+  location: '37:00'
+  quote: a top out the housing benefits okay so still works really well and there mentees doing this strategy and it's working really well across the UK as well
+  verified: true
+  score: 100
+versions:
+- date: '2025-03-09'
+  resource_id: R-YT-Lr_OKMBndUo
+  summary: Temporary accommodation is expensive for councils, so some are moving away from nightly rates. Instead they pay two to three months' rent upfront as an incentive and lease the property from you for up
+  what_changed: ''
+contradictions: []
+created_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T12:49:32Z'
+---
+
+## Description
+
+Temporary accommodation is expensive for councils, so some are moving away from nightly rates. Instead they pay two to three months' rent upfront as an incentive and lease the property from you for up to five years or more. The tenant pays a top-up from housing benefit.
+
+## Details
+
+- Why: the temporary accommodation sector is very costly for councils, and some are changing their schemes.
+- Incentive: two to three months' rent paid upfront.
+- Term: the council leases the property off you for up to five years, sometimes longer.
+- Tenant top-up: the tenant pays a top-up through housing benefits on top of what the council pays you.
+- Shaun's mentees run this version across the UK and it works well.
+
+## Notes
+
+
