@@ -48,8 +48,10 @@ Read the skill file in `.claude/skills/<name>/SKILL.md` before running any of th
 - Control panel (accounts, taxonomy, folders, resources, authors, summaries, jobs): Notion databases under the
   page whose id is `AIPRIMER_NOTION_PAGE_ID`, each inside its layer page (`pipeline/layout.py`: LAYER 1 - RAW
   MATERIAL, LAYER 2 - SUMMARY BY AUTHORS, LAYER 3 - DOMAINS > PRIMERS > STAGES with one page per taxonomy node,
-  LAYER 0 - CONFIG, plus a WHITEBOARD page embedding `notion.whiteboard_url`). Columns: `pipeline/models.py`;
-  store: `pipeline/notion.py`. `setup layout` is idempotent.
+  LAYER 0 - CONFIG). Columns: `pipeline/models.py`; store: `pipeline/notion.py`. `setup layout` is idempotent.
+- Drawings go into pages, never on a page of their own: a ```mermaid code block in markdown renders as a diagram in
+  Notion (domain and primer pages carry their subtree, redrawn by `sync_tree_pages`); a bare excalidraw.com link on
+  its own line becomes an embedded board. The publisher refreshes a page in place above its child pages.
 - Raw files + `.extracted.md` text versions: Backblaze bucket `ai-primer-raw-000N` (private), keys
   `raw/<domain id>/<primer id>/<stage id>/<readable filename>`; `raw/_Inbox/` for hand-uploaded files. Client: `pipeline/storage_b2.py`.
   Pictures go into Notion (5 MB each) and videos are YouTube embeds; a public media bucket is optional.

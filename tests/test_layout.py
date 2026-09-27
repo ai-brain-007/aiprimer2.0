@@ -5,7 +5,7 @@ from __future__ import annotations
 import pytest
 
 from pipeline.context import AppContext
-from pipeline.layout import SECTIONS, TREE_SECTION, WHITEBOARD_TITLE, apply_layout, ensure_whiteboard, home_titles, sync_tree_pages, table_homes
+from pipeline.layout import SECTIONS, TREE_SECTION, apply_layout, home_titles, node_body, sync_tree_pages, table_homes, tree_diagram
 from pipeline.models import TAB_MODELS
 from pipeline.notion import NotionError, NotionRepo, child_pages, plain_text
 from pipeline.registry import Registry
@@ -86,7 +86,7 @@ def test_apply_layout_moves_flat_tables_with_their_rows_and_builds_the_tree(worl
 
     # the tree: LAYER 3 > Body > Olympic Spartan > Boxing, Muay Thai; Mind
     tree = report["tree"]
-    assert tree["nodes"] == 5 and len(tree["created"]) == 5 and tree["renamed"] == []
+    assert tree["nodes"] == 5 and len(tree["created"]) == 5 and tree["renamed"] == [] and tree["refreshed"] == []
     root = layers[TREE_SECTION]
     domains = child_pages(notion, root)
     assert set(domains) == {"Body", "Mind"}
@@ -146,28 +146,41 @@ def test_relocate_tab_rolls_back_when_the_copy_is_incomplete(world, monkeypatch)
     assert len(reg.nodes()) == 5
 
 
-def test_whiteboard_page_embeds_the_configured_board_and_follows_a_change(world):
+def test_domain_and_primer_pages_carry_a_diagram_of_their_subtree_that_follows_the_tree(world):
+    from pipeline.taxonomy import load_taxonomy
+
     ctx, reg, repo, notion, parent = world
-    ctx.settings.config.setdefault("notion", {})["whiteboard_url"] = "https://excalidraw.com/"
-    report = apply_layout(ctx)
-    board = report["whiteboard"]
-    assert board["created"] and board["embed_url"] == "https://excalidraw.com/"
-    page_id = child_pages(notion, parent)[WHITEBOARD_TITLE]
-    assert board["page_id"] == page_id and list(child_pages(notion, parent)) == [*[s.title for s in SECTIONS], WHITEBOARD_TITLE]
-    blocks = notion.list_block_children(page_id)
-    assert [b["type"] for b in blocks] == ["paragraph", "embed"] and blocks[1]["embed"]["url"] == "https://excalidraw.com/"
-    assert "sketchpad" in notion.page_plain_text(page_id)
-    # unchanged config: nothing happens
-    again = apply_layout(ctx)["whiteboard"]
-    assert again == {"page_id": page_id, "url": notion.page_url(page_id), "embed_url": "https://excalidraw.com/", "created": False, "updated": False}
-    # the owner pins a shared board: same page, new embed
-    changed = ensure_whiteboard(repo, "https://excalidraw.com/#room=abc,def")
-    assert changed["page_id"] == page_id and changed["updated"] is True
-    embeds = [b for b in notion.list_block_children(page_id) if b["type"] == "embed"]
-    assert [b["embed"]["url"] for b in embeds] == ["https://excalidraw.com/#room=abc,def"]
-    # an empty url in the config means no whiteboard page at all
-    ctx.settings.config["notion"]["whiteboard_url"] = ""
-    assert apply_layout(ctx)["whiteboard"] == {"skipped": "notion.whiteboard_url is empty"}
+    init_sheet(ctx)
+    body, spartan, boxing, mind = _small_tree(reg)
+    sync_tree_pages(ctx)
+    tax = load_taxonomy(reg)
+    diagram = tree_diagram(tax, body)
+    assert diagram.startswith("```mermaid\ngraph TD\n") and '["Olympic Spartan"]' in diagram and '["Boxing"]' in diagram and '["Mind"]' not in diagram
+    body_page = reg.node(body.node_id).page_id
+    blocks = notion.list_block_children(body_page)
+    kinds = [b["type"] for b in blocks]
+    assert kinds[:2] == ["paragraph", "code"] and blocks[1]["code"]["language"] == "mermaid" and kinds.count("child_page") == 1
+    assert "Boxing" in notion.page_plain_text(body_page)
+    stage_md = node_body(tax, tax.by_id[boxing.node_id])
+    assert "graph LR" in stage_md and '["Body"]' in stage_md and "Nothing is built" in stage_md
+
+    # a new stage redraws the primer's and the domain's diagrams, and the text stays above the sub-pages
+    clinch = add_node(reg, "stage", "Clinch", spartan.node_id)
+    report = sync_tree_pages(ctx)
+    assert report["created"] == ["Body / Olympic Spartan / Clinch"] and report["refreshed"] == ["Body", "Body / Olympic Spartan"]
+    blocks = notion.list_block_children(body_page)
+    assert [b["type"] for b in blocks] == ["paragraph", "code", "child_page"] and "Clinch" in notion.page_plain_text(body_page)
+    assert reg.node(body.node_id).page_id == body_page
+    # a rename touches the node, its ancestors and its descendants; nothing else
+    rename_node(reg, spartan.node_id, "Spartan", lambda a: None)
+    report = sync_tree_pages(ctx)
+    assert report["renamed"] == ["Olympic Spartan -> Spartan"]
+    assert report["refreshed"] == ["Body", "Body / Spartan", "Body / Spartan / Boxing", "Body / Spartan / Clinch", "Body / Spartan / Muay Thai"]
+    assert '["Spartan"]' in notion.page_plain_text(body_page) and "Olympic" not in notion.page_plain_text(body_page)
+    # nothing changed: nothing rewritten; refresh="all" rewrites every page
+    assert sync_tree_pages(ctx)["refreshed"] == []
+    assert len(sync_tree_pages(ctx, "all")["refreshed"]) == 6 and len(apply_layout(ctx, refresh_pages=True)["tree"]["refreshed"]) == 6
+    assert sync_tree_pages(ctx, "none")["refreshed"] == []
 
 
 def test_layout_is_skipped_outside_notion_mode(settings, fake_sheets):

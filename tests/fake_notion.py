@@ -198,11 +198,21 @@ class FakeNotionBackend:
         self._parent_of(block_id)
         return [copy.deepcopy(self.blocks[b]) for b in self.children.get(block_id, []) if not self.blocks[b]["archived"]]
 
-    def append_block_children(self, block_id, children):
+    def append_block_children(self, block_id, children, after=None):
         block_id = self._id(block_id)
         self.calls.append(f"append_children:{block_id}:{len(children)}")
         self._parent_of(block_id)
-        return [self._store_block(block_id, c, 0) for c in children]
+        if after is not None:
+            after = self._id(after)
+            if after not in self.children.get(block_id, []):
+                raise _bad(f"after must be a child of {block_id}: {after}")
+        created = [self._store_block(block_id, c, 0) for c in children]
+        if after is not None and created:
+            ids = [c["id"] for c in created]
+            order = [b for b in self.children[block_id] if b not in ids]
+            pos = order.index(after) + 1
+            self.children[block_id] = [*order[:pos], *ids, *order[pos:]]
+        return created
 
     def delete_block(self, block_id):
         block_id = self._id(block_id)

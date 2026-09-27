@@ -80,11 +80,13 @@ then depth of the source; the owner can pin an author as primary for a primer. E
 triggers a focused layer 2 re-extraction, never a read of raw data. Stage artefacts record the card versions they
 used and are marked stale when those cards change.
 
-**Drawing (decided 2026-09-27).** Notion has no native infinite canvas. A "WHITEBOARD" page under "AI Primer" embeds
-Excalidraw (`notion.whiteboard_url`, created by `setup layout`); the plain app keeps drawings in the owner's browser
-only, so a board to keep or share is pinned by pasting its Excalidraw share or live-collaboration link into the
-config. Miro remains the option if the agent must read a board through an API. Diagrams the agent produces belong
-in the pages themselves (Mermaid code blocks; publisher support still to add).
+**Drawing (decided 2026-09-27).** Notion has no native infinite canvas, and the owner wants no drawing board outside
+the tree: drawings live on the primer, stage and (later) SOP pages. The agent draws with Mermaid code blocks, which
+Notion renders as diagrams; the publisher accepts the `mermaid` language and every domain and primer page already
+carries the diagram of its subtree, every stage page the chain above it, redrawn by `sync_tree_pages` when the tree
+changes. A hand-drawn Excalidraw board is pinned into a page by putting its share or live-collaboration link on its
+own line in the page's markdown (the converter turns it into an embed). The top-level WHITEBOARD page of earlier
+that day was archived. Miro remains the option if the agent must read a board through an API.
 
 ## 3b. Writing style for everything the owner reads (decided 2026-09-27)
 
@@ -189,9 +191,10 @@ in the pages themselves (Mermaid code blocks; publisher support still to add).
   move-page endpoint (sent with version 2026-03-11 for that one call; the pinned 2022-06-28 lacks it), links
   unchanged; `doc guide` now publishes there and moves a stray copy from the top. Pages can be moved by the API,
   databases cannot.
-- 2026-09-27: the owner asked for Excalidraw in Notion. A "WHITEBOARD" page under "AI Primer" embeds the board
-  (`notion.whiteboard_url`, default the plain app; a share or collaboration link pins one board). Created by
-  `setup layout`, refreshed in place when the link changes.
+- 2026-09-27: the owner asked for Excalidraw in Notion; a top-level "WHITEBOARD" page was built, then removed the
+  same day at the owner's request: drawings belong at primer, stage or SOP level, and the agent should draw on its
+  own. Done: Mermaid diagrams in pages (tree diagrams on all 78 node pages), Excalidraw links embed into any page,
+  the publisher refreshes a page in place above its sub-pages (API `after`). `notion.whiteboard_url` removed.
 - 2026-09-27: the owner asked that the two reference pages be updated every time the pipeline changes, without
   fail. Decided: a gate, not a reminder (rule 11 of CLAUDE.md, script `scripts/hooks/guide_gate.py`). A push that
   changes the pipeline without the pages fails until the pages are updated or a commit states `Guide: unchanged`; a
@@ -212,5 +215,4 @@ in the pages themselves (Mermaid code blocks; publisher support still to add).
 - Confirm in the live test: Notion API file upload on the Free plan, YouTube embeds starting at a timestamp.
   (Settled 2026-09-27: the Backblaze key pair works from the environment variables `B2_KEY_ID_0001` /
   `B2_APPLICATION_KEY_0001`; Backblaze needs no entry in the API credentials box.)
-- Whiteboard tool: settled on Excalidraw embedded in Notion (2026-09-27); Miro only if a board must be machine-readable.
-- Mermaid diagrams in published pages: add "mermaid" to the publisher's code-block languages when the first diagram is needed.
+- Confirm in Notion that Mermaid code blocks created through the API open in diagram view (the owner checks a domain page).

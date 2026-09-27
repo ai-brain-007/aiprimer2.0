@@ -179,7 +179,7 @@ def page_url(page_id: str) -> str:
 
 class NotionBackend(Protocol):
     def list_block_children(self, block_id: str) -> list[dict]: ...  # all pages
-    def append_block_children(self, block_id: str, children: list[dict]) -> list[dict]: ...  # chunks by 100
+    def append_block_children(self, block_id: str, children: list[dict], after: str | None = None) -> list[dict]: ...  # chunks by 100; `after` = insert after that child
     def delete_block(self, block_id: str) -> None: ...
     def create_database(self, parent_page_id: str, title: str, properties: dict) -> dict: ...
     def update_database(self, database_id: str, properties: dict) -> dict: ...
@@ -317,11 +317,17 @@ class RealNotionBackend:
     def list_block_children(self, block_id: str) -> list[dict]:
         return self._paginate("GET", f"/blocks/{block_id}/children")
 
-    def append_block_children(self, block_id: str, children: list[dict]) -> list[dict]:
+    def append_block_children(self, block_id: str, children: list[dict], after: str | None = None) -> list[dict]:
         created: list[dict] = []
+        anchor = after
         for chunk in chunk_children(children):
-            body = self._request("PATCH", f"/blocks/{block_id}/children", json={"children": chunk})
-            created.extend(body.get("results") or [])
+            payload: dict[str, Any] = {"children": chunk}
+            if anchor:
+                payload["after"] = anchor
+            results = self._request("PATCH", f"/blocks/{block_id}/children", json=payload).get("results") or []
+            created.extend(results)
+            if anchor and results:
+                anchor = results[-1]["id"]  # keep the next chunk in order, right behind this one
         return created
 
     def delete_block(self, block_id: str) -> None:
@@ -631,6 +637,7 @@ _HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$")
 _LIST_RE = re.compile(r"^(\s*)([-*+]|\d+[.)])\s+(.*)$")
 _DIVIDER_RE = re.compile(r"^(?:-{3,}|\*{3,}|_{3,})\s*$")
 _IMAGE_RE = re.compile(r"^!\[([^\]]*)\]\(\s*(\S+?)(?:\s+\"[^\"]*\")?\s*\)$")
+_EXCALIDRAW_RE = re.compile(r"^https?://(?:www\.)?excalidraw\.com/\S*$")  # a bare board link on its own line -> embed
 _YOUTUBE_RE = re.compile(r"^https?://(?:www\.|m\.)?(?:youtube\.com/(?:watch\?\S*v=|embed/|shorts/|live/)[\w-]{6,}\S*|youtu\.be/[\w-]{6,}\S*)$")
 _VIDEO_FILE_RE = re.compile(r"^https?://\S+\.(?:mp4|webm|mov|m4v)(?:\?\S*)?$", re.I)
 _TABLE_SEP_CELL_RE = re.compile(r"^:?-+:?$")
@@ -644,8 +651,8 @@ _INLINE_RE = re.compile(
 )
 _CODE_LANGUAGES = {
     "bash", "c", "c++", "c#", "css", "go", "html", "java", "javascript", "json", "kotlin", "markdown", "php",
-    "plain text", "powershell", "python", "ruby", "rust", "shell", "sql", "swift", "typescript", "xml", "yaml",
-}
+    "mermaid", "plain text", "powershell", "python", "ruby", "rust", "shell", "sql", "swift", "typescript", "xml", "yaml",
+}  # "mermaid": Notion renders the block as a diagram
 _CODE_ALIASES = {"sh": "shell", "zsh": "shell", "py": "python", "js": "javascript", "ts": "typescript", "yml": "yaml", "md": "markdown", "txt": "plain text", "text": "plain text", "": "plain text", "cpp": "c++", "cs": "c#", "console": "shell"}
 
 ImageResolver = Callable[[str], dict | None]
@@ -879,6 +886,11 @@ def markdown_to_blocks(md: str, *, image_resolver: ImageResolver | None = None) 
             blocks.append(_video_block(stripped))
             i += 1
             continue
+        if _EXCALIDRAW_RE.match(stripped):
+            flush()
+            blocks.append(_block("embed", {"url": stripped}))
+            i += 1
+            continue
         if stripped.startswith("|") and i + 1 < n and _is_table_separator(lines[i + 1]):
             flush()
             table_blocks, i = _parse_table(lines, i)
@@ -937,11 +949,12 @@ class NotionPublisher:
         """Create (or refresh) the page from markdown. Returns {doc_id, url, created, format, name}."""
         blocks = markdown_to_blocks(md_text, image_resolver=self._image_resolver())
         if existing_doc_id:
-            for block in self.backend.list_block_children(existing_doc_id):
-                if block.get("type") in CONTAINER_BLOCK_TYPES:
-                    continue
+            old = [b for b in self.backend.list_block_children(existing_doc_id) if b.get("type") not in CONTAINER_BLOCK_TYPES]
+            # The new content takes the old content's place: inserted right after the first old block, so it stays
+            # above any child page or database that follows (a node page's sub-pages, an author's Cards table).
+            self.backend.append_block_children(existing_doc_id, blocks, after=old[0]["id"] if old else None)
+            for block in old:
                 self.backend.delete_block(block["id"])
-            self.backend.append_block_children(existing_doc_id, blocks)
             return {"doc_id": existing_doc_id, "url": self.backend.page_url(existing_doc_id), "created": False, "format": "notion", "name": title}
         first, rest = blocks[:CHILDREN_LIMIT], blocks[CHILDREN_LIMIT:]
         page = self.backend.create_page({"page_id": parent_id}, {"title": {"title": _capped(rich_text(title))}}, children=first)

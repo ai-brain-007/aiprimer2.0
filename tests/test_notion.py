@@ -341,6 +341,33 @@ def test_publish_creates_then_refreshes_in_place(fake_notion, parent_page):
     assert sum(c.startswith("delete_block:") for c in fake_notion.calls) == 2
 
 
+def test_mermaid_blocks_and_excalidraw_links_convert_for_notion():
+    blocks = markdown_to_blocks("Drawing:\n\n```mermaid\ngraph TD\n    a[\"Body\"] --> b[\"Boxing\"]\n```\n\nhttps://excalidraw.com/#room=abc,def\n\nAfter.")
+    assert [b["type"] for b in blocks] == ["paragraph", "code", "embed", "paragraph"]
+    assert blocks[1]["code"]["language"] == "mermaid" and 'a["Body"] --> b["Boxing"]' in _texts(blocks[1])
+    assert blocks[2]["embed"] == {"url": "https://excalidraw.com/#room=abc,def"}
+    assert markdown_to_blocks("see https://excalidraw.com/ now")[0]["type"] == "paragraph"  # only a bare link on its own line embeds
+
+
+def test_append_after_inserts_behind_the_anchor(fake_notion, parent_page):
+    page = fake_notion.create_page({"page_id": parent_page}, {"title": {"title": [{"type": "text", "text": {"content": "P"}}]}}, children=markdown_to_blocks("one\n\ntwo"))["id"]
+    first = fake_notion.list_block_children(page)[0]["id"]
+    fake_notion.append_block_children(page, markdown_to_blocks("between"), after=first)
+    assert fake_notion.page_plain_text(page) == "one\nbetween\ntwo"
+    with pytest.raises(NotionError):
+        fake_notion.append_block_children(page, markdown_to_blocks("x"), after=parent_page)
+
+
+def test_refresh_keeps_the_text_above_child_pages(fake_notion, parent_page):
+    publisher = NotionPublisher(fake_notion)
+    node = publisher.publish_markdown("# Body\n\nold text", "Body", parent_page)["doc_id"]
+    sub = fake_notion.create_page({"page_id": node}, {"title": {"title": [{"type": "text", "text": {"content": "Olympic Spartan"}}]}})["id"]
+    publisher.publish_markdown("# Body\n\nnew text\n\n```mermaid\ngraph TD\n    a --> b\n```", "Body", parent_page, node)
+    kinds = [b["type"] for b in fake_notion.list_block_children(node)]
+    assert kinds == ["heading_1", "paragraph", "code", "child_page"], kinds
+    assert fake_notion.page_plain_text(node).startswith("Body\nnew text") and sub in fake_notion.children[node]
+
+
 def test_refresh_keeps_child_databases_and_child_pages(fake_notion, parent_page):
     publisher = NotionPublisher(fake_notion)
     author_page = fake_notion.create_page({"page_id": parent_page}, {"title": {"title": [{"type": "text", "text": {"content": "Jane"}}]}})["id"]

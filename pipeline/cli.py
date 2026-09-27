@@ -170,11 +170,11 @@ def setup_status(pretty: bool = Pretty):
 
 
 @setup_app.command("layout")
-def setup_layout(pretty: bool = Pretty):
+def setup_layout(refresh_pages: bool = typer.Option(False, help="rewrite every tree page's text and diagram"), pretty: bool = Pretty):
     """Notion only: the layer pages under "AI Primer", each table in its layer, the Domain > Primer > Stage pages."""
     from .layout import apply_layout
 
-    run_command("setup layout", lambda: apply_layout(get_ctx()), pretty=pretty)
+    run_command("setup layout", lambda: apply_layout(get_ctx(), refresh_pages), {"refresh_pages": refresh_pages}, pretty)
 
 
 @setup_app.command("all")

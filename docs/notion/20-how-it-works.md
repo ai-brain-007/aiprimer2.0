@@ -77,9 +77,15 @@ Under the "AI Primer" page you find one page per layer. Open a layer page to rea
 | LAYER 2 - SUMMARY BY AUTHORS | The Authors table (one row per author, the author's page inside the row) and the Summaries table (version history) |
 | LAYER 3 - DOMAINS > PRIMERS > STAGES | Your tree as pages: a page per domain, inside it a page per primer, inside that a page per stage. The stage pages will hold the study material |
 | LAYER 0 - CONFIG | The pipeline's bookkeeping: Accounts, Taxonomy, Folders and Jobs, plus these two guides |
-| WHITEBOARD | A drawing board (Excalidraw) for your own sketches. Drawings stay in your browser unless you save or share them from Excalidraw's menu |
 
 The tree pages are generated from the Taxonomy table. Adding or renaming a stage adds or renames its page; the page keeps its link. Nothing there is deleted automatically.
+
+## Drawings
+
+Drawings live on the pages they belong to, not on a board of their own.
+
+- **Drawn by the pipeline, without you doing anything.** Every domain and primer page shows its part of the tree as a diagram, and every stage page shows where it sits. The diagrams are written as text that Notion draws, so they are redrawn whenever the tree changes. Later, stage pages will carry diagrams of procedures and flows made the same way.
+- **Drawn by you.** For a free-hand sketch, open excalidraw.com, draw, and use Live collaboration or Save to get a link. Paste the link in the chat with the name of the page it belongs to, and it is pinned into that page as a board you can keep editing.
 
 ## Where things live
 

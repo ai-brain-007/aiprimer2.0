@@ -5,11 +5,15 @@ Under "AI Primer", one page per layer, in this order, each holding the registry 
     LAYER 1 - RAW MATERIAL                Resources
     LAYER 2 - SUMMARY BY AUTHORS          Authors, Summaries
     LAYER 3 - DOMAINS > PRIMERS > STAGES  one page per domain > primer > stage, generated from the Taxonomy table
-    LAYER 0 - CONFIG                      Accounts, Taxonomy, Folders, Jobs
+    LAYER 0 - CONFIG                      Accounts, Taxonomy, Folders, Jobs, and the two guide pages
 
 The two guide pages ("Command guide", "How the pipeline works") live inside LAYER 0 - CONFIG (`guide_home`);
-`doc guide` publishes them there and moves a copy left at the top by an earlier version. A "WHITEBOARD" page with
-an embedded drawing board (config `notion.whiteboard_url`, Excalidraw by default) completes the top level.
+`doc guide` publishes them there and moves a copy left at the top by an earlier version.
+
+Drawings belong to the tree pages, not to a page of their own: every domain and primer page carries a diagram of
+its part of the tree (a Mermaid code block, which Notion renders), redrawn by `sync_tree_pages` when the tree
+changes. A hand-drawn Excalidraw board is pinned into a page by putting its link in the page's markdown.
+
 `apply_layout` is idempotent: it creates what is missing, moves a table that sits in the wrong place (copy rows,
 verify, archive the old one: the API cannot move databases) and keeps the tree pages named after the nodes.
 Everything here is deterministic; no model is called.
@@ -17,12 +21,13 @@ Everything here is deterministic; no model is called.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Literal
 
 from .context import AppContext
 from .models import TaxonomyNode
-from .notion import CONTAINER_BLOCK_TYPES, NotionRepo, child_pages, markdown_to_blocks, rich_text
+from .notion import NotionPublisher, NotionRepo, child_pages, markdown_to_blocks, rich_text
 
 
 @dataclass(frozen=True)
@@ -63,12 +68,7 @@ SECTIONS: tuple[Section, ...] = (
 )
 TREE_SECTION = SECTIONS[2].title
 GUIDES_SECTION = SECTIONS[3].title
-WHITEBOARD_TITLE = "WHITEBOARD"
-WHITEBOARD_INTRO = (
-    "Your sketchpad: boxes, arrows and notes, as on a whiteboard. What you draw on the plain Excalidraw board is kept "
-    "in this browser only, so it stays on this computer and the pipeline cannot read it. To keep a drawing, use "
-    "Excalidraw's menu: Save to disk, or Live collaboration to get a link that can be pinned here instead."
-)
+Refresh = Literal["changed", "all", "none"]
 
 
 def home_titles() -> dict[str, str]:
@@ -113,22 +113,58 @@ def table_homes(ctx: AppContext) -> dict[str, str] | None:
     return {tab: pages[title] for tab, title in home_titles().items()}
 
 
-def _node_body(node: TaxonomyNode, path: str) -> str:
+# ---------------------------------------------------------------------------- tree pages and their diagrams
+
+
+def _mid(node: TaxonomyNode) -> str:
+    return "n_" + re.sub(r"[^A-Za-z0-9_]", "_", node.node_id)
+
+
+def _label(name: str) -> str:
+    return name.replace('"', "'")
+
+
+def tree_diagram(tax: Any, root: TaxonomyNode) -> str:
+    """A Mermaid flowchart of `root` and everything below it (Notion renders it as a diagram)."""
+    lines = ["graph TD", f'    {_mid(root)}["{_label(root.name)}"]']
+
+    def walk(n: TaxonomyNode) -> None:
+        for c in tax.children(n.node_id):
+            if c.status == "archived":
+                continue
+            lines.append(f'    {_mid(n)} --> {_mid(c)}["{_label(c.name)}"]')
+            walk(c)
+
+    walk(root)
+    return "```mermaid\n" + "\n".join(lines) + "\n```"
+
+
+def node_body(tax: Any, node: TaxonomyNode) -> str:
+    """The markdown of a node's page: what it is, its place, and (domain, primer) the diagram of its subtree.
+    Written at creation and rewritten by `sync_tree_pages` when the tree changes."""
+    path = tax.path(node.node_id)
     if node.level == "domain":
-        return "**Domain.** Its primers are the pages inside this one. Each primer holds stages, and each stage page will hold the study material built from the authors' cards."
+        return (
+            "**Domain.** Its primers are the pages inside this one. Each primer holds stages, and each stage page will "
+            "hold the study material built from the authors' cards.\n\n" + tree_diagram(tax, node)
+        )
     if node.level == "primer":
-        return f"**Primer.** {path}\n\nIts stages are the pages inside this one."
+        return f"**Primer.** {path}\n\nIts stages are the pages inside this one.\n\n" + tree_diagram(tax, node)
+    chain = [*tax.ancestors(node.node_id), node]
+    where = "```mermaid\ngraph LR\n" + "\n".join(f'    {_mid(a)}["{_label(a.name)}"]' + (" --> " + _mid(chain[i + 1]) if i + 1 < len(chain) else "") for i, a in enumerate(chain)) + "\n```"
     return (
         f"**Stage.** {path}\n\nNothing is built for this stage yet. When the learning layer runs, this page will hold the brief, "
         "procedures, drills, lists, scripts, glossary and self-test built from all authors' cards. The resources filed here "
-        "are listed in LAYER 1 - RAW MATERIAL, table Resources."
+        "are listed in LAYER 1 - RAW MATERIAL, table Resources.\n\n" + where
     )
 
 
-def sync_tree_pages(ctx: AppContext) -> dict[str, Any]:
+def sync_tree_pages(ctx: AppContext, refresh: Refresh = "changed") -> dict[str, Any]:
     """One page per taxonomy node under "LAYER 3 - DOMAINS > PRIMERS > STAGES", nested domain > primer > stage.
-    Creates missing pages, adopts a hand-made page of the same title, renames a page whose node was renamed, and
-    stores page id and link on the Taxonomy row. Nothing is deleted: an archived node keeps its page."""
+    Creates missing pages, adopts a hand-made page of the same title, renames a page whose node was renamed, stores
+    page id and link on the Taxonomy row, and rewrites the bodies (text and diagram) of the pages the change affects:
+    `refresh="changed"` the changed nodes with their ancestors and descendants, `"all"` every page, `"none"` no body.
+    Nothing is deleted: an archived node keeps its page."""
     repo = _notion_repo(ctx)
     if repo is None:
         return {"skipped": "not in Notion mode"}
@@ -141,6 +177,9 @@ def sync_tree_pages(ctx: AppContext) -> dict[str, Any]:
     renamed: list[str] = []
     adopted: list[str] = []
     changed: list[TaxonomyNode] = []
+    touched: set[str] = set()  # node ids whose page body must be rewritten
+    fresh: set[str] = set()  # node ids created now (body already written)
+    parent_page_of: dict[str, str] = {}
     listings: dict[str, dict[str, str]] = {}  # parent page -> {title: page id}
 
     def children_of(page_id: str) -> dict[str, str]:
@@ -151,20 +190,25 @@ def sync_tree_pages(ctx: AppContext) -> dict[str, Any]:
     def visit(node: TaxonomyNode, parent_page: str) -> None:
         if node.status == "archived":
             return
+        parent_page_of[node.node_id] = parent_page
         siblings = children_of(parent_page)
         by_id = {pid: title for title, pid in siblings.items()}
         page_id = node.page_id if node.page_id in by_id else ""
         if not page_id and node.name in siblings:
             page_id = siblings[node.name]
             adopted.append(node.path or node.name)
+            touched.add(node.node_id)
         if not page_id:
-            page = backend.create_page({"page_id": parent_page}, {"title": {"title": rich_text(node.name)}}, children=markdown_to_blocks(_node_body(node, tax.path(node.node_id))))
+            page = backend.create_page({"page_id": parent_page}, {"title": {"title": rich_text(node.name)}}, children=markdown_to_blocks(node_body(tax, node)))
             page_id = page["id"]
             siblings[node.name] = page_id
             created.append(tax.path(node.node_id))
+            fresh.add(node.node_id)
+            touched.add(node.node_id)
         elif by_id.get(page_id) != node.name:
             backend.update_page(page_id, properties={"title": {"title": rich_text(node.name)}})
             renamed.append(f"{by_id.get(page_id)} -> {node.name}")
+            touched.add(node.node_id)
         url = backend.page_url(page_id)
         if node.page_id != page_id or node.page_url != url:
             node.page_id, node.page_url = page_id, url
@@ -176,32 +220,31 @@ def sync_tree_pages(ctx: AppContext) -> dict[str, Any]:
         visit(domain, root)
     if changed:
         ctx.registry.upsert_nodes(changed)
-    return {"root": backend.page_url(root), "nodes": len([n for n in tax.by_id.values() if n.status != "archived"]), "created": created, "renamed": renamed, "adopted": adopted}
+
+    live = {n.node_id for n in tax.by_id.values() if n.status != "archived" and n.page_id}
+    if refresh == "all":
+        to_refresh = set(live)
+    elif refresh == "changed":
+        to_refresh = set()
+        for nid in touched:
+            to_refresh.add(nid)
+            to_refresh.update(a.node_id for a in tax.ancestors(nid))
+            to_refresh.update(d.node_id for d in tax.descendants(nid))
+        to_refresh &= live
+    else:
+        to_refresh = set()
+    to_refresh -= fresh
+    publisher = NotionPublisher(backend, scan_blocks_for_comments=0)
+    refreshed: list[str] = []
+    for node in sorted((tax.by_id[nid] for nid in to_refresh), key=lambda n: tax.path(n.node_id)):
+        publisher.publish_markdown(node_body(tax, node), node.name, parent_page_of.get(node.node_id, root), node.page_id)
+        refreshed.append(tax.path(node.node_id))
+    return {"root": backend.page_url(root), "nodes": len(live), "created": created, "renamed": renamed, "adopted": adopted, "refreshed": refreshed}
 
 
-def ensure_whiteboard(repo: NotionRepo, url: str) -> dict[str, Any]:
-    """The WHITEBOARD page under the parent page with `url` embedded. Created when missing; when the configured
-    board changes, the old embed is replaced on the same page (same link)."""
-    backend = repo.backend
-    page_id = child_pages(backend, repo.parent_page_id).get(WHITEBOARD_TITLE)
-    embed = {"object": "block", "type": "embed", "embed": {"url": url}}
-    if page_id is None:
-        page = backend.create_page({"page_id": repo.parent_page_id}, {"title": {"title": rich_text(WHITEBOARD_TITLE)}}, children=[*markdown_to_blocks(WHITEBOARD_INTRO), embed])
-        return {"page_id": page["id"], "url": backend.page_url(page["id"]), "embed_url": url, "created": True, "updated": False}
-    embeds = [b for b in backend.list_block_children(page_id) if b.get("type") == "embed"]
-    current = [((b.get("embed") or {}).get("url") or "") for b in embeds]
-    updated = False
-    if current != [url]:
-        for b in embeds:
-            backend.delete_block(b["id"])
-        backend.append_block_children(page_id, [embed])
-        updated = True
-    return {"page_id": page_id, "url": backend.page_url(page_id), "embed_url": url, "created": False, "updated": updated}
-
-
-def apply_layout(ctx: AppContext) -> dict[str, Any]:
+def apply_layout(ctx: AppContext, refresh_pages: bool = False) -> dict[str, Any]:
     """Create the layer pages, put every registry table in its layer (moving it if it sits elsewhere) and build
-    the Domain > Primer > Stage pages. Idempotent."""
+    the Domain > Primer > Stage pages (`refresh_pages` rewrites every tree page's body). Idempotent."""
     repo = _notion_repo(ctx)
     if repo is None:
         return {"skipped": "not in Notion mode"}
@@ -213,11 +256,9 @@ def apply_layout(ctx: AppContext) -> dict[str, Any]:
         if repo.database_parent(tab) != home:
             moved[tab] = repo.relocate_tab(tab, home)
     ctx.registry.repo.invalidate()
-    board_url = str(ctx.settings.notion.get("whiteboard_url") or "").strip()
     return {
         "parent_url": repo.url(),
         "sections": {title: {"page_id": pid, "url": repo.backend.page_url(pid), "created": title in sections["created"]} for title, pid in sections["pages"].items()},
         "tables": {tab: {"home": home_titles()[tab], "created": tab in tabs_report["created"], "moved": moved.get(tab)} for tab in homes},
-        "tree": sync_tree_pages(ctx),
-        "whiteboard": ensure_whiteboard(repo, board_url) if board_url else {"skipped": "notion.whiteboard_url is empty"},
+        "tree": sync_tree_pages(ctx, "all" if refresh_pages else "changed"),
     }
