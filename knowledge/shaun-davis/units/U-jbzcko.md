@@ -5,11 +5,12 @@ type: example
 name: Shaun's pivot from serviced accommodation to social housing
 aliases:
 - Shaun's property journey
+- Shaun's Covid pivot to social housing
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2025-03-12'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: 07:00
@@ -36,6 +37,26 @@ citations:
   quote: we got 500 room so actually I'm like it's pointless me looking into something else
   verified: true
   score: 100
+- resource_id: R-YT-dOkuUCpqijQ
+  location: 08:01
+  quote: so I started my business back in 2018 I was doing service accommodation and I was also doing hmls vented shared houses to students and professionals
+  verified: true
+  score: 100
+- resource_id: R-YT-dOkuUCpqijQ
+  location: 08:01
+  quote: now Co came 2020 and honestly it really worked me out I had to change my business plan and I realized at the time that I didn't have a Recession Proof strategy
+  verified: true
+  score: 100
+- resource_id: R-YT-dOkuUCpqijQ
+  location: 08:01
+  quote: so that was when I pivoted the business and I got involved in social housing two strategy supported and temporary accommodation which has been an absolute Game Changer
+  verified: true
+  score: 100
+- resource_id: R-YT-dOkuUCpqijQ
+  location: 00:00
+  quote: I've been in property now for 6 and a half years I've got over 90 rent to rent social housing properties
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -43,7 +64,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T12:56:25Z'
 ---
 
 ## Description

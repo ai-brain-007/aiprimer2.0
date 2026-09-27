@@ -5,11 +5,12 @@ type: concept
 name: The nightly-rate scheme
 aliases:
 - Nightly rate temporary accommodation
+- Nightly rate scheme
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2025-03-12'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '35:01'
@@ -31,6 +32,26 @@ citations:
   quote: the only issue with a nightly rate is they don't you don't have no contract with them it's Le should done on a just on night nightly basis you just invoice them at the end of the month
   verified: true
   score: 100
+- resource_id: R-YT-dOkuUCpqijQ
+  location: 05:00
+  quote: this is simply getting a property and form the relationship with the council and then the council will simply rent the property off you but they'll pay you nightly rates based on your negotiation
+  verified: true
+  score: 100
+- resource_id: R-YT-dOkuUCpqijQ
+  location: 05:00
+  quote: what you tend to find with nightly rates is the rates are a lot higher than usual it's a lot higher than the market rate because it's emergency accommodation
+  verified: true
+  score: 100
+- resource_id: R-YT-dOkuUCpqijQ
+  location: 06:01
+  quote: now the risk with this factor is the council are not leasing the property off you
+  verified: true
+  score: 100
+- resource_id: R-YT-dOkuUCpqijQ
+  location: 07:00
+  quote: obviously with the nightly rate there is a bit more operation involved because you're managing the tenant directly
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -38,7 +59,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T12:56:25Z'
 ---
 
 ## Description
