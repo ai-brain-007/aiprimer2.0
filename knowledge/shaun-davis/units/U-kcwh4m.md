@@ -5,11 +5,15 @@ type: procedure
 name: How to approach a council
 aliases:
 - Forming a partnership with the council
+- Find the council first
+- Council first, property second
+- Council first
+- Close a high-demand council first, then hunt properties
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-03-12'
+last_seen: '2025-06-09'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -21,6 +25,46 @@ citations:
   quote: once you've got these fre core questions answered you can then go out there find exactly what they need M the two together and form a partnership with the council
   verified: true
   score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: 01:00
+  quote: First things first, let's find a council.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: 02:01
+  quote: With temporary accommodation, it's all about find the council firstly.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: 02:01
+  quote: get a clear understanding of exactly what they want, what they pay, what types of properties they need, and the areas they need. From there, we then go out and find the properties.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: 02:01
+  quote: Let's call as many counselors as possible. Make lots of different relationships.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '1:05:01'
+  quote: You got to bear in mind this strategy is a lot different because firstly, it's not just about the property. You got to firstly close the council.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '1:05:01'
+  quote: You need to find a counter that has great demand. And that's exactly what this council has. It's got a huge demand.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '1:05:01'
+  quote: So, this is why we decided to come down on that same day and start finding properties.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '1:06:01'
+  quote: But what I would say guys, most important thing, you need to find a good good council.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -28,7 +72,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T12:56:24Z'
+updated_at: '2026-09-27T13:10:44Z'
 ---
 
 ## Description

@@ -7,11 +7,13 @@ aliases:
 - Stop seeking perfection, start taking action
 - Be obsessed or be average
 - Go big or go bigger
+- 'Whatever it takes: massive imperfect action'
+- Massive action
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-04-09'
+last_seen: '2025-06-09'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: '18:00'
@@ -33,6 +35,21 @@ citations:
   quote: speed matters much more than perfection.
   verified: true
   score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '35:01'
+  quote: I'm not an introvert. I'm not an extrovert. I'm a whatever it takes to get the job done. That's what I am.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '35:01'
+  quote: you've got to remove your self-beliefs, remove all your limitations, and just stop thinking about what people are going to say about you and what people think because end of the day, they're not paying your bills.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '35:01'
+  quote: And just get yourself out there and provide massive value. And more importantly, take massive action because it's a massive imperfect action.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -40,7 +57,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:10:44Z'
 ---
 
 ## Description

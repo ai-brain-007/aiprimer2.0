@@ -11,11 +11,12 @@ aliases:
 - The Miami trip
 - Be intentional about your circle
 - No yes men
+- 'Energy is contagious: choose your network'
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-04-09'
+last_seen: '2025-06-09'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '39:00'
@@ -67,6 +68,21 @@ citations:
   quote: You want to be with people that pour energy into you as opposed to draining it. And the same is true, your network is your net worth.
   verified: true
   score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '1:18:00'
+  quote: say energy is contagious. This is why it's very important with your network and the people you surround yourself with.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '1:18:00'
+  quote: If you're hanging around with five millionaires, you'll become the six because there's a rhythm to success.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '1:18:00'
+  quote: He's seen the way I move. He's seen the way I talk. He's seen the way I build rapport and he's doing the exact same thing now and he's getting crazy results already.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -74,7 +90,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:10:44Z'
 ---
 
 ## Description

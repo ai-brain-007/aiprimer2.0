@@ -7,11 +7,13 @@ aliases:
 - The power of showing up
 - Showing up daily
 - This is how winners win
+- 'Winners win: results or excuses, not both'
+- Winners win
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-04-09'
+last_seen: '2025-06-09'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: 02:00
@@ -28,6 +30,26 @@ citations:
   quote: The difference is those that are willing to show up regardless are the ones that will come on top time and time again.
   verified: true
   score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '13:00'
+  quote: Winners win, man. Yeah, winners win all the time. We find a way out. We don't find excuses.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '36:00'
+  quote: Winners win because they show up. They don't give excuses. Regardless of the way they feel, they will do the work. Regardless of the circumstance, they will still show up.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '36:00'
+  quote: You can either have results or excuses, but you can't have both.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '36:00'
+  quote: However, man of my word, if I commit to something, I have to do it.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -35,7 +57,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:10:44Z'
 ---
 
 ## Description

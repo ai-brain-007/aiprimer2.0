@@ -12,11 +12,17 @@ aliases:
 - Temporary accommodation is recession proof
 - Recession proof business
 - Four reasons to be in temporary accommodation
+- Temporary accommodation with the council
+- TA
+- Emergency accommodation
+- Temporary accommodation scheme
+- In-between house
+- Temporary accommodation is long-term and government backed
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-03-12'
+last_seen: '2025-06-09'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 00:00
@@ -83,6 +89,41 @@ citations:
   quote: temporary accommodation is one of the most most secure high demand property strategies today and honestly I don't see it going anywhere anytime soon because the demand is so high and it genuinely solves a major problem in the UK
   verified: true
   score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: 04:00
+  quote: You can get emergency housing if you're legally homeless, for example, if you've been evicted, have priority need
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '21:00'
+  quote: We're looking for like three or four bedroom properties to have for families.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '28:00'
+  quote: We work with Luton. Oh, right. Okay. Which is the emergency accommodation.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '28:00'
+  quote: We just pay the market rent.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '47:00'
+  quote: It's a long-term scheme and it's government backed. Basically, these it's temporary accommodation, right?
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '47:00'
+  quote: So, when a family moves in, you know, they could stay for 12, 24, even 36 months before they actually move out to a permanent accommodation.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '47:00'
+  quote: once somebody moves out they'll put somebody back in because there's a lot of demand
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -90,7 +131,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T12:56:24Z'
+updated_at: '2026-09-27T13:10:44Z'
 ---
 
 ## Description

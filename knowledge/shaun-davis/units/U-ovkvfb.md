@@ -6,11 +6,13 @@ name: Productive vs busy
 aliases:
 - Moving the needle
 - Busy as a disguise for procrastination
+- Start with high income generating tasks
+- Move the needle
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-04-09'
+last_seen: '2025-06-09'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: '14:00'
@@ -27,6 +29,26 @@ citations:
   quote: Don't just be busy, be productive. Focus on high-value tasks.
   verified: true
   score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '17:00'
+  quote: Are you actually doing the things that move the needle? If you notice, start the challenge. What do we do? High income generating task straight away.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '17:00'
+  quote: It all depends on how bad you want it.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '17:00'
+  quote: So for me, failure is not an option. So I'm just like, it just has to work.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '17:00'
+  quote: So, now all our energy will be going towards finding the property.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -34,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:10:44Z'
 ---
 
 ## Description

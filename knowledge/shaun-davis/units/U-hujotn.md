@@ -5,11 +5,13 @@ type: claim
 name: You don't need talent to be successful
 aliases:
 - Consistency beats talent
+- Consistency is the magic formula
+- Build the reps
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-04-09'
+last_seen: '2025-06-09'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: 03:01
@@ -21,6 +23,21 @@ citations:
   quote: you don't need to be talented to be successful. All you need to do is have the principle of showing up daily.
   verified: true
   score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '56:01'
+  quote: It's not because I'm talented. It's not because I'm special. Not because I'm great. It's simply because I've been consistent.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '56:01'
+  quote: And that is the magic formula. Consistency. Build the reps.
+  verified: true
+  score: 100
+- resource_id: R-YT-HJ5NOvSeCDA
+  location: '56:01'
+  quote: It's just simply because I've done that same talk over and over again. I've refined it. I've looked at what works. I've looked at what doesn't work. And I've now perfected it.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -28,7 +45,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:10:44Z'
 ---
 
 ## Description
