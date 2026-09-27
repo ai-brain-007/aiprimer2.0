@@ -75,6 +75,16 @@ used and are marked stale when those cards change.
 **Drawing.** Notion has no native infinite canvas; embed Excalidraw/tldraw for sketching, or Miro if the board must
 be readable by the agent through an API.
 
+## 3b. Writing style for everything the owner reads (decided 2026-09-27)
+
+- Conversational, like a good chat answer: talk to the reader as "you", short sentences, no jargon without a
+  one-line explanation.
+- Written for a newcomer first: what it is, why it matters, how to do it, what goes wrong, how to practise, then depth.
+- Straight to the point: lead with the answer, one idea per paragraph, no filler, no hype, no repetition.
+- Concrete: numbers, cues, examples, and in pipeline output a verified quote with page or timestamp behind every claim.
+- Layered: one line, one paragraph, full details, so the reader can stop at any depth.
+- Approved sample: `docs/style-sample-jab.md`. Renderers and helper prompts imitate it.
+
 ## 4. Engineering rules
 
 - Scripts (`python -m pipeline …`) are deterministic and never call a model; they print one JSON object.
@@ -121,6 +131,8 @@ be readable by the agent through an API.
 - 2026-09-27: raw files move to Backblaze B2; summaries and logs move to Notion; Google is dropped.
 - 2026-09-27: storage stays free via chained 10 GB Backblaze accounts; videos stored as audio + key frames by default.
 - 2026-09-27: three-layer model confirmed; layer 3 built in dialogue; Cards is one library across authors.
+- 2026-09-27: writing style fixed (conversational, newcomer-first, concise); sample `docs/style-sample-jab.md`.
+- 2026-09-27: first live example wanted soon: one author, one resource, one Notion author page.
 
 ## 8. Open points
 
