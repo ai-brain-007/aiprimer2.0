@@ -73,7 +73,8 @@ Credentials never live in this repository or in any page: they are settings of t
      `Authorization`, prefix `Bearer`, value = the Notion integration secret.
 5. **Bootstrap.** Start a session on the "AI Primer 2.0" environment, repository `aiprimer2.0`, and type `/setup`.
    It creates the databases under the "AI Primer" page, the `raw/` and `raw/_Inbox/` folders in the bucket, loads
-   the taxonomy, runs a real write test into the bucket and prints a health table.
+   the taxonomy, runs a real write test into the bucket, checks the two Apify actors' input formats and prints a
+   health table.
 6. **Adding storage later.** Create Backblaze account 0002 (a new Gmail, its own bucket `…-0002`, its own
    key), add `B2_KEY_ID_0002` / `B2_APPLICATION_KEY_0002` to the environment, start a new session, run `/setup`.
    The row `b2-0002` appears in the Accounts database and receives uploads once `b2-0001` is full.

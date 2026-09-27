@@ -7,12 +7,18 @@ Two actors (configured in config/pipeline.yaml):
 The token is normally attached by the cloud environment's API-credential proxy for api.apify.com,
 so the client is created without a token; APIFY_TOKEN is only a fallback.
 Actor output shapes vary between versions, so parsing is tolerant (several key spellings).
+
+`RealApifyRunner` is written for apify-client 3.x: `actor().get()`, `actor().call()`, `run().get()` and
+`build().get()` return pydantic models (camelCase aliases, unknown fields kept), and `call()` takes
+`run_timeout` / `wait_duration` timedeltas. `_as_dict` turns those models back into the API's JSON shape so the
+rest of this module keeps working on plain dicts (and still accepts dicts, as the fakes and older clients give).
 """
 
 from __future__ import annotations
 
 import json
 import re
+from datetime import timedelta
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -28,33 +34,49 @@ class ApifyRunner(Protocol):
     def actor_input_schema(self, actor_id: str) -> dict: ...
 
 
+def _as_dict(obj: Any) -> dict:
+    """The API's JSON shape (camelCase keys) of an apify-client result: a pydantic model, a dict or None."""
+    if obj is None:
+        return {}
+    if isinstance(obj, dict):
+        return obj
+    dump = getattr(obj, "model_dump", None)
+    if callable(dump):
+        return dump(by_alias=True, mode="json")
+    return dict(obj)
+
+
 class RealApifyRunner:
     def __init__(self, token: str | None = None):
         from apify_client import ApifyClient
 
         self.client = ApifyClient(token=token) if token else ApifyClient()
 
+    def _items(self, run: dict) -> list[dict]:
+        dataset_id = run.get("defaultDatasetId")
+        if not dataset_id:
+            return []
+        return [_as_dict(item) for item in self.client.dataset(dataset_id).iterate_items()]
+
     def run(self, actor_id: str, run_input: dict, timeout_secs: int = 1800) -> dict:
-        run = self.client.actor(actor_id).call(run_input=run_input, timeout_secs=timeout_secs, wait_secs=timeout_secs)
+        wait = timedelta(seconds=int(timeout_secs))
+        run = _as_dict(self.client.actor(actor_id).call(run_input=run_input, run_timeout=wait, wait_duration=wait))
         if not run:
             raise RuntimeError(f"actor {actor_id} returned no run")
-        items = list(self.client.dataset(run["defaultDatasetId"]).iterate_items())
         usage = run.get("usageTotalUsd")
-        return {"run_id": run.get("id", ""), "items": items, "usage_usd": float(usage) if usage is not None else None, "status": run.get("status", "")}
+        return {"run_id": run.get("id", ""), "items": self._items(run), "usage_usd": float(usage) if usage is not None else None, "status": str(run.get("status") or "")}
 
     def dataset_items(self, run_id: str) -> list[dict]:
-        run = self.client.run(run_id).get()
-        if not run:
-            return []
-        return list(self.client.dataset(run["defaultDatasetId"]).iterate_items())
+        return self._items(_as_dict(self.client.run(run_id).get()))
 
     def actor_input_schema(self, actor_id: str) -> dict:
-        actor = self.client.actor(actor_id).get() or {}
+        actor = _as_dict(self.client.actor(actor_id).get())
         build_id = ((actor.get("taggedBuilds") or {}).get("latest") or {}).get("buildId")
         if not build_id:
             return {}
-        build = self.client.build(build_id).get() or {}
-        schema = build.get("inputSchema")
+        build = _as_dict(self.client.build(build_id).get())
+        # Older builds carry the schema as a JSON string in `inputSchema`; newer ones under actorDefinition.input.
+        schema = build.get("inputSchema") or (build.get("actorDefinition") or {}).get("input")
         if isinstance(schema, str):
             try:
                 return json.loads(schema)

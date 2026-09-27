@@ -17,11 +17,13 @@ apify:
   input_templates:
     metadata:
       start_urls_key: startUrls
-      max_results_key: maxResults
+      max_results_key: maxItems
       extra: {}
+      start_urls_format: strings
     transcript:
-      start_urls_key: startUrls
+      start_urls_key: urls
       extra: {}
+      start_urls_format: strings
 
 drive:
   raw_root_name: "AI Primer Raw"

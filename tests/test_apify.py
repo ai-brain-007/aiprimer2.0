@@ -27,9 +27,15 @@ def test_parse_transcript_item_shapes():
     assert t2["video_id"] == "abcdefghijk" and t2["segments"] is None and t2["text"] == "plain text here"
 
 
+def _urls_key(settings, kind: str) -> str:
+    """Field the configured actor expects its URLs under (config/pipeline.yaml, kept current by `setup fetch-apify-schemas`)."""
+    return settings.config["apify"]["input_templates"][kind]["start_urls_key"]
+
+
 def test_client_caching_and_batches(settings, fake_apify, tmp_path):
-    fake_apify.responses["apidojo/youtube-scraper"] = lambda inp: [{"id": u.rsplit("=", 1)[-1] if "watch?v=" in u else f"vid{i:08d}", "title": f"T{i}", "channelName": "Chan", "date": "2020-01-0%d" % (i % 9 + 1)} for i, u in enumerate(inp["startUrls"])]
-    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [{"videoId": u.rsplit("=", 1)[-1], "transcript": [{"start": 0, "dur": 1, "text": "hello"}]} for u in inp["startUrls"]]
+    mkey, tkey = _urls_key(settings, "metadata"), _urls_key(settings, "transcript")
+    fake_apify.responses["apidojo/youtube-scraper"] = lambda inp: [{"id": u.rsplit("=", 1)[-1] if "watch?v=" in u else f"vid{i:08d}", "title": f"T{i}", "channelName": "Chan", "date": "2020-01-0%d" % (i % 9 + 1)} for i, u in enumerate(inp[mkey])]
+    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [{"videoId": u.rsplit("=", 1)[-1], "transcript": [{"start": 0, "dur": 1, "text": "hello"}]} for u in inp[tkey]]
     yt = ApifyYouTube(fake_apify, settings, cache_dir=tmp_path / "yt")
     meta = yt.video_metadata(["abcdefghijk"])
     assert meta["abcdefghijk"]["title"] == "T0"
@@ -63,3 +69,96 @@ def test_channel_listing_and_schema_fetch(settings, fake_apify, tmp_path, monkey
     yt.video_metadata(["newvideo001"], use_cache=False)
     actor, inp = fake_apify.calls[-1]
     assert inp["startUrls"] == [{"url": "https://www.youtube.com/watch?v=newvideo001"}] and inp["maxItems"] == 1
+
+
+class _Model:
+    """Stands in for an apify-client 3.x pydantic model: the API's JSON shape comes back from model_dump(by_alias=True)."""
+
+    def __init__(self, data: dict):
+        self._data = data
+
+    def model_dump(self, by_alias=False, mode="python"):
+        assert by_alias and mode == "json"
+        return self._data
+
+
+class _StubApifyClient:
+    """apify-client 3.x surface used by RealApifyRunner: typed results, timedelta arguments on call()."""
+
+    def __init__(self):
+        self.calls: list[dict] = []
+        self.actor_body = {"id": "act1", "name": "youtube-scraper", "taggedBuilds": {"latest": {"buildId": "b1", "buildNumber": "1.2.3"}}}
+        self.build_body: dict = {"id": "b1", "inputSchema": '{"properties": {"startUrls": {"type": "array"}}, "required": ["startUrls"]}'}
+        self.run_body = {"id": "run1", "status": "SUCCEEDED", "defaultDatasetId": "ds1", "usageTotalUsd": 0.0123}
+        self.items = [{"id": "abcdefghijk", "title": "T"}]
+
+    def actor(self, actor_id):
+        client = self
+
+        class _Actor:
+            def get(self, **kw):
+                return _Model(client.actor_body)
+
+            def call(self, **kw):
+                client.calls.append(kw)
+                return _Model(client.run_body)
+
+        return _Actor()
+
+    def build(self, build_id):
+        client = self
+
+        class _Build:
+            def get(self, **kw):
+                assert build_id == "b1"
+                return _Model(client.build_body)
+
+        return _Build()
+
+    def run(self, run_id):
+        client = self
+
+        class _Run:
+            def get(self, **kw):
+                return _Model(client.run_body) if run_id == "run1" else None
+
+        return _Run()
+
+    def dataset(self, dataset_id):
+        client = self
+
+        class _Dataset:
+            def iterate_items(self, **kw):
+                assert dataset_id == "ds1"
+                return iter(client.items)
+
+        return _Dataset()
+
+
+def test_real_runner_adapts_apify_client_v3_models_and_arguments():
+    from datetime import timedelta
+
+    from pipeline.apify_yt import RealApifyRunner, _as_dict
+
+    runner = RealApifyRunner.__new__(RealApifyRunner)  # skip __init__: no apify_client import, no network
+    runner.client = _StubApifyClient()
+
+    out = runner.run("apidojo/youtube-scraper", {"startUrls": ["u"]}, timeout_secs=120)
+    assert out == {"run_id": "run1", "items": [{"id": "abcdefghijk", "title": "T"}], "usage_usd": 0.0123, "status": "SUCCEEDED"}
+    call = runner.client.calls[0]
+    assert call["run_input"] == {"startUrls": ["u"]}
+    assert call["run_timeout"] == timedelta(seconds=120) and call["wait_duration"] == timedelta(seconds=120)
+    assert "timeout_secs" not in call and "wait_secs" not in call  # the 1.x names no longer exist in 3.x
+
+    assert runner.dataset_items("run1") == [{"id": "abcdefghijk", "title": "T"}]
+    assert runner.dataset_items("missing") == []
+
+    schema = runner.actor_input_schema("apidojo/youtube-scraper")
+    assert schema["properties"]["startUrls"]["type"] == "array" and schema["required"] == ["startUrls"]
+    # newer builds carry the schema as an object under actorDefinition.input instead of the deprecated string
+    runner.client.build_body = {"id": "b1", "actorDefinition": {"input": {"properties": {"videoUrls": {"type": "array"}}}}}
+    assert runner.actor_input_schema("x") == {"properties": {"videoUrls": {"type": "array"}}}
+    runner.client.actor_body = {"id": "act1"}
+    assert runner.actor_input_schema("x") == {}
+
+    assert _as_dict(None) == {} and _as_dict({"a": 1}) == {"a": 1} and _as_dict(_Model({"b": 2})) == {"b": 2}

@@ -92,7 +92,7 @@ be readable by the agent through an API.
 - Scripts (`python -m pipeline …`) are deterministic and never call a model; they print one JSON object.
   The agent does the judgement; helper agents get fresh context and one job each.
 - Tests run offline against fakes (`python -m pytest -q`). Add a fake for every external service.
-- Branch: `claude/determined-ritchie-771mo0`. Commit and push after each coherent change. Knowledge commits use
+- Branch: `claude/jolly-davinci-wdvr3o` (earlier sessions: `claude/determined-ritchie-771mo0`). Commit and push after each coherent change. Knowledge commits use
   `kb(<author-slug>): vN +new ~evolved =same`.
 - Cloud environment "AI Primer 2.0": Custom network access, allowed domains `api.apify.com`,
   `*.backblazeb2.com`, `*.backblaze.com`, `api.notion.com`, plus the default package managers. The setup box
@@ -103,7 +103,8 @@ be readable by the agent through an API.
 
 ## 5. State of the build (2026-09-27)
 
-- **v2 code has landed and is tested offline (246 tests), never yet run live.** Backblaze B2 storage backend
+- **v2 code has landed, is tested offline and passed its first live `/setup` on 2026-09-27** (what the live run
+  surfaced is in the decision log). Backblaze B2 storage backend
   (`pipeline/storage_b2.py`: native API, large files, retries, free-tier cap detection, id-named folders
   `raw/<domain id>/<primer id>/<stage id>/`), Notion backend (`pipeline/notion.py`: databases as the control
   panel, markdown-to-blocks, author page published in place into the author's row, comments read and replied),
@@ -121,12 +122,16 @@ be readable by the agent through an API.
   `ai.primer.brain.0001` died with that account's suspension), page "AI Primer", integration "AI Primer
   pipeline" connected to it (secret → API credential for `api.notion.com`; page id → `AIPRIMER_NOTION_PAGE_ID`).
   Done: allowed domains `*.backblazeb2.com`, `*.backblaze.com`, `api.notion.com`; setup script updated.
+- **First live run (2026-09-27, `/setup`).** Notion page reachable; the seven databases (Accounts, Taxonomy, Folders,
+  Resources, Authors, Summaries, Jobs) were created under "AI Primer"; 78 taxonomy nodes in 4 domains imported.
+  `b2-0001`: bucket reachable, write test passed, 0 of 9.31 GB used, `raw/` and `raw/_Inbox/` created; media bucket
+  reachable and public. Apify formats detected from the live actors: metadata actor takes `startUrls` (strings) and
+  `maxItems`; transcript actor takes `urls` (strings). No resources and no authors yet.
 
 ## 6. Next engineering steps
 
-1. Live smoke test in the "AI Primer 2.0" environment once the credentials are in: `/setup`, a temporary stage,
-   one short public video, `/summarize`, open the Notion page, comment, republish, clean up. Expect surprises in
-   the Notion API version and the Backblaze credential handling; fix and record them here.
+1. Live smoke test, continued. `/setup` passed on 2026-09-27 (fixes in the decision log). Still to do: a temporary
+   stage, one short public video, `/summarize`, open the Notion page, comment, republish, clean up.
 2. First real example: one boxing coach, one jab video, one author page. Style check against the sample.
 3. Pictures in pages (key frames and screenshots as image blocks) and the Cards database with one page per card.
 4. Transcription of stored audio (video files dropped into the chat).
@@ -154,10 +159,19 @@ be readable by the agent through an API.
   Small pictures still go into Notion; the public bucket serves clips and large images.
 - 2026-09-27: Notion runs under the owner's personal Google account (the dedicated Gmail was suspended by Google);
   no more throwaway Gmail accounts; plus-addresses for future Backblaze accounts.
+- 2026-09-27: the first live `/setup` surfaced three defects, fixed the same day. (1) Backblaze answered the empty
+  folder markers with an HTML 400: `requests` adds `Transfer-Encoding: chunked` to an empty file body next to
+  `Content-Length: 0`; zero-byte uploads now go as bytes. (2) The environment installs `apify-client` 3.x, which
+  returns pydantic models and renamed the arguments of `call()`; the runner was adapted and the requirement pinned to
+  `apify-client>=3,<4`. (3) `setup fetch-apify-schemas` rewrote `config/pipeline.yaml` without its comments;
+  `save_config` now round-trips through `ruamel.yaml` and keeps them. The live schema fetch corrected two actor
+  field names (`maxItems`, transcript `urls`). The test suite now scrubs the live environment variables so that
+  it passes inside the cloud environment too.
 
 ## 8. Open points
 
 - Verify Backblaze's terms on multiple free accounts before relying on rollover.
-- Confirm in the live test: Notion API file upload on the Free plan, YouTube embeds starting at a timestamp,
-  the Backblaze credential type available in the API credentials box (Basic) versus environment variables.
+- Confirm in the live test: Notion API file upload on the Free plan, YouTube embeds starting at a timestamp.
+  (Settled 2026-09-27: the Backblaze key pair works from the environment variables `B2_KEY_ID_0001` /
+  `B2_APPLICATION_KEY_0001`; Backblaze needs no entry in the API credentials box.)
 - Choose the whiteboard tool (Excalidraw/tldraw vs Miro).

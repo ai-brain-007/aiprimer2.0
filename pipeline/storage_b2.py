@@ -371,10 +371,14 @@ class RealB2Backend:
     def _put_small(self, path: Path, key: str, content_type: str, info: dict[str, str], size: int) -> dict:
         sha1 = _sha1_of(path)
         base_headers = {"X-Bz-File-Name": quote(key, safe="/"), "Content-Type": content_type, "Content-Length": str(size), "X-Bz-Content-Sha1": sha1, **self._info_headers(info)}
+        # A zero-byte body goes as bytes: for an empty *file object* `requests` cannot size the stream and adds
+        # `Transfer-Encoding: chunked` next to our `Content-Length: 0`, which Backblaze's nginx rejects with an
+        # HTML 400 (seen live with the empty folder markers).
+        open_body: Callable[[], Any] = (lambda: open(path, "rb")) if size else (lambda: b"")
         result = self._upload_attempts(
             lambda: self._api("b2_get_upload_url", {"bucketId": self._bucket_id()}),
             lambda token: {"Authorization": token, **base_headers},
-            lambda: open(path, "rb"),
+            open_body,
         )
         return _entry_from_api(result)
 

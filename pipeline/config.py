@@ -146,8 +146,37 @@ def load_settings(repo_root: Path | None = None, config_path: Path | None = None
     return Settings(repo_root=root, config=config)
 
 
+def _merge_into(target: Any, source: dict[str, Any]) -> None:
+    """Update the round-trip mapping `target` in place from the plain dict `source`: changed values are replaced,
+    new keys appended, keys missing from `source` removed; untouched lines keep their comments and quoting."""
+    for key, value in source.items():
+        if isinstance(value, dict) and isinstance(target.get(key), dict):
+            _merge_into(target[key], value)
+        else:
+            target[key] = value
+    for key in [k for k in target if k not in source]:
+        del target[key]
+
+
 def save_config(settings: Settings, config_path: Path | None = None) -> Path:
+    """Write `settings.config` back to the YAML file, keeping the file's comments (ruamel.yaml round trip).
+    Without ruamel.yaml, or for a new file, a plain dump is written."""
     path = config_path or settings.repo_root / "config" / "pipeline.yaml"
+    try:
+        from ruamel.yaml import YAML
+    except ImportError:  # pragma: no cover - the requirements install it
+        YAML = None  # type: ignore[assignment]
+    if YAML is not None and path.exists():
+        rt = YAML()
+        rt.preserve_quotes = True
+        rt.width = 4096
+        with open(path, encoding="utf-8") as fh:
+            doc = rt.load(fh)
+        if isinstance(doc, dict):
+            _merge_into(doc, settings.config)
+            with open(path, "w", encoding="utf-8") as fh:
+                rt.dump(doc, fh)
+            return path
     with open(path, "w", encoding="utf-8") as fh:
         yaml.safe_dump(settings.config, fh, sort_keys=False, allow_unicode=True)
     return path

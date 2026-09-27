@@ -564,3 +564,33 @@ def test_client_on_real_backend_builds_public_links():
     assert kids[0]["webViewLink"] == "https://f001.backblazeb2.com/file/ai-primer-raw/raw/T-a/a%20b.txt"
     assert kids[0]["id"] == "raw/T-a/a b.txt" and kids[0]["file_id"] == "4_zabc"
     assert client.container("") == {"kind": "bucket", "id": "ai-primer-raw", "name": "ai-primer-raw"}
+
+
+def test_zero_byte_upload_sends_bytes_not_an_empty_stream(tmp_path):
+    """Folder markers are empty files. Handing `requests` an empty *file object* makes it add
+    `Transfer-Encoding: chunked` next to `Content-Length: 0`, which Backblaze's nginx rejects with an HTML 400
+    (seen live in `setup all`). The body must therefore go as plain bytes."""
+    kinds: list[type] = []
+
+    class TypedSession(StubSession):
+        def request(self, method, url, **kw):
+            if self._name(url) == "upload":
+                kinds.append(type(kw.get("data")))
+            return super().request(method, url, **kw)
+
+    s = TypedSession()
+    key = "raw/_Inbox/" + FOLDER_MARKER
+    path = tmp_path / "marker"
+    path.write_bytes(b"")
+    s.routes["upload"] = lambda rec: Resp(200, file_body(key, 0, {"aiprimer": "folder"}))
+    entry = make_backend(s).put(path, key, "application/octet-stream", {"aiprimer": "folder"})
+    assert entry["key"] == key and entry["size"] == 0
+    assert kinds == [bytes]
+    h = s.named("upload")[0]["headers"]
+    assert h["Content-Length"] == "0" and h["X-Bz-Content-Sha1"] == hashlib.sha1(b"").hexdigest()
+    # a non-empty file still streams from disk
+    kinds.clear()
+    (tmp_path / "one").write_bytes(b"x")
+    s.routes["upload"] = lambda rec: Resp(200, file_body("raw/one", 1))
+    make_backend(s).put(tmp_path / "one", "raw/one", "text/plain", {})
+    assert kinds and kinds[0] is not bytes
