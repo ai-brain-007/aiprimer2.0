@@ -117,7 +117,9 @@ def _check_b2_account(ctx: AppContext, account: Account) -> dict[str, Any]:
         if not test.get("can_write"):
             entry["warning"] = "Backblaze refused a test upload: " + (B2_CAP_HINT if "cap" in str(test.get("error", "")).lower() else str(test.get("error", "")))
         media = ctx.media_storage(account)
-        if media is not None:
+        if not account.media_bucket:
+            entry["media"] = {"configured": False, "note": "no public media bucket (optional): pictures are uploaded into Notion, videos are embedded from YouTube"}
+        elif media is not None:
             try:
                 raw_backend = getattr(media, "b2", None)
                 info = raw_backend.bucket_info() if raw_backend is not None else {}

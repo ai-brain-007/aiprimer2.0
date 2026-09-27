@@ -29,7 +29,7 @@ you (chat) ── /summarize <author> ──► summary agent ──► helper a
 |---|---|
 | Original files, text versions, audio and key frames | Backblaze bucket `ai-primer-raw-000N` (private), `raw / <domain id> / <primer id> / <stage id> /` |
 | Files uploaded by hand for later | the same bucket, `raw / _Inbox /` |
-| Pictures and clips embedded in pages | Backblaze bucket `ai-primer-media-000N` (public), or uploaded into Notion when small |
+| Pictures and clips embedded in pages | Uploaded into Notion (up to 5 MB each); YouTube embeds for video; an optional public bucket for larger media |
 | Registry, taxonomy, storage accounts, authors, summaries, activity log | Notion databases under the page "AI Primer" |
 | Knowledge cards (source of truth) | this repository, `knowledge/<author>/units/` |
 | Readable summaries | the author's page in the Notion Authors database |
@@ -40,11 +40,14 @@ Credentials never live in this repository or in any page: they are settings of t
 
 1. **Rotate any Apify token that was ever pasted into a chat.** Apify Console → Settings → Integrations.
 2. **Backblaze**, signed in as the raw-files Gmail account: create the account, enable 2-Step Verification. Create
-   two buckets: `ai-primer-raw-0001` set to **Private** and `ai-primer-media-0001` set to **Public**. Bucket names
-   are global across Backblaze; if one is taken, choose another and remember it. Create one **application key**
-   restricted to those two buckets with read and write access; note its **keyID** and **applicationKey**.
-   The first 10 GB are free; a free account refuses uploads past that, and the pipeline then rolls over to the
-   next account (see step 6).
+   one bucket, `ai-primer-raw-0001`, set to **Private**, encryption enabled, Object Lock disabled; in its
+   Lifecycle Settings choose *Keep only the last version*. Bucket names are global across Backblaze; if the name
+   is taken, choose another and remember it. Create one **application key** with read and write access to the
+   account's buckets; note its **keyID** and **applicationKey**. The first 10 GB are free; a free account refuses
+   uploads past that, and the pipeline then rolls over to the next account (see step 6).
+   A second, **Public** bucket for pictures and clips shown inside pages is optional and Backblaze asks for a
+   payment method to create one. Without it, pictures are uploaded into Notion (5 MB each) and videos are
+   embedded from YouTube.
 3. **Notion**, signed in as the "brain" Gmail account: create a workspace and keep it single-member (a second
    member turns the free plan into a capped trial; share pages to yourself as a guest instead). Create a top page
    named **AI Primer**. Under *Settings → Connections → Develop or manage integrations* create an internal
@@ -61,7 +64,8 @@ Credentials never live in this repository or in any page: they are settings of t
      B2_APPLICATION_KEY_0001=<applicationKey>
      AIPRIMER_NOTION_PAGE_ID=<page id>
      ```
-     plus `B2_BUCKET_0001=` / `B2_MEDIA_BUCKET_0001=` only if you had to pick other bucket names.
+     plus `B2_BUCKET_0001=<name>` if the bucket is not called `ai-primer-raw-0001`, and `B2_MEDIA_BUCKET_0001=<name>`
+     only if you created the optional public bucket.
    - Setup script: paste the contents of `scripts/setup-env.sh`. (The box does not start in the repository, must
      finish in about five minutes and must exit 0; the script is written for that.)
    - Save, reopen the environment (hover → settings icon) and add two **API credentials**: host `api.apify.com`,
@@ -70,7 +74,7 @@ Credentials never live in this repository or in any page: they are settings of t
 5. **Bootstrap.** Start a session on the "AI Primer 2.0" environment, repository `aiprimer2.0`, and type `/setup`.
    It creates the databases under the "AI Primer" page, the `raw/` and `raw/_Inbox/` folders in the bucket, loads
    the taxonomy, runs a real write test into the bucket and prints a health table.
-6. **Adding storage later.** Create Backblaze account 0002 (a new Gmail, its own two buckets `…-0002`, its own
+6. **Adding storage later.** Create Backblaze account 0002 (a new Gmail, its own bucket `…-0002`, its own
    key), add `B2_KEY_ID_0002` / `B2_APPLICATION_KEY_0002` to the environment, start a new session, run `/setup`.
    The row `b2-0002` appears in the Accounts database and receives uploads once `b2-0001` is full.
 

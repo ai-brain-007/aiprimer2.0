@@ -34,7 +34,7 @@ def v2(settings, fake_apify, monkeypatch, tmp_path):
     monkeypatch.setenv("AIPRIMER_NOTION_PAGE_ID", "0123456789abcdef0123456789abcdef")
     monkeypatch.setenv("B2_KEY_ID_0001", "kid1")
     monkeypatch.setenv("B2_APPLICATION_KEY_0001", "k1")
-    for v in ("B2_KEY_ID_0002", "B2_APPLICATION_KEY_0002", "GOOGLE_SERVICE_ACCOUNT_JSON", "AIPRIMER_CONTROL_SHEET_ID"):
+    for v in ("B2_KEY_ID_0002", "B2_APPLICATION_KEY_0002", "B2_MEDIA_BUCKET_0001", "B2_MEDIA_BUCKET_0002", "GOOGLE_SERVICE_ACCOUNT_JSON", "AIPRIMER_CONTROL_SHEET_ID"):
         monkeypatch.delenv(v, raising=False)
     notion = FakeNotionBackend()
     parent = notion.add_page("AI Primer")
@@ -58,13 +58,15 @@ def v2(settings, fake_apify, monkeypatch, tmp_path):
 
 def test_storage_accounts_come_from_the_environment(settings, monkeypatch):
     monkeypatch.setenv("B2_APPLICATION_KEY_0001", "k1")
+    monkeypatch.setenv("B2_MEDIA_BUCKET_0001", "aiprimer-media-0001")
     monkeypatch.setenv("B2_APPLICATION_KEY_0003", "k3")
     monkeypatch.setenv("B2_BUCKET_0003", "my-other-bucket")
+    monkeypatch.delenv("B2_MEDIA_BUCKET_0003", raising=False)
     assert b2_account_numbers() == ["0001", "0003"]
     rows = default_storage_accounts(settings)
     assert [r["account_id"] for r in rows] == ["b2-0001", "b2-0003"]
-    assert rows[0]["bucket"] == "ai-primer-raw-0001" and rows[0]["media_bucket"] == "ai-primer-media-0001"
-    assert rows[1]["bucket"] == "my-other-bucket" and rows[1]["priority"] == 2
+    assert rows[0]["bucket"] == "ai-primer-raw-0001" and rows[0]["media_bucket"] == "aiprimer-media-0001"
+    assert rows[1]["bucket"] == "my-other-bucket" and rows[1]["media_bucket"] == "" and rows[1]["priority"] == 2
     assert rows[0]["quota_bytes"] == 10_000_000_000 and rows[0]["key_id_env_var"] == "B2_KEY_ID_0001"
 
 
@@ -85,7 +87,7 @@ def test_setup_creates_databases_prefixes_and_health(v2):
     assert health["control_panel"]["ok"]
     b2 = health["accounts"][0]
     assert b2["ok"] and b2["write_test"]["can_write"] and b2["writes_into"]["reachable"] and b2["cap_gb"] == 9.31
-    assert b2["media"]["public"] is True
+    assert b2["media"]["configured"] is False  # the public media bucket is optional
     assert not [k for k in bucket("ai-primer-raw-0001").keys() if "write-test" in k]
     st = status(ctx)
     assert st["mode"]["storage"] == "b2" and st["accounts"][0]["backend"] == "b2"

@@ -52,11 +52,13 @@ def default_key_env(role: str) -> str:
 
 
 def b2_bucket_names(settings: Settings, n: str) -> tuple[str, str]:
-    """(private raw bucket, public media bucket) for account number `n`: B2_BUCKET_<n> / B2_MEDIA_BUCKET_<n>
-    override the config patterns. Bucket names are global across Backblaze, hence the number in the default."""
+    """(private raw bucket, public media bucket) for account number `n`. B2_BUCKET_<n> overrides the config
+    pattern for the raw bucket (bucket names are global across Backblaze, hence the number in the default).
+    The public media bucket is optional (Backblaze asks for a payment method to create one): it exists only
+    when B2_MEDIA_BUCKET_<n> is set; otherwise pictures go into Notion and videos are embedded from YouTube."""
     cfg = settings.b2
     raw = os.environ.get(f"B2_BUCKET_{n}") or str(cfg.get("raw_bucket_pattern", "ai-primer-raw-{n}")).format(n=n)
-    media = os.environ.get(f"B2_MEDIA_BUCKET_{n}") or str(cfg.get("media_bucket_pattern", "ai-primer-media-{n}")).format(n=n)
+    media = os.environ.get(f"B2_MEDIA_BUCKET_{n}", "").strip()
     return raw, media
 
 

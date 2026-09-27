@@ -12,8 +12,9 @@ Everything here is idempotent: running it twice changes nothing the second time.
 - **v2 (current): Backblaze + Notion.** On when `AIPRIMER_NOTION_PAGE_ID` (the "AI Primer" page) and at least one
   `B2_KEY_ID_000N` / `B2_APPLICATION_KEY_000N` pair are set. The Notion secret and the Apify token live in the
   environment's API credentials box (hosts `api.notion.com`, `api.apify.com`); the pipeline never sees them.
-  Each Backblaze key pair becomes a storage account `b2-000N` with buckets `ai-primer-raw-000N` (private) and
-  `ai-primer-media-000N` (public), overridable with `B2_BUCKET_000N` / `B2_MEDIA_BUCKET_000N`.
+  Each Backblaze key pair becomes a storage account `b2-000N` with the private bucket `ai-primer-raw-000N`
+  (override with `B2_BUCKET_000N`). A public media bucket is optional (`B2_MEDIA_BUCKET_000N`); without it,
+  pictures are uploaded into Notion and videos are embedded from YouTube.
 - **v1 (legacy): Google Drive / Sheets / Docs.** Kept for the offline tests; only used when no v2 variable is set.
 
 Never ask the user to paste a key or token into the chat. If they do, tell them to create a new one.
@@ -30,7 +31,8 @@ Never ask the user to paste a key or token into the chat. If they do, tell them 
    - Per Backblaze account read `writes_into.reachable`, `write_test.can_write`, `used_gb`, `cap_gb`, `status`,
      and `media.public`. Unreachable bucket → wrong bucket name or a key not allowed on it. `can_write: false`
      with a cap message → the free 10 GB are used: the account is marked full; the next account is needed.
-     `media.public: false` → the media bucket must be set to Public in Backblaze, else pictures will not display.
+     `media.configured: false` is normal (no public bucket). `media.public: false` → a configured media bucket
+     is not Public, so pictures served from it would not display.
    - Missing variables → point to README.md → "Setup" and stop.
 2. **Bootstrap**
    ```bash
@@ -56,7 +58,7 @@ Never ask the user to paste a key or token into the chat. If they do, tell them 
 
 ## Adding storage later (free-tier rollover)
 
-Create Backblaze account 000N with its two buckets and a key allowed on both; add `B2_KEY_ID_000N` and
-`B2_APPLICATION_KEY_000N` (and bucket overrides if the default names were taken) to the environment; start a new
+Create Backblaze account 000N with its private bucket and a key allowed on it; add `B2_KEY_ID_000N` and
+`B2_APPLICATION_KEY_000N` (and `B2_BUCKET_000N` if the default name was taken) to the environment; start a new
 session; run `/setup`. The row `b2-000N` is added with the next priority and receives uploads once the earlier
 accounts are full.

@@ -49,7 +49,7 @@ Read the skill file in `.claude/skills/<name>/SKILL.md` before running any of th
   page whose id is `AIPRIMER_NOTION_PAGE_ID`. Columns: `pipeline/models.py`; store: `pipeline/notion.py`.
 - Raw files + `.extracted.md` text versions: Backblaze bucket `ai-primer-raw-000N` (private), keys
   `raw/<domain id>/<primer id>/<stage id>/<readable filename>`; `raw/_Inbox/` for hand-uploaded files. Client: `pipeline/storage_b2.py`.
-  Public pictures and clips: bucket `ai-primer-media-000N`.
+  Pictures go into Notion (5 MB each) and videos are YouTube embeds; a public media bucket is optional.
 - Knowledge cards (source of truth for summaries): `knowledge/<author-slug>/units/U-xxxxxx.md` (see `knowledge/README.md`).
 - Rendered summaries: `knowledge/<author-slug>/summary.md`, published into the author's row page of the Notion
   Authors database (same link every version).

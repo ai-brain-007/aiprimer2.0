@@ -74,10 +74,10 @@ docs:
 
 # v2 storage: Backblaze B2. One account row per B2 application key found in the environment
 # (B2_KEY_ID_0001 + B2_APPLICATION_KEY_0001 -> account b2-0001). Bucket names are global across Backblaze,
-# so the defaults carry the account number; override per account with B2_BUCKET_0001 / B2_MEDIA_BUCKET_0001.
+# so the default carries the account number; override per account with B2_BUCKET_0001. A public media bucket
+# is optional (Backblaze wants a payment method for public buckets): set B2_MEDIA_BUCKET_0001 only if you made one.
 b2:
   raw_bucket_pattern: "ai-primer-raw-{n}"
-  media_bucket_pattern: "ai-primer-media-{n}"
   # Top prefix inside the private bucket. Folders are "<raw_prefix>/<domain id>/<primer id>/<stage id>/" (ids never change,
   # so renaming a stage costs nothing); the readable path lives in the Resources log.
   raw_prefix: "raw"
