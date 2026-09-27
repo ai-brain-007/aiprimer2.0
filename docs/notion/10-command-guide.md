@@ -53,7 +53,7 @@ To see a link column first, drag its header to the left in Notion: the title col
 
 1. Type `/summarize` and the author's name.
 2. The agent shows the plan: which of the author's resources are new since the last run.
-3. Helper agents extract the ideas, every quote is checked against the source, and a reviewer reads the result. Long sources take a while; you can leave the session open.
+3. Helper agents extract the ideas, every quote is checked against the source, and a reviewer reads the result. Long sources take a while; you can leave the session open. Before publishing, the agent shows you the count of cards accepted, flagged for a human look and rejected.
 4. The author's page in Notion is created or refreshed: LAYER 2 - SUMMARY BY AUTHORS, table Authors, the author's row. The link never changes.
 5. You read it and comment, in Notion or in the chat.
 

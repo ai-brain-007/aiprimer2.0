@@ -60,6 +60,15 @@ python -m pipeline summarize review-prep --author <A-id> --pretty               
 ```
 Spawn ONE reviewer helper with `pipeline/prompts/review_units.md` (placeholders `{{author_id}}`, `{{evidence_path}}`,
 `{{output_path}}` = the `review_path` from the command output). It must not see anything else. It writes the review file.
+When `evidence.md` is too large for one helper to read whole (above about 250 KB, as with a 20-video channel), cut it
+into parts of whole cards (`review-parts/evidence-NN.md`), give each part to its own reviewer with the same prompt and
+only its part, then merge the part files into the single review file (`items` concatenated; `overall` = the worst of
+the parts). Each reviewer still sees nothing but evidence.
+
+A reviewer may reject a card for one unsupported sentence. When the rest of the card is supported by its quotes, you
+may remove the named sentence yourself and turn the verdict into accept, writing in the reason what you trimmed and
+why ("trimmed by the agent after review: ..."). Never add text; never keep a card whose core claim is the unsupported
+part.
 
 ## 7. Confirm with the user
 Show: cards new / same / evolved / contradicted / rejected, the contradictions found, the reviewer's verdict.

@@ -56,7 +56,7 @@ The tree of Domain > Primer > Stage. Every node has a permanent id, so renaming 
 2. Extract: the text is cut into chunks. A helper reads each chunk and writes candidate cards: principles, concepts, techniques, drills, lists, scripts, examples, claims, mistakes, glossary terms. Each with a quote and its page or timestamp.
 3. Verify: the script looks for every quote in the source text. No match, no card. Rejected cards are kept aside with the reason.
 4. Match: a helper compares each new card with the author's existing cards. Same idea: merge. Evolved idea: a new dated version. New idea: a new card.
-5. Review: a helper who only sees the evidence reads the result with fresh eyes and flags problems.
+5. Review: a helper who only sees the evidence reads the result with fresh eyes and flags problems. For a big author the evidence is cut into parts and each part gets its own reviewer; the verdicts are merged. A card the reviewer faults for one unsupported sentence loses that sentence rather than the whole card; a card whose core is unsupported is rejected and kept aside with the reason.
 6. Render and publish: the script writes the author page from the cards and publishes it into the author's row in the Authors table under LAYER 2. The link never changes. A version row goes into the Summaries table.
 
 ### 5. Feedback

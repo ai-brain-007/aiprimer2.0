@@ -147,17 +147,29 @@ that day was archived. Miro remains the option if the agent must read a board th
   `b2-0001`: bucket reachable, write test passed, 0 of 9.31 GB used, `raw/` and `raw/_Inbox/` created; media bucket
   reachable and public. Apify formats detected from the live actors: metadata actor takes `startUrls` (strings) and
   `maxItems`; transcript actor takes `urls` (strings). No resources and no authors yet.
+- **First author page (2026-09-27, `/summarize A-shaun-davis`, version 1).** 22 videos with a transcript (of 25
+  ingested) went through the whole flow: 26 chunks, 26 extraction helpers, consolidation per multi-chunk video,
+  quote gate (0 rejects: the helpers copied quotes verbatim), matching in date order (1 EVOLVED, 0 CONTRADICTS),
+  5 duplicate pairs merged by hand, independent review in 13 parts. Result: 607 cards on the page (558 accepted,
+  49 flagged "needs review" for the owner's eye), 14 cards in `_rejected/` (9 rejected by the review, 5 merged
+  duplicates), 19 cards trimmed of one unsupported sentence each. The page is the author's row in the Authors
+  table under LAYER 2; the Summaries table carries the version row. The owner has not yet read it.
 
 ## 6. Next engineering steps
 
-1. Live smoke test, continued. `/setup` passed on 2026-09-27 (fixes in the decision log). Still to do: a temporary
-   stage, one short public video, `/summarize`, open the Notion page, comment, republish, clean up.
-2. First real example, in progress: Shaun Davis (25 videos ingested into Money / Property Investor / Social
-   Housing on 2026-09-27); next `/summarize A-shaun-davis`, then the owner reads the page and the style is
-   checked against the sample.
-3. Pictures in pages (key frames and screenshots as image blocks) and the Cards database with one page per card.
-4. Transcription of stored audio (video files dropped into the chat).
-5. Layer 3: `/learn <stage>` dialogue that builds the Stage brief and its artefacts (Stages database).
+1. Live smoke test: done end to end on 2026-09-27 with the Shaun Davis channel (`/setup`, `/ingest`, `/summarize`;
+   fixes in the decision log). Still to do: the owner comments on the page, `doc comments` reads and applies them,
+   the page is republished.
+2. First real example: Shaun Davis, page version 1 published on 2026-09-27. Next: the owner reads the page, checks
+   the style against the sample and the 49 flagged cards, and tells the agent what to change. Then the 3 videos
+   without captions wait for the audio-transcription phase.
+3. Matcher quality (seen on Shaun Davis): the candidate search missed some true duplicates (found and merged by
+   hand) and scored a few unrelated cards at 100; the helpers followed the prompt correctly. Improve recall and
+   the scoring before the second author; add a deterministic `review-prep --parts N` / `review-merge` for large
+   evidence files instead of the hand split.
+4. Pictures in pages (key frames and screenshots as image blocks) and the Cards database with one page per card.
+5. Transcription of stored audio (video files dropped into the chat) and of YouTube videos without captions.
+6. Layer 3: `/learn <stage>` dialogue that builds the Stage brief and its artefacts (Stages database).
 
 ## 7. Decision log
 
@@ -234,6 +246,20 @@ that day was archived. Miro remains the option if the agent must read a board th
   `save_config` now round-trips through `ruamel.yaml` and keeps them. The live schema fetch corrected two actor
   field names (`maxItems`, transcript `urls`). The test suite now scrubs the live environment variables so that
   it passes inside the cloud environment too.
+- 2026-09-27: first `/summarize` (Shaun Davis, 22 videos). Three judgement calls, made by the agent and kept as
+  practice in the skill: (1) the evidence file for the review was 3.1 MB, more than one helper can read, so it was
+  cut into 13 parts of whole cards, one reviewer per part, verdicts merged into the single review file; each
+  reviewer still saw only evidence. (2) Reviewers rejected 28 cards; for 19 of them the fault was a single
+  sentence not backed by any quote (a number, a day name, a place, a person's name) in an otherwise supported
+  card, so the agent removed that sentence and accepted the card, recording the trim in the review reason. The 9
+  cards whose core was unsupported (a story attributed to the wrong speaker, steps or habits that appear in no
+  quote) stayed rejected and sit in `_rejected/` with the reason. (3) The matcher missed five true duplicates
+  (e.g. two "Temporary accommodation" glossary cards) and the agent merged them by hand, keeping the older card
+  and its citations; the dropped copies are in `_rejected/` with reason "duplicate of U-...". Where the owner
+  asked for two things at once (the summary and the link column), the order was confirmed with them: summary
+  first, link column second; both done.
+- 2026-09-27: the finalize step commits `knowledge/<author>/` with the pipeline's own plain message; the agent's
+  commits carry the session trailers. Both are acceptable; the kb message format is the rule.
 
 ## 8. Open points
 
@@ -242,3 +268,9 @@ that day was archived. Miro remains the option if the agent must read a board th
   (Settled 2026-09-27: the Backblaze key pair works from the environment variables `B2_KEY_ID_0001` /
   `B2_APPLICATION_KEY_0001`; Backblaze needs no entry in the API credentials box.)
 - Confirm in Notion that Mermaid code blocks created through the API open in diagram view (the owner checks a domain page).
+- Owner's actions pending: register the guide gate as a PreToolUse hook (README → Setup, step 7); read the Shaun
+  Davis page and the 49 flagged cards (section "Contradictions and open questions"); drag the `link` column first
+  in the Resources table if wanted.
+- Matcher recall and scoring (see Next steps 3); a deterministic split/merge for large review evidence.
+- Audio transcription for the 3 Shaun Davis videos without captions (`R-YT-0hlETEoAQDI`, `R-YT-cGXUmBexdJo`,
+  `R-YT-yvgUe4VK5lk`).
