@@ -3,12 +3,13 @@ id: U-ehzoch
 author_id: A-shaun-davis
 type: list
 name: Three core questions for the council
-aliases: []
+aliases:
+- Three core questions for a provider
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-03-12'
+last_seen: '2025-08-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -20,6 +21,11 @@ citations:
   quote: number three what do they pay
   verified: true
   score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 05:01
+  quote: So you'll call a provider, you'll find out the three core questions. What areas you're looking for? What specific types of properties do you need? What's the rent settings that you pay?
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -27,7 +33,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T12:56:24Z'
+updated_at: '2026-09-27T13:26:16Z'
 ---
 
 ## Description

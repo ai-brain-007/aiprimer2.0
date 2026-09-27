@@ -15,11 +15,17 @@ aliases:
 - Three reasons temporary accommodation beats serviced accommodation
 - Serviced accommodation vs temporary accommodation
 - TA vs SA
+- Rent to rent into temporary accommodation
+- Rent to rent
+- Two ways to do temporary accommodation
+- What temporary accommodation pays per month
+- Top five tips on temporary accommodation
+- Temporary accommodation is easy to systemise
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-07-08'
-last_seen: '2025-08-05'
+last_seen: '2025-08-14'
 citations:
 - resource_id: R-YT-VPA30_DJvZs
   location: 00:00
@@ -101,6 +107,91 @@ citations:
   quote: The final factor I would say comparing temporary accommodation to service accommodation is the fact that temporary accommodation is consistent.
   verified: true
   score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 00:00
+  quote: Temporary accommodation is a stop gap in the market. It is a necessity. It's for people that find themselves without a permanent home.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 00:00
+  quote: This could be due to domestic violence, homelessness or a natural disaster such as flood or fire in their property.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 00:00
+  quote: So landlords love this option because the rent is guaranteed by the council.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 00:00
+  quote: This property will make money every single month without a single tenant paying me directly. The strategy I'm using for this property is called temporary accommodation. And I acquired the property via another strategy called rent to rent.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 00:00
+  quote: This is a strategy I've been doing over the past 7 years and I now have over 90 rented social housing deals.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 00:00
+  quote: So, we've just got the keys. Come through. This is the living room. So, already we've started to make progress. Sofas have now been delivered. The property will be ready for tenants to start moving in next week.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 05:01
+  quote: So, there's two ways that you can actually do this strategy. The first way is actually by calling the council directly and becoming a provider and actually providing the service, managing the property, managing the tenants. That's one way.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 05:01
+  quote: The second way you can do it is by a strategy called backtoback leasing.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 06:00
+  quote: People doing this literally making between £500 to £1,000 a month just by doing backto-back leases and not actually having to worry about the property, the tenants or the management of the property.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 06:00
+  quote: Typically, you'll make anything from a1,000 to3,000 per month on average. This specific property once it's fully lit, I will make two5,000 per month.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 06:00
+  quote: Obviously, I have to manage the property, manage the tenants, keep the property full as well.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 07:00
+  quote: But before we end the video, I want to leave you with my top five tips on temporary accommodation. Tip number one is understand the rules of the game.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 07:00
+  quote: Tip number two is build relationships with agents and landlords.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 08:00
+  quote: Third tip is focus on council demand, not just the location.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 09:00
+  quote: Number four is nail your compliance and setup.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 09:00
+  quote: And then my final tip is start small and scale fast.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 08:00
+  quote: Now, one of the great things about tempe accommodation is it's quite easy to systemize. Once a tenant's in that property, because there's no actual support needed to tenant, it's just a management of the properties, but it's very easy for you to outsource that process.
+  verified: true
+  score: 100
 versions:
 - date: '2025-07-08'
   resource_id: R-YT-VPA30_DJvZs
@@ -108,7 +199,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:15:49Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:26:16Z'
 ---
 
 ## Description

@@ -13,11 +13,12 @@ aliases:
 - Rapport first
 - Social housing is a relationship game
 - Relationship game
+- Build relationships with agents and landlords
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-07-08'
+last_seen: '2025-08-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -99,6 +100,21 @@ citations:
   quote: a lot of the times they are calling me to say, "Michael, I'm about to purchase this property. Can you do anything with it?"
   verified: true
   score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 07:00
+  quote: Now, property really is a relationship based game. You've got to go out there and build the foundation.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 08:00
+  quote: But how you actually position this is by understanding what the problem the landlord's facing and also what the agent's facing and offer your service, your product as a solution to their problem.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 08:00
+  quote: If you can do that and they can see the value that you're providing to their business, if they're an agent or to their property and to their life, if they're a landlord, then they've got no reason not to go ahead with you.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -106,7 +122,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:15:49Z'
+updated_at: '2026-09-27T13:26:16Z'
 ---
 
 ## Description

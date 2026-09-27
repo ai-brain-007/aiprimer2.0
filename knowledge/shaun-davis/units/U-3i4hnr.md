@@ -7,11 +7,13 @@ aliases:
 - Full maintenance and no voids for the landlord
 - No void periods
 - Guaranteed rent
+- The landlord offer
+- Guaranteed rent offer
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-07-08'
+last_seen: '2025-08-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 09:01
@@ -38,6 +40,21 @@ citations:
   quote: a lot of the time the the full maintenance of a property relies on my company
   verified: true
   score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 02:02
+  quote: Now the beauty about this strategy is that we can offer the landlord guaranteed rent, zero hassle, zero voids, zero maintenance.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 02:02
+  quote: We manage the property and we can offer the utmost financial stability because we are working directly with the government and also providing a governmentbacked contract.
+  verified: true
+  score: 100
+- resource_id: R-YT-4lFF_IDs08U
+  location: 02:02
+  quote: So that in itself holds a lot of weight, hold a lot of power.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -45,7 +62,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:15:49Z'
+updated_at: '2026-09-27T13:26:16Z'
 ---
 
 ## Description
