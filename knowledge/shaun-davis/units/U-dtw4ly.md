@@ -8,11 +8,13 @@ aliases:
 - Let go to grow
 - On the business, not in it
 - Leverage
+- Replace yourself in the business
+- Work on the business, not in it
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2026-02-15'
+last_seen: '2026-03-15'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: 01:00
@@ -49,6 +51,21 @@ citations:
   quote: I'm better working on my team. I'm better empowering my team, working on the vision of the company to ensure that we are going the right direction.
   verified: true
   score: 100
+- resource_id: R-YT-Y3K2aTVc9XM
+  location: '12:02'
+  quote: Every entrepreneur's dream should be to build a business where you actually replace yourself in the business because then you can focus on systems, processes,
+  verified: true
+  score: 100
+- resource_id: R-YT-Y3K2aTVc9XM
+  location: '13:00'
+  quote: policies, especially with business like this, supported accommodation where all your ducks have to be in a row. The stakes are so high. The responsibility and accountability is very high as well.
+  verified: true
+  score: 100
+- resource_id: R-YT-Y3K2aTVc9XM
+  location: '13:00'
+  quote: So, ensuring that you're able to work on the business instead of in the business is crucial cuz then you can focus on the vision.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -56,7 +73,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T14:14:19Z'
+updated_at: '2026-09-27T14:20:35Z'
 ---
 
 ## Description

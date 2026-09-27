@@ -6,11 +6,13 @@ name: Victim mentality
 aliases:
 - Victim mindset
 - Why does this always happen to me
+- No victim mentality
+- Keep the drive
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2026-03-15'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '16:00'
@@ -32,6 +34,21 @@ citations:
   quote: the lesson is right in front of you but you're not able to see it
   verified: true
   score: 100
+- resource_id: R-YT-Y3K2aTVc9XM
+  location: 07:00
+  quote: what it is, you haven't got a victim mentality. You still get out there and you're doing the gym.
+  verified: true
+  score: 100
+- resource_id: R-YT-Y3K2aTVc9XM
+  location: 08:01
+  quote: getting about and it's great to see, man. You've still got the drive to actually pursue your goal. You've got a talent.
+  verified: true
+  score: 100
+- resource_id: R-YT-Y3K2aTVc9XM
+  location: 07:00
+  quote: You know, like I've had that shift in mindset.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -39,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T14:20:35Z'
 ---
 
 ## Description

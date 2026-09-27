@@ -5,11 +5,13 @@ type: principle
 name: Manage your emotions
 aliases:
 - Move logically, not emotionally
+- Deal with business logically, not emotionally
+- Logical point of view, not emotional
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-04-09'
+last_seen: '2026-03-15'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: '15:00'
@@ -26,6 +28,16 @@ citations:
   quote: So, I'm very conscious of myself and I try to move very logically as opposed to emotionally.
   verified: true
   score: 100
+- resource_id: R-YT-Y3K2aTVc9XM
+  location: 00:00
+  quote: So one of the biggest tips I'm giving you for any new people watching in business is when you're doing business, you have to deal with things from a logical point of view, not an emotional point of view.
+  verified: true
+  score: 100
+- resource_id: R-YT-Y3K2aTVc9XM
+  location: 00:00
+  quote: So we're here to sort of talk through it, understand how we can sort of move the business forward because we all have the business' best interest at heart.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -33,7 +45,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T14:20:35Z'
 ---
 
 ## Description
