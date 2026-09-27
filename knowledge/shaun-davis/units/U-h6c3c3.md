@@ -7,11 +7,13 @@ aliases:
 - 'Tuesdays: massive action day'
 - 'Shaun''s Tuesdays: one day a week in a 60-hour job'
 - Building the business on one day off
+- Rent-to-rent alongside a 60-hour car sales job
+- Doing this with a 9-to-5
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2026-01-08'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '17:01'
@@ -38,6 +40,16 @@ citations:
   quote: That's exactly what I did on Tuesdays. I dedicated everything I could and I devoted my full attention to finding councils, finding opportunities to building relationships that would later become the foundation of the business that I have today.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '22:01'
+  quote: 100% like you can do this alongside a 9-to-5. I had a 9-to-5. I used to sell cars for a living. I used to work in the motor trade, working 60 hours every single week, and honestly, it was very stressful.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '23:01'
+  quote: I used to have every Tuesday off. On that Tuesday, I didn't want to spend my time calling hundreds of people and providers. I need that time to be as productive as possible. So, I spent that one day off calling warm leads, and that's how I was still able to move the needle quite quickly.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -45,7 +57,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:54:02Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

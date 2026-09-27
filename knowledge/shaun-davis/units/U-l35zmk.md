@@ -14,7 +14,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2026-02-15'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '53:02'
@@ -61,6 +61,21 @@ citations:
   quote: And nine times out of 10, I'm able to get a better deal when I'm negotiating directly.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 05:00
+  quote: Direct to landlord is a game changer. I I love it because it's much easier to negotiate.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 06:01
+  quote: If they're not competent, then you're never going to get in front of the landlord. That's that's reality.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 06:01
+  quote: the best deals that I usually close are either with an agent that's very competent that understands and gets the strategy or with a landlord directly.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -68,7 +83,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T14:14:19Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

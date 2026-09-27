@@ -19,11 +19,13 @@ aliases:
 - What a VA and a viewing cost
 - 'First hire: a virtual assistant'
 - VA
+- Focus on high-value tasks, leverage the rest
+- Outsource the low-value tasks
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2026-02-15'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '26:01'
@@ -120,6 +122,21 @@ citations:
   quote: But they can get the job done they can do what we call all the low value tasks.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '14:00'
+  quote: high value tasks. And you need to outsource all the low value tasks. So, low value tasks are sort of like research, sending emails.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '14:00'
+  quote: You want to get yourself to a position where the VA is basically converting a cold lead to a warm lead, and then you just focus your time and energy on all the warm leads that come to the business.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '22:01'
+  quote: So, it's about leverage. Leverage is my favorite word in business because you know, often entrepreneurs, they get themselves into a bit of a pickle where they try and do everything themselves as opposed to leveraging.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -127,7 +144,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T14:14:19Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

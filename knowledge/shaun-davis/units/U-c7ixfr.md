@@ -21,11 +21,13 @@ aliases:
 - Property is a relationship-based game
 - Be on the council's radar
 - Attend the inspection yourself
+- People buy from people they know, like and trust
+- Know, like and trust
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-01-08'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -212,6 +214,16 @@ citations:
   quote: But if you're not available, guess what? Viewer can also do this inspection on your behalf as well.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '20:01'
+  quote: you remember that people buy from people that they know, like, and trust.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '20:01'
+  quote: if you're building the right level of rapport with the landlord, the landlord is going to trust you to be able to use that property as you wish basically.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -219,7 +231,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:54:02Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

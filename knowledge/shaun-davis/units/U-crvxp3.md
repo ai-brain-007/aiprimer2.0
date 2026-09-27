@@ -5,11 +5,14 @@ type: concept
 name: The PRS ombudsman scheme
 aliases:
 - PRS
+- Join the PRS and use it as a selling point
+- Public redress scheme
+- Ombudsman membership
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-10-29'
-last_seen: '2025-10-29'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-y6ixpf6kK8Y
   location: 09:00
@@ -26,6 +29,26 @@ citations:
   quote: then tenants, landlords, third parties can have a an adjudicator that can have a look at the situation and essentially solve the problem. So it gives everyone peace of mind, especially as a new company.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '19:01'
+  quote: Public redress scheme. You need to have and obviously there there is other ombudsman service that you can go with as well, but the PRS is probably the best one.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '19:01'
+  quote: And you can you can use that as a massive selling point as well.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '19:01'
+  quote: if there's an ombudsman service, it just means that the landlord or the council, whoever I'm dealing with, they have a sense of security with dealing with my business.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '19:01'
+  quote: That's why I like the PRS, like even before and it was mandatory
+  verified: true
+  score: 100
 versions:
 - date: '2025-10-29'
   resource_id: R-YT-y6ixpf6kK8Y
@@ -33,7 +56,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:43:33Z'
-updated_at: '2026-09-27T13:43:33Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

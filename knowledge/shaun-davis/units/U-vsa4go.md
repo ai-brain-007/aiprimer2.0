@@ -11,11 +11,14 @@ aliases:
 - Hiring a VA
 - Tasks your VA should handle
 - What to give a virtual assistant
+- Hire a virtual assistant first
+- Get a VA
+- Virtual assistant
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2026-01-08'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '17:01'
@@ -62,6 +65,36 @@ citations:
   quote: That frees you up to focus on high value tasks that actually make you money and move the needle.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '22:01'
+  quote: So, one of the very first things you need to do when you start your business is get a VA, a virtual assistant.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '22:01'
+  quote: You can get VAs as cheap as £250 per month, working full-time hours, 40 hours a week.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '23:01'
+  quote: If you want to recruit a VA right now, onlinejobs.ph, great website to find VAs.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '23:01'
+  quote: Sean's got 90 rent-to-rent properties, right? So, that's why he's got four VAs, guys, all right? So, if you're starting out, you're not going to need four straight away
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '22:01'
+  quote: get a VA, a virtual assistant.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '23:01'
+  quote: So, VAs are great. It stands for virtual assistant.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -69,7 +102,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:54:02Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

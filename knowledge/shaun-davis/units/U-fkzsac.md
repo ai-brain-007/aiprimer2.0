@@ -3,12 +3,13 @@ id: U-fkzsac
 author_id: A-shaun-davis
 type: list
 name: Why get into social housing
-aliases: []
+aliases:
+- Social housing gives real cash flow, Airbnb gives projections
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-12-14'
-last_seen: '2025-12-14'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-aRcmGZIV7Y4
   location: '14:01'
@@ -30,6 +31,16 @@ citations:
   quote: So that gives yourself the utmost confidence in the financial stability of the strategy and also the landlord.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '26:02'
+  quote: it would actually be hard to do a challenge with Airbnb the same way because, you know, all you're doing is projecting the figures.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '26:02'
+  quote: he's ended up getting one or two Airbnb deals that don't cash flow that well, up and down income. He's got legitimately really good deals.
+  verified: true
+  score: 100
 versions:
 - date: '2025-12-14'
   resource_id: R-YT-aRcmGZIV7Y4
@@ -37,7 +48,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:50:16Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

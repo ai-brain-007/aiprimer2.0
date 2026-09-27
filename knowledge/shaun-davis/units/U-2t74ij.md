@@ -11,11 +11,12 @@ aliases:
 - People that are proactive win the game
 - Get in front of people
 - Do not hide behind a laptop
+- Get from behind the laptop
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-10-29'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '15:01'
@@ -97,6 +98,16 @@ citations:
   quote: they're very busy and you might have caught them at the wrong time and a lot of the time they just want to put the phone down on you. Whereas if you're in front of someone, you can actually get their undivided attention.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 04:00
+  quote: So I always say you need to get from behind the laptop, get from behind the phones, and actually get in front of people. Like I can't stress to you how important this is.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 04:00
+  quote: the issue is you can't build relationships from a phone call, from sending an email, but you can build relationships so much stronger by actually physically going to see someone.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -104,7 +115,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:43:33Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

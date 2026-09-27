@@ -11,11 +11,15 @@ aliases:
 - Company let objection
 - Leasing to a company beats renting to a tenant
 - Lease to a company, not a tenant
+- Commercial lease, not an AST
+- Why rent-to-rent is legal
+- AST
+- Assured shorthold tenancy agreement
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2026-01-22'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '20:00'
@@ -77,6 +81,26 @@ citations:
   quote: And for the landlord, one of the main benefits is the fact that they're leasing their
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 06:01
+  quote: the way rent to rent works is you're not signing an AST, an assured shorthold tenancy agreement.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 07:01
+  quote: my company. So, my it's a company let, but what we sign is what it's it's called a a commercial lease agreement, and that allows you to gives you permission to be able to sublet.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 09:00
+  quote: Mate, get it into your head, yeah, that this is legal, okay?
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 06:01
+  quote: you're not signing an AST, an assured shorthold tenancy agreement.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -84,7 +108,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

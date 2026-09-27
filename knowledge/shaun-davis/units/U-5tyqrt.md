@@ -9,11 +9,13 @@ aliases:
 - Contractfinder method
 - gov.uk/contractsfinder
 - A contract end date means they must fill it fast
+- Find providers on Contracts Finder
+- contractsfinder.gov.uk
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-12-14'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: 04:00
@@ -70,6 +72,21 @@ citations:
   quote: contract end date is 2027. So, this contract is still active and most likely they'll be looking to actually scale as well.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '12:00'
+  quote: my favorite way to do it is by going on contractsfinder.gov.uk, and you can literally see all the public bids that the that the government has
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '13:01'
+  quote: And it literally gives you names of all the providers, the contract value and what it's for.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '12:00'
+  quote: Like you can just call them one by one and work through a list, but that's not really targeted
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -81,7 +98,7 @@ versions:
   what_changed: Search keywords broadened from 'temporary accommodation' alone to 'supported living', 'temporary accommodation' and 'emergency accommodation'; steps added to read the contract description, to reference the contract when contacting a supplier, and to ask whether they are looking to scale before offering your properties.
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

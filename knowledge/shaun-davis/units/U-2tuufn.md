@@ -8,11 +8,13 @@ aliases:
 - Partnering with estate agents
 - Partner with agents
 - Build agent relationships face to face
+- 'Estate agents: relationship first, then WhatsApp'
+- Off-market deals through agents
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-02-15'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -59,6 +61,21 @@ citations:
   quote: Whereas if you're in front of someone, they obviously have to give you their undivided attention.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 04:00
+  quote: If I go into an estate agent, my aim is I'm not looking to close a deal there and then. I'm trying to build a relationship. So when I build a relationship, I do that by getting their personal WhatsApp number.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 05:00
+  quote: Most of deals that I do now are not done on Rightmove. I get to close them way before it's presented on Rightmove.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 05:00
+  quote: And that's because I've done the groundwork of building relationships, but not only building relationships, maintaining relationships, too.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -66,7 +83,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T14:14:19Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

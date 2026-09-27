@@ -13,11 +13,14 @@ aliases:
 - The formula
 - Council before property
 - Start with the council
+- Becoming a temporary accommodation provider
+- Temporary and emergency accommodation
+- TEA
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-12-14'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -104,6 +107,16 @@ citations:
   quote: So firstly, you need to start with the council. Most people overcomplicate this.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 01:00
+  quote: And the first one is called temporary and emergency accommodation. Now, the way you get involved in this is actually quite simple. You literally um call the council, and you become a provider.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 01:00
+  quote: Once you've got this core information, you then go out there and basically find the exact property that they're looking for. It's that simple.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -111,7 +124,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T13:50:16Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

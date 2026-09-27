@@ -5,11 +5,12 @@ type: principle
 name: When you lack resources, become resourceful
 aliases:
 - Stay calm under money pressure
+- When you lack the resources, become resourceful
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-03-09'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '22:02'
@@ -26,6 +27,11 @@ citations:
   quote: when you start panicking you're not in a a fit State you're not in the right State of Mind to be able to make competent decisions
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '20:01'
+  quote: So, there's always a way around it and the famous quote, I love this quote, it says when you lack the resources, you must become resourceful.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -33,7 +39,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T12:49:32Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

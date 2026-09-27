@@ -16,7 +16,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-09'
-last_seen: '2025-06-09'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-Lr_OKMBndUo
   location: '39:00'
@@ -83,6 +83,11 @@ citations:
   quote: He's seen the way I move. He's seen the way I talk. He's seen the way I build rapport and he's doing the exact same thing now and he's getting crazy results already.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '28:00'
+  quote: I've always heard the term, you know, your network is your net worth.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-09'
   resource_id: R-YT-Lr_OKMBndUo
@@ -90,7 +95,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:49:32Z'
-updated_at: '2026-09-27T13:10:44Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

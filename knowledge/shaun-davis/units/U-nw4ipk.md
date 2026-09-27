@@ -20,11 +20,13 @@ aliases:
 - Start with what you have
 - Getting stung by a rent to rent serviced accommodation deal
 - Rent to rent Airbnb deal
+- Rent-to-rent social housing from start to finish
+- The social housing model in simple terms
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2026-01-22'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '10:00'
@@ -146,6 +148,16 @@ citations:
   quote: They've signed a contract. They've not read it through properly or had the right mentors or guidance. And guess what? They've end up losing a lot of money.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 03:01
+  quote: become a provider with them. You find out exactly what they want. You then go out there and find the property. You present the property to the council or the provider. And then, yeah, you start making money.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 03:01
+  quote: So, the council or the provider will pay you a set amount. You're obviously paying the landlord a lower amount, and you're pocketing the difference.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -153,7 +165,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T14:06:06Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

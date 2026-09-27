@@ -17,11 +17,13 @@ aliases:
 - Social housing strategy one
 - Duty of care and liability in supported accommodation
 - Responsibility when a tenant dies
+- High-level social housing
+- Supported living
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2026-01-14'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '12:00'
@@ -138,6 +140,16 @@ citations:
   quote: Um and if you didn't, then it you could be liable.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 05:00
+  quote: More like high-level social housing like supported accommodation and supported living, they need to be a CIC, community interest company.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '21:01'
+  quote: You are going to have issues, you're going to have kicked in doors, you're going to have smashed windows. That's with high-level social housing
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -145,7 +157,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:59:46Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

@@ -11,11 +11,13 @@ aliases:
 - Source to a provider under a back-to-back lease
 - Back-to-back leases
 - Middleman model
+- Back-to-back leasing is deal sourcing paid monthly
+- Marry the provider and the landlord
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-14'
-last_seen: '2026-02-15'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-4lFF_IDs08U
   location: 05:01
@@ -87,6 +89,41 @@ citations:
   quote: There is zero operations involved in the strategy and that's what makes it an absolute game changer.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 01:00
+  quote: The second one, this one's my favorite. It's called back-to-back leasing. This one is so simple to do. And again, there is zero operations involved as well.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 02:00
+  quote: You call a provider. By the way, there are thousands of providers in the UK. You literally find out exactly what they want. You become a partner with them. And then you find the property, too. And you end up making money as a result.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '10:00'
+  quote: Most back-to-back leases are normally done deals as well.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '12:00'
+  quote: five even six years already, and the landlord has just renewed for another six years.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '11:01'
+  quote: It's very similar to deal sourcing. So, if you're familiar with deal sourcing, you could definitely do back-to-back leasing. It's basically the same thing. You find the investor. In this case, the investor is the provider.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '11:01'
+  quote: instead of getting a sourcing fee, which is obviously one-time, let's say you get like £3,000, which is normal for sourcing fee, you're going to get a thousand pounds every single month for like 60 months.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '11:01'
+  quote: you find a provider, you find the landlord with the property, and you literally marry the two together.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-14'
   resource_id: R-YT-4lFF_IDs08U
@@ -94,7 +131,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:26:16Z'
-updated_at: '2026-09-27T14:14:19Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

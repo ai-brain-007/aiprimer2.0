@@ -6,11 +6,14 @@ name: Pitching social housing to landlords
 aliases:
 - How to pitch social housing
 - Closing landlords
+- Convincing a landlord who says no subletting
+- Landlord objections
+- Mortgaged landlords
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: 08:00
@@ -32,6 +35,21 @@ citations:
   quote: The last thing I would say on this is tell them the viable benefits about what social housing is, how it works, the fact that it's government back, the fact that they get guaranteed rent.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '20:01'
+  quote: You just need to explain competently like what it is that you do and you remember that people buy from people that they know, like, and trust.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '21:01'
+  quote: Number two, what the landlord cares about is you as a person. Are you a person that the landlord can trust? Are you a person that can get stuff boxed off?
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '21:01'
+  quote: So, as long as you can build that relationship with the landlord, then all the obstacles become easy to overcome.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -39,7 +57,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

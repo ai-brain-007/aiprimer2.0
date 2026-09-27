@@ -5,11 +5,13 @@ type: list
 name: Four ways into social housing
 aliases:
 - The three strategies we recommend
+- Rent-to-rent side and buying side
+- BRR social housing
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2025-09-29'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '1:20:00'
@@ -36,6 +38,16 @@ citations:
   quote: And then the other way is rentto- rent temporary accommodation.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: 00:00
+  quote: you do the rent-to-rent social housing, and I do the the buying side BRR social housing.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '12:00'
+  quote: there's so much crossover between doing that to what I do where I buy a property, renovate it, and lease it to a provider.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -43,7 +55,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:24Z'
-updated_at: '2026-09-27T13:37:24Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description

@@ -6,11 +6,14 @@ name: Mindset is the foundation of success
 aliases:
 - Mindset is everything
 - Winners and losers differ only in mindset
+- 'Mind, health and wealth: you can have it all'
+- HPA slogan
+- Mindset is the foundation
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-04-09'
+last_seen: '2026-05-14'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: 00:00
@@ -27,6 +30,21 @@ citations:
   quote: The only thing that's different between winners and losers is mindset. Mindset is everything.
   verified: true
   score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '31:00'
+  quote: How can we elevate our mind, health, and wealth?" That's the slogan of HPA.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '31:00'
+  quote: The motto is well, guys, that you really can have it all. You can have your health, you can have your mindset right, and you can have the wealth. A lot of people just focus solely on the wealth.
+  verified: true
+  score: 100
+- resource_id: R-YT-NuYOOjmh0ZI
+  location: '32:00'
+  quote: The mindset's the foundation of it all.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -34,7 +52,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T14:27:15Z'
 ---
 
 ## Description
