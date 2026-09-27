@@ -10,7 +10,7 @@ from typing import Any
 
 from . import extract as ex
 from .accounts import B2_CAP_HINT, GMAIL_QUOTA_HINT, NoStorageError, is_service_account, mark_full, pick_raw_account
-from .apify_yt import ApifyYouTube, metadata_guess_from_video
+from .apify_yt import ApifyYouTube, metadata_guess_from_video, transcript_failure_is_permanent
 from .config import Settings
 from .context import AppContext
 from .dedup import NaturalKey, find_existing, natural_key_for_file, natural_key_for_url, near_duplicates
@@ -190,7 +190,12 @@ class Ingestor:
             if t and (t.get("segments") or t.get("text")):
                 extraction = transcript_extraction(t.get("segments") or t.get("text"), int(self.settings.extract.get("transcript_marker_seconds", 60)), language=t.get("language", ""), transcript_kind=t.get("kind", "auto"), duration_sec=video.get("duration_sec") if video else None)
             else:
-                extraction = ex.Extraction(text="", metadata=guess, source_type="youtube", transcript_kind="none", warnings=["no transcript returned by the transcript actor"])
+                reason = (t or {}).get("error") or "no transcript returned by the transcript actor"
+                if t and not transcript_failure_is_permanent(t) and t.get("error"):
+                    reason += " (a passing problem: re-ingest with --force to try again)"
+                elif t and t.get("error"):
+                    reason += " (the video has no captions; audio transcription is a later phase)"
+                extraction = ex.Extraction(text="", metadata=guess, source_type="youtube", transcript_kind="none", warnings=[f"no transcript: {reason}"])
             extraction.metadata = guess
             if video:
                 video_json = workdir / f"{nk.key}.youtube.json"

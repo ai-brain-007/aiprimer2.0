@@ -196,3 +196,32 @@ def test_schema_fetch_marks_a_request_list_field_as_objects(settings, fake_apify
     yt.transcripts(["abcdefghijk"])
     actor, inp = fake_apify.calls[-1]
     assert actor == "supreme_coder/youtube-transcript-scraper" and inp["urls"] == [{"url": "https://www.youtube.com/watch?v=abcdefghijk"}]
+
+
+def test_transcript_errors_are_kept_and_only_permanent_ones_are_cached(settings, fake_apify, tmp_path):
+    from pipeline.apify_yt import transcript_failure_is_permanent
+
+    no_caps = parse_transcript_item({"errorCode": "TranscriptNotFound", "error": "Could not retrieve a transcript for the video https://www.youtube.com/watch?v=aaaaaaaaaaa Subtitles are disabled for this video", "videoId": "aaaaaaaaaaa"})
+    wall = parse_transcript_item({"errorCode": "TranscriptNotFound", "error": "Could not retrieve a transcript for the video https://www.youtube.com/watch?v=bbbbbbbbbbb The video is unplayable for the following reason: Sign in to confirm you're not a bot", "videoId": "bbbbbbbbbbb"})
+    assert no_caps["error"] == "Subtitles are disabled for this video" and no_caps["text"] == "" and no_caps["segments"] is None
+    assert wall["error"].startswith("The video is unplayable") and "watch?v=" not in wall["error"]
+    assert transcript_failure_is_permanent(no_caps) is True and transcript_failure_is_permanent(wall) is False
+    ok = parse_transcript_item({"videoId": "ccccccccccc", "transcript": [{"start": 0, "dur": 1, "text": "hi"}], "error": "ignored when there is a transcript"})
+    assert ok["error"] == "" and transcript_failure_is_permanent(ok) is False
+
+    tkey = _urls_key(settings, "transcript")
+    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = lambda inp: [
+        {"videoId": "aaaaaaaaaaa", "errorCode": "TranscriptNotFound", "error": "Subtitles are disabled for this video"} if u.endswith("aaaaaaaaaaa")
+        else {"videoId": "bbbbbbbbbbb", "errorCode": "TranscriptNotFound", "error": "The video is unplayable for the following reason: Sign in to confirm you're not a bot"} if u.endswith("bbbbbbbbbbb")
+        else {"videoId": "ccccccccccc", "transcript": [{"start": 0, "dur": 1, "text": "hi"}]}
+        for u in _urls(inp, tkey)
+    ]
+    yt = ApifyYouTube(fake_apify, settings, cache_dir=tmp_path / "yt")
+    out = yt.transcripts(["aaaaaaaaaaa", "bbbbbbbbbbb", "ccccccccccc"])
+    assert set(out) == {"aaaaaaaaaaa", "bbbbbbbbbbb", "ccccccccccc"} and out["ccccccccccc"]["text"] == "" and out["ccccccccccc"]["segments"]
+    calls_before = len(fake_apify.calls)
+    again = yt.transcripts(["aaaaaaaaaaa", "bbbbbbbbbbb", "ccccccccccc"])
+    assert len(fake_apify.calls) == calls_before + 1, "only the sign-in wall is asked again"
+    actor, inp = fake_apify.calls[-1]
+    assert _urls(inp, tkey) == ["https://www.youtube.com/watch?v=bbbbbbbbbbb"]
+    assert again["aaaaaaaaaaa"]["error"] == "Subtitles are disabled for this video"

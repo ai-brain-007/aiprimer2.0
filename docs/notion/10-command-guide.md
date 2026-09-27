@@ -27,6 +27,7 @@ Good to know:
 - A screenshot or a scanned page: the agent reads it by eye and files the text it read.
 - A video file dropped into the chat is stored as its audio track plus a few key frames, to keep storage small. Say "keep the full video" if you want the original kept.
 - No date found: the agent asks for one. The date is what lets the system track how an author's ideas change over time.
+- A YouTube video without captions is kept with its details only, and its row in the Resources table says why. Transcribing the audio comes in a later phase. A passing problem on YouTube's side, such as a sign-in check, is retried the next time the video is ingested.
 - "Ingest the inbox": the agent picks up files you uploaded by hand into the `raw/_Inbox` folder of the storage bucket.
 
 ## /taxonomy: the tree of categories

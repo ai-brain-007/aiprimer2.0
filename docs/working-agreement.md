@@ -203,7 +203,11 @@ that day was archived. Miro remains the option if the agent must read a board th
   Resources row with "title is expected to be title": the API resolves a property key as an id before a name,
   and every title column has the fixed id `title`, so our rich-text column named `title` clashed. Rows are now
   written by property id (one `retrieve_database` per table, cached); the fake Notion assigns ids like the API
-  and resolves ids first, so this class of bug fails offline from now on.
+  and resolves ids first, so this class of bug fails offline from now on. Result: 25 rows ingested, author
+  `A-shaun-davis` created, 50 objects in the bucket (details JSON + transcript per video, 4.6 MB), Apify cost 3
+  cents. 20 videos have auto captions; 5 came back without: one has subtitles disabled, one hit YouTube's sign-in
+  wall, one the actor could not parse. The transcript actor's reason is now kept on the row ("no transcript:
+  ..."), only definite no-caption answers are cached, passing failures are asked again on the next run.
 - 2026-09-27: the owner asked that the two reference pages be updated every time the pipeline changes, without
   fail. Decided: a gate, not a reminder (rule 11 of CLAUDE.md, script `scripts/hooks/guide_gate.py`). A push that
   changes the pipeline without the pages fails until the pages are updated or a commit states `Guide: unchanged`; a

@@ -166,3 +166,22 @@ def test_ocr_patch():
     text = "<!-- page 1 -->\nold one\n<!-- page 2 -->\nold two\n<!-- page 3 -->\nold three\n"
     out = _apply_ocr_patch(text, {"2": "new two", 4: "new four"})
     assert "old one" in out and "new two" in out and "old two" not in out and "old three" in out and "<!-- page 4 -->\nnew four" in out
+
+
+def test_video_without_captions_is_ingested_with_the_actor_reason_as_warning(settings, fake_sheets, fake_drive, fake_apify, tmp_path):
+    fake_apify.responses["apidojo/youtube-scraper"] = [{"id": "nocaptions1", "title": "Silent talk", "channelName": "Teddy Atlas", "date": "2021-06-10T00:00:00Z", "duration": "10:00"}]
+    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = [{"videoId": "nocaptions1", "errorCode": "TranscriptNotFound", "error": "Could not retrieve a transcript for the video https://www.youtube.com/watch?v=nocaptions1 Subtitles are disabled for this video"}]
+    ctx, reg, drive, root, inbox = build_ctx(settings, fake_sheets, fake_drive, fake_apify)
+    r = Ingestor(ctx).run("https://www.youtube.com/watch?v=nocaptions1", "Body / Olympic Spartan / Boxing")
+    assert r["status"] == "ingested"
+    row = reg.resource("R-YT-nocaptions1")
+    assert row.transcript_kind == "none" and not row.extracted_chars
+    assert row.warnings == ["no transcript: Subtitles are disabled for this video (the video has no captions; audio transcription is a later phase)"]
+    # a passing failure is worded as such and is asked again on the next run
+    fake_apify.responses["supreme_coder/youtube-transcript-scraper"] = [{"videoId": "signinwall1", "errorCode": "TranscriptNotFound", "error": "The video is unplayable for the following reason: Sign in to confirm you're not a bot"}]
+    fake_apify.responses["apidojo/youtube-scraper"] = [{"id": "signinwall1", "title": "Walled", "channelName": "Teddy Atlas", "date": "2021-06-11T00:00:00Z", "duration": "10:00"}]
+    Ingestor(ctx).run("https://www.youtube.com/watch?v=signinwall1", "Body / Olympic Spartan / Boxing")
+    assert reg.resource("R-YT-signinwall1").warnings[0].endswith("(a passing problem: re-ingest with --force to try again)")
+    calls_before = len([c for c in fake_apify.calls if c[0] == "supreme_coder/youtube-transcript-scraper"])
+    Ingestor(ctx).run("https://www.youtube.com/watch?v=signinwall1", "Body / Olympic Spartan / Boxing", force=True)
+    assert len([c for c in fake_apify.calls if c[0] == "supreme_coder/youtube-transcript-scraper"]) == calls_before + 1
