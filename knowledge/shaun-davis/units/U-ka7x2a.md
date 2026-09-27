@@ -21,11 +21,15 @@ aliases:
 - What temporary accommodation pays per month
 - Top five tips on temporary accommodation
 - Temporary accommodation is easy to systemise
+- Key advantages of temporary accommodation
+- Nothing touches temporary accommodation for stability
+- Getting started in temporary accommodation under £10k
+- Compliance requirements for temporary accommodation
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-07-08'
-last_seen: '2025-08-14'
+last_seen: '2025-10-29'
 citations:
 - resource_id: R-YT-VPA30_DJvZs
   location: 00:00
@@ -192,6 +196,66 @@ citations:
   quote: Now, one of the great things about tempe accommodation is it's quite easy to systemize. Once a tenant's in that property, because there's no actual support needed to tenant, it's just a management of the properties, but it's very easy for you to outsource that process.
   verified: true
   score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 06:02
+  quote: So temporary accommodation is when you take on a property either one that you own or rent via rent to rent and you lease it to the local authority, charity or housing provider to house people who are homeless, fleeing domestic violence or waiting for permanent housing.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 05:00
+  quote: So temporary accommodation, you're going to need around £5,000 to get started.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 07:01
+  quote: So the key advantages are guaranteed demand, recurring revenue, recession proof, social impact, and scalable growth.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 06:02
+  quote: what I love about temporary accommodation is it gives you predictable income, long-term contracts, and governmentbacked payments.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 00:00
+  quote: temporary accommodation is the most underrated, recession proof, and fastest scaling strategy in the whole property game.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 00:00
+  quote: None of those touch temporary accommodation when it comes to stability, scalability, and impact.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: '11:00'
+  quote: Meanwhile, deal sources are chasing investors. SA operators are stressing about cancellations, and you're getting a guaranteed payment straight from the council that's governmentbacked.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 07:01
+  quote: So let's talk about how you can get started in temporary accommodation with less than £10,000. So firstly, assess the area, research councils and the rates.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 08:00
+  quote: Secondly is build relationships. Councils value reliability.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 09:00
+  quote: Next is understand compliance. So it's fire doors, smoke alarms, the insurance that you need.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: '10:01'
+  quote: If you really want to impress the council, you need to understand how to find great deals. Now, the main strategy that I focus on is called rent to rent.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 09:00
+  quote: Next is understand compliance. So it's fire doors, smoke alarms, the insurance that you need. So you're going to need public liability insurance. You're going to need professional indemnity insurance. You're going to need to be part of the PRS.
+  verified: true
+  score: 100
 versions:
 - date: '2025-07-08'
   resource_id: R-YT-VPA30_DJvZs
@@ -199,7 +263,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:15:49Z'
-updated_at: '2026-09-27T13:26:16Z'
+updated_at: '2026-09-27T13:43:33Z'
 ---
 
 ## Description

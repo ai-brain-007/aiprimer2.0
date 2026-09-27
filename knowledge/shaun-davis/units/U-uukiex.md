@@ -5,11 +5,12 @@ type: claim
 name: The government cannot go bankrupt
 aliases:
 - Government-backed income
+- Councils pay a nightly rate, government-backed
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-08-05'
-last_seen: '2025-08-05'
+last_seen: '2025-10-29'
 citations:
 - resource_id: R-YT-z6Ei9suvXX0
   location: '13:01'
@@ -21,6 +22,16 @@ citations:
   quote: Now, there's two great things about supported accommodation. Again, the first one is that you get paid directly from the government.
   verified: true
   score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 06:02
+  quote: They will pay you a nightly rate, not monthly rent. And that rate is set by the council. And it's backed by the government, which means even in a recession, your income doesn't stop.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: '11:00'
+  quote: you're getting a guaranteed payment straight from the council that's governmentbacked.
+  verified: true
+  score: 100
 versions:
 - date: '2025-08-05'
   resource_id: R-YT-z6Ei9suvXX0
@@ -28,7 +39,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:20:40Z'
-updated_at: '2026-09-27T13:20:40Z'
+updated_at: '2026-09-27T13:43:33Z'
 ---
 
 ## Description

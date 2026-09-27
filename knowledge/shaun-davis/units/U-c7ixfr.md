@@ -18,11 +18,12 @@ aliases:
 - The power of building rapport
 - Build and maintain relationships
 - Where property transactions turn into relationships
+- Property is a relationship-based game
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-09-29'
+last_seen: '2025-10-29'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '11:01'
@@ -169,6 +170,16 @@ citations:
   quote: And that's how I've been able to sort of build great relationship with agents, close agents, and get lots of deals from them as well.
   verified: true
   score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 08:00
+  quote: Now, I always say property is a relationship based game. The people who build the relationships fastest and the best are the ones that win the game.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 08:00
+  quote: Secondly is build relationships. Councils value reliability.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -176,7 +187,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T13:43:33Z'
 ---
 
 ## Description

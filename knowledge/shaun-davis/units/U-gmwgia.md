@@ -3,12 +3,14 @@ id: U-gmwgia
 author_id: A-shaun-davis
 type: principle
 name: Do the work once and get paid over and over
-aliases: []
+aliases:
+- Do the work once, get paid repeatedly
+- The blank canvas problem
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-09-29'
-last_seen: '2025-09-29'
+last_seen: '2025-10-29'
 citations:
 - resource_id: R-YT-PKg8fPvSkfw
   location: '1:09:00'
@@ -30,6 +32,21 @@ citations:
   quote: I'm now in another vehicle that's more safer.
   verified: true
   score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 02:00
+  quote: I didn't like the fact that I have to keep on going out there and finding deals and also finding investors to keep selling deals to. So, I continue to look for a model that can do that.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 04:01
+  quote: I didn't like the fact that every single month I start on a blank canvas. It's a bit like deal sourcing. Every month you start on a blank canvas
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: '11:00'
+  quote: Once the tenant is in the property, there's very little work to do.
+  verified: true
+  score: 100
 versions:
 - date: '2025-09-29'
   resource_id: R-YT-PKg8fPvSkfw
@@ -37,7 +54,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:37:23Z'
-updated_at: '2026-09-27T13:37:23Z'
+updated_at: '2026-09-27T13:43:33Z'
 ---
 
 ## Description

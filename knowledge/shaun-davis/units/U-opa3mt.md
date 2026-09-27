@@ -6,11 +6,12 @@ name: Relying on partners for your bookings
 aliases:
 - Not enough direct bookings
 - Don't rely on partners
+- Build a database of contractors and direct bookings
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-04-09'
-last_seen: '2025-04-09'
+last_seen: '2025-10-29'
 citations:
 - resource_id: R-YT-O1krmmSq5Zo
   location: 06:01
@@ -27,6 +28,11 @@ citations:
   quote: They shut the calendars down and I didn't have any bookings coming in. Yet I was paying all these rental.
   verified: true
   score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 04:01
+  quote: So, just putting it on Airbnb.com and hoping that you're going to get booked, it's not going to work. You need to have a database of contractors. You need to have a database of direct bookings so that you can then do your own marketing and then ensure that your property gets booked.
+  verified: true
+  score: 100
 versions:
 - date: '2025-04-09'
   resource_id: R-YT-O1krmmSq5Zo
@@ -34,7 +40,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:05:45Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:43:33Z'
 ---
 
 ## Description

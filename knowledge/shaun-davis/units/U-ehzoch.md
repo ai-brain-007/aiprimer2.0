@@ -5,11 +5,12 @@ type: list
 name: Three core questions for the council
 aliases:
 - Three core questions for a provider
+- Assess the area
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-08-14'
+last_seen: '2025-10-29'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: 02:01
@@ -26,6 +27,21 @@ citations:
   quote: So you'll call a provider, you'll find out the three core questions. What areas you're looking for? What specific types of properties do you need? What's the rent settings that you pay?
   verified: true
   score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 07:01
+  quote: You call the council or you call the provider and you find out these three core questions. Number one, what specific areas do you need properties in? Number two, what specific types of properties do you need? So, is it one beds? Is it two beds? Is it studios?
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 08:00
+  quote: it HMOs? Then the third question is, what are the rates?
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 08:00
+  quote: Once you got this key bit of information, you can then go out, start building relationships with estate agents, with landlord directly, find the properties, you know exactly the numbers, and then you can then marry the two together and start making money.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -33,7 +49,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:24Z'
-updated_at: '2026-09-27T13:26:16Z'
+updated_at: '2026-09-27T13:43:33Z'
 ---
 
 ## Description

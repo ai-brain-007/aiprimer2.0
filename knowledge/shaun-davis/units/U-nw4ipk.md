@@ -12,7 +12,7 @@ stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-03-12'
-last_seen: '2025-04-09'
+last_seen: '2025-10-29'
 citations:
 - resource_id: R-YT-dOkuUCpqijQ
   location: '10:00'
@@ -49,6 +49,21 @@ citations:
   quote: So, after 18 months of starting that business, I was in the very fortunate position that I was able to leave my job.
   verified: true
   score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: '10:01'
+  quote: Rentto rent is a great strategy because it's low barrier to entry. It's low cost. In fact, you can genuinely do normally down deals.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: '10:01'
+  quote: You find a landlord and you find the landlord either direct to vendor or via an agent and you simply lease the property from the landlord or the agent and then you lease it back out to the council.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: '11:00'
+  quote: because it means that you can then control the property. You can make money from the property without actually owning the property.
+  verified: true
+  score: 100
 versions:
 - date: '2025-03-12'
   resource_id: R-YT-dOkuUCpqijQ
@@ -56,7 +71,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T12:56:25Z'
-updated_at: '2026-09-27T13:05:45Z'
+updated_at: '2026-09-27T13:43:33Z'
 ---
 
 ## Description

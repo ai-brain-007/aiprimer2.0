@@ -9,11 +9,13 @@ aliases:
 - Get in front of people to build rapport
 - Be proactive and get in front of people
 - People that are proactive win the game
+- Get in front of people
+- Do not hide behind a laptop
 stages:
 - T-6t6qdp
 status: active
 first_seen: '2025-06-09'
-last_seen: '2025-09-29'
+last_seen: '2025-10-29'
 citations:
 - resource_id: R-YT-HJ5NOvSeCDA
   location: '15:01'
@@ -80,6 +82,21 @@ citations:
   quote: I will get in front of people. I will go I'll visit wherever I need to visit.
   verified: true
   score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 08:00
+  quote: Stop trying to cut corners. Don't try and hide behind a laptop. Get on the phones. Get in front of people. Arrange Zoom calls. Arrange face to face meetings.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 08:00
+  quote: One of the great things about being in front of someone, it's very easy to build rapport as opposed to sending a quick email and trying to get a response.
+  verified: true
+  score: 100
+- resource_id: R-YT-y6ixpf6kK8Y
+  location: 09:00
+  quote: they're very busy and you might have caught them at the wrong time and a lot of the time they just want to put the phone down on you. Whereas if you're in front of someone, you can actually get their undivided attention.
+  verified: true
+  score: 100
 versions:
 - date: '2025-06-09'
   resource_id: R-YT-HJ5NOvSeCDA
@@ -87,7 +104,7 @@ versions:
   what_changed: ''
 contradictions: []
 created_at: '2026-09-27T13:10:44Z'
-updated_at: '2026-09-27T13:37:24Z'
+updated_at: '2026-09-27T13:43:33Z'
 ---
 
 ## Description
