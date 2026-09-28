@@ -3,7 +3,7 @@
 This is the project's memory. Every Claude Code session reads `CLAUDE.md`, which points here. Update this file
 whenever a decision is taken or changed, with the date. Never write a secret in it.
 
-Last updated: 2026-09-27.
+Last updated: 2026-09-28.
 
 ## 1. Who and how
 
@@ -260,6 +260,12 @@ that day was archived. Miro remains the option if the agent must read a board th
   first, link column second; both done.
 - 2026-09-27: the finalize step commits `knowledge/<author>/` with the pipeline's own plain message; the agent's
   commits carry the session trailers. Both are acceptable; the kb message format is the rule.
+- 2026-09-28: the owner wanted the Summaries link clickable. Every column that holds a link is now a Notion `url`
+  property: `Summaries.doc_url`, `Authors.summary_doc_url`, `summary_folder_url`, `kb_url` (declared in
+  `url_fields` on the row models, next to the Resources links). `ensure_tabs` (`setup init-sheet`, `setup all`,
+  `setup layout`) converts an existing text column to a link and writes the cell values back itself, because the
+  API does not promise to keep them across a type change (the fake Notion empties them, so the code has to). Done
+  live on both tables; property ids unchanged.
 
 ## 8. Open points
 
@@ -272,5 +278,19 @@ that day was archived. Miro remains the option if the agent must read a board th
   Davis page and the 49 flagged cards (section "Contradictions and open questions"); drag the `link` column first
   in the Resources table if wanted.
 - Matcher recall and scoring (see Next steps 3); a deterministic split/merge for large review evidence.
+- **Token budget (raised by the owner on 2026-09-28; decision pending).** The first ingest + summarize session
+  used about half of the weekly Fable allowance. Measured from the transcripts: the main chat made about 360 tool
+  calls and re-read roughly 580 million cached context tokens (the session had grown to about a million tokens of
+  context before it was compacted, and every call re-sends all of it); the 128 helper agents together read about
+  135 million and wrote 0.5 million. So four fifths of the cost was the length of this one chat, not the helpers or
+  the source text (0.7 MB of transcripts, 3 MB of review evidence). Levers, in order of effect: (1) one job per
+  session and a fresh session after each job (the repo, Notion and this document are the memory, the chat is
+  not); (2) fewer main-chat steps per resource (a `summarize run-resource` command doing verify + match + apply in
+  one, and the agent not reading helper outputs into its own context); (3) model routing: the chat model is chosen
+  by the owner in the model picker and cannot be switched by the agent, but helpers can be routed per step with the
+  Agent tool. Options put to the owner: A. routine sessions (`/ingest`, `/summarize`) on Opus 5.5 with helpers
+  kept on Fable (judgement unchanged, about four fifths of the Fable usage moves to the larger all-models
+  allowance); B. everything on Opus 5.5 for routine work, Fable for design and decisions; C. everything stays on
+  Fable, only (1) and (2). The current rule (one model, no override) stands until the owner chooses.
 - Audio transcription for the 3 Shaun Davis videos without captions (`R-YT-0hlETEoAQDI`, `R-YT-cGXUmBexdJo`,
   `R-YT-yvgUe4VK5lk`).

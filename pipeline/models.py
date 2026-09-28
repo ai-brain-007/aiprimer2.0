@@ -179,6 +179,7 @@ class Resource(TabRow):
 
 class Author(TabRow):
     key_field: ClassVar[str] = "author_id"
+    url_fields: ClassVar[frozenset[str]] = frozenset({"summary_doc_url", "summary_folder_url", "kb_url"})
     author_id: str
     canonical_name: str
     aliases: list[str] = Field(default_factory=list)
@@ -201,6 +202,7 @@ class Author(TabRow):
 
 class SummaryRun(TabRow):
     key_field: ClassVar[str] = "summary_id"
+    url_fields: ClassVar[frozenset[str]] = frozenset({"doc_url"})
     summary_id: str
     author_id: str
     version: int | None = None

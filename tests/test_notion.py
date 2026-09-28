@@ -646,3 +646,30 @@ def test_url_columns_are_url_properties_and_round_trip(fake_notion, parent_page)
     assert row.link == "https://www.youtube.com/watch?v=x" and row.text_link == ""
     page = fake_notion.pages[repo.page_id("Resources", "R-YT-x")]
     assert page["properties"]["link"]["url"] == "https://www.youtube.com/watch?v=x" and page["properties"]["text_link"]["url"] is None
+
+
+def test_ensure_tabs_turns_declared_url_columns_from_text_into_links_and_keeps_the_values(fake_notion, parent_page):
+    """Summaries.doc_url and the Authors links were text columns in the first live tables; the owner wanted them
+    clickable. The type change must keep the property id and the cell values (the fake empties them on retype)."""
+    from pipeline.models import Author, SummaryRun
+
+    db = fake_notion.create_database(parent_page, "Summaries", {"summary_id": {"title": {}}, "author_id": {"rich_text": {}}, "doc_url": {"rich_text": {}}})
+    old_id = db["properties"]["doc_url"]["id"]
+    fake_notion.create_page({"database_id": db["id"]}, {"summary_id": {"title": [{"type": "text", "text": {"content": "A-x@v1"}}]}, "author_id": {"rich_text": [{"type": "text", "text": {"content": "A-x"}}]}, "doc_url": {"rich_text": [{"type": "text", "text": {"content": "https://www.notion.so/abc"}}]}})
+    fake_notion.create_page({"database_id": db["id"]}, {"summary_id": {"title": [{"type": "text", "text": {"content": "A-y@v1"}}]}, "author_id": {"rich_text": [{"type": "text", "text": {"content": "A-y"}}]}, "doc_url": {"rich_text": []}})
+    repo = NotionRepo(fake_notion, parent_page)
+    report = repo.ensure_tabs()
+    assert report["columns_retyped"]["Summaries"] == ["doc_url"]
+    schema = fake_notion.databases[repo.database_id("Summaries")]["properties"]
+    assert schema["doc_url"]["type"] == "url" and schema["doc_url"]["id"] == old_id
+    rows = {r.summary_id: r for r in repo.load("Summaries", refresh=True)}
+    assert rows["A-x@v1"].doc_url == "https://www.notion.so/abc" and rows["A-y@v1"].doc_url == ""
+    page = fake_notion.pages[repo.page_id("Summaries", "A-x@v1")]
+    assert page["properties"]["doc_url"]["url"] == "https://www.notion.so/abc"
+    # a fresh Authors table gets the links as url properties from the start; a second run changes nothing
+    authors = fake_notion.databases[repo.database_id("Authors")]["properties"]
+    assert {authors[h]["type"] for h in Author.url_fields} == {"url"} and SummaryRun.url_fields == {"doc_url"}
+    again = repo.ensure_tabs()
+    assert "columns_retyped" not in again
+    repo.append("Summaries", [SummaryRun(summary_id="A-z@v1", author_id="A-z", doc_url="https://www.notion.so/z")])
+    assert fake_notion.pages[repo.page_id("Summaries", "A-z@v1")]["properties"]["doc_url"]["url"] == "https://www.notion.so/z"

@@ -119,8 +119,9 @@ class FakeNotionBackend:
             self._store_block(bid, k, depth + 1)
         return copy.deepcopy(stored)
 
-    def _schema(self, properties: dict, existing: dict | None = None) -> dict:
+    def _schema(self, properties: dict, existing: dict | None = None, retyped: list | None = None) -> dict:
         schema = copy.deepcopy(existing or {})
+        retyped = retyped if retyped is not None else []
         for name, spec in properties.items():
             if spec is None:
                 schema.pop(name, None)
@@ -135,9 +136,13 @@ class FakeNotionBackend:
             kind = next((k for k in spec if k not in ("name", "id")), None)
             if kind is None:
                 raise _bad(f"property {name} has no type")
+            if name in schema and schema[name]["type"] == "title" and kind != "title":
+                raise _bad("the title property cannot change type")
             # Like Notion: the title property always has the id "title"; every other property gets an opaque id,
-            # so a rich-text column *named* "title" does not carry the id "title".
-            pid = "title" if kind == "title" else f"%7C{next(self._ids):04x}"
+            # so a rich-text column *named* "title" does not carry the id "title". A type change keeps the id.
+            pid = "title" if kind == "title" else (schema[name]["id"] if name in schema else f"%7C{next(self._ids):04x}")
+            if name in schema and schema[name]["type"] != kind:
+                retyped.append((name, kind))
             schema[name] = {"id": pid, "name": name, "type": kind, kind: copy.deepcopy(spec[kind] or {})}
         titles = [n for n, p in schema.items() if p["type"] == "title"]
         if len(titles) != 1:
@@ -263,7 +268,14 @@ class FakeNotionBackend:
         database_id = self._id(database_id)
         self.calls.append(f"update_database:{database_id}")
         db = self.retrieve_database(database_id)
-        self.databases[database_id]["properties"] = self._schema(properties, db["properties"])
+        retyped: list = []
+        self.databases[database_id]["properties"] = self._schema(properties, db["properties"], retyped)
+        # The documentation does not promise that cell values survive a type change; the fake takes the strict
+        # reading and empties them, so the code must carry values across itself.
+        for page in self._db_pages(database_id):
+            for name, kind in retyped:
+                if name in page["properties"]:
+                    page["properties"][name] = {"id": self.databases[database_id]["properties"][name]["id"], "type": kind, kind: [] if kind in ("title", "rich_text") else None}
         return copy.deepcopy(self.databases[database_id])
 
     def retrieve_database(self, database_id):

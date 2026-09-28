@@ -498,6 +498,21 @@ class NotionRepo:
             if missing:
                 self.backend.update_database(db_id, {h: self._property_type(model, h) for h in missing})
                 report["columns_added"][tab] = missing
+            # A text column the model now declares as a link becomes a clickable `url` property. The API may not
+            # carry the cell values across a type change, so they are read first and written back afterwards.
+            retype = [h for h in model.url_fields if h in props and (props[h] or {}).get("type") == "rich_text"]
+            if retype:
+                self._cache.pop(tab, None)
+                _headers, rows, page_ids = self._load_raw(tab, refresh=True)
+                self.backend.update_database(db_id, {h: {"url": {}} for h in retype})
+                self._prop_ids.pop(db_id, None)
+                ids = self._property_ids(db_id)
+                for row in rows:
+                    page_id = page_ids.get(row.get(model.key_field, ""))
+                    values = {ids.get(h, h): {"url": row[h]} for h in retype if row.get(h, "").strip()}
+                    if page_id and values:
+                        self.backend.update_page(page_id, values)
+                report.setdefault("columns_retyped", {})[tab] = sorted(retype)
         self._cache.clear()
         self._prop_ids.clear()
         return report
